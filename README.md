@@ -1,0 +1,53 @@
+TbbcMoneyBundle
+===============
+
+This bundle is used to integrate the [Money library from mathiasverraes](https://github.com/mathiasverraes/money) into
+a symfony2 project.
+This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
+
+
+# Overview
+
+## integration of money library
+
+```php
+$fiveEur = Money::EUR(500);
+$tenEur = $fiveEur->add($fiveEur);
+list($part1, $part2, $part3) = $tenEur->allocate(array(1, 1, 1));
+assert($part1->equals(Money::EUR(334)));
+assert($part2->equals(Money::EUR(333)));
+assert($part3->equals(Money::EUR(333)));
+
+$pair = new CurrencyPair(new Currency('EUR'), new Currency('USD'), 1.2500);
+$usd = $pair->convert($tenEur);
+$this->assertEquals(Money::USD(1250), $usd);
+```
+
+## integration of money and currencies in a form
+
+add a type money and a type currency in forms
+
+## currencies configurations and GUI
+
+```php
+$pairManager = $this->get("tbbc_money.pair_manager");
+$usd = $pairManager->convert($amount, new Currency('USD'));
+```
+
+
+## Twig integration
+
+```twig
+{{ $amount | money_format }}
+{{ $amount | money_format("fr") }}
+{{ $amount | money_as_float }}
+```
+
+# Configuration
+
+```yaml
+tbbc_money:
+    currencies: ["USD", "EUR"]
+    reference_currency: "EUR"
+```
+
