@@ -1,0 +1,8 @@
+tbbc_money:
+    currencies: ["USD", "EUR"]
+    reference_currency: "EUR"
+
+framework:
+    secret: "test"
+    test: ~
+
