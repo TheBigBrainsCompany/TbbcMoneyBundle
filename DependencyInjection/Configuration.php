@@ -4,6 +4,7 @@ namespace Tbbc\MoneyBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -19,11 +20,35 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('tbbc_money');
-
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $this->addCurrencySection($rootNode);
 
         return $treeBuilder;
     }
+
+    /**
+     * Parses the kitpages_cms.block config section
+     * Example for yaml driver:
+     * tbbc_money:
+     *     currencies: ["USD", "EUR"]
+     *     reference_currency: "EUR"
+     *
+     * @param ArrayNodeDefinition $node
+     * @return void
+     */
+    private function addCurrencySection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('currencies')
+                    ->prototype('scalar')
+                    ->end()
+                ->end()
+                ->scalarNode('reference_currency')
+                    ->isRequired()
+                    ->cannotBeEmpty()
+                ->end()
+            ->end()
+        ;
+    }
+
 }
