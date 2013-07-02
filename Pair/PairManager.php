@@ -89,7 +89,7 @@ class PairManager
      */
     public function getCurrencyCodeList()
     {
-        return $this->currencyList;
+        return $this->currencyCodeList;
     }
 
     /**
@@ -116,14 +116,13 @@ class PairManager
      */
     protected function loadCurrencyRatioList($force = false)
     {
-        if ( ($force === false) && is_array($this->ratioList)) {
+        if ( ($force === false) && (count($this->ratioList) > 0) ) {
             return;
         }
         // if filename doesn't exist, init with only reference currency code
         if (!is_file($this->ratioFileName)) {
             $this->saveCurrencyRatioList(array(
-                $this->getReferenceCurrencyCode(),
-                (float) 1
+                $this->getReferenceCurrencyCode() => (float) 1
             ));
         }
         // read ratio file
@@ -144,6 +143,7 @@ class PairManager
             try {
                 $currency = new Currency($currencyCode);
             } catch (UnknownCurrencyException $e) {
+//                echo file_get_contents($this->ratioFileName);
                 throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, unknown currency $currencyCode");
             }
 
