@@ -45,7 +45,7 @@ $usd = $pairManager->convert($amount, 'USD');
 Save an conversion value in a DB
 ```php
 $pairManager = $this->get("tbbc_money.pair_manager");
-$pairManager->setPair('USD', 1.2500); // save in DB
+$pairManager->saveRatio('USD', 1.25); // save in ratio file in CSV
 $eur = Money::EUR(100);
 $usd = $pairManager->convert($amount, 'USD');
 $this->assertEquals(Money::USD(125), $usd);
@@ -57,6 +57,7 @@ $this->assertEquals(Money::USD(125), $usd);
 {{ $amount | money_format }}
 {{ $amount | money_format("fr") }}
 {{ $amount | money_as_float }}
+{{ $amount | money_convert("USD") | money_format }}
 ```
 
 # Versions
