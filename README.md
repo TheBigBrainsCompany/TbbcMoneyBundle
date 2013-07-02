@@ -5,6 +5,22 @@ This bundle is used to integrate the [Money library from mathiasverraes](https:/
 a symfony2 project.
 This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
 
+# Status
+
+unstable
+
+what is functionnal :
+
+* integration of the money library
+* configuration parser
+* pairManager
+
+In progress :
+
+* form integration
+* twig integration
+* small administration interface for ratio management
+
 # Overview
 
 ## integration of money library
