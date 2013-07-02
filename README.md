@@ -1,6 +1,8 @@
 TbbcMoneyBundle
 ===============
 
+[![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle.png?branch=master)](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle)
+
 This bundle is used to integrate the [Money library from mathiasverraes](https://github.com/mathiasverraes/money) into
 a symfony2 project.
 This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
@@ -14,13 +16,14 @@ what is functionnal :
 * integration of the money library
 * configuration parser
 * pairManager
+* travis-ci integration
 
 In progress :
 
 * form integration
 * twig integration
 * small administration interface for ratio management
-* travis-ci integration
+
 
 # Overview
 
