@@ -20,6 +20,7 @@ In progress :
 * form integration
 * twig integration
 * small administration interface for ratio management
+* travis-ci integration
 
 # Overview
 
