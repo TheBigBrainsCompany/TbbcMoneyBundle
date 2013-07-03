@@ -7,28 +7,83 @@ This bundle is used to integrate the [Money library from mathiasverraes](https:/
 a symfony2 project.
 This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
 
-# Status
+Quick Start
+-----------
 
-unstable
+```php
+// a money library
+$fiveEur = Money::EUR(500);
+$tenEur = $fiveEur->add($fiveEur);
+list($part1, $part2, $part3) = $tenEur->allocate(array(1, 1, 1));
+assert($part1->equals(Money::EUR(334)));
+assert($part2->equals(Money::EUR(333)));
+assert($part3->equals(Money::EUR(333)));
 
-what is functionnal :
+// a service that stores conversion ratios
+$pairManager = $this->get("tbbc_money.pair_manager");
+$usd = $pairManager->convert($tenEur, 'USD');
 
-* integration of the money library
-* configuration parser
-* pairManager
-* travis-ci integration
-* form integration
+// a form integration
+$formBuilder->add("price", "tbbc_money");
+```
 
-In progress :
+Table of contents
+-----------------
 
-* twig presentation for forms
-* twig filters
-* small administration interface for ratio management
+[Installation](#Installation)
+[Usage](#Usage)
+[Contributing](#Contributing)
+[Requirements](#Requirements)
+[Authors](#Authors)
+[Status](#Status)
+
+Installation
+------------
+
+Using [Composer](http://getcomposer.org/), just `$ composer require {PACKAGIST_PACKAGE_PATH}` package or:
+
+``` javascript
+{
+  "require": {
+    "tbbc/money-bundle": "dev-master"
+  }
+}
+```
+
+Then add the bundle in AppKernel :
+
+```php
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+            new \Tbbc\MoneyBundle\TbbcMoneyBundle(),
+        );
+    }
+```
+
+in your config.php, add the currencies you want to use and the reference currency.
+
+```yaml
+tbbc_money:
+    currencies: ["USD", "EUR"]
+    reference_currency: "EUR"
+```
+
+In your config.yml, add the form fields presentations
+
+```yaml
+twig:
+    form:
+        resources:
+            - 'TbbcMoneyBundle:Form:fields.html.twig'
+```
 
 
-# Overview
+Usage
+-----
 
-## integration of money library
+### Money Library integration
 
 ```php
 $fiveEur = Money::EUR(500);
@@ -43,19 +98,11 @@ $usd = $pair->convert($tenEur);
 $this->assertEquals(Money::USD(1250), $usd);
 ```
 
-## integration of money and currencies in a form
+### integration of money and currencies in a form
 
-add a type money and a type currency in forms
+[see 20-FormAndDoctrineIntegration.md](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/Resources/doc/20-FormAndDoctrineIntegration.md)
 
-## add a configuration for currencylist
-
-```yaml
-tbbc_money:
-    currencies: ["USD", "EUR"]
-    reference_currency: "EUR"
-```
-
-## currencies configurations and GUI
+### Conversion manager
 
 Convert an amount into another currency
 ```php
@@ -72,7 +119,7 @@ $usd = $pairManager->convert($amount, 'USD');
 $this->assertEquals(Money::USD(125), $usd);
 ```
 
-## Twig integration
+### Twig integration (to be coded)
 
 ```twig
 {{ $amount | money_format }}
@@ -81,6 +128,43 @@ $this->assertEquals(Money::USD(125), $usd);
 {{ $amount | money_convert("USD") | money_format }}
 ```
 
-# Authors
 
-* Philippe Le Van (twitter : plv), http://www.kitpages.fr
+
+Contributing
+------------
+
+1. Take a look at the [list of issues](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle).
+2. Fork
+3. Write a test (for either new feature or bug)
+4. Make a PR
+
+Requirements
+------------
+
+* PHP 5.3+
+* Symfony 2.1 +
+
+Authors
+-------
+
+Philippe Le Van - [kitpages.fr](http://www.kitpages.fr) - twitter : @plv
+
+
+Status
+------
+
+unstable
+
+what is functionnal :
+
+* integration of the money library
+* configuration parser
+* pairManager
+* travis-ci integration
+* form integration
+* twig presentation for forms
+
+In progress :
+
+* twig filters
+* small administration interface for ratio management
