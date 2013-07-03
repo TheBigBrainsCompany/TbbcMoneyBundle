@@ -17,11 +17,12 @@ what is functionnal :
 * configuration parser
 * pairManager
 * travis-ci integration
+* form integration
 
 In progress :
 
-* form integration
-* twig integration
+* twig presentation for forms
+* twig filters
 * small administration interface for ratio management
 
 
@@ -79,10 +80,6 @@ $this->assertEquals(Money::USD(125), $usd);
 {{ $amount | money_as_float }}
 {{ $amount | money_convert("USD") | money_format }}
 ```
-
-# Versions
-
-unstable
 
 # Authors
 
