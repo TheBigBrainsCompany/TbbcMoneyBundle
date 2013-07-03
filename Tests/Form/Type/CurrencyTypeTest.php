@@ -25,4 +25,18 @@ class CurrencyTypeTest
         $this->assertEquals(new Currency('EUR'), $form->getData());
     }
 
+    public function testSetData()
+    {
+        \Locale::setDefault("fr_FR");
+        $currencyType = new CurrencyType(
+            array("EUR", "USD"),
+            "EUR"
+        );
+        $form = $this->factory->create($currencyType, null, array());
+        $form->setData(new Currency("USD"));
+        $formView = $form->createView();
+
+        $this->assertEquals("USD", $formView->children["tbbc_name"]->vars["value"]);
+    }
+
 }

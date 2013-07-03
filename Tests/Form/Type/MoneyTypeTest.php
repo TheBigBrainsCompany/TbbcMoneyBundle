@@ -51,4 +51,20 @@ class MoneyTypeTest
         ));
         $this->assertEquals(Money::EUR(1250), $form->getData());
     }
+
+    public function testSetData()
+    {
+        \Locale::setDefault("fr_FR");
+        $currencyType = new CurrencyType(
+            array("EUR", "USD"),
+            "EUR"
+        );
+        $moneyType = new MoneyType($currencyType);
+        $form = $this->factory->create($moneyType, null, array());
+        $form->setData(Money::EUR(120));
+        $formView = $form->createView();
+
+        $this->assertEquals("1,20", $formView->children["tbbc_amount"]->vars["value"]);
+    }
+
 }
