@@ -124,7 +124,8 @@ $this->assertEquals(Money::USD(125), $usd);
 ```twig
 {{ $amount | money_format }}
 {{ $amount | money_as_float }}
-{{ $amount | money_get_currency }}
+{{ $amount | money_get_currency | currency_symbol }}
+{{ $amount | money_get_currency | currency_name }}
 {{ $amount | money_convert("USD") | money_format }}
 ```
 

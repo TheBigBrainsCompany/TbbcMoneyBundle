@@ -8,6 +8,8 @@ namespace Tbbc\MoneyBundle\Twig;
 
 
 use Money\Money;
+use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\ResourceBundle\CurrencyBundle;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 class MoneyExtension
@@ -33,11 +35,13 @@ class MoneyExtension
 
     public function format(Money $money, $decPoint = ',', $thousandsSep = ' ')
     {
+        $symbol = Intl::getCurrencyBundle()->getCurrencySymbol($money->getCurrency()->getName());
+
         $amount = $money->getAmount();
         $amount = (float)$amount;
         $amount = $amount / 100;
         $price = number_format($amount, 2, $decPoint, $thousandsSep);
-        $price = $price." ".$money->getCurrency()->getName();
+        $price = $price." ".$symbol;
         return $price;
     }
 
@@ -51,7 +55,7 @@ class MoneyExtension
 
     public function getCurrency(Money $money)
     {
-        return $money->getCurrency()->getName();
+        return $money->getCurrency();
     }
 
     public function convert(Money $money, $currencyCode)

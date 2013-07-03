@@ -6,10 +6,12 @@
 
 namespace Tbbc\MoneyBundle\Tests\Config;
 
+use Money\Currency;
 use Money\Money;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
+use Tbbc\MoneyBundle\Twig\CurrencyExtension;
 use Tbbc\MoneyBundle\Twig\MoneyExtension;
 
 
@@ -28,6 +30,7 @@ class ConfigTest
 
     public function testMoneyTwigExtension()
     {
+        \Locale::setDefault('en');
         $client = self::createClient();
         /** @var PairManagerInterface $pairManager */
         $pairManager = $client->getContainer()->get("tbbc_money.pair_manager");
@@ -38,9 +41,20 @@ class ConfigTest
         $usd = $moneyExtension->convert($eur, "USD");
         $this->assertEquals(Money::USD(125), $usd);
 
-        $this->assertEquals("1,25 USD", $moneyExtension->format($usd));
+        $this->assertEquals("1,25 $", $moneyExtension->format($usd));
         $this->assertEquals(1.25, $moneyExtension->asFloat($usd));
-        $this->assertEquals("USD", $moneyExtension->getCurrency($usd));
+        $this->assertEquals(new Currency("USD"), $moneyExtension->getCurrency($usd));
+    }
+    public function testCurrencyTwigExtension()
+    {
+        \Locale::setDefault('en');
+        $client = self::createClient();
+        /** @var CurrencyExtension $currencyExtension */
+        $currencyExtension = $client->getContainer()->get("tbbc_money.twig.currency");
+        $eur = new Currency("EUR");
+
+        $this->assertEquals("€", $currencyExtension->symbol($eur));
+        $this->assertEquals("EUR", $currencyExtension->name($eur));
     }
 
 }
