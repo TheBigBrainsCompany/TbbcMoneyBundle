@@ -108,12 +108,14 @@ $this->assertEquals(Money::USD(1250), $usd);
 ### Conversion manager
 
 Convert an amount into another currency
+
 ```php
 $pairManager = $this->get("tbbc_money.pair_manager");
 $usd = $pairManager->convert($amount, 'USD');
 ```
 
 Save an conversion value in a DB
+
 ```php
 $pairManager = $this->get("tbbc_money.pair_manager");
 $pairManager->saveRatio('USD', 1.25); // save in ratio file in CSV
