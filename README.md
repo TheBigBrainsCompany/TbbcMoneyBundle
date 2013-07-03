@@ -5,7 +5,10 @@ TbbcMoneyBundle
 
 This bundle is used to integrate the [Money library from mathiasverraes](https://github.com/mathiasverraes/money) into
 a symfony2 project.
+
 This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
+
+This bundle is stable and tested.
 
 Quick Start
 -----------
@@ -154,7 +157,7 @@ Philippe Le Van - [kitpages.fr](http://www.kitpages.fr) - twitter : @plv
 Status
 ------
 
-unstable
+Stable
 
 what is functionnal :
 
@@ -164,8 +167,17 @@ what is functionnal :
 * travis-ci integration
 * form integration
 * twig presentation for forms
+* twig filters
 
 In progress :
 
-* twig filters
 * small administration interface for ratio management
+
+Versions
+--------
+
+1.0.0 : 2013/07/03
+
+* first realease
+
+
