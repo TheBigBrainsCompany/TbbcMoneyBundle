@@ -2,7 +2,7 @@
 
 namespace Tbbc\MoneyBundle\Form\Type;
 
-use Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToStringTransformer;
+use Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -41,7 +41,7 @@ class CurrencyType
             "choices" => $choiceList,
             "preferred_choices" => array($options["reference_currency"])
         ));
-        $builder->addModelTransformer(new CurrencyToStringTransformer());
+        $builder->addModelTransformer(new CurrencyToArrayTransformer());
     }
 
     /**

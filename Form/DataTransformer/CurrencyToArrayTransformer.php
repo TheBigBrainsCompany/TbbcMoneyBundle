@@ -11,7 +11,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 /**
  * Transforms between a Currency and a string
  */
-class CurrencyToStringTransformer implements DataTransformerInterface
+class CurrencyToArrayTransformer implements DataTransformerInterface
 {
     /**
      * @inheritdoc
@@ -24,7 +24,7 @@ class CurrencyToStringTransformer implements DataTransformerInterface
         if (!$value instanceof Currency) {
             throw new UnexpectedTypeException($value, 'Currency');
         }
-        return $value->getName();
+        return array("tbbc_name" => $value->getName());
     }
 
     /**
