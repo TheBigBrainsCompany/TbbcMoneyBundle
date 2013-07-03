@@ -122,7 +122,7 @@ $usd = $pairManager->convert($amount, 'USD');
 $this->assertEquals(Money::USD(125), $usd);
 ```
 
-### Twig integration (to be coded)
+### Twig integration
 
 ```twig
 {{ $amount | money_format }}
