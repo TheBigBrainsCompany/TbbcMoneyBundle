@@ -6,6 +6,7 @@ use Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Form type for the Currency object.
@@ -32,6 +33,14 @@ class CurrencyType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $choiceList = array();
+        foreach ($options["currency_choices"] as $currencyCode) {
+            $choiceList[$currencyCode] = $currencyCode;
+        }
+        $builder->add('tbbc_name', new ChoiceType(), array(
+            "choices" => $choiceList,
+            "preferred_choices" => array($options["reference_currency"])
+        ));
         $builder->addModelTransformer(new CurrencyToStringTransformer());
     }
 
@@ -40,17 +49,17 @@ class CurrencyType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setRequired(array('currency', 'currency_choices'));
+        $resolver->setRequired(array('reference_currency', 'currency_choices'));
         $resolver->setDefaults(array(
-            'currency' => $this->referenceCurrencyCode,
+            'reference_currency' => $this->referenceCurrencyCode,
             'currency_choices' => $this->currencyCodeList
         ));
         $resolver->setAllowedTypes(array(
-            'currency' => array('string'),
-            'choices' => array('array')
+            'reference_currency' => array('string'),
+            'currency_choices' => array('array')
         ));
         $resolver->setAllowedValues(array(
-            'currency' => $this->currencyCodeList
+            'reference_currency' => $this->currencyCodeList
         ));
     }
 

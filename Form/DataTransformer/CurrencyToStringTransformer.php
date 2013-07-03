@@ -35,11 +35,12 @@ class CurrencyToStringTransformer implements DataTransformerInterface
         if (null === $value) {
             return null;
         }
-        if (!is_string($value)) {
-            throw new UnexpectedTypeException($value, 'string');
+        if (!is_array($value)) {
+//            print_r($value);
+            throw new UnexpectedTypeException($value, 'array');
         }
         try {
-            return new Currency($value);
+            return new Currency($value["tbbc_name"]);
         } catch (UnknownCurrencyException $e) {
             throw new TransformationFailedException($e->getMessage());
         }
