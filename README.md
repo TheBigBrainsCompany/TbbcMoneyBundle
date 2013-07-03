@@ -30,12 +30,12 @@ $formBuilder->add("price", "tbbc_money");
 Table of contents
 -----------------
 
-[Installation](#Installation)
-[Usage](#Usage)
-[Contributing](#Contributing)
-[Requirements](#Requirements)
-[Authors](#Authors)
-[Status](#Status)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* [Requirements](#requirements)
+* [Authors](#authors)
+* [Status](#status)
 
 Installation
 ------------
