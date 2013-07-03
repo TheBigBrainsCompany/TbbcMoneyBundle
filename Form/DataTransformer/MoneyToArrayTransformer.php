@@ -17,7 +17,7 @@ class MoneyToArrayTransformer implements DataTransformerInterface
 
     public function __construct()
     {
-        $this->sfTransformer = new MoneyToLocalizedStringTransformer();
+        $this->sfTransformer = new MoneyToLocalizedStringTransformer(null, null, null, 100);
     }
 
     /**
@@ -33,7 +33,7 @@ class MoneyToArrayTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($value, 'Money');
         }
 
-        $amount = $this->sfTransformer->transform((float)$value->getAmount() / 100.0);
+        $amount = $this->sfTransformer->transform($value->getAmount());
 
         return array(
             'tbbc_amount' => $amount,

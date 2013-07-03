@@ -2,6 +2,7 @@
 
 namespace Tbbc\MoneyBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,7 +32,7 @@ class MoneyType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tbbc_amount', new IntegerType())
+            ->add('tbbc_amount', new NumberType())
             ->add('tbbc_currency', $this->currencyType)
             ->addModelTransformer(
                 new MoneyToArrayTransformer()
