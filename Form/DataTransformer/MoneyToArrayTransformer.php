@@ -5,12 +5,21 @@ namespace Tbbc\MoneyBundle\Form\DataTransformer;
 use Money\Money;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 
 /**
  * Transforms between a Money instance and an array.
  */
 class MoneyToArrayTransformer implements DataTransformerInterface
 {
+    /** @var  MoneyToLocalizedStringTransformer */
+    protected $sfTransformer;
+
+    public function __construct()
+    {
+        $this->sfTransformer = new MoneyToLocalizedStringTransformer();
+    }
+
     /**
      * @inheritdoc
      */
@@ -24,8 +33,10 @@ class MoneyToArrayTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($value, 'Money');
         }
 
+        $amount = $this->sfTransformer->transform((float)$value->getAmount() / 100.0);
+
         return array(
-            'tbbc_amount' => $value->getAmount(),
+            'tbbc_amount' => $amount,
             'tbbc_currency' => $value->getCurrency()
         );
     }
@@ -45,8 +56,12 @@ class MoneyToArrayTransformer implements DataTransformerInterface
         if (!isset($value['tbbc_amount']) || !isset($value['tbbc_currency'])) {
             return null;
         }
+        $amount = (string)$value['tbbc_amount'];
+        $amount = $this->sfTransformer->reverseTransform($amount);
+        $amount = round($amount);
+        $amount = (int)$amount;
 
-        return new Money($value['tbbc_amount'], $value['tbbc_currency']);
+        return new Money($amount, $value['tbbc_currency']);
     }
 
 }
