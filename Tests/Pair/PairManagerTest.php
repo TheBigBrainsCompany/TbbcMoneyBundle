@@ -5,6 +5,7 @@ use Money\Money;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManager;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
+use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 
 /**
  * @group manager
@@ -19,8 +20,9 @@ class PairManagerTest extends \PHPUnit_Framework_TestCase
         $this->fileName = __DIR__."/../app/data/tbbc_money/pair.csv";
         $dir = dirname($this->fileName);
         exec("rm -rf ".escapeshellarg($dir));
+        $storage = new CsvStorage($this->fileName, "EUR");
         $this->manager = new PairManager(
-            $this->fileName,
+            $storage,
             array("EUR", "USD", "CAD"),
             "EUR"
         );
@@ -55,6 +57,10 @@ class PairManagerTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         $this->manager->saveRatio("USD", 1.25);
+        $this->assertEquals(
+            "EUR;1\nUSD;1.25\n",
+            file_get_contents($this->fileName)
+        );
         $this->manager->saveRatio("CAD", 1.50);
         $this->assertEquals(
             "EUR;1\nUSD;1.25\nCAD;1.5\n",
