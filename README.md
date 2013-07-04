@@ -134,6 +134,15 @@ $this->assertEquals(Money::USD(125), $usd);
 {{ $amount | money_convert("USD") | money_format }}
 ```
 
+### commands
+
+```bash
+# save a ratio in the storage
+./app/console tbbc:money:save-ratio USD 1.25
+
+# display ratio list
+./app/console tbbc:money:ratio-list
+```
 
 
 Contributing
@@ -170,6 +179,7 @@ what is functionnal :
 * form integration
 * twig presentation for forms
 * twig filters
+* commands for ratio creation and ratio display
 
 In progress :
 
@@ -177,6 +187,11 @@ In progress :
 
 Versions
 --------
+
+1.1.0 : 2013/07/04
+
+* refactor : storage extracted in another service (CsvStorage)
+* new : command creation : tbbc:money:save-ratio, tbbc:money:ratio-list
 
 1.0.0 : 2013/07/03
 
