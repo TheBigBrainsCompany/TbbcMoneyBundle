@@ -148,7 +148,7 @@ $this->assertEquals(Money::USD(125), $usd);
 Contributing
 ------------
 
-1. Take a look at the [list of issues](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle).
+1. Take a look at the [list of issues](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/issues).
 2. Fork
 3. Write a test (for either new feature or bug)
 4. Make a PR
