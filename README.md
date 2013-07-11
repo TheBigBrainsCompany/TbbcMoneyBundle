@@ -45,7 +45,7 @@ Table of contents
 Installation
 ------------
 
-Using [Composer](http://getcomposer.org/), just `$ composer require {PACKAGIST_PACKAGE_PATH}` package or:
+Using [Composer](http://getcomposer.org/), just `$ composer require tbbc/money-bundle` package or:
 
 ``` javascript
 {
