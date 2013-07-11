@@ -103,7 +103,7 @@ $this->assertEquals(Money::USD(1250), $usd);
 
 ### integration of money and currencies in a form
 
-[see 20-FormAndDoctrineIntegration.md](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/Resources/doc/20-FormAndDoctrineIntegration.md)
+See [Form And Doctrine Integration](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/Resources/doc/20-FormAndDoctrineIntegration.md)
 
 ### Conversion manager
 
