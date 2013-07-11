@@ -101,7 +101,7 @@ $usd = $pair->convert($tenEur);
 $this->assertEquals(Money::USD(1250), $usd);
 ```
 
-### integration of money and currencies in a form
+### Integration of money and currencies in a form
 
 See [Form And Doctrine Integration](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/Resources/doc/20-FormAndDoctrineIntegration.md)
 
