@@ -5,7 +5,7 @@ Let's see an example :
 * an entity with a setPrice / getPrice manipulating a Money object
 * a controller with the form
 
-### the doctrine entity
+### Doctrine entity
 
 Note that there is 2 columns : $priceAmount and $priceCurrency and only one get/set : getPrice and setPrice.
 
@@ -122,7 +122,7 @@ class TestMoney
 }
 ```
 
-### the controller
+### Controller
 ```php
 public function testMoneyFormAction()
 {
