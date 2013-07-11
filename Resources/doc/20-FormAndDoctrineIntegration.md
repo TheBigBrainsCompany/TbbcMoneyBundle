@@ -2,7 +2,7 @@ Form and Doctrine Integration
 =============================
 
 Let's see an example :
-* an entity with a setPrice / getPrice manipulating an Money object
+* an entity with a setPrice / getPrice manipulating a Money object
 * a controller with the form
 
 ### the doctrine entity
