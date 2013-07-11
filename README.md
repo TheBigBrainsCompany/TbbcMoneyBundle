@@ -14,6 +14,8 @@ Quick Start
 -----------
 
 ```php
+use Money\Money;
+
 // a money library
 $fiveEur = Money::EUR(500);
 $tenEur = $fiveEur->add($fiveEur);
@@ -89,6 +91,8 @@ Usage
 ### Money Library integration
 
 ```php
+use Money\Money;
+
 $fiveEur = Money::EUR(500);
 $tenEur = $fiveEur->add($fiveEur);
 list($part1, $part2, $part3) = $tenEur->allocate(array(1, 1, 1));
@@ -117,6 +121,8 @@ $usd = $pairManager->convert($amount, 'USD');
 Save a conversion value in a DB
 
 ```php
+use Money\Money;
+
 $pairManager = $this->get("tbbc_money.pair_manager");
 $pairManager->saveRatio('USD', 1.25); // save in ratio file in CSV
 $eur = Money::EUR(100);
