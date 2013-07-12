@@ -32,6 +32,17 @@ $usd = $pairManager->convert($tenEur, 'USD');
 $formBuilder->add("price", "tbbc_money");
 ```
 
+Features
+--------
+
+* Integrates money library from mathiasverraes
+* Twig filters and formater in order to display amounts
+* A storage system for currency ratios
+* A ratioProvider system for fetching ratio from externals api
+* Symfony2 form integration
+* Console commands for different operations
+* A configuration parser for specifying website used currencies
+
 Table of contents
 -----------------
 
@@ -149,6 +160,9 @@ $this->assertEquals(Money::USD(125), $usd);
 
 # display ratio list
 ./app/console tbbc:money:ratio-list
+
+# fetch all the ratio for all defined currencies from an external API
+./app/console tbbc:money:ratio-fetch
 ```
 
 
@@ -197,6 +211,7 @@ Versions
 
 1.2.0 : coming soon
 
+* NEW : ratio provider mecanism for fetch currency ratios from external api
 * Warning : small BC Break : command save-ratio is renamed ratio-save
 * doc enhancement
 

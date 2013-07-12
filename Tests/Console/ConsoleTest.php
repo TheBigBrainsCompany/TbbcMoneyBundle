@@ -26,4 +26,17 @@ class ConsoleTest
 
         $this->assertEquals("Ratio list\nEUR;1\nUSD;1.265\n\n", $output);
     }
+
+    public function testRunRatioFetch()
+    {
+        $client = self::createClient();
+        $output = $this->runCommand($client, "tbbc:money:ratio-fetch");
+        $this->assertNotContains("ERR", $output);
+
+        $output = $this->runCommand($client, "tbbc:money:ratio-list");
+        $res = file_get_contents("http://rate-exchange.appspot.com/currency?from=EUR&to=USD");
+        $res = json_decode($res, true);
+        $ratio = $res["rate"];
+        $this->assertEquals("Ratio list\nEUR;1\nUSD;$ratio\n\n", $output);
+    }
 }
