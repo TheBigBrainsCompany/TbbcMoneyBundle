@@ -209,7 +209,7 @@ In progress :
 Versions
 --------
 
-1.2.0 : coming soon
+1.2.0 : 12/07/2013
 
 * NEW : ratio provider mecanism for fetch currency ratios from external api
 * Warning : small BC Break : command save-ratio is renamed ratio-save
