@@ -11,7 +11,7 @@ class ConsoleTest
     {
         $client = self::createClient();
 
-        $output = $this->runCommand($client, "tbbc:money:save-ratio USD 1.265");
+        $output = $this->runCommand($client, "tbbc:money:ratio-save USD 1.265");
 
         /** @var PairManagerInterface $pairManager */
         $pairManager = $client->getContainer()->get("tbbc_money.pair_manager");
@@ -20,7 +20,7 @@ class ConsoleTest
     public function testRunRatioList()
     {
         $client = self::createClient();
-        $output = $this->runCommand($client, "tbbc:money:save-ratio USD 1.265");
+        $output = $this->runCommand($client, "tbbc:money:ratio-save USD 1.265");
 
         $output = $this->runCommand($client, "tbbc:money:ratio-list");
 

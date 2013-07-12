@@ -41,6 +41,7 @@ Table of contents
 * [Requirements](#requirements)
 * [Authors](#authors)
 * [Status](#status)
+* [Versions](#versions)
 
 Installation
 ------------
@@ -144,7 +145,7 @@ $this->assertEquals(Money::USD(125), $usd);
 
 ```bash
 # save a ratio in the storage
-./app/console tbbc:money:save-ratio USD 1.25
+./app/console tbbc:money:ratio-save USD 1.25
 
 # display ratio list
 ./app/console tbbc:money:ratio-list
@@ -194,10 +195,15 @@ In progress :
 Versions
 --------
 
+1.2.0 : coming soon
+
+* Warning : small BC Break : command save-ratio is renamed ratio-save
+* doc enhancement
+
 1.1.0 : 2013/07/04
 
 * refactor : storage extracted in another service (CsvStorage)
-* new : command creation : tbbc:money:save-ratio, tbbc:money:ratio-list
+* new : command creation : tbbc:money:ratio-save, tbbc:money:ratio-list
 
 1.0.0 : 2013/07/03
 
