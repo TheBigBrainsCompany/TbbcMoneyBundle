@@ -9,7 +9,7 @@ class Currency
     /**
      * @var string
      */
-    private $code;
+    private $currencyCode;
 
     /**
      * @var integer
@@ -18,7 +18,7 @@ class Currency
     
     public function __construct($code = null, $ratio = null) 
     {
-        $this->code = $code;
+        $this->currencyCode = $code;
         $this->ratio = $ratio;
     }
 
@@ -35,24 +35,24 @@ class Currency
     /**
      * Set code
      *
-     * @param  string $code
+     * @param  string $currencyCode
      * @return Currency
      */
-    public function setCode($code)
+    public function setCurrencyCode($code)
     {
-        $this->code = $code;
+        $this->currencyCode = $currencyCode;
 
         return $this;
     }
 
     /**
-     * Get code
+     * Get currencyCode
      *
      * @return string
      */
-    public function getCode()
+    public function getCurrencyCode()
     {
-        return $this->code;
+        return $this->currencyCode;
     }
 
     /**

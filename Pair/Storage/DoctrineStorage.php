@@ -58,7 +58,7 @@ class DoctrineStorage implements StorageInterface
         $this->ratioList = array();
         
         foreach ($currencies as $currency) {
-            $this->ratioList[$currency->getCode()] = $currency->getRatio();
+            $this->ratioList[$currency->getCurrencyCode()] = $currency->getRatio();
         }
         
         return $this->ratioList;
@@ -74,27 +74,12 @@ class DoctrineStorage implements StorageInterface
         
         $this->objectManager->flush();
         
-        foreach ($ratioList as $code => $ratio) {
-            $this->objectManager->persist($this->createCurrency($code, $ratio));
+        foreach ($ratioList as $currencyCode => $ratio) {
+            $this->objectManager->persist(new Currency($currencyCode, $ratio));
         }
 
         $this->objectManager->flush();
         
         $this->ratioList = $ratioList;
-    }
-
-    /**
-     * Create a Currency from code & currency
-     *
-     * @param string $code
-     * @param float  $ratio
-     */
-    protected function createCurrency($code, $ratio)
-    {
-        $currency = new Currency();
-        $currency->setCode($code);
-        $currency->setRatio($ratio);
-
-        return $currency;
     }
 }

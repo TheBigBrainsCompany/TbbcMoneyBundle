@@ -5,7 +5,7 @@
             <generator strategy="AUTO"/>
         </id>
         
-        <field name="code" type="string" column="code" nullable="false" unique="true" length="3"/>
+        <field name="currencyCode" type="string" column="currency_code" nullable="false" unique="true" length="3"/>
         <field name="ratio" type="float" column="ratio" nullable="false" length="255"/>
     </entity>
 </doctrine-mapping>

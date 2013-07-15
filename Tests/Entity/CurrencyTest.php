@@ -17,7 +17,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     {
         $dollar = new Currency('USD', 1.6);
         
-        $this->assertEquals('USD', $dollar->getCode());
+        $this->assertEquals('USD', $dollar->getCurrencyCode());
         $this->assertEquals(1.6, $dollar->getRatio());
     }
 
@@ -26,8 +26,8 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         $currency = new Currency();
 
         $this->assertTrue(method_exists($currency, 'getId'));
-        $this->assertTrue(method_exists($currency, 'getCode'));
-        $this->assertTrue(method_exists($currency, 'setCode'));
+        $this->assertTrue(method_exists($currency, 'getCurrencyCode'));
+        $this->assertTrue(method_exists($currency, 'setCurrencyCode'));
         $this->assertTrue(method_exists($currency, 'getRatio'));
         $this->assertTrue(method_exists($currency, 'setRatio'));
     }
