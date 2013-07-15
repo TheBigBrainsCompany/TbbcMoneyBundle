@@ -6,6 +6,8 @@ php:
   - 5.5
 
 before_script:
+  - pyrus channel-discover pear.symfony.com
+  - pyrus install --force phpunit/DbUnit
   - composer self-update
   - composer install --dev --prefer-source
 
