@@ -3,7 +3,7 @@ namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 
 use Tbbc\MoneyBundle\Tests\BundleOrmTestCase;
 use Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage;
-use Tbbc\MoneyBundle\Entity\Currency;
+use Tbbc\MoneyBundle\Entity\DoctrineStorageRatio;
 
 /**
  * @group manager
@@ -33,12 +33,12 @@ class DoctrineStorageTest extends BundleOrmTestCase
     
     public function testLoadForceOption ()
     {
-        $this->getEntityManager()->persist(new Currency('USD', 1));
+        $this->getEntityManager()->persist(new DoctrineStorageRatio('USD', 1));
         $this->getEntityManager()->flush();
         
         $this->assertCount(1, $this->doctrineStorage->loadRatioList());
         
-        $this->getEntityManager()->persist(new Currency('EUR', 1.6));
+        $this->getEntityManager()->persist(new DoctrineStorageRatio('EUR', 1.6));
         $this->getEntityManager()->flush();
         
         $this->assertCount(1, $this->doctrineStorage->loadRatioList());
@@ -48,7 +48,7 @@ class DoctrineStorageTest extends BundleOrmTestCase
     public function testSave ()
     {
         $em = $this->getEntityManager();
-        $repository = $em->getRepository('Tbbc\MoneyBundle\Entity\Currency');
+        $repository = $em->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio');
 
         $this->doctrineStorage->saveRatioList(array (
             'EUR' => 1,

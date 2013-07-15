@@ -6,7 +6,7 @@
 
 namespace Tbbc\MoneyBundle\Pair\Storage;
 
-use Tbbc\MoneyBundle\Entity\Currency;
+use Tbbc\MoneyBundle\Entity\DoctrineStorageRatio;
 use Tbbc\MoneyBundle\Pair\StorageInterface;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -44,12 +44,12 @@ class DoctrineStorage implements StorageInterface
             return $this->ratioList;
         }
         
-        $repository = $this->objectManager->getRepository('Tbbc\MoneyBundle\Entity\Currency');        
-        $currencies = $repository->findAll();
+        $repository = $this->objectManager->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio');        
+        $doctrineStorageRatios = $repository->findAll();
         
         // FIXME
         // if filename doesn't exist, init with only reference currency code
-        if (0 === count($currencies)) {
+        if (0 === count($doctrineStorageRatios)) {
             $this->ratioList = array($this->referenceCurrencyCode => (float) 1);
             $this->saveRatioList($this->ratioList);
             return $this->ratioList;
@@ -57,8 +57,8 @@ class DoctrineStorage implements StorageInterface
         
         $this->ratioList = array();
         
-        foreach ($currencies as $currency) {
-            $this->ratioList[$currency->getCurrencyCode()] = $currency->getRatio();
+        foreach ($doctrineStorageRatios as $doctrineStorageRatio) {
+            $this->ratioList[$doctrineStorageRatio->getCurrencyCode()] = $doctrineStorageRatio->getRatio();
         }
         
         return $this->ratioList;
@@ -66,16 +66,16 @@ class DoctrineStorage implements StorageInterface
 
     public function saveRatioList($ratioList)
     {
-        $currencies = $this->objectManager->getRepository('Tbbc\MoneyBundle\Entity\Currency')->findAll();
+        $doctrineStorageRatios = $this->objectManager->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio')->findAll();
         
-        foreach($currencies as $currency) {
-            $this->objectManager->remove($currency);
+        foreach($doctrineStorageRatios as $doctrineStorageRatio) {
+            $this->objectManager->remove($doctrineStorageRatio);
         }
         
         $this->objectManager->flush();
         
         foreach ($ratioList as $currencyCode => $ratio) {
-            $this->objectManager->persist(new Currency($currencyCode, $ratio));
+            $this->objectManager->persist(new DoctrineStorageRatio($currencyCode, $ratio));
         }
 
         $this->objectManager->flush();

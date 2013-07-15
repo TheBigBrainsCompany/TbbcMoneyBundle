@@ -1,21 +1,21 @@
 <?php
 namespace Tbbc\MoneyBundle\Tests\Entity;
 
-use Tbbc\MoneyBundle\Entity\Currency;
+use Tbbc\MoneyBundle\Entity\DoctrineStorageRatio;
 
 /**
  * @group manager
  */
-class CurrencyTest extends \PHPUnit_Framework_TestCase
+class DoctrineStorageRatioTest extends \PHPUnit_Framework_TestCase
 {
     public function testClassExists ()
     {
-        $this->assertTrue(class_exists('\Tbbc\MoneyBundle\Entity\Currency'));
+        $this->assertTrue(class_exists('\Tbbc\MoneyBundle\Entity\DoctrineStorageRatio'));
     }
 
     public function testConstructor ()
     {
-        $dollar = new Currency('USD', 1.6);
+        $dollar = new DoctrineStorageRatio('USD', 1.6);
         
         $this->assertEquals('USD', $dollar->getCurrencyCode());
         $this->assertEquals(1.6, $dollar->getRatio());
@@ -23,7 +23,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 
     public function testProperties ()
     {
-        $currency = new Currency();
+        $currency = new DoctrineStorageRatio();
 
         $this->assertTrue(method_exists($currency, 'getId'));
         $this->assertTrue(method_exists($currency, 'getCurrencyCode'));

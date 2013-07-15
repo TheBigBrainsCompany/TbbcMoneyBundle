@@ -2,7 +2,7 @@
 
 namespace Tbbc\MoneyBundle\Entity;
 
-class Currency
+class DoctrineStorageRatio
 {
     private $id;
 
