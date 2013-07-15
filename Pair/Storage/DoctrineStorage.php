@@ -79,6 +79,8 @@ class DoctrineStorage implements StorageInterface
         }
 
         $this->objectManager->flush();
+        
+        $this->ratioList = $ratioList;
     }
 
     /**

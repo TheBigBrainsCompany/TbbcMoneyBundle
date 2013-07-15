@@ -71,4 +71,21 @@ class DoctrineStorageTest extends BundleOrmTestCase
         
         $this->assertCount(1, $repository->findAll());
     }
+    
+    public function testSaveAndLoad ()
+    {
+        $this->doctrineStorage->saveRatioList(array (
+            'EUR' => 1,
+            'USD' => 1.6
+        ));
+
+        $this->assertCount(2, $this->doctrineStorage->loadRatioList());
+        $this->doctrineStorage->saveRatioList(array (
+            'EUR' => 1,
+            'USD' => 1.6,
+            'JPY' => 2
+        ));
+
+        $this->assertCount(3, $this->doctrineStorage->loadRatioList());
+    }
 }
