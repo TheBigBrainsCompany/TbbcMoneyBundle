@@ -40,7 +40,7 @@ class BundleOrmTestCase
         return EntityManager::create(
             array(
                 'driver' => 'pdo_sqlite',
-                'path' => "/tmp/sqlite-test.db"
+                'path' => "/tmp/sqlite-tbbc-money-test.db"
             ),
             $config,
             $eventManager
@@ -52,6 +52,6 @@ class BundleOrmTestCase
      */
     protected function getDataSet()
     {
-        return $this->createXMLDataSet(__DIR__."/_doctrine/dataset/currencies.xml");
+        return $this->createXMLDataSet(__DIR__."/_doctrine/dataset/doctrine_storage_ratios.xml");
     }
 }
