@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Tbbc\MoneyBundle\Entity\DoctrineStorageRatio" table="tbbc_money_doctrine_storage_ratios">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+        
+        <field name="currencyCode" type="string" column="currency_code" nullable="false" unique="true" length="3"/>
+        <field name="ratio" type="float" column="ratio" nullable="false" length="255"/>
+    </entity>
+</doctrine-mapping>
