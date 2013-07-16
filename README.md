@@ -37,6 +37,7 @@ Table of contents
 
 * [Installation](#installation)
 * [Usage](#usage)
+* [Storage](#storage)
 * [Contributing](#contributing)
 * [Requirements](#requirements)
 * [Authors](#authors)
@@ -150,6 +151,25 @@ $this->assertEquals(Money::USD(125), $usd);
 ./app/console tbbc:money:ratio-list
 ```
 
+Storage
+-------
+
+Two storages are available : CSV File, or Doctrine
+By default, TbbcMoneyBundle is configured with CSV File.
+
+If you want to switch to a Doctrine storage, edit your **config.yml**
+
+```yaml
+tbbc_money:
+    storage: doctrine
+```
+
+Update your database schema :
+```bash
+./app/console doctrine:schema:update --force
+```
+
+With the Doctrine storage, currency ratio will use the default entity manager and will store data inside the **tbbc_money_doctrine_storage_ratios**
 
 Contributing
 ------------
@@ -193,6 +213,10 @@ In progress :
 
 Versions
 --------
+
+master
+
+* new : doctrine storage
 
 1.1.0 : 2013/07/04
 
