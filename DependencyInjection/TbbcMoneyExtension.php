@@ -31,7 +31,8 @@ class TbbcMoneyExtension extends Extension
             'currencies'  => 'tbbc_money.currencies',
             'reference_currency'  => 'tbbc_money.reference_currency'
         ));
-
+        
+        $container->setParameter('tbbc_money.pair.storage', $config['storage']);
     }
 
     /**
