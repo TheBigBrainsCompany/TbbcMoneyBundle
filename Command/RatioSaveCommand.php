@@ -9,14 +9,14 @@ use Symfony\Component\Console\Input\InputOption;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
-class SaveRatioCommand
+class RatioSaveCommand
     extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('tbbc:money:save-ratio')
-            ->setHelp("The <info>tbbc:money:save-ratio</info> save a currency ratio")
+            ->setName('tbbc:money:ratio-save')
+            ->setHelp("The <info>tbbc:money:ratio-save</info> save a currency ratio")
             ->setDescription('save a currency ratio')
             ->addArgument(
                 'currencyCode',

@@ -5,6 +5,7 @@ use Money\Money;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManager;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
+use Tbbc\MoneyBundle\Pair\RatioProvider\RateExchangeRatioProvider;
 use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 
 /**
@@ -98,5 +99,25 @@ class PairManagerTest extends \PHPUnit_Framework_TestCase
     {
         $eur = Money::BSD(100);
         $bsd = $this->manager->convert($eur, "EUR");
+    }
+
+    public function testRatioProvider()
+    {
+        $provider = new RateExchangeRatioProvider();
+        $this->manager->setRatioProvider($provider);
+        $this->manager->saveRatioListFromRatioProvider();
+        $ratio = $this->manager->getRelativeRatio("EUR", "USD");
+        $this->assertTrue($ratio > 0.3);
+        $this->assertTrue($ratio < 3);
+        $referenceRatio = $provider->fetchRatio("EUR", "CAD");
+        $this->assertEquals($referenceRatio, $this->manager->getRelativeRatio("EUR", "CAD"));
+    }
+
+    /**
+     * @expectedException \Tbbc\MoneyBundle\MoneyException
+     */
+    public function testNoRatioProvider()
+    {
+        $this->manager->saveRatioListFromRatioProvider();
     }
 }

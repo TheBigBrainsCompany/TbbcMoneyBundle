@@ -32,6 +32,17 @@ $usd = $pairManager->convert($tenEur, 'USD');
 $formBuilder->add("price", "tbbc_money");
 ```
 
+Features
+--------
+
+* Integrates money library from mathiasverraes
+* Twig filters and formater in order to display amounts
+* A storage system for currency ratios
+* A ratioProvider system for fetching ratio from externals api
+* Symfony2 form integration
+* Console commands for different operations
+* A configuration parser for specifying website used currencies
+
 Table of contents
 -----------------
 
@@ -42,11 +53,12 @@ Table of contents
 * [Requirements](#requirements)
 * [Authors](#authors)
 * [Status](#status)
+* [Versions](#versions)
 
 Installation
 ------------
 
-Using [Composer](http://getcomposer.org/), just `$ composer require {PACKAGIST_PACKAGE_PATH}` package or:
+Using [Composer](http://getcomposer.org/), just `$ composer require tbbc/money-bundle` package or:
 
 ``` javascript
 {
@@ -145,10 +157,13 @@ $this->assertEquals(Money::USD(125), $usd);
 
 ```bash
 # save a ratio in the storage
-./app/console tbbc:money:save-ratio USD 1.25
+./app/console tbbc:money:ratio-save USD 1.25
 
 # display ratio list
 ./app/console tbbc:money:ratio-list
+
+# fetch all the ratio for all defined currencies from an external API
+./app/console tbbc:money:ratio-fetch
 ```
 
 Storage
@@ -214,14 +229,20 @@ In progress :
 Versions
 --------
 
-master
+master :
 
 * new : doctrine storage
+
+1.2.0 : 12/07/2013
+
+* new : ratio provider mecanism for fetch currency ratios from external api
+* Warning : small BC Break : command save-ratio is renamed ratio-save
+* doc enhancement
 
 1.1.0 : 2013/07/04
 
 * refactor : storage extracted in another service (CsvStorage)
-* new : command creation : tbbc:money:save-ratio, tbbc:money:ratio-list
+* new : command creation : tbbc:money:ratio-save, tbbc:money:ratio-list
 
 1.0.0 : 2013/07/03
 

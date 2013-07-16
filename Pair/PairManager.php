@@ -25,6 +25,9 @@ class PairManager
     /** @var  string */
     protected $referenceCurrencyCode;
 
+    /** @var  RatioProviderInterface */
+    protected $ratioProvider;
+
     public function __construct(
         StorageInterface $storage,
         $currencyCodeList,
@@ -105,5 +108,30 @@ class PairManager
     {
         return $this->storage->loadRatioList();
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function setRatioProvider(RatioProviderInterface $ratioProvider)
+    {
+        $this->ratioProvider = $ratioProvider;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function saveRatioListFromRatioProvider()
+    {
+        if (!$this->ratioProvider) {
+            throw new MoneyException("no ratio provider defined");
+        }
+        foreach ($this->getCurrencyCodeList() as $currencyCode) {
+            if ($currencyCode != $this->getReferenceCurrencyCode()) {
+                $ratio = $this->ratioProvider->fetchRatio($this->getReferenceCurrencyCode(), $currencyCode);
+                $this->saveRatio($currencyCode, $ratio);
+            }
+        }
+    }
+
 
 }
