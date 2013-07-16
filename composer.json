@@ -30,6 +30,10 @@
         "beberlei/DoctrineExtensions": "dev-master",
         "doctrine/orm": "~2.2,>=2.2.3"
     },
+    "suggest": {
+        "doctrine/doctrine-bundle": "*",
+        "doctrine/orm": "*"
+    },
     "autoload": {
         "psr-0": { "Tbbc\\MoneyBundle": "" }
     },
