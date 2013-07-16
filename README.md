@@ -166,10 +166,10 @@ $this->assertEquals(Money::USD(125), $usd);
 ./app/console tbbc:money:ratio-fetch
 ```
 
-Storage
--------
+RatioStorage
+------------
 
-Two storages are available : CSV File, or Doctrine
+Two storages for storing ratios are available : CSV File, or Doctrine
 By default, TbbcMoneyBundle is configured with CSV File.
 
 If you want to switch to a Doctrine storage, edit your **config.yml**
@@ -204,6 +204,7 @@ Authors
 -------
 
 Philippe Le Van - [kitpages.fr](http://www.kitpages.fr) - twitter : @plv
+Thomas Tourlourat - [Wozbe](http://wozbe.com) - twitter: @armetiz
 
 
 Status
@@ -229,9 +230,9 @@ In progress :
 Versions
 --------
 
-master :
+1.3.0 : 16/07/2013
 
-* new : doctrine storage
+* new : doctrine storage (thanks to @armetiz)
 
 1.2.0 : 12/07/2013
 
