@@ -57,6 +57,7 @@ class MoneyToArrayTransformer implements DataTransformerInterface
             return null;
         }
         $amount = (string)$value['tbbc_amount'];
+        $amount = str_replace(" ", "", $amount);
         $amount = $this->sfTransformer->reverseTransform($amount);
         $amount = round($amount);
         $amount = (int)$amount;

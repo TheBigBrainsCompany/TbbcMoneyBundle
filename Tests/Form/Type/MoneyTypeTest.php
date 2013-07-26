@@ -52,6 +52,22 @@ class MoneyTypeTest
         $this->assertEquals(Money::EUR(1250), $form->getData());
     }
 
+    public function testGreaterThan1000Valid()
+    {
+        \Locale::setDefault("fr_FR");
+        $currencyType = new CurrencyType(
+            array("EUR", "USD"),
+            "EUR"
+        );
+        $moneyType = new MoneyType($currencyType);
+        $form = $this->factory->create($moneyType, null, array());
+        $form->bind(array(
+            "tbbc_currency" => array("tbbc_name"=>'EUR'),
+            "tbbc_amount" => '1 252,5'
+        ));
+        $this->assertEquals(Money::EUR(125250), $form->getData());
+    }
+
     public function testSetData()
     {
         \Locale::setDefault("fr_FR");
