@@ -3,6 +3,7 @@
     <parameters>
         <parameter key="tbbc_money.form_type.money.class">Tbbc\MoneyBundle\Form\Type\MoneyType</parameter>
         <parameter key="tbbc_money.form_type.currency.class">Tbbc\MoneyBundle\Form\Type\CurrencyType</parameter>
+        <parameter key="tbbc_money.form_type.simple_money.class">Tbbc\MoneyBundle\Form\Type\SimpleMoneyType</parameter>
     </parameters>
 
     <services>
@@ -14,6 +15,10 @@
         <service id="tbbc_money.form_type.money" class="%tbbc_money.form_type.money.class%">
             <argument type="service" id="tbbc_money.form_type.currency"/>
             <tag name="form.type" alias="tbbc_money" />
+        </service>
+        <service id="tbbc_money.form_type.simple_money" class="%tbbc_money.form_type.simple_money.class%">
+            <argument type="service" id="tbbc_money.pair_manager"/>
+            <tag name="form.type" alias="tbbc_simple_money" />
         </service>
     </services>
 </container>
