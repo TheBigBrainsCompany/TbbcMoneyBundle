@@ -118,9 +118,15 @@ $usd = $pair->convert($tenEur);
 $this->assertEquals(Money::USD(1250), $usd);
 ```
 
-### Integration of money and currencies in a form
+### Integration of money and currencies in a form and link to doctrine
 
-See [Form And Doctrine Integration](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/Resources/doc/20-FormAndDoctrineIntegration.md)
+You have 3 new form types :
+* tbbc_currency : asks for a currency among currencies defined in config.yml
+* tbbc_money : asks for an amount and a currency
+* tbbc_simple_money : asks for an amount and sets the currency to the reference currency set in config.yml
+
+You can see more details on how to manage forms and doctrine binding in this page :
+[Form And Doctrine Integration](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/Resources/doc/20-FormAndDoctrineIntegration.md)
 
 ### Conversion manager
 
@@ -229,6 +235,11 @@ In progress :
 
 Versions
 --------
+
+1.4.0 : 26/07/2013
+
+* fix : datatransformer returned a null values for amounts above 1000 with a space grouping separator
+* new : tbbc_simple_money field type without currency (reference currency used by default)
 
 1.3.0 : 16/07/2013
 
