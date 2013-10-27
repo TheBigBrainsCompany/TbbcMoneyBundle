@@ -59,7 +59,7 @@ class MoneyExtension extends \Twig_Extension
      */
     public function format(Money $money, $decPoint = ',', $thousandsSep = ' ')
     {
-        $symbol = $this->formatCurrency($money->getCurrency());
+        $symbol = $this->formatCurrency($money);
         $amount = $this->formatAmount($money, $decPoint, $thousandsSep);
         $price = $amount . " " . $symbol;
 
@@ -90,12 +90,12 @@ class MoneyExtension extends \Twig_Extension
      * Formats ONLY the currency part of the given Money object
      * into a localized string
      *
-     * @param Currency $currency
+     * @param Money $money
      * @return null|string
      */
-    public function formatCurrency(Currency $currency)
+    public function formatCurrency(Money $money)
     {
-        return Intl::getCurrencyBundle()->getCurrencySymbol($currency->getName());
+        return Intl::getCurrencyBundle()->getCurrencySymbol($money->getCurrency()->getName());
     }
 
     /**

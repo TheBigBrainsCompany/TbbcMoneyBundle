@@ -157,6 +157,7 @@ $this->assertEquals(Money::USD(125), $usd);
 {{ $amount | money_get_currency | currency_symbol }}
 {{ $amount | money_get_currency | currency_name }}
 {{ $amount | money_convert("USD") | money_format }}
+{{ $amount | money_format_currency }}
 ```
 
 ### commands
