@@ -21,8 +21,8 @@ class RateExchangeRatioProvider
     public function fetchRatio($referenceCurrencyCode, $currencyCode)
     {
         try {
-            $currency = new Currency($currencyCode);
-            $referenceCurrency = new Currency($referenceCurrencyCode);
+            new Currency($currencyCode);
+            new Currency($referenceCurrencyCode);
         } catch (UnknownCurrencyException $e) {
             throw new MoneyException("one of your currency code doesn't exist");
         }
