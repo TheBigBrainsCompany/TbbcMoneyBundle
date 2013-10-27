@@ -4,7 +4,7 @@
     "description": "This is a Symfony2 bundle that integrates the php money library (Fowler pattern): https://github.com/mathiasverraes/money.",
     "keywords": ["money", "currency", "fowler", "conversion"],
     "homepage": "https://github.com/TheBigBrainsCompany/TbbcMoneyBundle",
-    "license": "BSD",
+    "license": "MIT",
     "authors": [
         {
             "name": "Philippe Le Van",
