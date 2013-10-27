@@ -6,7 +6,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 
 /**

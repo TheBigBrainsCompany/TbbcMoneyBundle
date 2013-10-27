@@ -3,10 +3,6 @@
 namespace Tbbc\MoneyBundle\Form\DataTransformer;
 
 use Money\Currency;
-use Money\Money;
-use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 /**

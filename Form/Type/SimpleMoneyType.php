@@ -3,12 +3,8 @@
 namespace Tbbc\MoneyBundle\Form\Type;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Tbbc\MoneyBundle\Form\DataTransformer\SimpleMoneyToArrayTransformer;
-use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 /**

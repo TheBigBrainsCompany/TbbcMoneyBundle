@@ -9,7 +9,6 @@ namespace Tbbc\MoneyBundle\Pair;
 use Money\Currency;
 use Money\CurrencyPair;
 use Money\Money;
-use Money\UnknownCurrencyException;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\StorageInterface;
 

@@ -6,7 +6,6 @@
 
 namespace Tbbc\MoneyBundle\Twig;
 
-use Money\Currency;
 use Money\Money;
 use Symfony\Component\Intl\Intl;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
