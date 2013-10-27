@@ -37,12 +37,17 @@ class DoctrineStorageTest extends BundleOrmTestCase
         $this->getEntityManager()->flush();
         
         $this->assertCount(1, $this->doctrineStorage->loadRatioList());
-        
+
+        $storageRatio = new DoctrineStorageRatio('USD', 1);
+        $storageRatio->setCurrencyCode("EUR");
+        $storageRatio->setRatio(1.6);
         $this->getEntityManager()->persist(new DoctrineStorageRatio('EUR', 1.6));
         $this->getEntityManager()->flush();
         
         $this->assertCount(1, $this->doctrineStorage->loadRatioList());
         $this->assertCount(2, $this->doctrineStorage->loadRatioList(true));
+        $ratioList = $this->doctrineStorage->loadRatioList();
+        $this->assertEquals(1.6, $ratioList["EUR"]);
     }
 
     public function testSave ()

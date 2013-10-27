@@ -38,7 +38,7 @@ class DoctrineStorageRatio
      * @param  string $currencyCode
      * @return Currency
      */
-    public function setCurrencyCode($code)
+    public function setCurrencyCode($currencyCode)
     {
         $this->currencyCode = $currencyCode;
 
