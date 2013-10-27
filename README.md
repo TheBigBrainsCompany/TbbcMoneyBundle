@@ -3,6 +3,8 @@ TbbcMoneyBundle
 
 [![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle.png?branch=master)](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle)
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6/big.png)](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6)
+
 This bundle is used to integrate the [Money library from mathiasverraes](https://github.com/mathiasverraes/money) into
 a symfony2 project.
 
