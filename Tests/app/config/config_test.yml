@@ -3,6 +3,14 @@ tbbc_money:
     reference_currency: "EUR"
 
 framework:
+    trusted_hosts: ~
     secret: "test"
     test: ~
 
+doctrine:
+    dbal:
+        driver:   'pdo_sqlite'
+        memory:   true
+    orm:
+        entity_managers:
+            default: ~

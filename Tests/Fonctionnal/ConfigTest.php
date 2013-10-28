@@ -13,6 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Client;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 use Tbbc\MoneyBundle\Twig\CurrencyExtension;
 use Tbbc\MoneyBundle\Twig\MoneyExtension;
+use Tbbc\MoneyBundle\Type\MoneyType;
+use Doctrine\DBAL\Types\Type;
 
 
 class ConfigTest
@@ -56,5 +58,14 @@ class ConfigTest
         $this->assertEquals("€", $currencyExtension->symbol($eur));
         $this->assertEquals("EUR", $currencyExtension->name($eur));
     }
-
+    
+    public function testDoctrineMoneyTypeAvailable()
+    {
+        $client = self::createClient();
+        
+        $this->assertTrue(Type::hasType(MoneyType::NAME));
+        
+        $em = $client->getContainer()->get('doctrine')->getManager('default');
+        $this->assertEquals(MoneyType::NAME, $em->getConnection()->getDatabasePlatform()->getDoctrineTypeMapping(MoneyType::NAME));
+    }
 }
