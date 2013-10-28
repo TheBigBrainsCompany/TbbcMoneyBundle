@@ -64,9 +64,9 @@ class CsvStorage
 
             // validate that currency exist in currency code list
             try {
-                $currency = new Currency($currencyCode);
+                // hack to throw an exception if currency doesn't exist
+                new Currency($currencyCode);
             } catch (UnknownCurrencyException $e) {
-//                echo file_get_contents($this->ratioFileName);
                 throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, unknown currency $currencyCode");
             }
 

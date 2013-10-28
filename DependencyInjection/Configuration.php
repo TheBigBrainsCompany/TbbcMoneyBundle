@@ -47,6 +47,14 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
+                ->scalarNode('storage')
+                    ->cannotBeEmpty()
+                    ->defaultValue('csv')
+                    ->validate()
+                    ->ifNotInArray(array('csv', 'doctrine'))
+                        ->thenInvalid('Invalid storage "%s"')
+                    ->end()
+                ->end()
             ->end()
         ;
     }

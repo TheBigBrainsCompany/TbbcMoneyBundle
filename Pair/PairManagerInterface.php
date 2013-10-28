@@ -49,4 +49,17 @@ interface PairManagerInterface
      * @return array of type array("EUR" => 1, "USD" => 1.25);
      */
     public function getRatioList();
+
+    /**
+     * just for dependency injection. inject if needed the ratio provider
+     *
+     * @param RatioProviderInterface $ratioProvider
+     */
+    public function setRatioProvider(RatioProviderInterface $ratioProvider);
+
+    /**
+     * If ratio provider is defined, get currency code list, and fetch ratio
+     * from the ratio provider.
+     */
+    public function saveRatioListFromRatioProvider();
 }

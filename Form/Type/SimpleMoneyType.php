@@ -3,25 +3,22 @@
 namespace Tbbc\MoneyBundle\Form\Type;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Tbbc\MoneyBundle\Form\Type\CurrencyType;
+use Tbbc\MoneyBundle\Form\DataTransformer\SimpleMoneyToArrayTransformer;
+use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 /**
  * Form type for the Money object.
  */
-class MoneyType
-    extends AbstractType
+class SimpleMoneyType
+    extends MoneyType
 {
-    /** @var  CurrencyType */
-    protected $currencyType;
 
-    public function __construct(
-        CurrencyType $currencyType
-    )
+    /** @var  PairManagerInterface */
+    protected $pairManager;
+    public function __construct(PairManagerInterface $pairManager)
     {
-        $this->currencyType = $currencyType;
+        $this->pairManager = $pairManager;
     }
 
     /**
@@ -31,9 +28,8 @@ class MoneyType
     {
         $builder
             ->add('tbbc_amount', new TextType())
-            ->add('tbbc_currency', $this->currencyType)
             ->addModelTransformer(
-                new MoneyToArrayTransformer()
+                new SimpleMoneyToArrayTransformer($this->pairManager)
             );
     }
 
@@ -42,6 +38,6 @@ class MoneyType
      */
     public function getName()
     {
-        return 'tbbc_money';
+        return 'tbbc_simple_money';
     }
 }
