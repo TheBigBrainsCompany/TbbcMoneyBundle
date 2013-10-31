@@ -212,8 +212,8 @@ Requirements
 Authors
 -------
 
-Philippe Le Van - [kitpages.fr](http://www.kitpages.fr) - twitter : @plv
-Thomas Tourlourat - [Wozbe](http://wozbe.com) - twitter: @armetiz
+Philippe Le Van - [kitpages.fr](http://www.kitpages.fr) - twitter : @plv  
+Thomas Tourlourat - [Wozbe](http://wozbe.com) - twitter: @armetiz  
 
 
 Status
