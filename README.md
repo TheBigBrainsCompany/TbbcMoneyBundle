@@ -62,7 +62,7 @@ Installation
 
 Using [Composer](http://getcomposer.org/), just `$ composer require tbbc/money-bundle` package or:
 
-``` javascript
+```javascript
 {
   "require": {
     "tbbc/money-bundle": "dev-master"
@@ -221,7 +221,7 @@ Status
 
 Stable
 
-what is functionnal :
+what is functional :
 
 * integration of the money library
 * configuration parser
