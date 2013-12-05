@@ -62,7 +62,7 @@ Installation
 
 Using [Composer](http://getcomposer.org/), just `$ composer require tbbc/money-bundle` package or:
 
-``` javascript
+```javascript
 {
   "require": {
     "tbbc/money-bundle": "dev-master"
@@ -212,8 +212,8 @@ Requirements
 Authors
 -------
 
-Philippe Le Van - [kitpages.fr](http://www.kitpages.fr) - twitter : @plv
-Thomas Tourlourat - [Wozbe](http://wozbe.com) - twitter: @armetiz
+Philippe Le Van - [kitpages.fr](http://www.kitpages.fr) - twitter : @plv  
+Thomas Tourlourat - [Wozbe](http://wozbe.com) - twitter: @armetiz  
 
 
 Status
@@ -221,7 +221,7 @@ Status
 
 Stable
 
-what is functionnal :
+what is functional :
 
 * integration of the money library
 * configuration parser

@@ -77,9 +77,7 @@ class MoneyExtension extends \Twig_Extension
      */
     public function formatAmount(Money $money, $decPoint = ',', $thousandsSep = ' ')
     {
-        $amount = $money->getAmount();
-        $amount = (float)$amount;
-        $amount = $amount / 100;
+        $amount = $this->asFloat($money);
         $amount = number_format($amount, 2, $decPoint, $thousandsSep);
 
         return $amount;
