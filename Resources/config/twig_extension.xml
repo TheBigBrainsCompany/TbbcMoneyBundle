@@ -5,16 +5,18 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="tbbc_money.twig.money.class">Tbbc\MoneyBundle\Twig\MoneyExtension</parameter>
-        <parameter key="tbbc_money.twig.currency.class">Tbbc\MoneyBundle\Twig\CurrencyExtension</parameter>
+        <parameter key="tbbc_money.twig.money.class">Tbbc\MoneyBundle\Twig\Extension\MoneyExtension</parameter>
+        <parameter key="tbbc_money.twig.currency.class">Tbbc\MoneyBundle\Twig\Extension\CurrencyExtension</parameter>
     </parameters>
 
     <services>
         <service id="tbbc_money.twig.money" class="%tbbc_money.twig.money.class%">
+            <argument type="service" id="tbbc_money.formatter.money_formatter"/>
             <argument type="service" id="tbbc_money.pair_manager"/>
             <tag name="twig.extension" />
         </service>
         <service id="tbbc_money.twig.currency" class="%tbbc_money.twig.currency.class%">
+            <argument type="service" id="tbbc_money.formatter.money_formatter"/>
             <tag name="twig.extension" />
         </service>
     </services>

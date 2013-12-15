@@ -9,6 +9,7 @@
         <parameter key="tbbc_money.pair.csv_storage.class">Tbbc\MoneyBundle\Pair\Storage\CsvStorage</parameter>
         <parameter key="tbbc_money.pair_manager.ratio_file_name">%kernel.root_dir%/data/tbbc_money/ratio_file_name.csv</parameter>
         <parameter key="tbbc_money.ratio_provider.rate_exchange.class">Tbbc\MoneyBundle\Pair\RatioProvider\RateExchangeRatioProvider</parameter>
+        <parameter key="tbbc_money.formatter.money_formatter.class">Tbbc\MoneyBundle\Formatter\MoneyFormatter</parameter>
 
     </parameters>
 
@@ -28,6 +29,9 @@
         </service>
         <!-- Ratio providers -->
         <service id="tbbc_money.ratio_provider.rate_exchange" class="%tbbc_money.ratio_provider.rate_exchange.class%">
+        </service>
+        <!-- Formatter -->
+        <service id="tbbc_money.formatter.money_formatter" class="%tbbc_money.formatter.money_formatter.class%">
         </service>
     </services>
 
