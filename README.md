@@ -38,7 +38,7 @@ Features
 --------
 
 * Integrates money library from mathiasverraes
-* Twig filters and formater in order to display amounts
+* Twig filters and PHP helpers for helping with money and currencies in templates
 * A storage system for currency ratios
 * A ratioProvider system for fetching ratio from externals api
 * Symfony2 form integration
@@ -88,6 +88,8 @@ in your config.php, add the currencies you want to use and the reference currenc
 tbbc_money:
     currencies: ["USD", "EUR"]
     reference_currency: "EUR"
+    templating:
+        engines: ["twig", "php"]
 ```
 
 In your config.yml, add the form fields presentations
@@ -151,6 +153,33 @@ $usd = $pairManager->convert($amount, 'USD');
 $this->assertEquals(Money::USD(125), $usd);
 ```
 
+### Money formatter
+
+```php
+<?php
+
+namespace My\Controller\IndexController;
+
+use Money\Money;
+use Money\Currency;
+
+class IndexController extends Controller
+{
+    public function myAction()
+    {
+        $moneyFormatter = $this->get('tbbc_money.formatter.money_formatter');
+        $price = new Money(123456789, new Currency('EUR'));
+
+        $formattedPrice = $moneyFormatter->formatMoney($price);
+        // 1 234 567,89
+
+        $formattedCurrency = $moneyFormatter->formatCurrency($price);
+        // €
+    }
+}
+
+```
+
 ### Twig integration
 
 ```twig
@@ -160,6 +189,13 @@ $this->assertEquals(Money::USD(125), $usd);
 {{ $amount | money_get_currency | currency_name }}
 {{ $amount | money_convert("USD") | money_format }}
 {{ $amount | money_format_currency }}
+```
+
+### PHP templating integration
+
+```php
+<span class="price"><?php echo $view['tbbc_money']->format($price) ?></span>
+<span class="money"><?php echo $view['tbbc_money_currency']->formatCurrencyAsSymbol($price->getCurrency()) ?></span>
 ```
 
 ### commands
