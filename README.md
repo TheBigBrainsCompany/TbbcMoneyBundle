@@ -274,6 +274,10 @@ In progress :
 
 Versions
 --------
+2.0.0 : 2013/12/17
+
+* new : separation between formaters and twig extension
+* possible BC Break if you are using directly twig extension inside a controller
 
 1.5.0 : 2013/12/17
 
