@@ -239,6 +239,10 @@ In progress :
 Versions
 --------
 
+1.5.0 : 2013/12/17
+
+* fix : use statement missing in exception case
+
 1.4.0 : 26/07/2013
 
 * fix : datatransformer returned a null values for amounts above 1000 with a space grouping separator
