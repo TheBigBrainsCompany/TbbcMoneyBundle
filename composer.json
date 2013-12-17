@@ -30,7 +30,9 @@
         "beberlei/DoctrineExtensions": "dev-master",
         "doctrine/doctrine-bundle": "~1.1",
         "doctrine/orm": "~2.2,>=2.2.3",
-        "ext-sqlite3": "*"
+        "ext-sqlite3": "*",
+        "phpunit/phpunit": "~3.7",
+        "phpunit/dbunit": "~1.3"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "~1.1",

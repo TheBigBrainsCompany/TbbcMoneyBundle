@@ -42,21 +42,14 @@ class ConfigTest
         $eur = Money::EUR(100);
         $usd = $moneyExtension->convert($eur, "USD");
         $this->assertEquals(Money::USD(125), $usd);
-
-        $this->assertEquals("1,25 $", $moneyExtension->format($usd));
-        $this->assertEquals(1.25, $moneyExtension->asFloat($usd));
-        $this->assertEquals(new Currency("USD"), $moneyExtension->getCurrency($usd));
     }
+
     public function testCurrencyTwigExtension()
     {
         \Locale::setDefault('en');
         $client = self::createClient();
         /** @var CurrencyExtension $currencyExtension */
         $currencyExtension = $client->getContainer()->get("tbbc_money.twig.currency");
-        $eur = new Currency("EUR");
-
-        $this->assertEquals("€", $currencyExtension->symbol($eur));
-        $this->assertEquals("EUR", $currencyExtension->name($eur));
     }
     
     public function testDoctrineMoneyTypeAvailable()
