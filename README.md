@@ -82,14 +82,12 @@ Then add the bundle in AppKernel :
     }
 ```
 
-in your config.php, add the currencies you want to use and the reference currency.
+in your config.yml, add the currencies you want to use and the reference currency.
 
 ```yaml
 tbbc_money:
     currencies: ["USD", "EUR"]
     reference_currency: "EUR"
-    templating:
-        engines: ["twig", "php"]
 ```
 
 In your config.yml, add the form fields presentations
@@ -122,15 +120,197 @@ $usd = $pair->convert($tenEur);
 $this->assertEquals(Money::USD(1250), $usd);
 ```
 
-### Integration of money and currencies in a form and link to doctrine
+### form integration
 
 You have 3 new form types :
+
 * tbbc_currency : asks for a currency among currencies defined in config.yml
 * tbbc_money : asks for an amount and a currency
 * tbbc_simple_money : asks for an amount and sets the currency to the reference currency set in config.yml
 
-You can see more details on how to manage forms and doctrine binding in this page :
-[Form And Doctrine Integration](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/Resources/doc/20-FormAndDoctrineIntegration.md)
+Example :
+
+```php
+// I create my form
+$form = $this->createFormBuilder($testMoney)
+    ->add("name", 'text')
+    ->add("price", "tbbc_money")
+    ->add("save", "submit")
+    ->getForm();
+```
+
+
+### saving moneys in doctrine
+
+#### Solution 1 : two fields in the database
+
+Note that there is 2 columns in db : $priceAmount and $priceCurrency and only one
+getter/setter : getPrice and setPrice.
+
+The get/setPrice are dealing with these two columns transparently.
+
+* Advantage : your DB is clean and you can do sql sum, group by, sort,... with the amount and the currency
+in two different columns in your db
+* Default : it is ugly in the Entity.
+
+```php
+<?php
+namespace App\AdministratorBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Money\Currency;
+use Money\Money;
+
+/**
+ * TestMoney
+ *
+ * @ORM\Table("test_money")
+ * @ORM\Entity
+ */
+class TestMoney
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="price_amount", type="integer")
+     */
+    private $priceAmount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price_currency", type="string", length=64)
+     */
+    private $priceCurrency;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * get Money
+     *
+     * @return Money
+     */
+    public function getPrice()
+    {
+        if (!$this->priceCurrency) {
+            return null;
+        }
+        if (!$this->priceAmount) {
+            return new Money(0, new Currency($this->priceCurrency));
+        }
+        return new Money($this->priceAmount, new Currency($this->priceCurrency));
+    }
+
+    /**
+     * Set price
+     *
+     * @param Money $price
+     * @return TestMoney
+     */
+    public function setPrice(Money $price)
+    {
+        $this->priceAmount = $price->getAmount();
+        $this->priceCurrency = $price->getCurrency()->getName();
+
+        return $this;
+    }
+}
+```
+
+
+#### Solution 2 : use doctrine type
+
+There is only one string column in your DB. The money object is manually serialized by
+the new doctrine type.
+
+1.25€ is serialized in your DB by 'EUR 125'. *This format is stable. It won't change in future releases.*.
+
+The new doctrine type name is "money".
+
+* Advantage : The entity is easy to create and use
+* Default : it is more difficult to directly request de db in SQL.
+
+```php
+<?php
+namespace App\AdministratorBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Money\Money;
+
+/**
+ * TestMoney
+ *
+ * @ORM\Table("test_money")
+ * @ORM\Entity
+ */
+class TestMoney
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var Money
+     *
+     * @ORM\Column(name="price", type="money")
+     */
+    private $price;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * get Money
+     *
+     * @return Money
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set price
+     *
+     * @param Money $price
+     * @return TestMoney
+     */
+    public function setPrice(Money $price)
+    {
+        $this->price = $price;
+        return $this;
+    }
+}
+```
 
 ### Conversion manager
 
@@ -231,6 +411,21 @@ Update your database schema :
 
 With the Doctrine storage, currency ratio will use the default entity manager and will store data inside the **tbbc_money_doctrine_storage_ratios**
 
+Optimizations
+-------------
+
+in your config.yml, you can select the templating engine to use.
+By default, only twig is loaded.
+
+```yaml
+tbbc_money:
+    currencies: ["USD", "EUR"]
+    reference_currency: "EUR"
+    templating:
+        engines: ["twig", "php"]
+```
+
+
 Contributing
 ------------
 
@@ -274,6 +469,11 @@ In progress :
 
 Versions
 --------
+
+2.0.1 : 2013/12/18
+
+* only README fixes
+
 2.0.0 : 2013/12/17
 
 * new : separation between formaters and twig extension
