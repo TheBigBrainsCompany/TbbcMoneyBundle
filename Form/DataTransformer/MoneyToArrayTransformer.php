@@ -15,9 +15,13 @@ class MoneyToArrayTransformer implements DataTransformerInterface
     /** @var  MoneyToLocalizedStringTransformer */
     protected $sfTransformer;
 
-    public function __construct()
+    /** @var  int */
+    protected $decimals;
+
+    public function __construct($decimals = 2)
     {
-        $this->sfTransformer = new MoneyToLocalizedStringTransformer(null, null, null, 100);
+        $this->decimals = (int)$decimals;
+        $this->sfTransformer = new MoneyToLocalizedStringTransformer(null, null, null, pow(10, $this->decimals));
     }
 
     /**

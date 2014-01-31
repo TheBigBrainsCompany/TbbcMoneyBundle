@@ -17,11 +17,16 @@ class MoneyType
     /** @var  CurrencyType */
     protected $currencyType;
 
+    /** @var  int */
+    protected $decimals;
+
     public function __construct(
-        CurrencyType $currencyType
+        CurrencyType $currencyType,
+        $decimals
     )
     {
         $this->currencyType = $currencyType;
+        $this->decimals = (int)$decimals;
     }
 
     /**
@@ -33,7 +38,7 @@ class MoneyType
             ->add('tbbc_amount', new TextType())
             ->add('tbbc_currency', $this->currencyType)
             ->addModelTransformer(
-                new MoneyToArrayTransformer()
+                new MoneyToArrayTransformer($this->decimals)
             );
     }
 

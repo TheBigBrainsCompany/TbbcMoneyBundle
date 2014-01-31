@@ -30,10 +30,19 @@ class SimpleMoneyTypeTest
 
     public function testBindValid()
     {
-        $moneyType = new SimpleMoneyType($this->pairManager);
+        $moneyType = new SimpleMoneyType($this->pairManager, 2);
         $form = $this->factory->create($moneyType, null, array());
         $form->bind(array(
             "tbbc_amount" => '12'
+        ));
+        $this->assertEquals(Money::EUR(1200), $form->getData());
+    }
+    public function testBindValidDecimals()
+    {
+        $moneyType = new SimpleMoneyType($this->pairManager, 3);
+        $form = $this->factory->create($moneyType, null, array());
+        $form->bind(array(
+            "tbbc_amount" => '1,2'
         ));
         $this->assertEquals(Money::EUR(1200), $form->getData());
     }
@@ -41,7 +50,7 @@ class SimpleMoneyTypeTest
     public function testBindDecimalValid()
     {
         \Locale::setDefault("fr_FR");
-        $moneyType = new SimpleMoneyType($this->pairManager);
+        $moneyType = new SimpleMoneyType($this->pairManager, 2);
         $form = $this->factory->create($moneyType, null, array());
         $form->bind(array(
             "tbbc_amount" => '12,5'
@@ -52,7 +61,7 @@ class SimpleMoneyTypeTest
     public function testGreaterThan1000Valid()
     {
         \Locale::setDefault("fr_FR");
-        $moneyType = new SimpleMoneyType($this->pairManager);
+        $moneyType = new SimpleMoneyType($this->pairManager, 2);
         $form = $this->factory->create($moneyType, null, array());
         $form->bind(array(
             "tbbc_amount" => '1 252,5'
@@ -63,7 +72,7 @@ class SimpleMoneyTypeTest
     public function testSetData()
     {
         \Locale::setDefault("fr_FR");
-        $moneyType = new SimpleMoneyType($this->pairManager);
+        $moneyType = new SimpleMoneyType($this->pairManager, 2);
         $form = $this->factory->create($moneyType, null, array());
         $form->setData(Money::EUR(120));
         $formView = $form->createView();

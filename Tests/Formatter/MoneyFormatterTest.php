@@ -21,7 +21,7 @@ class MoneyFormatterTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         \Locale::setDefault('fr_FR');
-        $this->formatter = new MoneyFormatter();
+        $this->formatter = new MoneyFormatter(2);
         $this->inputMoney = new Money(123456789, new Currency('EUR'));
     }
 
@@ -29,6 +29,12 @@ class MoneyFormatterTest extends \PHPUnit_Framework_TestCase
     {
         $value = $this->formatter->formatMoney($this->inputMoney);
         $this->assertEquals('1 234 567,89 €', $value);
+    }
+    public function testFormatMoneyWithDefaultSeparatorsAndDecimals3()
+    {
+        $this->formatter = new MoneyFormatter(4);
+        $value = $this->formatter->formatMoney($this->inputMoney);
+        $this->assertEquals('12 345,6789 €', $value);
     }
 
     public function testFormatMoneyWithCustomSeparators()

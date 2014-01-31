@@ -13,12 +13,16 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 class SimpleMoneyType
     extends MoneyType
 {
-
     /** @var  PairManagerInterface */
     protected $pairManager;
-    public function __construct(PairManagerInterface $pairManager)
+
+    /** @var  int */
+    protected $decimals;
+
+    public function __construct(PairManagerInterface $pairManager, $decimals)
     {
         $this->pairManager = $pairManager;
+        $this->decimals = (int)$decimals;
     }
 
     /**
@@ -29,7 +33,7 @@ class SimpleMoneyType
         $builder
             ->add('tbbc_amount', new TextType())
             ->addModelTransformer(
-                new SimpleMoneyToArrayTransformer($this->pairManager)
+                new SimpleMoneyToArrayTransformer($this->pairManager, $this->decimals)
             );
     }
 

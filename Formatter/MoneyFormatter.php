@@ -13,6 +13,13 @@ use Symfony\Component\Intl\Intl;
  */
 class MoneyFormatter
 {
+    protected $decimals;
+
+    public function __construct($decimals = 2)
+    {
+        $this->decimals = $decimals;
+    }
+
     /**
      * Formats the given Money object
      * INCLUDING the currency symbol
@@ -45,7 +52,7 @@ class MoneyFormatter
     public function formatAmount(Money $money, $decPoint = ',', $thousandsSep = ' ')
     {
         $amount = $this->asFloat($money);
-        $amount = number_format($amount, 2, $decPoint, $thousandsSep);
+        $amount = number_format($amount, $this->decimals, $decPoint, $thousandsSep);
 
         return $amount;
     }
@@ -60,7 +67,7 @@ class MoneyFormatter
     {
         $amount = $money->getAmount();
         $amount = (float)$amount;
-        $amount = $amount / 100;
+        $amount = $amount / pow(10, $this->decimals);
 
         return $amount;
     }

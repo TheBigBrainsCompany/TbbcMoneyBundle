@@ -13,9 +13,9 @@ class SimpleMoneyToArrayTransformer
 {
     /** @var  PairManagerInterface */
     protected $pairManager;
-    public function __construct(PairManagerInterface $pairManager)
+    public function __construct(PairManagerInterface $pairManager, $decimals)
     {
-        parent::__construct();
+        parent::__construct($decimals);
         $this->pairManager = $pairManager;
     }
 

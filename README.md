@@ -88,6 +88,7 @@ in your config.yml, add the currencies you want to use and the reference currenc
 tbbc_money:
     currencies: ["USD", "EUR"]
     reference_currency: "EUR"
+    decimals: 2
 ```
 
 In your config.yml, add the form fields presentations
@@ -414,13 +415,16 @@ With the Doctrine storage, currency ratio will use the default entity manager an
 Optimizations
 -------------
 
-in your config.yml, you can select the templating engine to use.
-By default, only twig is loaded.
+in your config.yml, you can :
+
+* select the templating engine to use. By default, only twig is loaded.
+* define the decimals count after a unit (ex : 12.25€ : 2 decimals ; 11.5678€ : 4 decimals)
 
 ```yaml
 tbbc_money:
     currencies: ["USD", "EUR"]
     reference_currency: "EUR"
+    decimals: 2
     templating:
         engines: ["twig", "php"]
 ```
@@ -469,6 +473,11 @@ In progress :
 
 Versions
 --------
+
+2.1.0 : 2014/02/01
+
+* no BC Break
+* new parameter : decimal count in config.yml for number of decimals (for every money)
 
 2.0.1 : 2013/12/18
 

@@ -24,7 +24,7 @@ class CurrencyExtensionTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         \Locale::setDefault("fr_FR");
-        $this->extension = new CurrencyExtension(new MoneyFormatter());
+        $this->extension = new CurrencyExtension(new MoneyFormatter(2));
         $this->variables = array('currency' => new Currency('EUR'));
     }
 

@@ -32,6 +32,7 @@
         </service>
         <!-- Formatter -->
         <service id="tbbc_money.formatter.money_formatter" class="%tbbc_money.formatter.money_formatter.class%">
+            <argument>%tbbc_money.decimals%</argument>
         </service>
     </services>
 

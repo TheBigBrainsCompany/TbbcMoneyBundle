@@ -36,7 +36,8 @@ class TbbcMoneyExtension extends Extension
 
         $this->remapParameters($config, $container, array(
             'currencies'  => 'tbbc_money.currencies',
-            'reference_currency'  => 'tbbc_money.reference_currency'
+            'reference_currency'  => 'tbbc_money.reference_currency',
+            'decimals'  => 'tbbc_money.decimals'
         ));
         
         $container->setParameter('tbbc_money.pair.storage', $config['storage']);

@@ -1,6 +1,7 @@
 tbbc_money:
     currencies: ["USD", "EUR"]
     reference_currency: "EUR"
+    decimals: 3
 
 framework:
     trusted_hosts: ~

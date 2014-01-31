@@ -32,7 +32,7 @@ class MoneyExtensionTest extends \PHPUnit_Framework_TestCase
             ->method('getReferenceCurrencyCode')
             ->will($this->returnValue("EUR"));
 
-        $this->extension = new MoneyExtension(new MoneyFormatter(), $pairManager);
+        $this->extension = new MoneyExtension(new MoneyFormatter(2), $pairManager);
         $this->variables = array('price' => new Money(123456789, new Currency('EUR')));
     }
 
