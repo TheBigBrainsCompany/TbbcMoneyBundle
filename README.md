@@ -485,8 +485,9 @@ Versions
 
 2.0.0 : 2013/12/17
 
+* BC Break : Twig/MoneyExtension moved to Twig/Extension/MoneyExtension
+* BC Break : Twig/Extension/MoneyExtension changed it's internals => possible BC Break in
 * new : separation between formaters and twig extension
-* possible BC Break if you are using directly twig extension inside a controller
 
 1.5.0 : 2013/12/17
 
