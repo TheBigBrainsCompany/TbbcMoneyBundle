@@ -13,7 +13,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 /**
  * Stores Money in a single field, in the smallest unit (cents). eg "EUR 100"
- * Note that this is only usefull if you don't intend to query on this.
+ * Note that this is only useful if you don't intend to query on this.
  *
  * @example
  */
