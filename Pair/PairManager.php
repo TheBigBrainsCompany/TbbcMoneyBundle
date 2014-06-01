@@ -59,7 +59,7 @@ class PairManager
         if ($ratio <= 0) {
             throw new MoneyException("ratio has to be strictly positive");
         }
-        $ratioList = $this->storage->loadRatioList();
+        $ratioList = $this->storage->loadRatioList(true);
         $ratioList[$currency->getName()] = $ratio;
         $ratioList[$this->getReferenceCurrencyCode()] = (float) 1;
         $this->storage->saveRatioList($ratioList);
