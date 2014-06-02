@@ -20,7 +20,7 @@ class StorageCompilerPass implements CompilerPassInterface
             }
             
             $storageDoctrineDefinition = new Definition('Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage', array(
-                new Reference('doctrine.orm.default_entity_manager'),
+                new Reference('doctrine.orm.entity_manager'),
                 $container->getParameter('tbbc_money.reference_currency')
             ));
             
