@@ -474,6 +474,13 @@ In progress :
 Versions
 --------
 
+2.1.1 : 2014/06/02
+
+* no BC Break
+* fix access to multiple entity manager : PR : https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/pull/17
+* fix updating multiple currencies : PR : https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/pull/18
+* thx Xobb on github for it's PR
+
 2.1.0 : 2014/02/01
 
 * no BC Break
