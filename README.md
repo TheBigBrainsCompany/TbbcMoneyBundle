@@ -351,6 +351,14 @@ class IndexController extends Controller
         $moneyFormatter = $this->get('tbbc_money.formatter.money_formatter');
         $price = new Money(123456789, new Currency('EUR'));
 
+        // best method (added in 2.2+ version)
+        \Locale::setDefault('fr_FR');
+        $formatedPrice = $moneyFormatter->localizedFormatMoney($price)
+        // 1 234 567,89 €
+        $formatedPrice = $moneyFormatter->localizedFormatMoney($price, 'en')
+        // €1,234,567.89
+
+        // old method (before v2.2)
         $formattedPrice = $moneyFormatter->formatMoney($price);
         // 1 234 567,89
 
@@ -358,12 +366,14 @@ class IndexController extends Controller
         // €
     }
 }
-
 ```
 
 ### Twig integration
 
 ```twig
+{{ $amount | money_localized_format('fr') }} => 1 234 567,89 €
+{{ $amount | money_localized_format('en_US') }} => €1,234,567.89
+{{ $amount | money_localized_format }} => depends on your default locale
 {{ $amount | money_format }}
 {{ $amount | money_as_float }}
 {{ $amount | money_get_currency | currency_symbol }}
@@ -411,6 +421,19 @@ Update your database schema :
 ```
 
 With the Doctrine storage, currency ratio will use the default entity manager and will store data inside the **tbbc_money_doctrine_storage_ratios**
+
+Custom NumberFormatter in MoneyFormatter
+----------------------------------------
+
+The MoneyFormatter::localizedFormatMoney ( service 'tbbc_money.formatter.money_formatter' ) use
+the php NumberFormatter class ( http://www.php.net/manual/en/numberformatter.formatcurrency.php )
+to format money.
+
+You can :
+
+* give your own \NumberFormatter instance as a parameter of MoneyFormatter::localizedFormatMoney
+* subclass the MoneyFormatter and rewrite the getDefaultNumberFormater method to set a application wide
+NumberFormatter
 
 Optimizations
 -------------
@@ -473,6 +496,13 @@ In progress :
 
 Versions
 --------
+
+2.2.0 : not released yet
+
+* no BC Break
+* New : new formater MoneyFormatter::localizedFormatMoney that displays money with PHP
+NumberFormatter class : http://www.php.net/manual/en/numberformatter.formatcurrency.php
+* new : twig filter money_localized_format
 
 2.1.1 : 2014/06/02
 

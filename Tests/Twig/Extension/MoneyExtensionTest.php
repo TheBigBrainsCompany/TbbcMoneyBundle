@@ -47,6 +47,8 @@ class MoneyExtensionTest extends \PHPUnit_Framework_TestCase
     public function getMoneyTests()
     {
         return array(
+            array('{{ price|money_localized_format }}', '1 234 567,89 €'),
+            array('{{ price|money_localized_format("en_US") }}', '€1,234,567.89'),
             array('{{ price|money_format }}', '1 234 567,89 €'),
             array('{{ price|money_format(".", ",") }}', '1,234,567.89 €'),
             array('{{ price|money_format_amount }}', '1 234 567,89'),

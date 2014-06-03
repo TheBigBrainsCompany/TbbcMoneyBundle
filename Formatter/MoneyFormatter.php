@@ -20,6 +20,38 @@ class MoneyFormatter
         $this->decimals = $decimals;
     }
 
+    protected function getDefaultNumberFormatter($currencyCode, $locale = null)
+    {
+        if (is_null($locale)) {
+            $locale = \Locale::getDefault();
+        }
+        $numberFormatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
+        $numberFormatter->setTextAttribute(\NumberFormatter::CURRENCY_CODE, $currencyCode);
+        $numberFormatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $this->decimals);
+        return $numberFormatter;
+    }
+
+    /**
+     * Format money with the NumberFormatter class
+     *
+     * You can force the locale or event use your own $numberFormatter instance to format
+     * the output as you wish.
+     *
+     * @see http://www.php.net/manual/en/numberformatter.formatcurrency.php
+     *
+     * @param Money $money
+     * @param null|string $locale
+     * @param null|\NumberFormatter $numberFormatter
+     * @return string
+     */
+    public function localizedFormatMoney(Money $money, $locale = null, \NumberFormatter $numberFormatter = null)
+    {
+        if (!($numberFormatter instanceof \NumberFormatter)) {
+            $numberFormatter = $this->getDefaultNumberFormatter($money->getCurrency()->getName(), $locale);
+        }
+        return $numberFormatter->formatCurrency($this->asFloat($money), $money->getCurrency()->getName());
+    }
+
     /**
      * Formats the given Money object
      * INCLUDING the currency symbol

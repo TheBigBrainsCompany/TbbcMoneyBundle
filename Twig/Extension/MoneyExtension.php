@@ -44,6 +44,7 @@ class MoneyExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
+            new \Twig_SimpleFilter('money_localized_format', array($this->moneyFormatter, 'localizedFormatMoney')),
             new \Twig_SimpleFilter('money_format', array($this->moneyFormatter, 'formatMoney')),
             new \Twig_SimpleFilter('money_format_amount', array($this->moneyFormatter, 'formatAmount')),
             new \Twig_SimpleFilter('money_format_currency', array($this->moneyFormatter, 'formatCurrency')),
