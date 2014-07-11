@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use Doctrine\DBAL\Types\Type;
 
+use Tbbc\MoneyBundle\DependencyInjection\Compiler\PairHistoryCompilerPass;
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\StorageCompilerPass;
 use Tbbc\MoneyBundle\Type\MoneyType;
 
@@ -17,6 +18,7 @@ class TbbcMoneyBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new StorageCompilerPass());
+        $container->addCompilerPass(new PairHistoryCompilerPass());
     }
     
     public function boot()

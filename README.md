@@ -412,6 +412,19 @@ Add to your crontab :
 
 ### history of currency ratio with the pairHistoryManager
 
+Doctrine is required to use this feature.
+
+In order to get the ratio history, you have to enable it in the configuration and to use doctrine.
+
+```yaml
+tbbc_money:
+    currencies: ["USD", "EUR"]
+    reference_currency: "EUR"
+    enable_pair_history: true
+```
+
+then you can use the service :
+
 ```php
 $pairHistoryManager = $this->get("tbbc_money.pair_history_manager");
 $dt = new \DateTime("2012-07-08 11:14:15.638276");
@@ -469,8 +482,7 @@ tbbc_money:
     currencies: ["USD", "EUR"]
     reference_currency: "EUR"
     decimals: 2
-    templating:
-        engines: ["twig", "php"]
+    enable_pair_history: true
 ```
 
 
