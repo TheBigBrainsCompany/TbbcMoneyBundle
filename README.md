@@ -44,6 +44,8 @@ Features
 * Symfony2 form integration
 * Console commands for different operations
 * A configuration parser for specifying website used currencies
+* Access to the history of currency ratio fetched
+* money formatter i18n
 
 Table of contents
 -----------------
