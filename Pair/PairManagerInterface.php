@@ -17,6 +17,9 @@ interface PairManagerInterface
     /**
      * set ratio between the currency in parameter and the reference currency.
      *
+     * WARNING: This method has to dispatch a \TbbcMoneyEvents::AFTER_RATIO_SAVE event
+     * with a SaveRatioEvent
+     *
      * @param string $currencyCode from the list of currencies
      * @param float $ratio
      */

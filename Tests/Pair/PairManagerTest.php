@@ -22,10 +22,14 @@ class PairManagerTest extends \PHPUnit_Framework_TestCase
         $dir = dirname($this->fileName);
         exec("rm -rf ".escapeshellarg($dir));
         $storage = new CsvStorage($this->fileName, "EUR");
+        // create EventDispatcher mock
+        $dispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcher');
+
         $this->manager = new PairManager(
             $storage,
             array("EUR", "USD", "CAD"),
-            "EUR"
+            "EUR",
+            $dispatcher
         );
     }
 

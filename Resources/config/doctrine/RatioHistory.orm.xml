@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Tbbc\MoneyBundle\Entity\RatioHistory" table="tbbc_money_ratio_history">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+        
+        <field name="currencyCode" type="string" column="currency_code" nullable="false" length="3"/>
+        <field name="referenceCurrencyCode" type="string" column="reference_currency_code" nullable="false" length="3"/>
+        <field name="ratio" type="float" column="ratio" nullable="false" length="255"/>
+        <field name="savedAt" type="datetime" column="saved_at" nullable="false"/>
+    </entity>
+</doctrine-mapping>

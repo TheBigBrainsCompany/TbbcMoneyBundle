@@ -10,55 +10,106 @@ use Money\Currency;
 use Money\Money;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Component\Console\Input\StringInput;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 use Tbbc\MoneyBundle\Twig\CurrencyExtension;
 use Tbbc\MoneyBundle\Twig\MoneyExtension;
 use Tbbc\MoneyBundle\Type\MoneyType;
 use Doctrine\DBAL\Types\Type;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 
-
+/**
+ * @group functionnal
+ */
 class ConfigTest
     extends WebTestCase
 {
+    /** @var  \Symfony\Bundle\FrameworkBundle\Client */
+    private $client;
+    public function setUp()
+    {
+        parent::setUp();
+        /** @var \Symfony\Bundle\FrameworkBundle\Client client */
+        $this->client = static::createClient();
+        $this->runCommand('doctrine:database:create');
+        $this->runCommand('doctrine:schema:update --force');
+    }
+
+    protected function runCommand($command)
+    {
+        $command = sprintf('%s --quiet', $command);
+
+        $application = new Application($this->client->getKernel());
+        $application->setAutoExit(false);
+
+        return $application->run(new StringInput($command));
+    }
+
     public function testConfigParsing()
     {
-        $client = self::createClient();
-        $currencies = $client->getContainer()->getParameter('tbbc_money.currencies');
+        $currencies = $this->client->getContainer()->getParameter('tbbc_money.currencies');
         $this->assertEquals(array("USD", "EUR"), $currencies);
 
-        $referenceCurrency = $client->getContainer()->getParameter('tbbc_money.reference_currency');
+        $referenceCurrency = $this->client->getContainer()->getParameter('tbbc_money.reference_currency');
         $this->assertEquals("EUR", $referenceCurrency);
     }
 
     public function testMoneyTwigExtension()
     {
         \Locale::setDefault('en');
-        $client = self::createClient();
         /** @var PairManagerInterface $pairManager */
-        $pairManager = $client->getContainer()->get("tbbc_money.pair_manager");
+        $pairManager = $this->client->getContainer()->get("tbbc_money.pair_manager");
         $pairManager->saveRatio("USD", 1.25);
         /** @var MoneyExtension $moneyExtension */
-        $moneyExtension = $client->getContainer()->get("tbbc_money.twig.money");
+        $moneyExtension = $this->client->getContainer()->get("tbbc_money.twig.money");
         $eur = Money::EUR(100);
         $usd = $moneyExtension->convert($eur, "USD");
         $this->assertEquals(Money::USD(125), $usd);
     }
 
+    public function testHistoryRatio()
+    {
+        \Locale::setDefault('en');
+        /** @var PairManagerInterface $pairManager */
+        $pairManager = $this->client->getContainer()->get("tbbc_money.pair_manager");
+        $pairManager->saveRatio("USD", 1.25);
+        sleep(2);
+        $pairManager->saveRatio("USD", 1.50);
+        $now = new \DateTime();
+        $between = clone($now);
+        $between->sub(new \DateInterval('PT1S'));
+        $before = clone($now);
+        $before->sub(new \DateInterval('P1D'));
+        $pairHistoryManager = $this->client->getContainer()->get("tbbc_money.pair_history_manager");
+        $ratio = $pairHistoryManager->getRatioAtDate('USD', $between);
+        $this->assertEquals(1.25, $ratio);
+        $ratio = $pairHistoryManager->getRatioAtDate('USD', $now);
+        $this->assertEquals(1.5, $ratio);
+        $ratio = $pairHistoryManager->getRatioAtDate('USD', $before);
+        $this->assertEquals(null, $ratio);
+
+
+        $em = $this->client->getContainer()->get("doctrine.orm.entity_manager");
+        $repo = $em->getRepository('\Tbbc\MoneyBundle\Entity\RatioHistory');
+        $list = $repo->findAll();
+        // 4 because of 2 reference currencies and 2 USD
+        $this->assertEquals(4, count($list));
+
+    }
+
     public function testCurrencyTwigExtension()
     {
         \Locale::setDefault('en');
-        $client = self::createClient();
         /** @var CurrencyExtension $currencyExtension */
-        $currencyExtension = $client->getContainer()->get("tbbc_money.twig.currency");
+        $currencyExtension = $this->client->getContainer()->get("tbbc_money.twig.currency");
     }
     
     public function testDoctrineMoneyTypeAvailable()
     {
-        $client = self::createClient();
         
         $this->assertTrue(Type::hasType(MoneyType::NAME));
         
-        $em = $client->getContainer()->get('doctrine')->getManager('default');
+        $em = $this->client->getContainer()->get('doctrine')->getManager('default');
         $this->assertEquals(MoneyType::NAME, $em->getConnection()->getDatabasePlatform()->getDoctrineTypeMapping(MoneyType::NAME));
     }
 }

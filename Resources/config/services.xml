@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="tbbc_money.pair_manager.class">Tbbc\MoneyBundle\Pair\PairManager</parameter>
+        <parameter key="tbbc_money.pair_history_manager.class">Tbbc\MoneyBundle\PairHistory\PairHistoryManager</parameter>
         <parameter key="tbbc_money.pair.csv_storage.class">Tbbc\MoneyBundle\Pair\Storage\CsvStorage</parameter>
         <parameter key="tbbc_money.pair_manager.ratio_file_name">%kernel.root_dir%/data/tbbc_money/ratio_file_name.csv</parameter>
         <parameter key="tbbc_money.ratio_provider.rate_exchange.class">Tbbc\MoneyBundle\Pair\RatioProvider\RateExchangeRatioProvider</parameter>
@@ -18,9 +19,15 @@
             <argument type="service" id="tbbc_money.pair.csv_storage"/>
             <argument>%tbbc_money.currencies%</argument>
             <argument>%tbbc_money.reference_currency%</argument>
+            <argument type="service" id="event_dispatcher"/>
             <call method="setRatioProvider">
                 <argument type="service" id="tbbc_money.ratio_provider.rate_exchange" />
             </call>
+        </service>
+        <service id="tbbc_money.pair_history_manager" class="%tbbc_money.pair_history_manager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument>%tbbc_money.reference_currency%</argument>
+            <tag name="kernel.event_listener" event="tbbc_money.after_ratio_save" method="listenSaveRatioEvent" />
         </service>
         <!-- Storage -->
         <service id="tbbc_money.pair.csv_storage" class="%tbbc_money.pair.csv_storage.class%">

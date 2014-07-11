@@ -9,8 +9,10 @@ namespace Tbbc\MoneyBundle\Pair;
 use Money\Currency;
 use Money\CurrencyPair;
 use Money\Money;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\StorageInterface;
+use Tbbc\MoneyBundle\TbbcMoneyEvents;
 
 class PairManager
     implements PairManagerInterface
@@ -27,15 +29,20 @@ class PairManager
     /** @var  RatioProviderInterface */
     protected $ratioProvider;
 
+    /** @var EventDispatcherInterface  */
+    protected $dispatcher;
+
     public function __construct(
         StorageInterface $storage,
         $currencyCodeList,
-        $referenceCurrencyCode
+        $referenceCurrencyCode,
+        EventDispatcherInterface $dispatcher
     )
     {
         $this->storage = $storage;
         $this->currencyCodeList = $currencyCodeList;
         $this->referenceCurrencyCode = $referenceCurrencyCode;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -63,6 +70,17 @@ class PairManager
         $ratioList[$currency->getName()] = $ratio;
         $ratioList[$this->getReferenceCurrencyCode()] = (float) 1;
         $this->storage->saveRatioList($ratioList);
+
+        $savedAt = new \DateTime();
+        foreach($ratioList as $currencyCode => $ratio) {
+            $event = new SaveRatioEvent(
+                $this->getReferenceCurrencyCode(),
+                $currencyCode,
+                $ratio,
+                $savedAt
+            );
+            $this->dispatcher->dispatch(TbbcMoneyEvents::AFTER_RATIO_SAVE, $event);
+        }
     }
 
     /**

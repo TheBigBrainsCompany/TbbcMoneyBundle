@@ -421,9 +421,6 @@ $ratio = $pairHistoryManager->getRatioAtDate('USD',$dt);
 
 // returns the list of USD ratio (relative to the reference value)
 $ratioList = $pairHistoryManager->getRatioHistory('USD',$startDate, $endDate);
-
-// returns a query builder that returns all entries ordered by date DESC
-$rationHistoryQueryBuilder = $pairHistoryManager->getQueryBuilder();
 ```
 
 RatioStorage

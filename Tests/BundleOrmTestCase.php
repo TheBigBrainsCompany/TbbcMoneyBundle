@@ -52,6 +52,6 @@ class BundleOrmTestCase
      */
     protected function getDataSet()
     {
-        return $this->createXMLDataSet(__DIR__."/_doctrine/dataset/doctrine_storage_ratios.xml");
+        return $this->createXMLDataSet(__DIR__."/_doctrine/dataset/dataset.xml");
     }
 }
