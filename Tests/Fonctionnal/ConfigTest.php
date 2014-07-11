@@ -73,9 +73,9 @@ class ConfigTest
         /** @var PairManagerInterface $pairManager */
         $pairManager = $this->client->getContainer()->get("tbbc_money.pair_manager");
         $pairManager->saveRatio("USD", 1.25);
-        usleep(500000);
+        sleep(1);
         $between = new \DateTime();
-        usleep(500000);
+        sleep(1);
         $pairManager->saveRatio("USD", 1.50);
         $now = new \DateTime();
         $before = clone($now);
