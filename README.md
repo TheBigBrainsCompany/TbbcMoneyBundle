@@ -497,7 +497,7 @@ In progress :
 Versions
 --------
 
-2.2.0 : not released yet
+2.2.0 : 2014/07/11
 
 * no BC Break
 * New : new formater MoneyFormatter::localizedFormatMoney that displays money with PHP
