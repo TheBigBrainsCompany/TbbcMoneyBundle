@@ -389,7 +389,7 @@ class IndexController extends Controller
 <span class="money"><?php echo $view['tbbc_money_currency']->formatCurrencyAsSymbol($price->getCurrency()) ?></span>
 ```
 
-### commands
+### Fetching ratio values from remote provider
 
 ```bash
 # save a ratio in the storage
@@ -400,6 +400,30 @@ class IndexController extends Controller
 
 # fetch all the ratio for all defined currencies from an external API
 ./app/console tbbc:money:ratio-fetch
+```
+
+### automatic currency ratio fetch
+
+Add to your crontab :
+
+```
+1 0 * * * /my_app_dir/app/console tbbc:money:ratio-fetch > /dev/null
+```
+
+### history of currency ratio with the pairHistoryManager
+
+```php
+$pairHistoryManager = $this->get("tbbc_money.pair_history_manager");
+$dt = new \DateTime("2012-07-08 11:14:15.638276");
+
+// returns ratio for at a given date
+$ratio = $pairHistoryManager->getRatioAtDate('USD',$dt);
+
+// returns the list of USD ratio (relative to the reference value)
+$ratioList = $pairHistoryManager->getRatioHistory('USD',$startDate, $endDate);
+
+// returns a query builder that returns all entries ordered by date DESC
+$rationHistoryQueryBuilder = $pairHistoryManager->getQueryBuilder();
 ```
 
 RatioStorage
@@ -496,6 +520,12 @@ In progress :
 
 Versions
 --------
+
+2.3.0 : coming soon
+
+* no BC Break
+* new : history of currency values saved
+* warning : doctrine is now mandatory for history system
 
 2.2.0 : 2014/07/11
 
