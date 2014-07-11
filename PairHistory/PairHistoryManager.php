@@ -4,7 +4,6 @@ namespace Tbbc\MoneyBundle\PairHistory;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
-use Money\Currency;
 use Tbbc\MoneyBundle\Entity\RatioHistory;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;

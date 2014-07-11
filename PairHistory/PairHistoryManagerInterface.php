@@ -1,7 +1,6 @@
 <?php
 namespace Tbbc\MoneyBundle\PairHistory;
 
-use Money\Money;
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
 
 interface PairHistoryManagerInterface
