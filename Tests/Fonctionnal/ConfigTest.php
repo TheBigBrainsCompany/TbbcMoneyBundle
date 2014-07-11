@@ -73,11 +73,11 @@ class ConfigTest
         /** @var PairManagerInterface $pairManager */
         $pairManager = $this->client->getContainer()->get("tbbc_money.pair_manager");
         $pairManager->saveRatio("USD", 1.25);
-        sleep(2);
+        usleep(500000);
+        $between = new \DateTime();
+        usleep(500000);
         $pairManager->saveRatio("USD", 1.50);
         $now = new \DateTime();
-        $between = clone($now);
-        $between->sub(new \DateInterval('PT1S'));
         $before = clone($now);
         $before->sub(new \DateInterval('P1D'));
         $pairHistoryManager = $this->client->getContainer()->get("tbbc_money.pair_history_manager");
