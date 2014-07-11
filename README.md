@@ -530,11 +530,10 @@ In progress :
 Versions
 --------
 
-2.3.0 : coming soon
+2.3.0 : 2014/07/11
 
 * no BC Break
-* new : history of currency values saved
-* warning : doctrine is now mandatory for history system
+* new : history of currency ratio saved
 
 2.2.0 : 2014/07/11
 
