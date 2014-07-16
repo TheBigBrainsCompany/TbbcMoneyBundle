@@ -35,6 +35,9 @@ class PairHistoryManager
      */
     public function getRatioAtDate($currencyCode, \DateTime $historyDate)
     {
+        if ($currencyCode == $this->referenceCurrencyCode) {
+            return (float)1;
+        }
         $qb = $this->em->createQueryBuilder();
         $qb->select('rh')
             ->from('\Tbbc\MoneyBundle\Entity\RatioHistory', 'rh')
@@ -96,6 +99,7 @@ class PairHistoryManager
      */
     public function listenSaveRatioEvent(SaveRatioEvent $event)
     {
+
         $ratioHistory = new RatioHistory();
         $ratioHistory->setReferenceCurrencyCode($event->getReferenceCurrencyCode());
         $ratioHistory->setCurrencyCode($event->getCurrencyCode());
