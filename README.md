@@ -531,6 +531,11 @@ In progress :
 
 Versions
 --------
+2.3.1 : 2014/07/16
+
+* no BC Break
+* fix : history or ratio was saved more than once
+* fix : history of the reference currency returns a 1 ratio
 
 2.3.0 : 2014/07/11
 
