@@ -1,5 +1,5 @@
 tbbc_money:
-    currencies: ["USD", "EUR"]
+    currencies: ["USD", "EUR", "CAD"]
     reference_currency: "EUR"
     decimals: 3
     enable_pair_history: true

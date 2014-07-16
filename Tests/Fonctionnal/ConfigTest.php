@@ -48,7 +48,7 @@ class ConfigTest
     public function testConfigParsing()
     {
         $currencies = $this->client->getContainer()->getParameter('tbbc_money.currencies');
-        $this->assertEquals(array("USD", "EUR"), $currencies);
+        $this->assertEquals(array("USD", "EUR", 'CAD'), $currencies);
 
         $referenceCurrency = $this->client->getContainer()->getParameter('tbbc_money.reference_currency');
         $this->assertEquals("EUR", $referenceCurrency);
@@ -92,9 +92,18 @@ class ConfigTest
         $em = $this->client->getContainer()->get("doctrine.orm.entity_manager");
         $repo = $em->getRepository('\Tbbc\MoneyBundle\Entity\RatioHistory');
         $list = $repo->findAll();
-        // 4 because of 2 reference currencies and 2 USD
-        $this->assertEquals(4, count($list));
+        $this->assertEquals(2, count($list));
 
+    }
+
+    public function testHistoryOfFetchedRatio()
+    {
+        $this->runCommand('tbbc:money:ratio-fetch');
+        $em = $this->client->getContainer()->get("doctrine.orm.entity_manager");
+        $repo = $em->getRepository('\Tbbc\MoneyBundle\Entity\RatioHistory');
+        $list = $repo->findAll();
+
+        $this->assertEquals(2, count($list));
     }
 
     public function testCurrencyTwigExtension()

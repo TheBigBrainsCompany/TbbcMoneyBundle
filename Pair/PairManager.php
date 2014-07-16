@@ -72,15 +72,13 @@ class PairManager
         $this->storage->saveRatioList($ratioList);
 
         $savedAt = new \DateTime();
-        foreach($ratioList as $currencyCode => $ratio) {
-            $event = new SaveRatioEvent(
-                $this->getReferenceCurrencyCode(),
-                $currencyCode,
-                $ratio,
-                $savedAt
-            );
-            $this->dispatcher->dispatch(TbbcMoneyEvents::AFTER_RATIO_SAVE, $event);
-        }
+        $event = new SaveRatioEvent(
+            $this->getReferenceCurrencyCode(),
+            $currencyCode,
+            $ratio,
+            $savedAt
+        );
+        $this->dispatcher->dispatch(TbbcMoneyEvents::AFTER_RATIO_SAVE, $event);
     }
 
     /**
