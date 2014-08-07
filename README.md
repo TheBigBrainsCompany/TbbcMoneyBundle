@@ -355,9 +355,9 @@ class IndexController extends Controller
 
         // best method (added in 2.2+ version)
         \Locale::setDefault('fr_FR');
-        $formatedPrice = $moneyFormatter->localizedFormatMoney($price)
+        $formatedPrice = $moneyFormatter->localizedFormatMoney($price);
         // 1 234 567,89 €
-        $formatedPrice = $moneyFormatter->localizedFormatMoney($price, 'en')
+        $formatedPrice = $moneyFormatter->localizedFormatMoney($price, 'en');
         // €1,234,567.89
 
         // old method (before v2.2)
