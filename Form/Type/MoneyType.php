@@ -36,7 +36,7 @@ class MoneyType
     {
         $builder
             ->add('tbbc_amount', new TextType())
-            ->add('tbbc_currency', $this->currencyType)
+            ->add('tbbc_currency', $this->currencyType->getName())
             ->addModelTransformer(
                 new MoneyToArrayTransformer($this->decimals)
             );
