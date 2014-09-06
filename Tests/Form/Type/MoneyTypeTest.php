@@ -27,8 +27,10 @@ class MoneyTypeTest
             array("EUR", "USD"),
             "EUR"
         );
-        $moneyType = new MoneyType($currencyType, 2);
-        $form = $this->factory->create($moneyType, null, array());
+        $moneyType = new MoneyType(2);
+        $form = $this->factory->create($moneyType, null, array(
+            "currency_type" => $currencyType,
+        ));
         $form->bind(array(
             "tbbc_currency" => array("tbbc_name"=>'EUR'),
             "tbbc_amount" => '12'
@@ -43,8 +45,10 @@ class MoneyTypeTest
             array("EUR", "USD"),
             "EUR"
         );
-        $moneyType = new MoneyType($currencyType, 2);
-        $form = $this->factory->create($moneyType, null, array());
+        $moneyType = new MoneyType(2);
+        $form = $this->factory->create($moneyType, null, array(
+            "currency_type" => $currencyType,
+        ));
         $form->bind(array(
             "tbbc_currency" => array("tbbc_name"=>'EUR'),
             "tbbc_amount" => '12,5'
@@ -59,8 +63,10 @@ class MoneyTypeTest
             array("EUR", "USD"),
             "EUR"
         );
-        $moneyType = new MoneyType($currencyType, 2);
-        $form = $this->factory->create($moneyType, null, array());
+        $moneyType = new MoneyType(2);
+        $form = $this->factory->create($moneyType, null, array(
+            "currency_type" => $currencyType,
+        ));
         $form->bind(array(
             "tbbc_currency" => array("tbbc_name"=>'EUR'),
             "tbbc_amount" => '1 252,5'
@@ -75,8 +81,10 @@ class MoneyTypeTest
             array("EUR", "USD"),
             "EUR"
         );
-        $moneyType = new MoneyType($currencyType, 2);
-        $form = $this->factory->create($moneyType, null, array());
+        $moneyType = new MoneyType(2);
+        $form = $this->factory->create($moneyType, null, array(
+            "currency_type" => $currencyType,
+        ));
         $form->setData(Money::EUR(120));
         $formView = $form->createView();
 
