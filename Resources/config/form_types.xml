@@ -13,7 +13,6 @@
             <tag name="form.type" alias="tbbc_currency" />
         </service>
         <service id="tbbc_money.form_type.money" class="%tbbc_money.form_type.money.class%">
-            <argument type="service" id="tbbc_money.form_type.currency"/>
             <argument>%tbbc_money.decimals%</argument>
             <tag name="form.type" alias="tbbc_money" />
         </service>
