@@ -412,6 +412,18 @@ Add to your crontab :
 1 0 * * * /my_app_dir/app/console tbbc:money:ratio-fetch > /dev/null
 ```
 
+### MoneyManager : create a money from a float
+
+Create a money from a float can be a bit tricky because of rounding issues.
+
+```php
+<?php
+$moneyManager = $this->get("tbbc_money.money_manager");
+$money = $moneyManager->createMoneyFromFloat('2.5', 'USD');
+$this->assertEquals("USD", $money->getCurrency()->getName());
+$this->assertEquals(250, $money->getAmount());
+```
+
 ### history of currency ratio with the pairHistoryManager
 
 Doctrine is required to use this feature.
@@ -525,12 +537,17 @@ what is functional :
 * twig filters
 * commands for ratio creation and ratio display
 
-In progress :
-
-* small administration interface for ratio management
 
 Versions
 --------
+
+2.4.0 : 2014/09/25
+
+* no BC Break
+* major update in form types : form types are injected by names so extensions are invoked
+* new : a brand new MoneyManager that allows to create a Money object from a float value
+* doc : small fixes
+
 2.3.1 : 2014/07/16
 
 * no BC Break
