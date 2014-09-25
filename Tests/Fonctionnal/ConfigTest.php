@@ -11,6 +11,7 @@ use Money\Money;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\Console\Input\StringInput;
+use Tbbc\MoneyBundle\Money\MoneyManager;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 use Tbbc\MoneyBundle\Twig\CurrencyExtension;
 use Tbbc\MoneyBundle\Twig\MoneyExtension;
@@ -65,6 +66,15 @@ class ConfigTest
         $eur = Money::EUR(100);
         $usd = $moneyExtension->convert($eur, "USD");
         $this->assertEquals(Money::USD(125), $usd);
+    }
+
+    public function testMoneyManager()
+    {
+        /** @var MoneyManager $moneyManager */
+        $moneyManager = $this->client->getContainer()->get("tbbc_money.money_manager");
+        $money = $moneyManager->createMoneyFromFloat('2.5', 'USD');
+        $this->assertEquals("USD", $money->getCurrency()->getName());
+        $this->assertEquals(2500, $money->getAmount()); // note : 3 decimals in config for theses tests
     }
 
     public function testHistoryRatio()
