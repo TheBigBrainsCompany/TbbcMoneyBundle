@@ -580,7 +580,7 @@ what is functional :
 Versions
 --------
 
-2.5.0 : 2014/09/25
+2.5.0 : 2014/10/16
 
 * no BC Break
 * new : A brand new ratio provider based on google finance convert
