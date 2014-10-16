@@ -11,6 +11,7 @@
         <parameter key="tbbc_money.pair.csv_storage.class">Tbbc\MoneyBundle\Pair\Storage\CsvStorage</parameter>
         <parameter key="tbbc_money.pair_manager.ratio_file_name">%kernel.root_dir%/data/tbbc_money/ratio_file_name.csv</parameter>
         <parameter key="tbbc_money.ratio_provider.rate_exchange.class">Tbbc\MoneyBundle\Pair\RatioProvider\RateExchangeRatioProvider</parameter>
+        <parameter key="tbbc_money.ratio_provider.google.class">Tbbc\MoneyBundle\Pair\RatioProvider\GoogleRatioProvider</parameter>
         <parameter key="tbbc_money.formatter.money_formatter.class">Tbbc\MoneyBundle\Formatter\MoneyFormatter</parameter>
 
     </parameters>
@@ -21,9 +22,6 @@
             <argument>%tbbc_money.currencies%</argument>
             <argument>%tbbc_money.reference_currency%</argument>
             <argument type="service" id="event_dispatcher"/>
-            <call method="setRatioProvider">
-                <argument type="service" id="tbbc_money.ratio_provider.rate_exchange" />
-            </call>
         </service>
         <service id="tbbc_money.money_manager" class="%tbbc_money.money_manager.class%">
             <argument>%tbbc_money.reference_currency%</argument>
@@ -36,6 +34,8 @@
         </service>
         <!-- Ratio providers -->
         <service id="tbbc_money.ratio_provider.rate_exchange" class="%tbbc_money.ratio_provider.rate_exchange.class%">
+        </service>
+        <service id="tbbc_money.ratio_provider.google" class="%tbbc_money.ratio_provider.google.class%">
         </service>
         <!-- Formatter -->
         <service id="tbbc_money.formatter.money_formatter" class="%tbbc_money.formatter.money_formatter.class%">

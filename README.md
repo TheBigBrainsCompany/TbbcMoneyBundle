@@ -404,6 +404,42 @@ class IndexController extends Controller
 ./app/console tbbc:money:ratio-fetch
 ```
 
+### Change the ratio provider
+
+The ratio provider by default is base on the service 'tbbc_money.ratio_provider.rate_exchange'
+
+This bundles contains two ratio providers :
+
+* tbbc_money.ratio_provider.rate_exchange based on the http://rate-exchange.appspot.com/ service
+* tbbc_money.ratio_provider.google based on the https://www.google.com/finance/converter service
+
+You can change the service to use in the config.yml file :
+
+```
+tbbc_money:
+    [...]
+    ratio_provider: tbbc_money.ratio_provider.google
+```
+
+
+### Create your own ratio provider
+
+A ratio provider is a service that implements the Tbbc\MoneyBundle\Pair\RatioProviderInterface.
+I let you read the PHP doc of the interface to understand how to implement a new ratio provider.
+
+The the new ratio provider has to be registered as a service.
+
+To use the new ratio provider, you should set the service to use in the config.yml by giving the
+service name.
+
+```
+tbbc_money:
+    [...]
+    ratio_provider: tbbc_money.ratio_provider.google
+```
+
+
+
 ### automatic currency ratio fetch
 
 Add to your crontab :
@@ -497,6 +533,7 @@ tbbc_money:
     reference_currency: "EUR"
     decimals: 2
     enable_pair_history: true
+    ratio_provider: tbbc_money.ratio_provider.rate_exchange
 ```
 
 
@@ -536,10 +573,23 @@ what is functional :
 * twig presentation for forms
 * twig filters
 * commands for ratio creation and ratio display
+* automatic ratio fetch (with 2 ratio providers)
+* history of currency ratio
 
 
 Versions
 --------
+
+2.5.0 : 2014/09/25
+
+* no BC Break
+* new : A brand new ratio provider based on google finance convert
+* new : a simple way to choose the ratio provider from the config.yml
+* doc : readme updated
+* doc : better phpdoc for the RatioProviderInterface.php
+
+* new : a brand new MoneyManager that allows to create a Money object from a float value
+* doc : small fixes
 
 2.4.0 : 2014/09/25
 

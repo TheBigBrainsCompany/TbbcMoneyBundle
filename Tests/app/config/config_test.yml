@@ -3,6 +3,7 @@ tbbc_money:
     reference_currency: "EUR"
     decimals: 3
     enable_pair_history: true
+    ratio_provider: tbbc_money.ratio_provider.rate_exchange
 
 framework:
     trusted_hosts: ~
