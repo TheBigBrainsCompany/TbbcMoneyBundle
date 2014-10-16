@@ -588,9 +588,6 @@ Versions
 * doc : readme updated
 * doc : better phpdoc for the RatioProviderInterface.php
 
-* new : a brand new MoneyManager that allows to create a Money object from a float value
-* doc : small fixes
-
 2.4.0 : 2014/09/25
 
 * no BC Break
