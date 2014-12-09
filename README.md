@@ -593,6 +593,12 @@ what is functional :
 Versions
 --------
 
+2.6.0 : 2014/12/09
+
+* no BC Break
+* new : removed dependency to doctrine
+* fix : currencies with 0 decimals are allowed 
+
 2.5.0 : 2014/10/16
 
 * no BC Break
