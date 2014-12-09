@@ -27,15 +27,17 @@ class TbbcMoneyBundle extends Bundle
     {
         parent::boot();
         
-        if(!Type::hasType(MoneyType::NAME)) {
-            Type::addType(MoneyType::NAME, 'Tbbc\MoneyBundle\Type\MoneyType');
-        }
-        
-        $entityManagerNameList = $this->container->getParameter('doctrine.entity_managers');
-        foreach($entityManagerNameList as $entityManagerName) {
-            $em = $this->container->get($entityManagerName);
-            if (!$em->getConnection()->getDatabasePlatform()->hasDoctrineTypeMappingFor(MoneyType::NAME)) {
-                $em->getConnection()->getDatabasePlatform()->registerDoctrineTypeMapping(MoneyType::NAME, MoneyType::NAME);
+        if($this->container->hasParameter('doctrine.entity_managers')){
+            if(!Type::hasType(MoneyType::NAME)) {
+                Type::addType(MoneyType::NAME, 'Tbbc\MoneyBundle\Type\MoneyType');
+            }
+
+            $entityManagerNameList = $this->container->getParameter('doctrine.entity_managers');
+            foreach($entityManagerNameList as $entityManagerName) {
+                $em = $this->container->get($entityManagerName);
+                if (!$em->getConnection()->getDatabasePlatform()->hasDoctrineTypeMappingFor(MoneyType::NAME)) {
+                    $em->getConnection()->getDatabasePlatform()->registerDoctrineTypeMapping(MoneyType::NAME, MoneyType::NAME);
+                }
             }
         }
     }

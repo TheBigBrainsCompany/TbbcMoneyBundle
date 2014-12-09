@@ -519,6 +519,19 @@ You can :
 * subclass the MoneyFormatter and rewrite the getDefaultNumberFormater method to set a application wide
 NumberFormatter
 
+Using the TbbcMoneyBundle without doctrine
+------------------------------------------
+
+You have to disable the pair history service in order to use the TbbcMoneyBundle without doctrine.
+
+```
+tbbc_money:
+    enable_pair_history: true
+```
+
+Note : you can imagine to code your own PairHistoryManager for mongodb or propel, it is very easy to do. Don't
+hesitate to submit a PR with your code and your tests.
+
 Optimizations
 -------------
 
