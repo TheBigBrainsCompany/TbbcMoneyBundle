@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by Philippe Le Van.
- * Date: 01/07/13
- */
-
 namespace Tbbc\MoneyBundle\Tests\Config;
 
-use Money\Currency;
 use Money\Money;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\Console\Input\StringInput;
 use Tbbc\MoneyBundle\Money\MoneyManager;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
