@@ -593,6 +593,13 @@ what is functional :
 Versions
 --------
 
+2.7.0 : 2015/04/27
+
+* possible BC Break : rate exchange ratio provider is removed from the bundle (the remote api is now stopped).
+* new ratio provider with yahoo finance
+* this yahoo finance provider is set as the default provider
+* the rate exchange provider is removed
+
 2.6.0 : 2014/12/09
 
 * no BC Break
