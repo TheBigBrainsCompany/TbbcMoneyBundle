@@ -4,8 +4,7 @@ namespace Tbbc\MoneyBundle\Tests\Pair;
 use Money\Money;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManager;
-use Tbbc\MoneyBundle\Pair\PairManagerInterface;
-use Tbbc\MoneyBundle\Pair\RatioProvider\RateExchangeRatioProvider;
+use Tbbc\MoneyBundle\Pair\RatioProvider\YahooFinanceRatioProvider;
 use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 
 /**
@@ -107,7 +106,7 @@ class PairManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testRatioProvider()
     {
-        $provider = new RateExchangeRatioProvider();
+        $provider = new YahooFinanceRatioProvider();
         $this->manager->setRatioProvider($provider);
         $this->manager->saveRatioListFromRatioProvider();
         $ratio = $this->manager->getRelativeRatio("EUR", "USD");

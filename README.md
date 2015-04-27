@@ -406,11 +406,11 @@ class IndexController extends Controller
 
 ### Change the ratio provider
 
-The ratio provider by default is base on the service 'tbbc_money.ratio_provider.rate_exchange'
+The ratio provider by default is base on the service 'tbbc_money.ratio_provider.yahoo_finance'
 
 This bundles contains two ratio providers :
 
-* tbbc_money.ratio_provider.rate_exchange based on the http://rate-exchange.appspot.com/ service
+* tbbc_money.ratio_provider.yahoo_finance based on the Yahoo finance APIs https://developer.yahoo.com/
 * tbbc_money.ratio_provider.google based on the https://www.google.com/finance/converter service
 
 You can change the service to use in the config.yml file :
@@ -546,7 +546,7 @@ tbbc_money:
     reference_currency: "EUR"
     decimals: 2
     enable_pair_history: true
-    ratio_provider: tbbc_money.ratio_provider.rate_exchange
+    ratio_provider: tbbc_money.ratio_provider.yahoo_finance
 ```
 
 
