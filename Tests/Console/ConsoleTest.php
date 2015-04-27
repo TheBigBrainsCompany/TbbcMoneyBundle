@@ -51,12 +51,7 @@ class ConsoleTest
         $this->assertNotContains("ERR", $output);
 
         $output = $this->runCommand($client, "tbbc:money:ratio-list");
-        $res = file_get_contents("http://rate-exchange.appspot.com/currency?from=EUR&to=USD");
-        $res = json_decode($res, true);
-        $ratioUsd = $res["rate"];
-        $res = file_get_contents("http://rate-exchange.appspot.com/currency?from=EUR&to=CAD");
-        $res = json_decode($res, true);
-        $ratioCad = $res["rate"];
-        $this->assertEquals("Ratio list\nEUR;1\nUSD;$ratioUsd\nCAD;$ratioCad\n\n", $output);
+
+        $this->assertRegExp("/^Ratio list\nEUR;1\nUSD;\d.\d+\nCAD;\d.\d+\n\n$/", $output);
     }
 }

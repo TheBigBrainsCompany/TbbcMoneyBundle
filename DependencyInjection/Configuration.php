@@ -64,7 +64,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('ratio_provider')
                     ->cannotBeEmpty()
-                    ->defaultValue('tbbc_money.ratio_provider.rate_exchange')
+                    ->defaultValue('tbbc_money.ratio_provider.yahoo_finance')
                 ->end()
                 ->arrayNode('templating')
                     ->addDefaultsIfNotSet()
