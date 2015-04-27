@@ -65,19 +65,19 @@ abstract class AbstractRatioProviderTest extends \PHPUnit_Framework_TestCase
      */
     protected function getRatiosToTest()
     {
-        return [
-            [
+        return array(
+            array(
                 'reference' => 'EUR',
                 'currency' => 'USD',
                 'ratio_min' => 0.3,
                 'ratio_max' => 3,
-            ],
-            [
+            ),
+            array(
                 'reference' => 'GBP',
                 'currency' => 'EUR',
                 'ratio_min' => 0.3,
                 'ratio_max' => 3,
-            ],
-        ];
+            ),
+        );
     }
 }
