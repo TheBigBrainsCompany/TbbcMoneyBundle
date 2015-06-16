@@ -12,6 +12,12 @@ This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/0
 
 This bundle is stable and tested.
 
+## Fork features
+
+This fork adopts TbbcMoneyBundle to be used independently of reference currency for projects that may not have one main
+currency or that are multi-currency.
+Backwards-compatibility is saved everywhere except format of currency storing
+
 Quick Start
 -----------
 
