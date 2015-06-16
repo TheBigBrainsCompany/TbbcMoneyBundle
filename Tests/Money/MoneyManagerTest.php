@@ -39,4 +39,9 @@ class MoneyManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(253, $money->getAmount());
     }
 
+    public function testCreateFloatFromMoney()
+    {
+        $money = Money::EUR(250);
+        $this->assertEquals(2.5, $this->manager->createFloatFromMoney($money));
+    }
 }

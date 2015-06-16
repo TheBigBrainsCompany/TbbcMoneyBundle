@@ -1,6 +1,7 @@
 <?php
 namespace Tbbc\MoneyBundle\Pair;
 
+use Money\Currency;
 use Money\Money;
 
 interface PairManagerInterface
@@ -8,11 +9,11 @@ interface PairManagerInterface
     /**
      * convert the amount into the currencyCode given in parameter
      *
-     * @param Money $amout
-     * @param string $currencyCode in the list of currencies from config.yml
+     * @param Money $amount
+     * @param string $currencyTo in the list of currencies from config.yml
      * @return Money
      */
-    public function convert(Money $amout, $currencyCode);
+    public function convert(Money $amount, $currencyTo);
 
     /**
      * set ratio between the currency in parameter and the reference currency.
@@ -20,19 +21,21 @@ interface PairManagerInterface
      * WARNING: This method has to dispatch a \TbbcMoneyEvents::AFTER_RATIO_SAVE event
      * with a SaveRatioEvent
      *
-     * @param string $currencyCode from the list of currencies
+     * @param string|Currency $currencyTo
      * @param float $ratio
+     * @param string|Currency|null $currencyFrom if null - reference currency will be used
+     * @return
      */
-    public function saveRatio($currencyCode, $ratio);
+    public function saveRatio($currencyTo, $ratio, $currencyFrom = null);
 
     /**
      * get ratio between two currencies
      *
-     * @param string $referenceCurrencyCode
-     * @param string $currencyCode
+     * @param string|Currency $currencyFrom
+     * @param string|Currency $currencyTo
      * @return float
      */
-    public function getRelativeRatio($referenceCurrencyCode,$currencyCode);
+    public function getRelativeRatio($currencyFrom, $currencyTo);
 
     /**
      * @return array of type array("EUR", "USD");
@@ -40,11 +43,18 @@ interface PairManagerInterface
     public function getCurrencyCodeList();
 
     /**
-     * returns  currency used as reference currency
+     * returns  currency code used as reference currency
      *
      * @return string "USD"|"EUR"|...
      */
     public function getReferenceCurrencyCode();
+
+    /**
+     * returns  currency used as reference currency
+     *
+     * @return Currency
+     */
+    public function getReferenceCurrency();
 
     /**
      * return ratio list for currencies in comparison to reference currency

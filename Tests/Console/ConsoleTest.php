@@ -41,7 +41,7 @@ class ConsoleTest
 
         $output = $this->runCommand($client, "tbbc:money:ratio-list");
 
-        $this->assertEquals("Ratio list\nEUR;1\nUSD;1.265\nCAD;1.1\n\n", $output);
+        $this->assertEquals("Ratio list\nEUR/EUR;1\nEUR/USD;1.265\nEUR/CAD;1.1\n\n", $output);
     }
 
     public function testRunRatioFetch()
@@ -52,6 +52,10 @@ class ConsoleTest
 
         $output = $this->runCommand($client, "tbbc:money:ratio-list");
 
-        $this->assertRegExp("/^Ratio list\nEUR;1\nUSD;\d.\d+\nCAD;\d.\d+\n\n$/", $output);
+        $expression = <<<REGEXP
+/^Ratio list\nEUR\/EUR;1\nEUR\/USD;\d.\d+\nEUR\/CAD;\d.\d+\n\n$/
+REGEXP;
+
+        $this->assertRegExp($expression, $output);
     }
 }

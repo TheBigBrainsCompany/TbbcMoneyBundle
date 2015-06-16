@@ -14,4 +14,11 @@ interface MoneyManagerInterface
      */
     public function createMoneyFromFloat($floatAmount, $currencyCode = null);
 
+    /**
+     * Convert the money object to float amount
+     *
+     * @param Money $money
+     * @return float
+     */
+    public function createFloatFromMoney(Money $money);
 }

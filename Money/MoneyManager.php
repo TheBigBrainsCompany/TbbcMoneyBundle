@@ -43,4 +43,14 @@ class MoneyManager
         return $money;
     }
 
-} 
+    /**
+     * Convert the money object to float amount
+     *
+     * @param Money $money
+     * @return float
+     */
+    public function createFloatFromMoney(Money $money)
+    {
+        return $money->getAmount() / pow(10, $this->decimals);
+    }
+}

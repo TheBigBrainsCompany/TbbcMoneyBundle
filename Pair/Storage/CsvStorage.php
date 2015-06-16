@@ -34,10 +34,7 @@ class CsvStorage
     }
 
     /**
-     * load and return ratioList
-     *
-     * @param bool $force // force reload (no cache)
-     * @throws \Tbbc\MoneyBundle\MoneyException
+     * @inheritdoc
      */
     public function loadRatioList($force = false)
     {
@@ -46,7 +43,8 @@ class CsvStorage
         }
         // if filename doesn't exist, init with only reference currency code
         if (!is_file($this->ratioFileName)) {
-            $this->ratioList = array($this->referenceCurrencyCode => (float) 1);
+            $currencyCodePair = $this->referenceCurrencyCode . '/' . $this->referenceCurrencyCode;
+            $this->ratioList = array($currencyCodePair => (float) 1);
             $this->saveRatioList($this->ratioList);
             return $this->ratioList;
         }
@@ -61,16 +59,11 @@ class CsvStorage
             if (count($data) != 2) {
                 throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, invalid argument count");
             }
-            list($currencyCode, $ratio) = $data;
+            list($currencyCodePair, $ratio) = $data;
 
 
-            // validate that currency exist in currency code list
-            try {
-                // hack to throw an exception if currency doesn't exist
-                new Currency($currencyCode);
-            } catch (UnknownCurrencyException $e) {
-                throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, unknown currency $currencyCode");
-            }
+            // TODO: validate that currency exist in currency code list.
+            // It should be util from mathiasverraes/money library, not a object creation
 
             // validate value
             $ratio = floatval($ratio);
@@ -82,11 +75,11 @@ class CsvStorage
             }
 
             // validate if currency is twice in the file
-            if (array_key_exists($currencyCode, $this->ratioList)) {
-                throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, ratio already exists for currency $currencyCode");
+            if (array_key_exists($currencyCodePair, $this->ratioList)) {
+                throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, ratio already exists for currency $currencyCodePair");
             }
 
-            $this->ratioList[$currencyCode] = $ratio;
+            $this->ratioList[$currencyCodePair] = $ratio;
             $row++;
         }
         fclose($handle);
@@ -102,8 +95,8 @@ class CsvStorage
         if (($handle = fopen($this->ratioFileName, "w")) === FALSE) {
             throw new MoneyException("can't open $this->ratioFileName for writing");
         }
-        foreach ($ratioList as $currencyCode => $ratio) {
-            fputcsv($handle, array($currencyCode, $ratio), ';');
+        foreach ($ratioList as $currencyCodePair => $ratio) {
+            fputcsv($handle, array($currencyCodePair, $ratio), ';');
         }
         fclose($handle);
         $this->ratioList = $ratioList;

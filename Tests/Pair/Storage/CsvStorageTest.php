@@ -33,22 +33,22 @@ class CsvStorageTest extends \PHPUnit_Framework_TestCase
     {
         $ratioList = $this->storage->loadRatioList();
         $this->assertEquals(
-            "EUR;1\n",
+            "EUR/EUR;1\n",
             file_get_contents($this->fileName)
         );
-        $ratioList["USD"] = 1.25;
+        $ratioList["EUR/USD"] = 1.25;
         $this->storage->saveRatioList($ratioList);
         $this->assertEquals(
-            "EUR;1\nUSD;1.25\n",
+            "EUR/EUR;1\nEUR/USD;1.25\n",
             file_get_contents($this->fileName)
         );
 
         $ratioList = $this->storage->loadRatioList();
-        $this->assertEquals(array("EUR"=>1.0, "USD"=>1.25), $ratioList);
+        $this->assertEquals(array("EUR/EUR"=>1.0, "EUR/USD"=>1.25), $ratioList);
 
         $this->storage->saveRatioList($ratioList);
         $this->assertEquals(
-            "EUR;1\nUSD;1.25\n",
+            "EUR/EUR;1\nEUR/USD;1.25\n",
             file_get_contents($this->fileName)
         );
 
