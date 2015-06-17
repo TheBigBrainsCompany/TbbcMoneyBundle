@@ -33,9 +33,10 @@ interface PairManagerInterface
      *
      * @param string|Currency $currencyFrom
      * @param string|Currency $currencyTo
+     * @param boolean $isStrict if true - tries only pairs from storage. Else - works with reference currency as intermediate exchange currency
      * @return float
      */
-    public function getRelativeRatio($currencyFrom, $currencyTo);
+    public function getRelativeRatio($currencyFrom, $currencyTo, $isStrict = false);
 
     /**
      * @return array of type array("EUR", "USD");

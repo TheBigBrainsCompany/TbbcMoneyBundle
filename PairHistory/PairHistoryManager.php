@@ -5,8 +5,8 @@ namespace Tbbc\MoneyBundle\PairHistory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
 use Tbbc\MoneyBundle\Entity\RatioHistory;
-use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
+use Tbbc\MoneyBundle\Utils\CurrencyUtils;
 
 class PairHistoryManager
     implements PairHistoryManagerInterface
@@ -33,19 +33,26 @@ class PairHistoryManager
     /**
      * @inheritdoc
      */
-    public function getRatioAtDate($currencyCode, \DateTime $historyDate)
+    public function getRatioAtDate($currencyTo, \DateTime $savedAt, $currencyFrom = null)
     {
-        if ($currencyCode == $this->referenceCurrencyCode) {
-            return (float)1;
+        $currencyCode = CurrencyUtils::isCurrency($currencyTo) ? $currencyTo->getName() : $currencyTo;
+        $referenceCurrencyCode = null === $currencyFrom
+            ? $this->referenceCurrencyCode
+            : (CurrencyUtils::isCurrency($currencyFrom) ? $currencyFrom->getName() : $currencyFrom);
+
+        if ($currencyCode === $referenceCurrencyCode) {
+            return 1.;
         }
         $qb = $this->em->createQueryBuilder();
         $qb->select('rh')
             ->from('\Tbbc\MoneyBundle\Entity\RatioHistory', 'rh')
             ->where('rh.currencyCode = :currencyCode')
-            ->orderBy('rh.savedAt', 'DESC')
+            ->andWhere('rh.referenceCurrencyCode = :referenceCurrencyCode')
             ->andWhere('rh.savedAt <= :historyDate')
-            ->setParameter('historyDate', $historyDate)
+            ->orderBy('rh.savedAt', 'DESC')
+            ->setParameter('historyDate', $savedAt)
             ->setParameter('currencyCode', $currencyCode)
+            ->setParameter('referenceCurrencyCode', $referenceCurrencyCode)
             ->setMaxResults(1)
         ;
         $query = $qb->getQuery();
@@ -54,17 +61,19 @@ class PairHistoryManager
         } catch (NoResultException $e) {
             return null;
         }
-        if ($ratioHistory->getReferenceCurrencyCode() !== $this->referenceCurrencyCode) {
-            throw new MoneyException('Reference currency code changed in history of currency ratio');
-        }
         return $ratioHistory->getRatio();
     }
 
     /**
      * @inheritdoc
      */
-    public function getRatioHistory($currencyCode, $startDate=null, $endDate=null)
+    public function getRatioHistory($currencyTo, $startDate, $endDate, $currencyFrom = null)
     {
+        $currencyCode = CurrencyUtils::isCurrency($currencyTo) ? $currencyTo->getName() : $currencyTo;
+        $referenceCurrencyCode = null === $currencyFrom
+            ? $this->referenceCurrencyCode
+            : (CurrencyUtils::isCurrency($currencyFrom) ? $currencyFrom->getName() : $currencyFrom);
+
         $qb = $this->em->createQueryBuilder();
         $qb->select('rh')
             ->from('\Tbbc\MoneyBundle\Entity\RatioHistory', 'rh')
@@ -72,7 +81,7 @@ class PairHistoryManager
             ->andWhere('rh.referenceCurrencyCode = :referenceCurrencyCode')
             ->orderBy('rh.savedAt', 'ASC')
             ->setParameter('currencyCode', $currencyCode)
-            ->setParameter('referenceCurrencyCode', $this->referenceCurrencyCode)
+            ->setParameter('referenceCurrencyCode', $referenceCurrencyCode)
         ;
         if ($startDate instanceof \DateTime) {
             $qb->andWhere('rh.savedAt >= :startDate')

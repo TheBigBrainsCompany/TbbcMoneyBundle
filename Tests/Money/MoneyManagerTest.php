@@ -3,7 +3,6 @@ namespace Tbbc\MoneyBundle\Tests\Money;
 
 use Money\Money;
 use Tbbc\MoneyBundle\Money\MoneyManager;
-use Tbbc\MoneyBundle\MoneyException;
 
 /**
  * @group moneymanager

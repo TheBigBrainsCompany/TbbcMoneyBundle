@@ -53,8 +53,8 @@ class PairManagerTest extends \PHPUnit_Framework_TestCase
         $usd = $this->manager->convert($eur, "USD");
         $this->assertEquals(Money::USD(125), $usd);
 
-        $this->manager->saveRatio("CAD", 1.50, 'USD');
-        $cad = $this->manager->convert(Money::USD(100), "CAD");
+        $this->manager->saveRatio("CAD", 1.50);
+        $cad = $this->manager->convert($usd, "CAD");
         $this->assertEquals(Money::CAD(150), $cad);
     }
 
@@ -62,19 +62,19 @@ class PairManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->manager->saveRatio("USD", 1.25);
         $this->assertEquals(
-            "EUR/EUR;1\nEUR/USD;1.25\n",
+            "EUR;1\nUSD;1.25\n",
             file_get_contents($this->fileName)
         );
         $this->manager->saveRatio("CAD", 1.50);
         $this->assertEquals(
-            "EUR/EUR;1\nEUR/USD;1.25\nEUR/CAD;1.5\n",
+            "EUR;1\nUSD;1.25\nCAD;1.5\n",
             file_get_contents($this->fileName)
         );
         $this->assertEquals(
             array(
-                'EUR/USD' => 1.25,
-                'EUR/EUR' => 1.0,
-                'EUR/CAD' => 1.5
+                'USD' => 1.25,
+                'EUR' => 1.0,
+                'CAD' => 1.5
             ),
             $this->manager->getRatioList()
         );
@@ -101,7 +101,7 @@ class PairManagerTest extends \PHPUnit_Framework_TestCase
     public function testCurrencyWithoutRatio()
     {
         $eur = Money::BSD(100);
-        $this->manager->convert($eur, "EUR");
+        $bsd = $this->manager->convert($eur, "EUR");
     }
 
     public function testRatioProvider()

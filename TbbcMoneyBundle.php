@@ -4,9 +4,7 @@ namespace Tbbc\MoneyBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Doctrine\DBAL\Types\Type;
-
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\PairHistoryCompilerPass;
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\RatioProviderCompilerPass;
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\StorageCompilerPass;

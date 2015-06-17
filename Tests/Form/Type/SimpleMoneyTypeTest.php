@@ -6,13 +6,9 @@
 
 namespace Tbbc\MoneyBundle\Tests\Form\Type;
 
-use Money\Currency;
-use Symfony\Component\Form\Test\FormIntegrationTestCase;
-use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Money\Money;
 use Tbbc\MoneyBundle\Form\Type\SimpleMoneyType;
-use Tbbc\MoneyBundle\Pair\PairManager;
 
 class SimpleMoneyTypeTest
     extends TypeTestCase

@@ -15,10 +15,10 @@ class DoctrineStorageRatioTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructor ()
     {
-        $eurToUsd = new DoctrineStorageRatio('EUR/USD', 1.6);
-        
-        $this->assertEquals('EUR/USD', $eurToUsd->getCurrencyCodePair());
-        $this->assertEquals(1.6, $eurToUsd->getRatio());
+        $dollar = new DoctrineStorageRatio('USD', 1.6);
+
+        $this->assertEquals('USD', $dollar->getCurrencyCode());
+        $this->assertEquals(1.6, $dollar->getRatio());
     }
 
     public function testProperties ()
@@ -26,8 +26,8 @@ class DoctrineStorageRatioTest extends \PHPUnit_Framework_TestCase
         $currency = new DoctrineStorageRatio();
 
         $this->assertTrue(method_exists($currency, 'getId'));
-        $this->assertTrue(method_exists($currency, 'getCurrencyCodePair'));
-        $this->assertTrue(method_exists($currency, 'setCurrencyCodePair'));
+        $this->assertTrue(method_exists($currency, 'getCurrencyCode'));
+        $this->assertTrue(method_exists($currency, 'setCurrencyCode'));
         $this->assertTrue(method_exists($currency, 'getRatio'));
         $this->assertTrue(method_exists($currency, 'setRatio'));
     }

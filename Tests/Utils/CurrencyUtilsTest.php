@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: sowhat
- */
 
 namespace Tbbc\MoneyBundle\Utils;
 

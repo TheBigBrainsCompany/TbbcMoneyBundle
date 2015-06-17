@@ -1,10 +1,6 @@
 <?php
 namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 
-use Money\Money;
-use Tbbc\MoneyBundle\MoneyException;
-use Tbbc\MoneyBundle\Pair\PairManager;
-use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 
 /**
@@ -33,22 +29,22 @@ class CsvStorageTest extends \PHPUnit_Framework_TestCase
     {
         $ratioList = $this->storage->loadRatioList();
         $this->assertEquals(
-            "EUR/EUR;1\n",
+            "EUR;1\n",
             file_get_contents($this->fileName)
         );
-        $ratioList["EUR/USD"] = 1.25;
+        $ratioList["USD"] = 1.25;
         $this->storage->saveRatioList($ratioList);
         $this->assertEquals(
-            "EUR/EUR;1\nEUR/USD;1.25\n",
+            "EUR;1\nUSD;1.25\n",
             file_get_contents($this->fileName)
         );
 
         $ratioList = $this->storage->loadRatioList();
-        $this->assertEquals(array("EUR/EUR"=>1.0, "EUR/USD"=>1.25), $ratioList);
+        $this->assertEquals(array("EUR"=>1.0, "USD"=>1.25), $ratioList);
 
         $this->storage->saveRatioList($ratioList);
         $this->assertEquals(
-            "EUR/EUR;1\nEUR/USD;1.25\n",
+            "EUR;1\nUSD;1.25\n",
             file_get_contents($this->fileName)
         );
 

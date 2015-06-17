@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Bundle\FrameworkBundle\Client;
 
 /**

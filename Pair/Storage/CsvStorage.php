@@ -7,8 +7,6 @@
 namespace Tbbc\MoneyBundle\Pair\Storage;
 
 
-use Money\Currency;
-use Money\UnknownCurrencyException;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\StorageInterface;
 
@@ -43,8 +41,8 @@ class CsvStorage
         }
         // if filename doesn't exist, init with only reference currency code
         if (!is_file($this->ratioFileName)) {
-            $currencyCodePair = $this->referenceCurrencyCode . '/' . $this->referenceCurrencyCode;
-            $this->ratioList = array($currencyCodePair => (float) 1);
+            $currencyRatioKey = $this->referenceCurrencyCode;
+            $this->ratioList = array($currencyRatioKey => (float) 1);
             $this->saveRatioList($this->ratioList);
             return $this->ratioList;
         }
@@ -59,7 +57,7 @@ class CsvStorage
             if (count($data) != 2) {
                 throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, invalid argument count");
             }
-            list($currencyCodePair, $ratio) = $data;
+            list($currencyRatioKey, $ratio) = $data;
 
 
             // TODO: validate that currency exist in currency code list.
@@ -75,11 +73,11 @@ class CsvStorage
             }
 
             // validate if currency is twice in the file
-            if (array_key_exists($currencyCodePair, $this->ratioList)) {
-                throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, ratio already exists for currency $currencyCodePair");
+            if (array_key_exists($currencyRatioKey, $this->ratioList)) {
+                throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, ratio already exists for currency $currencyRatioKey");
             }
 
-            $this->ratioList[$currencyCodePair] = $ratio;
+            $this->ratioList[$currencyRatioKey] = $ratio;
             $row++;
         }
         fclose($handle);

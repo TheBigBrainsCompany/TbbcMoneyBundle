@@ -9,16 +9,16 @@ class DoctrineStorageRatio
     /**
      * @var string
      */
-    private $currencyCodePair;
+    private $currencyCode;
 
     /**
      * @var integer
      */
     private $ratio;
     
-    public function __construct($codePair = null, $ratio = null)
+    public function __construct($currencyCode = null, $ratio = null)
     {
-        $this->currencyCodePair = $codePair;
+        $this->currencyCode = $currencyCode;
         $this->ratio = $ratio;
     }
 
@@ -35,12 +35,12 @@ class DoctrineStorageRatio
     /**
      * Set code
      *
-     * @param  string $currencyCodePair
+     * @param  string $currencyCode
      * @return DoctrineStorageRatio
      */
-    public function setCurrencyCodePair($currencyCodePair)
+    public function setCurrencyCode($currencyCode)
     {
-        $this->currencyCodePair = $currencyCodePair;
+        $this->currencyCode = $currencyCode;
 
         return $this;
     }
@@ -50,9 +50,9 @@ class DoctrineStorageRatio
      *
      * @return string
      */
-    public function getCurrencyCodePair()
+    public function getCurrencyCode()
     {
-        return $this->currencyCodePair;
+        return $this->currencyCode;
     }
 
     /**

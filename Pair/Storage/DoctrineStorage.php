@@ -6,10 +6,9 @@
 
 namespace Tbbc\MoneyBundle\Pair\Storage;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Tbbc\MoneyBundle\Entity\DoctrineStorageRatio;
 use Tbbc\MoneyBundle\Pair\StorageInterface;
-
-use Doctrine\Common\Persistence\ObjectManager;
 
 class DoctrineStorage implements StorageInterface
 {
@@ -48,8 +47,8 @@ class DoctrineStorage implements StorageInterface
         // FIXME
         // if filename doesn't exist, init with only reference currency code
         if (0 === count($doctrineStorageRatios)) {
-            $currencyCodePair = $this->referenceCurrencyCode . '/' . $this->referenceCurrencyCode;
-            $this->ratioList = array($currencyCodePair => (float) 1);
+            $currencyCodePair = $this->referenceCurrencyCode;
+            $this->ratioList = array($currencyCodePair => 1.);
             $this->saveRatioList($this->ratioList);
             return $this->ratioList;
         }
@@ -57,7 +56,7 @@ class DoctrineStorage implements StorageInterface
         $this->ratioList = array();
         
         foreach ($doctrineStorageRatios as $doctrineStorageRatio) {
-            $this->ratioList[$doctrineStorageRatio->getCurrencyCodePair()] = $doctrineStorageRatio->getRatio();
+            $this->ratioList[$doctrineStorageRatio->getCurrencyCode()] = $doctrineStorageRatio->getRatio();
         }
 
         return $this->ratioList;
