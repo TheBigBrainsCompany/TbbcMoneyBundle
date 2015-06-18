@@ -115,9 +115,13 @@ class PairManagerTest extends \PHPUnit_Framework_TestCase
         $referenceRatio = $provider->fetchRatio("EUR", "CAD");
         //The currency exchange rate are updated every seconds
         //The round is a workaround to negate the variation between the two ratio fetches
+        $roundReference = round($referenceRatio, 2);
+        $roundRelative = round($this->manager->getRelativeRatio("EUR", "CAD"),2);
         $this->assertEquals(
-            ROUND($referenceRatio, 2),
-            ROUND($this->manager->getRelativeRatio("EUR", "CAD"),2)
+            $roundReference,
+            $roundRelative,
+            'Failed asserting that ' . $roundReference .' matches expected ' . $roundRelative,
+            .0001
         );
     }
 
