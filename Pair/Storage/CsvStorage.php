@@ -33,6 +33,7 @@ class CsvStorage
 
     /**
      * @inheritdoc
+     * @throws MoneyException
      */
     public function loadRatioList($force = false)
     {
@@ -47,14 +48,14 @@ class CsvStorage
             return $this->ratioList;
         }
         // read ratio file
-        if (($handle = fopen($this->ratioFileName, "r")) === FALSE) {
+        if (($handle = fopen($this->ratioFileName, 'r')) === FALSE) {
             throw new MoneyException("ratioFileName $this->ratioFileName not initialized");
         }
         $row = 1;
         $this->ratioList = array();
-        while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ';')) !== FALSE) {
             // extract data from CSV line
-            if (count($data) != 2) {
+            if (2 !== count($data)) {
                 throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, invalid argument count");
             }
             list($currencyRatioKey, $ratio) = $data;
@@ -64,7 +65,7 @@ class CsvStorage
             // It should be util from mathiasverraes/money library, not a object creation
 
             // validate value
-            $ratio = floatval($ratio);
+            $ratio = (float)$ratio;
             if (!$ratio) {
                 throw new MoneyException("error in ratioFileName $this->ratioFileName on line $row, ratio is not a float or is null");
             }
@@ -84,13 +85,17 @@ class CsvStorage
         return $this->ratioList;
     }
 
+    /**
+     * @inheritdoc
+     * @throws MoneyException
+     */
     public function saveRatioList($ratioList)
     {
         $dirName = dirname($this->ratioFileName);
         if (!is_dir($dirName)) {
-            mkdir($dirName,0777, true);
+            mkdir($dirName, 0777, true);
         }
-        if (($handle = fopen($this->ratioFileName, "w")) === FALSE) {
+        if (($handle = fopen($this->ratioFileName, 'w')) === FALSE) {
             throw new MoneyException("can't open $this->ratioFileName for writing");
         }
         foreach ($ratioList as $currencyCodePair => $ratio) {
