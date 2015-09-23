@@ -25,7 +25,12 @@ class MoneyType extends Type
     {
         return $platform->getVarcharTypeDeclarationSQL($fieldDeclaration);
     }
- 
+
+    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    {
+        return true;
+    }
+
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         if (is_null($value)) {
