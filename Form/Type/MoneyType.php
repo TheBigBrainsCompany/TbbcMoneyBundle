@@ -44,12 +44,12 @@ class MoneyType
             ->setDefaults(array(
                 'currency_type' => 'tbbc_currency',
             ))
-            ->setAllowedTypes(array(
-                'currency_type' => array(
+            ->setAllowedTypes(
+                'currency_type', array(
                     'string',
                     'Tbbc\MoneyBundle\Form\Type\CurrencyType',
-                ),
-            ))
+                )
+            )
         ;
     }
 
