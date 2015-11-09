@@ -5,6 +5,7 @@ namespace Tbbc\MoneyBundle\Form\Type;
 use Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -47,20 +48,22 @@ class CurrencyType
     /**
      * @inheritdoc
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array('reference_currency', 'currency_choices'));
         $resolver->setDefaults(array(
             'reference_currency' => $this->referenceCurrencyCode,
             'currency_choices' => $this->currencyCodeList
         ));
-        $resolver->setAllowedTypes(array(
-            'reference_currency' => array('string'),
-            'currency_choices' => array('array')
-        ));
-        $resolver->setAllowedValues(array(
-            'reference_currency' => $this->currencyCodeList
-        ));
+        $resolver->setAllowedTypes('reference_currency', 'string');
+        $resolver->setAllowedTypes('currency_choices', 'array');
+        $resolver->setAllowedValues('reference_currency', $this->currencyCodeList);
+    }
+
+    // BC for SF < 2.7
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
     }
 
     /**
