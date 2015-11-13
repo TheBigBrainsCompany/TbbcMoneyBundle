@@ -1,7 +1,6 @@
 <?php
 namespace Tbbc\MoneyBundle\Tests\PairHistory;
 
-use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
 use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
 use Tbbc\MoneyBundle\Tests\BundleOrmTestCase;
@@ -22,10 +21,7 @@ class PairHistoryManagerTest extends BundleOrmTestCase
     {
         parent::setUp();
         $em = $this->getEntityManager();
-        $this->pairHistoryManager = new PairHistoryManager(
-            $em,
-            'EUR'
-        );
+        $this->pairHistoryManager = new PairHistoryManager($em, 'EUR');
         $this->ratioHistoryRepo = $em->getRepository('Tbbc\MoneyBundle\Entity\RatioHistory');
     }
 
@@ -60,9 +56,13 @@ class PairHistoryManagerTest extends BundleOrmTestCase
         $this->assertEquals('2012-07-08 13:00:00', $ratioList[1]["savedAt"]->format('Y-m-d H:i:s'));
         $this->assertEquals('2012-07-08 14:00:00', $ratioList[2]["savedAt"]->format('Y-m-d H:i:s'));
 
-        $ratioList = $this->pairHistoryManager->getRatioHistory('USD',new \DateTime('2012-07-08 12:30:00') , null);
+        $ratioList = $this->pairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'), null);
         $this->assertEquals(2, count($ratioList));
-        $ratioList = $this->pairHistoryManager->getRatioHistory('USD',new \DateTime('2012-07-08 12:30:00') , new \DateTime('2012-07-08 13:30:00'));
+        $ratioList = $this->pairHistoryManager->getRatioHistory(
+            'USD',
+            new \DateTime('2012-07-08 12:30:00'),
+            new \DateTime('2012-07-08 13:30:00')
+        );
         $this->assertEquals(1, count($ratioList));
     }
     public function testGetRatio()
@@ -102,12 +102,8 @@ class PairHistoryManagerTest extends BundleOrmTestCase
 
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 12:30:00'));
         $this->assertEquals(1.25, $ratio);
-        try {
-            $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
-            $this->fail('should throw an exception du to reference currency code');
-        } catch (MoneyException $e) {
-            $this->assertTrue(true);
-        }
+        $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'), 'CAD');
+        $this->assertEquals(1.5, $ratio);
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-10 12:30:00'));
         $this->assertEquals(1.75, $ratio);
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2011-07-10 12:30:00'));

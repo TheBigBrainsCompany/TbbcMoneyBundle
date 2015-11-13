@@ -16,7 +16,7 @@ class DoctrineStorageRatioTest extends \PHPUnit_Framework_TestCase
     public function testConstructor ()
     {
         $dollar = new DoctrineStorageRatio('USD', 1.6);
-        
+
         $this->assertEquals('USD', $dollar->getCurrencyCode());
         $this->assertEquals(1.6, $dollar->getRatio());
     }

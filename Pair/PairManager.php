@@ -11,8 +11,8 @@ use Money\CurrencyPair;
 use Money\Money;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tbbc\MoneyBundle\MoneyException;
-use Tbbc\MoneyBundle\Pair\StorageInterface;
 use Tbbc\MoneyBundle\TbbcMoneyEvents;
+use Tbbc\MoneyBundle\Utils\CurrencyUtils;
 
 class PairManager
     implements PairManagerInterface
@@ -23,8 +23,8 @@ class PairManager
     /** @var  array */
     protected $currencyCodeList;
 
-    /** @var  string */
-    protected $referenceCurrencyCode;
+    /** @var  Currency */
+    protected $referenceCurrency;
 
     /** @var  RatioProviderInterface */
     protected $ratioProvider;
@@ -41,40 +41,59 @@ class PairManager
     {
         $this->storage = $storage;
         $this->currencyCodeList = $currencyCodeList;
-        $this->referenceCurrencyCode = $referenceCurrencyCode;
+        $this->referenceCurrency = new Currency($referenceCurrencyCode);
         $this->dispatcher = $dispatcher;
     }
 
     /**
      * @inheritdoc
+     * @throws \Tbbc\MoneyBundle\MoneyException
+     * @throws \Money\InvalidArgumentException
      */
-    public function convert(Money $amount, $currencyCode)
+    public function convert(Money $amount, $currencyTo)
     {
-        $ratio = $this->getRelativeRatio($amount->getCurrency()->getName(), $currencyCode);
-        $pair = new CurrencyPair($amount->getCurrency(), new Currency($currencyCode), $ratio);
+        if (CurrencyUtils::isCurrency($currencyTo)) {
+            $targetCurrency = $currencyTo;
+        } elseif (CurrencyUtils::isInCurrencyCodeFormat($currencyTo)) {
+            $targetCurrency = new Currency($currencyTo);
+        } else {
+            throw new MoneyException('Can\'t create currencyTo');
+        }
+        $ratio = $this->getRelativeRatio($amount->getCurrency(), $targetCurrency);
+        $pair = new CurrencyPair($amount->getCurrency(), $targetCurrency, $ratio);
         return $pair->convert($amount);
     }
 
     /**
      * @inheritdoc
+     * @throws \Tbbc\MoneyBundle\MoneyException
      */
-    public function saveRatio($currencyCode, $ratio)
+    public function saveRatio($currencyTo, $ratio, $currencyFrom = null)
     {
-        $currency = new Currency($currencyCode);
-        // end of hack
-        $ratio = floatval($ratio);
-        if ($ratio <= 0) {
-            throw new MoneyException("ratio has to be strictly positive");
+        $toCurrency = CurrencyUtils::isCurrency($currencyTo) ? $currencyTo : new Currency($currencyTo);
+        if (null === $currencyFrom) {
+            $fromCurrency = $this->getReferenceCurrency();
+            $isFromReference = true;
+        } else {
+            $fromCurrency = CurrencyUtils::isCurrency($currencyFrom) ? $currencyFrom : new Currency($currencyFrom);
+            $isFromReference = false;
+        }
+
+        $ratio = (float)$ratio;
+        if ($fromCurrency->equals($toCurrency)) {
+            $ratio = 1.;
+        } if ($ratio <= 0) {
+            throw new MoneyException('ratio has to be strictly positive');
         }
         $ratioList = $this->storage->loadRatioList(true);
-        $ratioList[$currency->getName()] = $ratio;
-        $ratioList[$this->getReferenceCurrencyCode()] = (float) 1;
+        $ratioKey = $isFromReference ? $toCurrency->getName() : $fromCurrency->getName() . '/' . $toCurrency->getName();
+        $ratioList[$ratioKey] = $ratio;
         $this->storage->saveRatioList($ratioList);
 
         $savedAt = new \DateTime();
         $event = new SaveRatioEvent(
-            $this->getReferenceCurrencyCode(),
-            $currencyCode,
+            $fromCurrency->getName(),
+            $toCurrency->getName(),
             $ratio,
             $savedAt
         );
@@ -83,22 +102,27 @@ class PairManager
 
     /**
      * @inheritdoc
+     * @throws \Tbbc\MoneyBundle\MoneyException
      */
-    public function getRelativeRatio($referenceCurrencyCode, $currencyCode)
+    public function getRelativeRatio($currencyFrom, $currencyTo, $isStrict = false)
     {
-        $currency = new Currency($currencyCode);
-        $referenceCurrency = new Currency($referenceCurrencyCode);
-        if ($currencyCode === $referenceCurrencyCode) {
-            return (float) 1;
+        $currency = CurrencyUtils::isCurrency($currencyFrom) ? $currencyFrom : new Currency($currencyFrom);
+        $targetCurrency = CurrencyUtils::isCurrency($currencyTo) ? $currencyTo : new Currency($currencyTo);
+        if ($targetCurrency->equals($currency)) {
+            return 1.;
         }
         $ratioList = $this->storage->loadRatioList();
-        if (!array_key_exists($currency->getName(), $ratioList)) {
-            throw new MoneyException("unknown ratio for currency $currencyCode");
+        $currencyCodePair = $currency->getName() . '/' . $targetCurrency->getName();
+        if (!array_key_exists($currencyCodePair, $ratioList)) {
+            if (!array_key_exists($targetCurrency->getName(), $ratioList)
+                or !array_key_exists($currency->getName(), $ratioList)
+                or $isStrict
+            ) {
+                throw new MoneyException('unknown ratio for currency ' . $currencyFrom . ' to ' . $currencyTo);
+            }
+            return $ratioList[$targetCurrency->getName()] / $ratioList[$currency->getName()];
         }
-        if (!array_key_exists($referenceCurrency->getName(), $ratioList)) {
-            throw new MoneyException("unknown ratio for currency $referenceCurrencyCode");
-        }
-        return $ratioList[$currency->getName()] / $ratioList[$referenceCurrency->getName()];
+        return $ratioList[$currencyCodePair];
     }
 
     /**
@@ -114,7 +138,15 @@ class PairManager
      */
     public function getReferenceCurrencyCode()
     {
-        return $this->referenceCurrencyCode;
+        return $this->referenceCurrency->getName();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getReferenceCurrency()
+    {
+        return $this->referenceCurrency;
     }
 
     /**
@@ -135,19 +167,18 @@ class PairManager
 
     /**
      * @inheritdoc
+     * @throws \Tbbc\MoneyBundle\MoneyException
      */
     public function saveRatioListFromRatioProvider()
     {
         if (!$this->ratioProvider) {
-            throw new MoneyException("no ratio provider defined");
+            throw new MoneyException('no ratio provider defined');
         }
         foreach ($this->getCurrencyCodeList() as $currencyCode) {
-            if ($currencyCode != $this->getReferenceCurrencyCode()) {
+            if ($currencyCode !== $this->getReferenceCurrencyCode()) {
                 $ratio = $this->ratioProvider->fetchRatio($this->getReferenceCurrencyCode(), $currencyCode);
                 $this->saveRatio($currencyCode, $ratio);
             }
         }
     }
-
-
 }

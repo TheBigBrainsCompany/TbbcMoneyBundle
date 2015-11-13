@@ -16,9 +16,9 @@ class DoctrineStorageRatio
      */
     private $ratio;
     
-    public function __construct($code = null, $ratio = null) 
+    public function __construct($currencyCode = null, $ratio = null)
     {
-        $this->currencyCode = $code;
+        $this->currencyCode = $currencyCode;
         $this->ratio = $ratio;
     }
 
@@ -36,7 +36,7 @@ class DoctrineStorageRatio
      * Set code
      *
      * @param  string $currencyCode
-     * @return Currency
+     * @return DoctrineStorageRatio
      */
     public function setCurrencyCode($currencyCode)
     {
@@ -69,7 +69,7 @@ class DoctrineStorageRatio
      * Set ratio
      *
      * @param  float    $ratio
-     * @return Currency
+     * @return DoctrineStorageRatio
      */
     public function setRatio($ratio)
     {

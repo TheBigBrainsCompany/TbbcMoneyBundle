@@ -11,7 +11,7 @@ interface StorageInterface {
     /**
      * save ratio list in a storage
      *
-     * @param $ratioList
+     * @param array $ratioList of type array("USD/EUR" => 1.25)
      */
     public function saveRatioList($ratioList);
 
@@ -19,7 +19,7 @@ interface StorageInterface {
      * load ratioList from the storage
      *
      * @param bool $force
-     * @return array of type array("EUR"=>1, "USD" => 1.25)
+     * @return array of type array("USD/EUR" => 1.25)
      */
     public function loadRatioList($force = false);
 }

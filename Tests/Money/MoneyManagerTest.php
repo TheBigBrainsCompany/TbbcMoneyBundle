@@ -3,7 +3,6 @@ namespace Tbbc\MoneyBundle\Tests\Money;
 
 use Money\Money;
 use Tbbc\MoneyBundle\Money\MoneyManager;
-use Tbbc\MoneyBundle\MoneyException;
 
 /**
  * @group moneymanager
@@ -39,4 +38,9 @@ class MoneyManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(253, $money->getAmount());
     }
 
+    public function testCreateFloatFromMoney()
+    {
+        $money = Money::EUR(250);
+        $this->assertEquals(2.5, $this->manager->createFloatFromMoney($money));
+    }
 }

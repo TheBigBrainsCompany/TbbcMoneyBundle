@@ -1,10 +1,6 @@
 <?php
 namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 
-use Money\Money;
-use Tbbc\MoneyBundle\MoneyException;
-use Tbbc\MoneyBundle\Pair\PairManager;
-use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 
 /**

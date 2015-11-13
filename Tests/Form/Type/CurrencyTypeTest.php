@@ -7,7 +7,6 @@
 namespace Tbbc\MoneyBundle\Tests\Form\Type;
 
 use Money\Currency;
-use Symfony\Component\Form\Test\FormIntegrationTestCase;
 use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
