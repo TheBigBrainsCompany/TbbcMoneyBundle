@@ -10,19 +10,16 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
  */
 class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
 {
-    /** @var  PairManagerInterface */
-    protected $pairManager;
+    protected $currency;
 
     /**
      * SimpleMoneyToArrayTransformer constructor.
      *
-     * @param PairManagerInterface $pairManager
-     * @param int                  $decimals
+     * @param int $decimals
      */
-    public function __construct(PairManagerInterface $pairManager, $decimals)
+    public function __construct($decimals)
     {
         parent::__construct($decimals);
-        $this->pairManager = $pairManager;
     }
 
     /**
@@ -45,9 +42,17 @@ class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
     public function reverseTransform($value)
     {
         if (is_array($value)) {
-            $value["tbbc_currency"] = new Currency($this->pairManager->getReferenceCurrencyCode());
+            $value["tbbc_currency"] = new Currency($this->currency);
         }
 
         return parent::reverseTransform($value);
+    }
+
+    /**
+     * @param string $currency
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 }
