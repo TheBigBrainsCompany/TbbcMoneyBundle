@@ -22,7 +22,7 @@
         "symfony/form": "~2.1",
         "symfony/twig-bundle": "~2.1",
         "symfony/console": "~2.1",
-        "symfony/dom-crawler": "~2.0"
+        "symfony/dom-crawler": "~2.0|~3.0"
     },
     "require-dev": {
         "symfony/class-loader": "~2.1",
