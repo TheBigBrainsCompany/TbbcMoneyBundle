@@ -31,7 +31,7 @@ class MoneyType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tbbc_amount', new TextType())
+            ->add('tbbc_amount', get_class(new TextType()))
             ->add('tbbc_currency', $options['currency_type'])
             ->addModelTransformer(
                 new MoneyToArrayTransformer($this->decimals)

@@ -7,6 +7,7 @@
 namespace Tbbc\MoneyBundle\Tests\Form\Type;
 
 use Money\Currency;
+use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
 use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 use Tbbc\MoneyBundle\Form\Type\MoneyType;
@@ -16,22 +17,16 @@ use Money\Money;
 class MoneyTypeTest
     extends TypeTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-    }
+
+    private $currencyTypeClass;
+    private $moneyTypeClass;
 
     public function testBindValid()
     {
-        $currencyType = new CurrencyType(
-            array("EUR", "USD"),
-            "EUR"
-        );
-        $moneyType = new MoneyType(2);
-        $form = $this->factory->create($moneyType, null, array(
-            "currency_type" => $currencyType,
+        $form = $this->factory->create($this->moneyTypeClass, null, array(
+            "currency_type" => $this->currencyTypeClass,
         ));
-        $form->bind(array(
+        $form->submit(array(
             "tbbc_currency" => array("tbbc_name"=>'EUR'),
             "tbbc_amount" => '12'
         ));
@@ -41,15 +36,10 @@ class MoneyTypeTest
     public function testBindDecimalValid()
     {
         \Locale::setDefault("fr_FR");
-        $currencyType = new CurrencyType(
-            array("EUR", "USD"),
-            "EUR"
-        );
-        $moneyType = new MoneyType(2);
-        $form = $this->factory->create($moneyType, null, array(
-            "currency_type" => $currencyType,
+        $form = $this->factory->create($this->moneyTypeClass, null, array(
+            "currency_type" => $this->currencyTypeClass,
         ));
-        $form->bind(array(
+        $form->submit(array(
             "tbbc_currency" => array("tbbc_name"=>'EUR'),
             "tbbc_amount" => '12,5'
         ));
@@ -59,15 +49,10 @@ class MoneyTypeTest
     public function testGreaterThan1000Valid()
     {
         \Locale::setDefault("fr_FR");
-        $currencyType = new CurrencyType(
-            array("EUR", "USD"),
-            "EUR"
-        );
-        $moneyType = new MoneyType(2);
-        $form = $this->factory->create($moneyType, null, array(
-            "currency_type" => $currencyType,
+        $form = $this->factory->create($this->moneyTypeClass, null, array(
+            "currency_type" => $this->currencyTypeClass,
         ));
-        $form->bind(array(
+        $form->submit(array(
             "tbbc_currency" => array("tbbc_name"=>'EUR'),
             "tbbc_amount" => '1 252,5'
         ));
@@ -77,18 +62,26 @@ class MoneyTypeTest
     public function testSetData()
     {
         \Locale::setDefault("fr_FR");
-        $currencyType = new CurrencyType(
-            array("EUR", "USD"),
-            "EUR"
-        );
-        $moneyType = new MoneyType(2);
-        $form = $this->factory->create($moneyType, null, array(
-            "currency_type" => $currencyType,
+        $form = $this->factory->create($this->moneyTypeClass, null, array(
+            "currency_type" => $this->currencyTypeClass,
         ));
         $form->setData(Money::EUR(120));
         $formView = $form->createView();
 
         $this->assertEquals("1,20", $formView->children["tbbc_amount"]->vars["value"]);
+    }
+
+    protected function getExtensions()
+    {
+        $currencyType = new CurrencyType(array("EUR", "USD"), "EUR");
+        $moneyType =  new MoneyType(2);
+        $this->currencyTypeClass = get_class($currencyType);
+        $this->moneyTypeClass = get_class($moneyType);
+        return array(
+            new PreloadedExtension(
+                array($currencyType,$moneyType), array()
+            )
+        );
     }
 
 }

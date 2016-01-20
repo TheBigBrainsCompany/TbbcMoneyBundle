@@ -7,6 +7,7 @@
 namespace Tbbc\MoneyBundle\Tests\Form\Type;
 
 use Money\Currency;
+use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
 use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 use Symfony\Component\Form\Test\TypeTestCase;
@@ -17,31 +18,22 @@ use Tbbc\MoneyBundle\Pair\PairManager;
 class SimpleMoneyTypeTest
     extends TypeTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->pairManager = $this->getMockBuilder('Tbbc\MoneyBundle\Pair\PairManager')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->pairManager->expects($this->any())
-            ->method('getReferenceCurrencyCode')
-            ->will($this->returnValue("EUR"));
-    }
+    private $pairManager;
+    private $simpleMoneyTypeClass;
 
     public function testBindValid()
     {
-        $moneyType = new SimpleMoneyType($this->pairManager, 2);
-        $form = $this->factory->create($moneyType, null, array());
-        $form->bind(array(
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
+        $form->submit(array(
             "tbbc_amount" => '12'
         ));
         $this->assertEquals(Money::EUR(1200), $form->getData());
     }
     public function testBindValidDecimals()
     {
-        $moneyType = new SimpleMoneyType($this->pairManager, 3);
-        $form = $this->factory->create($moneyType, null, array());
-        $form->bind(array(
+        \Locale::setDefault("fr_FR");
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
+        $form->submit(array(
             "tbbc_amount" => '1,2'
         ));
         $this->assertEquals(Money::EUR(1200), $form->getData());
@@ -50,9 +42,8 @@ class SimpleMoneyTypeTest
     public function testBindDecimalValid()
     {
         \Locale::setDefault("fr_FR");
-        $moneyType = new SimpleMoneyType($this->pairManager, 2);
-        $form = $this->factory->create($moneyType, null, array());
-        $form->bind(array(
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
+        $form->submit(array(
             "tbbc_amount" => '12,5'
         ));
         $this->assertEquals(Money::EUR(1250), $form->getData());
@@ -61,9 +52,8 @@ class SimpleMoneyTypeTest
     public function testGreaterThan1000Valid()
     {
         \Locale::setDefault("fr_FR");
-        $moneyType = new SimpleMoneyType($this->pairManager, 2);
-        $form = $this->factory->create($moneyType, null, array());
-        $form->bind(array(
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
+        $form->submit(array(
             "tbbc_amount" => '1 252,5'
         ));
         $this->assertEquals(Money::EUR(125250), $form->getData());
@@ -72,12 +62,36 @@ class SimpleMoneyTypeTest
     public function testSetData()
     {
         \Locale::setDefault("fr_FR");
-        $moneyType = new SimpleMoneyType($this->pairManager, 2);
-        $form = $this->factory->create($moneyType, null, array());
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
         $form->setData(Money::EUR(120));
         $formView = $form->createView();
 
         $this->assertEquals("1,20", $formView->children["tbbc_amount"]->vars["value"]);
+    }
+
+    protected function getExtensions()
+    {
+        //This is probably not ideal, but I'm not sure how to set up the pair manager
+        // with different decimals for different tests in Symfony 3.0
+        $decimals = 2;
+        if($this->getName() === "testBindValidDecimals")
+            $decimals = 3;
+
+        $this->pairManager = $this->getMockBuilder('Tbbc\MoneyBundle\Pair\PairManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->pairManager->expects($this->any())
+            ->method('getReferenceCurrencyCode')
+            ->will($this->returnValue("EUR"));
+
+        $simpleMoneyType = new SimpleMoneyType($this->pairManager, $decimals);
+        $this->simpleMoneyTypeClass = get_class($simpleMoneyType);
+
+        return array(
+            new PreloadedExtension(
+                array($simpleMoneyType), array()
+            )
+        );
     }
 
 }
