@@ -12,8 +12,9 @@ framework:
 
 doctrine:
     dbal:
-        driver:   'pdo_sqlite'
+        driver:   "pdo_sqlite"
         memory:   true
+        path:     ":memory:"
     orm:
         entity_managers:
             default:
