@@ -14,7 +14,7 @@ use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 class CurrencyTypeTest
     extends TypeTestCase
 {
-    private $currencyTypeClass;
+    private $currencyTypeClass = 'Tbbc\MoneyBundle\Form\Type\CurrencyType';
 
     public function testBindValid()
     {
@@ -35,11 +35,9 @@ class CurrencyTypeTest
 
     protected function getExtensions()
     {
-        $currencyType = new CurrencyType(array("EUR", "USD"), "EUR");
-        $this->currencyTypeClass = get_class($currencyType);
         return array(
             new PreloadedExtension(
-                array($currencyType), array()
+                array(new CurrencyType(array("EUR", "USD"), "EUR")), array()
             )
         );
     }

@@ -31,7 +31,7 @@ class SimpleMoneyType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tbbc_amount', get_class(new TextType()))
+            ->add('tbbc_amount', 'Symfony\Component\Form\Extension\Core\Type\TextType')
             ->addModelTransformer(
                 new SimpleMoneyToArrayTransformer($this->pairManager, $this->decimals)
             );

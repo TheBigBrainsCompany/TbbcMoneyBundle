@@ -38,7 +38,7 @@ class CurrencyType
         foreach ($options["currency_choices"] as $currencyCode) {
             $choiceList[$currencyCode] = $currencyCode;
         }
-        $builder->add('tbbc_name', get_class(new ChoiceType()), array(
+        $builder->add('tbbc_name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
             "choices" => $choiceList,
             "preferred_choices" => array($options["reference_currency"])
         ));

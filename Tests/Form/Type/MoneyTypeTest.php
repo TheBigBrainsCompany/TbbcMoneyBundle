@@ -18,8 +18,8 @@ class MoneyTypeTest
     extends TypeTestCase
 {
 
-    private $currencyTypeClass;
-    private $moneyTypeClass;
+    private $currencyTypeClass = 'Tbbc\MoneyBundle\Form\Type\CurrencyType';
+    private $moneyTypeClass = 'Tbbc\MoneyBundle\Form\Type\MoneyType';
 
     public function testBindValid()
     {
@@ -73,13 +73,9 @@ class MoneyTypeTest
 
     protected function getExtensions()
     {
-        $currencyType = new CurrencyType(array("EUR", "USD"), "EUR");
-        $moneyType =  new MoneyType(2);
-        $this->currencyTypeClass = get_class($currencyType);
-        $this->moneyTypeClass = get_class($moneyType);
         return array(
             new PreloadedExtension(
-                array($currencyType,$moneyType), array()
+                array(new CurrencyType(array("EUR", "USD"), "EUR"),new MoneyType(2)), array()
             )
         );
     }

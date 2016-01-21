@@ -19,7 +19,7 @@ class SimpleMoneyTypeTest
     extends TypeTestCase
 {
     private $pairManager;
-    private $simpleMoneyTypeClass;
+    private $simpleMoneyTypeClass = 'Tbbc\MoneyBundle\Form\Type\SimpleMoneyType';
 
     public function testBindValid()
     {
@@ -84,12 +84,9 @@ class SimpleMoneyTypeTest
             ->method('getReferenceCurrencyCode')
             ->will($this->returnValue("EUR"));
 
-        $simpleMoneyType = new SimpleMoneyType($this->pairManager, $decimals);
-        $this->simpleMoneyTypeClass = get_class($simpleMoneyType);
-
         return array(
             new PreloadedExtension(
-                array($simpleMoneyType), array()
+                array(new SimpleMoneyType($this->pairManager, $decimals)), array()
             )
         );
     }
