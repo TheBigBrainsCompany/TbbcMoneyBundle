@@ -4,7 +4,7 @@ namespace Tbbc\MoneyBundle\Tests\Pair;
 use Money\Money;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManager;
-use Tbbc\MoneyBundle\Pair\RatioProvider\YahooFinanceRatioProvider;
+use Tbbc\MoneyBundle\Pair\RatioProvider\StaticRatioProvider;
 use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 
 /**
@@ -106,19 +106,24 @@ class PairManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testRatioProvider()
     {
-        $provider = new YahooFinanceRatioProvider();
+        //Provider
+        $provider = new StaticRatioProvider();
+        $provider->setRatio('EUR', 'USD', 1.08);
+        $provider->setRatio('EUR', 'CAD', 1.54);
+
+        //Store rates in manager
         $this->manager->setRatioProvider($provider);
         $this->manager->saveRatioListFromRatioProvider();
-        $ratio = $this->manager->getRelativeRatio("EUR", "USD");
-        $this->assertTrue($ratio > 0.3);
-        $this->assertTrue($ratio < 3);
-        $referenceRatio = $provider->fetchRatio("EUR", "CAD");
-        //The currency exchange rate are updated every seconds
-        //The round is a workaround to negate the variation between the two ratio fetches
-        $this->assertEquals(
-            ROUND($referenceRatio, 2),
-            ROUND($this->manager->getRelativeRatio("EUR", "CAD"),2)
-        );
+
+        //Check saved rates
+        $this->assertSame(1.08, $this->manager->getRelativeRatio("EUR", "USD"));
+        $this->assertSame(1.54, $this->manager->getRelativeRatio("EUR", "CAD"));
+
+        //Change provider rates and make sure stored rates are not touched
+        $provider->setRatio('EUR', 'USD', 2.2);
+        $provider->setRatio('EUR', 'CAD', 1.83);
+        $this->assertSame(1.08, $this->manager->getRelativeRatio("EUR", "USD"));
+        $this->assertSame(1.54, $this->manager->getRelativeRatio("EUR", "CAD"));
     }
 
     /**
