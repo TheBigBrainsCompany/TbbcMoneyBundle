@@ -15,7 +15,7 @@ class StaticRatioProvider implements RatioProviderInterface
     /**
      * @var array
      */
-    private $ratios = [];
+    private $ratios = array();
 
     /**
      * @param string $referenceCurrencyCode
