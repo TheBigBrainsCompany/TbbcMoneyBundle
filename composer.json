@@ -17,18 +17,18 @@
     "require": {
         "php": ">=5.3.2",
         "ext-curl" : "*",
-        "symfony/framework-bundle": "~2.1",
+        "symfony/framework-bundle": "~2.3",
         "mathiasverraes/money": "1.2.*",
-        "symfony/form": "~2.1",
-        "symfony/twig-bundle": "~2.1",
-        "symfony/console": "~2.1",
-        "symfony/dom-crawler": "~2.0|~3.0"
+        "symfony/form": "~2.3",
+        "symfony/twig-bundle": "~2.3",
+        "symfony/console": "~2.3",
+        "symfony/dom-crawler": "~2.3|~3.0"
     },
     "require-dev": {
-        "symfony/class-loader": "~2.1",
-        "symfony/yaml": "~2.1",
-        "symfony/finder": "~2.1",
-        "symfony/browser-kit": "~2.1",
+        "symfony/class-loader": "~2.3",
+        "symfony/yaml": "~2.3",
+        "symfony/finder": "~2.3",
+        "symfony/browser-kit": "~2.3",
         "beberlei/DoctrineExtensions": "0.3.*",
         "ext-sqlite3": "*",
         "doctrine/doctrine-bundle": "~1.1",
