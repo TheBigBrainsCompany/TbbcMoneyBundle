@@ -5,12 +5,34 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - 7.0
 
-before_script:
+env:
+  - SYMFONY_VERSION=2.3.* #php >=5.3.3
+  - SYMFONY_VERSION=2.7.* #php >=5.3.9
+  - SYMFONY_VERSION=2.8.* #php >=5.3.9
+  #- SYMFONY_VERSION=3.0.* #php >=5.5.9
+
+before_install:
+  - export SYMFONY_DEPRECATIONS_HELPER=weak #set this to "strict" to make build fail on deprecation messages
   - composer self-update
-  - composer install --dev --prefer-source
+  - mv composer.json composer.json.bck
+  - sed 's/${env:SYMFONY_VERSION}/'$SYMFONY_VERSION'/g' composer-template.json > composer.json #replace composer dependencies with actual symfony version
 
-script: ./vendor/bin/phpunit --coverage-text
+install:
+  - composer update --prefer-dist --no-interaction
+
+after_install:
+  - mv composer.json.bck composer.json
+
+script: vendor/bin/phpunit --coverage-text
+
+matrix:
+  exclude:
+    - php: 5.3
+      env: SYMFONY_VERSION=3.0.*
+    - php: 5.4
+      env: SYMFONY_VERSION=3.0.*
 
 notifications:
   email:
