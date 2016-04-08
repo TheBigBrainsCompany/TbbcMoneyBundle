@@ -62,15 +62,8 @@ Table of contents
 Installation
 ------------
 
-Using [Composer](http://getcomposer.org/), just `$ composer require tbbc/money-bundle` package or:
-
-```javascript
-{
-  "require": {
-    "tbbc/money-bundle": "dev-master"
-  }
-}
-```
+Use [Composer](http://getcomposer.org/) and install with  
+`$ composer require tbbc/money-bundle`
 
 Then add the bundle in AppKernel :
 
@@ -79,7 +72,7 @@ Then add the bundle in AppKernel :
     {
         $bundles = array(
             // ...
-            new \Tbbc\MoneyBundle\TbbcMoneyBundle(),
+            new Tbbc\MoneyBundle\TbbcMoneyBundle(),
         );
     }
 ```
