@@ -15,9 +15,12 @@ class MoneyFormatter
 {
     protected $decimals;
 
-    public function __construct($decimals = 2)
+    protected $useHardSpace;
+
+    public function __construct($decimals = 2, $useHardSpace = false)
     {
         $this->decimals = $decimals;
+        $this->useHardSpace = $useHardSpace;
     }
 
     protected function getDefaultNumberFormatter($currencyCode, $locale = null)
@@ -49,7 +52,9 @@ class MoneyFormatter
         if (!($numberFormatter instanceof \NumberFormatter)) {
             $numberFormatter = $this->getDefaultNumberFormatter($money->getCurrency()->getName(), $locale);
         }
-        return $numberFormatter->formatCurrency($this->asFloat($money), $money->getCurrency()->getName());
+        return $this->ensureCorrectSpace(
+            $numberFormatter->formatCurrency($this->asFloat($money), $money->getCurrency()->getName())
+        );
     }
 
     /**
@@ -68,7 +73,7 @@ class MoneyFormatter
         $amount = $this->formatAmount($money, $decPoint, $thousandsSep);
         $price = $amount . " " . $symbol;
 
-        return $price;
+        return $this->ensureCorrectSpace($price);
     }
 
     /**
@@ -86,7 +91,7 @@ class MoneyFormatter
         $amount = $this->asFloat($money);
         $amount = number_format($amount, $this->decimals, $decPoint, $thousandsSep);
 
-        return $amount;
+        return $this->ensureCorrectSpace($amount);
     }
 
     /**
@@ -146,5 +151,20 @@ class MoneyFormatter
     public function getCurrency(Money $money)
     {
         return $money->getCurrency();
+    }
+
+    /**
+     * @param string $string
+     * @return string
+     */
+    protected function ensureCorrectSpace($string)
+    {
+        if ($this->useHardSpace) {
+            $softSpace = ' ';
+            $hardSpace = ' ';
+            $string = str_replace($softSpace, $hardSpace, $string);
+        }
+
+        return $string;
     }
 }

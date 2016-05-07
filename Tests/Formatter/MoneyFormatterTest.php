@@ -117,4 +117,12 @@ class MoneyFormatterTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Money\Currency', $value);
         $this->assertEquals(new Currency('EUR'), $value);
     }
+
+    public function testUseHardSpace()
+    {
+        $formatter = new MoneyFormatter(2, true);
+        $value = $formatter->formatMoney($this->inputMoney);
+        $this->assertEquals('1 234 567,89 €', $value);
+        $this->assertNotEquals('1 234 567,89 €', $value);
+    }
 }

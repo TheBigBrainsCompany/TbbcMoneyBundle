@@ -87,6 +87,9 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->booleanNode('hard_space')
+                    ->defaultValue(false)
+                ->end()
             ->end()
         ;
     }
