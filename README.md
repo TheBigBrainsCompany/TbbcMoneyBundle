@@ -10,7 +10,11 @@ a symfony2 project.
 
 This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
 
-This bundle is stable and tested.
+:zap::zap: **WARNING !** watch out for the symfony versions and the bundle versions 
+
+* This bundle is stable and tested for symfony ~2.3 (use branch 2.x or tags v2.*)
+* This bundle is in alpha state for symfony 3.x (use master or future tags v3.*)
+* There is some BC Breaks from 2.x to 3.x versions. See UPGRADE2-3.md
 
 Quick Start
 -----------
