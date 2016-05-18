@@ -40,6 +40,7 @@ class TbbcMoneyExtension extends Extension
             'decimals'  => 'tbbc_money.decimals',
             'enable_pair_history'  => 'tbbc_money.enable_pair_history',
             'ratio_provider'  => 'tbbc_money.ratio_provider',
+            'hard_space' => 'tbbc_money.hard_space',
         ));
         
         $container->setParameter('tbbc_money.pair.storage', $config['storage']);

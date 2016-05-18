@@ -536,6 +536,7 @@ in your config.yml, you can :
 
 * select the templating engine to use. By default, only twig is loaded.
 * define the decimals count after a unit (ex : 12.25€ : 2 decimals ; 11.5678€ : 4 decimals)
+* define to use hard space or not. If true the money string will not line break.
 
 ```yaml
 tbbc_money:
@@ -544,6 +545,7 @@ tbbc_money:
     decimals: 2
     enable_pair_history: true
     ratio_provider: tbbc_money.ratio_provider.yahoo_finance
+    hard_space: true
 ```
 
 
