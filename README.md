@@ -94,9 +94,8 @@ In your config.yml, add the form fields presentations
 
 ```yaml
 twig:
-    form:
-        resources:
-            - 'TbbcMoneyBundle:Form:fields.html.twig'
+    form_themes:
+        - 'TbbcMoneyBundle:Form:fields.html.twig'
 ```
 
 
