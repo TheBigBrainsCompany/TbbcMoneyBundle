@@ -6,15 +6,15 @@ TbbcMoneyBundle
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6/big.png)](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6)
 
 This bundle is used to integrate the [Money library from mathiasverraes](https://github.com/mathiasverraes/money) into
-a symfony2 project.
+a Symfony2 project.
 
 This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
 
-:zap::zap: **WARNING !** watch out for the symfony versions and the bundle versions 
+:zap::zap: **WARNING !** watch out for the Symfony versions and the bundle versions 
 
-* This bundle is stable and tested for symfony ~2.3 (use branch 2.x or tags v2.*)
-* This bundle is in alpha state for symfony 3.x (use master or future tags v3.*)
-* There is some BC Breaks from 2.x to 3.x versions. See UPGRADE2-3.md
+* This bundle is stable and tested for Symfony ~2.3 (use branch 2.x or tags v2.*)
+* This bundle is in alpha state for Symfony 3.x (use master or future tags v3.*)
+* There are some BC breaks from 2.x to 3.x versions. See [UPGRADE2-3.md](UPGRADE2-3.md)
 
 Quick Start
 -----------
@@ -22,7 +22,7 @@ Quick Start
 ```php
 use Money\Money;
 
-// a money library
+// the money library
 $fiveEur = Money::EUR(500);
 $tenEur = $fiveEur->add($fiveEur);
 list($part1, $part2, $part3) = $tenEur->allocate(array(1, 1, 1));
@@ -31,11 +31,11 @@ assert($part2->equals(Money::EUR(333)));
 assert($part3->equals(Money::EUR(333)));
 
 // a service that stores conversion ratios
-$pairManager = $this->get("tbbc_money.pair_manager");
+$pairManager = $this->get('tbbc_money.pair_manager');
 $usd = $pairManager->convert($tenEur, 'USD');
 
 // a form integration
-$formBuilder->add("price", "tbbc_money");
+$formBuilder->add('price', 'tbbc_money');
 ```
 
 Features
@@ -49,7 +49,7 @@ Features
 * Console commands for different operations
 * A configuration parser for specifying website used currencies
 * Access to the history of currency ratio fetched
-* money formatter i18n
+* Money formatter i18n
 
 Table of contents
 -----------------
@@ -81,7 +81,7 @@ Then add the bundle in AppKernel :
     }
 ```
 
-in your config.yml, add the currencies you want to use and the reference currency.
+In your config.yml, add the currencies you want to use and the reference currency.
 
 ```yaml
 tbbc_money:
@@ -140,18 +140,18 @@ $form = $this->createFormBuilder($testMoney)
 ```
 
 
-### saving moneys in doctrine
+### saving moneys in Doctrine
 
 #### Solution 1 : two fields in the database
 
-Note that there is 2 columns in db : $priceAmount and $priceCurrency and only one
+Note that there are 2 columns in the DB table : $priceAmount and $priceCurrency and only one
 getter/setter : getPrice and setPrice.
 
-The get/setPrice are dealing with these two columns transparently.
+The get/setPrice methods are dealing with these two columns transparently.
 
 * Advantage : your DB is clean and you can do sql sum, group by, sort,... with the amount and the currency
 in two different columns in your db
-* Default : it is ugly in the Entity.
+* Disadvantage : it is ugly in the entity.
 
 ```php
 <?php
@@ -235,17 +235,17 @@ class TestMoney
 ```
 
 
-#### Solution 2 : use doctrine type
+#### Solution 2 : use Doctrine type
 
-There is only one string column in your DB. The money object is manually serialized by
-the new doctrine type.
+There is only one string column in your DB table. The money object is manually serialized by
+the new Doctrine type.
 
 1.25€ is serialized in your DB by 'EUR 125'. *This format is stable. It won't change in future releases.*.
 
-The new doctrine type name is "money".
+The new Doctrine type name is "money".
 
 * Advantage : The entity is easy to create and use
-* Default : it is more difficult to directly request de db in SQL.
+* Disadvantage : it is more difficult to directly request the db in SQL.
 
 ```php
 <?php
@@ -421,10 +421,10 @@ tbbc_money:
 
 ### Create your own ratio provider
 
-A ratio provider is a service that implements the Tbbc\MoneyBundle\Pair\RatioProviderInterface.
-I let you read the PHP doc of the interface to understand how to implement a new ratio provider.
+A ratio provider is a service that implements the `Tbbc\MoneyBundle\Pair\RatioProviderInterface`.
+I recommend that you read the PHP doc of the interface to understand how to implement a new ratio provider.
 
-The the new ratio provider has to be registered as a service.
+The new ratio provider has to be registered as a service.
 
 To use the new ratio provider, you should set the service to use in the config.yml by giving the
 service name.
@@ -445,9 +445,9 @@ Add to your crontab :
 1 0 * * * /my_app_dir/app/console tbbc:money:ratio-fetch > /dev/null
 ```
 
-### MoneyManager : create a money from a float
+### MoneyManager : create a money object from a float
 
-Create a money from a float can be a bit tricky because of rounding issues.
+Create a money object from a float can be a bit tricky because of rounding issues.
 
 ```php
 <?php
@@ -461,7 +461,7 @@ $this->assertEquals(250, $money->getAmount());
 
 Doctrine is required to use this feature.
 
-In order to get the ratio history, you have to enable it in the configuration and to use doctrine.
+In order to get the ratio history, you have to enable it in the configuration and to use Doctrine.
 
 ```yaml
 tbbc_money:
@@ -470,7 +470,7 @@ tbbc_money:
     enable_pair_history: true
 ```
 
-then you can use the service :
+Then you can use the service :
 
 ```php
 $pairHistoryManager = $this->get("tbbc_money.pair_history_manager");
@@ -516,25 +516,25 @@ You can :
 * subclass the MoneyFormatter and rewrite the getDefaultNumberFormater method to set a application wide
 NumberFormatter
 
-Using the TbbcMoneyBundle without doctrine
+Using the TbbcMoneyBundle without Doctrine
 ------------------------------------------
 
-You have to disable the pair history service in order to use the TbbcMoneyBundle without doctrine.
+You have to disable the pair history service in order to use the TbbcMoneyBundle without Doctrine.
 
 ```
 tbbc_money:
     enable_pair_history: true
 ```
 
-Note : you can imagine to code your own PairHistoryManager for mongodb or propel, it is very easy to do. Don't
+Note : you can imagine to code your own PairHistoryManager for MongoDB or Propel, it is very easy to do. Don't
 hesitate to submit a PR with your code and your tests.
 
 Optimizations
 -------------
 
-in your config.yml, you can :
+In your config.yml, you can :
 
-* select the templating engine to use. By default, only twig is loaded.
+* select the templating engine to use. By default, only Twig is loaded.
 * define the decimals count after a unit (ex : 12.25€ : 2 decimals ; 11.5678€ : 4 decimals)
 
 ```yaml
@@ -559,7 +559,7 @@ Requirements
 ------------
 
 * PHP 5.3+
-* Symfony 2.1 +
+* Symfony 2.1+
 
 Authors
 -------
@@ -578,10 +578,10 @@ what is functional :
 * integration of the money library
 * configuration parser
 * pairManager
-* travis-ci integration
+* Travis CI integration
 * form integration
-* twig presentation for forms
-* twig filters
+* Twig presentation for forms
+* Twig filters
 * commands for ratio creation and ratio display
 * automatic ratio fetch (with 2 ratio providers)
 * history of currency ratio
@@ -604,7 +604,7 @@ Versions
 2.6.0 : 2014/12/09
 
 * no BC Break
-* new : removed dependency to doctrine
+* new : removed dependency to Doctrine
 * fix : currencies with 0 decimals are allowed 
 
 2.5.0 : 2014/10/16
@@ -673,7 +673,7 @@ NumberFormatter class : http://www.php.net/manual/en/numberformatter.formatcurre
 
 1.3.0 : 16/07/2013
 
-* new : doctrine storage (thanks to @armetiz)
+* new : Doctrine storage (thanks to @armetiz)
 
 1.2.0 : 12/07/2013
 
