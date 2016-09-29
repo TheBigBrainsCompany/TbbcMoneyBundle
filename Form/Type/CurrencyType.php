@@ -60,16 +60,10 @@ class CurrencyType
         $resolver->setAllowedValues('reference_currency', $this->currencyCodeList);
     }
 
-    // BC for SF < 2.7
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $this->configureOptions($resolver);
-    }
-
     /**
      * @inheritdoc
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'tbbc_currency';
     }

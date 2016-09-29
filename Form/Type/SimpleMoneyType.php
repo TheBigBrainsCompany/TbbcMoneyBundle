@@ -40,7 +40,7 @@ class SimpleMoneyType
     /**
      * @inheritdoc
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'tbbc_simple_money';
     }
