@@ -552,6 +552,13 @@ tbbc_money:
     ratio_provider: tbbc_money.ratio_provider.yahoo_finance
 ```
 
+Note about older versions
+-------------------------
+
+- Examples above use symfony 3 syntax for console (`./bin/console`), for version 2.8 you should use `./app/console` instead.
+- "class" constant (e.g. `MoneyType::class`) is only supported since PHP 5.5, if you have older version, you should use full 
+class name instead (e.g. `Tbbc\MoneyBundle\Type\MoneyType`)
+
 
 Contributing
 ------------

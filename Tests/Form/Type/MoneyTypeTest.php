@@ -75,7 +75,7 @@ class MoneyTypeTest
     {
         return array(
             new PreloadedExtension(
-                array(new CurrencyType(array("EUR", "USD"), "EUR"),new MoneyType(2)), array()
+                array(new CurrencyType(array("EUR", "USD"), "EUR"), new MoneyType(2)), array()
             )
         );
     }
