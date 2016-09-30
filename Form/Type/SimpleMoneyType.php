@@ -2,7 +2,6 @@
 
 namespace Tbbc\MoneyBundle\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Tbbc\MoneyBundle\Form\DataTransformer\SimpleMoneyToArrayTransformer;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
