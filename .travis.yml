@@ -8,10 +8,8 @@ php:
   - 7.0
 
 env:
-  - SYMFONY_VERSION=2.3.* #php >=5.3.3
-  - SYMFONY_VERSION=2.7.* #php >=5.3.9
   - SYMFONY_VERSION=2.8.* #php >=5.3.9
-  #- SYMFONY_VERSION=3.0.* #php >=5.5.9
+  - SYMFONY_VERSION=3.0.* #php >=5.5.9
 
 before_install:
   - export SYMFONY_DEPRECATIONS_HELPER=weak #set this to "strict" to make build fail on deprecation messages

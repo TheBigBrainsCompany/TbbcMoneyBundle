@@ -6,8 +6,6 @@ use Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Form type for the Currency object.
@@ -38,7 +36,7 @@ class CurrencyType
         foreach ($options["currency_choices"] as $currencyCode) {
             $choiceList[$currencyCode] = $currencyCode;
         }
-        $builder->add('tbbc_name', new ChoiceType(), array(
+        $builder->add('tbbc_name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
             "choices" => $choiceList,
             "preferred_choices" => array($options["reference_currency"])
         ));
@@ -60,16 +58,10 @@ class CurrencyType
         $resolver->setAllowedValues('reference_currency', $this->currencyCodeList);
     }
 
-    // BC for SF < 2.7
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $this->configureOptions($resolver);
-    }
-
     /**
      * @inheritdoc
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'tbbc_currency';
     }

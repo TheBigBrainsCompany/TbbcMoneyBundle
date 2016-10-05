@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.9",
         "ext-curl" : "*",
         "symfony/framework-bundle": "${env:SYMFONY_VERSION}",
         "mathiasverraes/money": "1.2.*",
@@ -35,7 +35,7 @@
         "doctrine/orm": "~2.3",
         "phpunit/phpunit": "~4|~5",
         "phpunit/dbunit": "~1.4",
-        "symfony/phpunit-bridge": "~2.7|~3.0"
+        "symfony/phpunit-bridge": "${env:SYMFONY_VERSION}"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "~1.1",

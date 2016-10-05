@@ -2,7 +2,6 @@
 
 namespace Tbbc\MoneyBundle\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Tbbc\MoneyBundle\Form\DataTransformer\SimpleMoneyToArrayTransformer;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
@@ -31,7 +30,7 @@ class SimpleMoneyType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tbbc_amount', new TextType())
+            ->add('tbbc_amount', 'Symfony\Component\Form\Extension\Core\Type\TextType')
             ->addModelTransformer(
                 new SimpleMoneyToArrayTransformer($this->pairManager, $this->decimals)
             );
@@ -40,7 +39,7 @@ class SimpleMoneyType
     /**
      * @inheritdoc
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'tbbc_simple_money';
     }
