@@ -36,7 +36,7 @@ $pairManager = $this->get('tbbc_money.pair_manager');
 $usd = $pairManager->convert($tenEur, 'USD');
 
 // a form integration
-$formBuilder->add("price", MoneyType::class);
+$formBuilder->add('price', MoneyType::class);
 ```
 
 Features
