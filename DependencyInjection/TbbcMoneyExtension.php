@@ -41,7 +41,7 @@ class TbbcMoneyExtension extends Extension
             'enable_pair_history'  => 'tbbc_money.enable_pair_history',
             'ratio_provider'  => 'tbbc_money.ratio_provider',
         ));
-        
+
         $container->setParameter('tbbc_money.pair.storage', $config['storage']);
     }
 
@@ -60,5 +60,4 @@ class TbbcMoneyExtension extends Extension
             }
         }
     }
-
 }

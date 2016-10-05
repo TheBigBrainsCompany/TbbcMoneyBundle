@@ -1,15 +1,17 @@
 <?php
 namespace Tbbc\MoneyBundle\PairHistory;
 
-
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
 use Tbbc\MoneyBundle\Entity\RatioHistory;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
 
-class PairHistoryManager
-    implements PairHistoryManagerInterface
+/**
+ * Class PairHistoryManager
+ * @package Tbbc\MoneyBundle\PairHistory
+ */
+class PairHistoryManager implements PairHistoryManagerInterface
 {
     /**
      * @var EntityManager
@@ -21,23 +23,27 @@ class PairHistoryManager
      */
     protected $referenceCurrencyCode;
 
-    public function __construct(
-        EntityManager $em,
-        $referenceCurrencyCode
-    )
+    /**
+     * PairHistoryManager constructor.
+     *
+     * @param EntityManager $em
+     * @param string        $referenceCurrencyCode
+     */
+    public function __construct(EntityManager $em, $referenceCurrencyCode)
     {
         $this->em = $em;
         $this->referenceCurrencyCode = $referenceCurrencyCode;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getRatioAtDate($currencyCode, \DateTime $historyDate)
     {
         if ($currencyCode == $this->referenceCurrencyCode) {
-            return (float)1;
+            return 1.0;
         }
+
         $qb = $this->em->createQueryBuilder();
         $qb->select('rh')
             ->from('\Tbbc\MoneyBundle\Entity\RatioHistory', 'rh')
@@ -57,13 +63,14 @@ class PairHistoryManager
         if ($ratioHistory->getReferenceCurrencyCode() !== $this->referenceCurrencyCode) {
             throw new MoneyException('Reference currency code changed in history of currency ratio');
         }
+
         return $ratioHistory->getRatio();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function getRatioHistory($currencyCode, $startDate=null, $endDate=null)
+    public function getRatioHistory($currencyCode, $startDate = null, $endDate = null)
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('rh')
@@ -85,17 +92,19 @@ class PairHistoryManager
         $query = $qb->getQuery();
         $resultList = $query->getResult();
         $res = array();
-        foreach($resultList as $ratioHistory) {
+
+        foreach ($resultList as $ratioHistory) {
             $res[] = array(
                 'ratio' => $ratioHistory->getRatio(),
-                'savedAt' => $ratioHistory->getSavedAt()
+                'savedAt' => $ratioHistory->getSavedAt(),
             );
         }
+
         return $res;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function listenSaveRatioEvent(SaveRatioEvent $event)
     {
@@ -108,6 +117,4 @@ class PairHistoryManager
         $this->em->persist($ratioHistory);
         $this->em->flush();
     }
-
-
-} 
+}

@@ -1,5 +1,4 @@
 <?php
-
 namespace Tbbc\MoneyBundle\Pair\RatioProvider;
 
 use Money\Currency;
@@ -16,7 +15,7 @@ use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 class GoogleRatioProvider implements RatioProviderInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function fetchRatio($referenceCurrencyCode, $currencyCode)
     {
@@ -45,7 +44,7 @@ class GoogleRatioProvider implements RatioProviderInterface
     }
 
     /**
-     * @param          $units
+     * @param string   $units
      * @param Currency $referenceCurrency
      * @param Currency $currency
      * @return string The endpoint to get Currency conversion
@@ -69,7 +68,7 @@ class GoogleRatioProvider implements RatioProviderInterface
     {
         $crawler = new Crawler($response);
         $rawConvertedAmount = $crawler->filterXPath('//div[@id="currency_converter_result"]/span[@class="bld"]')->text();
-        $floatConvertedAmount = (float)$rawConvertedAmount;
+        $floatConvertedAmount = (float) $rawConvertedAmount;
 
         if (! $rawConvertedAmount || $floatConvertedAmount <= 0) {
             throw new MoneyException("Cannot parse response from google finance converter API");

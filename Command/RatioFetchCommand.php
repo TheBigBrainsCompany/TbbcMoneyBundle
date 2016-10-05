@@ -7,9 +7,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
-class RatioFetchCommand
-    extends ContainerAwareCommand
+/**
+ * Class RatioFetchCommand
+ * @package Tbbc\MoneyBundle\Command
+ */
+class RatioFetchCommand extends ContainerAwareCommand
 {
+    /**
+     * Configure command
+     */
     protected function configure()
     {
         $this
@@ -18,6 +24,13 @@ class RatioFetchCommand
             ->setDescription('fetch all needed ratio from a external ratio provider')
         ;
     }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         /** @var PairManagerInterface $pairManager */
@@ -29,7 +42,4 @@ class RatioFetchCommand
             $output->writeln("ERROR during fetch ratio : ".$e->getMessage());
         }
     }
-
-
-
 }

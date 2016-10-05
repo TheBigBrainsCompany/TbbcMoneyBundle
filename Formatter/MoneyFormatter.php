@@ -13,22 +13,19 @@ use Symfony\Component\Intl\Intl;
  */
 class MoneyFormatter
 {
+    /**
+     * @var int
+     */
     protected $decimals;
 
+    /**
+     * MoneyFormatter constructor.
+     *
+     * @param int $decimals
+     */
     public function __construct($decimals = 2)
     {
         $this->decimals = $decimals;
-    }
-
-    protected function getDefaultNumberFormatter($currencyCode, $locale = null)
-    {
-        if (is_null($locale)) {
-            $locale = \Locale::getDefault();
-        }
-        $numberFormatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
-        $numberFormatter->setTextAttribute(\NumberFormatter::CURRENCY_CODE, $currencyCode);
-        $numberFormatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $this->decimals);
-        return $numberFormatter;
     }
 
     /**
@@ -39,9 +36,10 @@ class MoneyFormatter
      *
      * @see http://www.php.net/manual/en/numberformatter.formatcurrency.php
      *
-     * @param Money $money
-     * @param null|string $locale
+     * @param Money                 $money
+     * @param null|string           $locale
      * @param null|\NumberFormatter $numberFormatter
+     *
      * @return string
      */
     public function localizedFormatMoney(Money $money, $locale = null, \NumberFormatter $numberFormatter = null)
@@ -49,6 +47,7 @@ class MoneyFormatter
         if (!($numberFormatter instanceof \NumberFormatter)) {
             $numberFormatter = $this->getDefaultNumberFormatter($money->getCurrency()->getName(), $locale);
         }
+
         return $numberFormatter->formatCurrency($this->asFloat($money), $money->getCurrency()->getName());
     }
 
@@ -66,7 +65,7 @@ class MoneyFormatter
     {
         $symbol = $this->formatCurrency($money);
         $amount = $this->formatAmount($money, $decPoint, $thousandsSep);
-        $price = $amount . " " . $symbol;
+        $price = $amount." ".$symbol;
 
         return $price;
     }
@@ -98,7 +97,7 @@ class MoneyFormatter
     public function asFloat(Money $money)
     {
         $amount = $money->getAmount();
-        $amount = (float)$amount;
+        $amount = (float) $amount;
         $amount = $amount / pow(10, $this->decimals);
 
         return $amount;
@@ -146,5 +145,23 @@ class MoneyFormatter
     public function getCurrency(Money $money)
     {
         return $money->getCurrency();
+    }
+
+    /**
+     * @param string $currencyCode
+     * @param string $locale
+     *
+     * @return \NumberFormatter
+     */
+    protected function getDefaultNumberFormatter($currencyCode, $locale = null)
+    {
+        if (is_null($locale)) {
+            $locale = \Locale::getDefault();
+        }
+        $numberFormatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
+        $numberFormatter->setTextAttribute(\NumberFormatter::CURRENCY_CODE, $currencyCode);
+        $numberFormatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $this->decimals);
+
+        return $numberFormatter;
     }
 }

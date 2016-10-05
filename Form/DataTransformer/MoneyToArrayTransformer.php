@@ -18,14 +18,19 @@ class MoneyToArrayTransformer implements DataTransformerInterface
     /** @var  int */
     protected $decimals;
 
+    /**
+     * MoneyToArrayTransformer constructor.
+     *
+     * @param int $decimals
+     */
     public function __construct($decimals = 2)
     {
-        $this->decimals = (int)$decimals;
+        $this->decimals = (int) $decimals;
         $this->sfTransformer = new MoneyToLocalizedStringTransformer($decimals, null, null, pow(10, $this->decimals));
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function transform($value)
     {
@@ -41,12 +46,12 @@ class MoneyToArrayTransformer implements DataTransformerInterface
 
         return array(
             'tbbc_amount' => $amount,
-            'tbbc_currency' => $value->getCurrency()
+            'tbbc_currency' => $value->getCurrency(),
         );
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function reverseTransform($value)
     {
@@ -60,13 +65,12 @@ class MoneyToArrayTransformer implements DataTransformerInterface
         if (!isset($value['tbbc_amount']) || !isset($value['tbbc_currency'])) {
             return null;
         }
-        $amount = (string)$value['tbbc_amount'];
+        $amount = (string) $value['tbbc_amount'];
         $amount = str_replace(" ", "", $amount);
         $amount = $this->sfTransformer->reverseTransform($amount);
         $amount = round($amount);
-        $amount = (int)$amount;
+        $amount = (int) $amount;
 
         return new Money($amount, $value['tbbc_currency']);
     }
-
 }

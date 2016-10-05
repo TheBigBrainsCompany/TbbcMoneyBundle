@@ -21,6 +21,7 @@ Quick Start
 
 ```php
 use Money\Money;
+use Tbbc\MoneyBundle\Form\Type\MoneyType;
 
 // the money library
 $fiveEur = Money::EUR(500);
@@ -35,7 +36,7 @@ $pairManager = $this->get('tbbc_money.pair_manager');
 $usd = $pairManager->convert($tenEur, 'USD');
 
 // a form integration
-$formBuilder->add('price', 'tbbc_money');
+$formBuilder->add("price", MoneyType::class);
 ```
 
 Features
@@ -120,22 +121,27 @@ $usd = $pair->convert($tenEur);
 $this->assertEquals(Money::USD(1250), $usd);
 ```
 
-### form integration
+### Form integration
 
-You have 3 new form types :
+You have 3 new form types (under Tbbc\MoneyBundle\Form\Type namespace):
 
-* tbbc_currency : asks for a currency among currencies defined in config.yml
-* tbbc_money : asks for an amount and a currency
-* tbbc_simple_money : asks for an amount and sets the currency to the reference currency set in config.yml
+* CurrencyType : asks for a currency among currencies defined in config.yml
+* MoneyType : asks for an amount and a currency
+* SimpleMoneyType : asks for an amount and sets the currency to the reference currency set in config.yml
 
 Example :
 
 ```php
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 // I create my form
-$form = $this->createFormBuilder($testMoney)
-    ->add("name", 'text')
-    ->add("price", "tbbc_money")
-    ->add("save", "submit")
+$form = $this->createFormBuilder()
+    ->add('name', TextType::class)
+    ->add('price', MoneyType::class, [
+        'data' => Money::EUR(1000), //EUR 10
+    ])
+    ->add('save', SubmitType::class)
     ->getForm();
 ```
 
@@ -392,13 +398,13 @@ class IndexController extends Controller
 
 ```bash
 # save a ratio in the storage
-./app/console tbbc:money:ratio-save USD 1.25
+./bin/console tbbc:money:ratio-save USD 1.25
 
 # display ratio list
-./app/console tbbc:money:ratio-list
+./bin/console tbbc:money:ratio-list
 
 # fetch all the ratio for all defined currencies from an external API
-./app/console tbbc:money:ratio-fetch
+./bin/console tbbc:money:ratio-fetch
 ```
 
 ### Change the ratio provider
@@ -442,7 +448,7 @@ tbbc_money:
 Add to your crontab :
 
 ```
-1 0 * * * /my_app_dir/app/console tbbc:money:ratio-fetch > /dev/null
+1 0 * * * /my_app_dir/bin/console tbbc:money:ratio-fetch > /dev/null
 ```
 
 ### MoneyManager : create a money object from a float
@@ -498,7 +504,7 @@ tbbc_money:
 
 Update your database schema :
 ```bash
-./app/console doctrine:schema:update --force
+./bin/console doctrine:schema:update --force
 ```
 
 With the Doctrine storage, currency ratio will use the default entity manager and will store data inside the **tbbc_money_doctrine_storage_ratios**
@@ -545,6 +551,13 @@ tbbc_money:
     enable_pair_history: true
     ratio_provider: tbbc_money.ratio_provider.yahoo_finance
 ```
+
+Note about older versions
+-------------------------
+
+- Examples above use Symfony 3 syntax for the console (`./bin/console`), for version 2.8 you should use `./app/console` instead.
+- "class" constant (e.g. `MoneyType::class`) is only supported since PHP 5.5, if you have an older version, you should use the full 
+class name instead (e.g. `Tbbc\MoneyBundle\Type\MoneyType`)
 
 
 Contributing

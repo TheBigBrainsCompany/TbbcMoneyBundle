@@ -1,11 +1,14 @@
 <?php
-
 namespace Tbbc\MoneyBundle\Templating\Helper;
 
 use Money\Currency;
 use Symfony\Component\Templating\Helper\Helper;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 
+/**
+ * Class CurrencyHelper
+ * @package Tbbc\MoneyBundle\Templating\Helper
+ */
 class CurrencyHelper extends Helper
 {
     /**
@@ -16,7 +19,7 @@ class CurrencyHelper extends Helper
     /**
      * Constructor
      *
-     * @param MoneyFormatter       $moneyFormatter
+     * @param MoneyFormatter $moneyFormatter
      */
     public function __construct(MoneyFormatter $moneyFormatter)
     {

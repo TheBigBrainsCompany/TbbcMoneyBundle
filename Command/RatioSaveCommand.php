@@ -8,9 +8,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
-class RatioSaveCommand
-    extends ContainerAwareCommand
+/**
+ * Class RatioSaveCommand
+ * @package Tbbc\MoneyBundle\Command
+ */
+class RatioSaveCommand extends ContainerAwareCommand
 {
+    /**
+     * Configure command
+     */
     protected function configure()
     {
         $this
@@ -28,9 +34,14 @@ class RatioSaveCommand
                 'Ratio to the reference currency (ex: 1.2563) ?'
             )
         ;
-
-
     }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $currencyCode = $input->getArgument('currencyCode');
@@ -45,7 +56,4 @@ class RatioSaveCommand
             $output->writeln("ERROR : ratio no saved du to error : ".$e->getMessage());
         }
     }
-
-
-
 }

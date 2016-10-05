@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by Philippe Le Van.
- * Date: 01/07/13
- */
-
 namespace Tbbc\MoneyBundle\Pair;
 
 use Money\Currency;
@@ -14,8 +9,12 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\StorageInterface;
 use Tbbc\MoneyBundle\TbbcMoneyEvents;
 
-class PairManager
-    implements PairManagerInterface
+/**
+ * Class PairManager
+ * @package Tbbc\MoneyBundle\Pair
+ * @author Philippe Le Van.
+ */
+class PairManager implements PairManagerInterface
 {
     /** @var  StorageInterface */
     protected $storage;
@@ -32,13 +31,20 @@ class PairManager
     /** @var EventDispatcherInterface  */
     protected $dispatcher;
 
+    /**
+     * PairManager constructor.
+     *
+     * @param StorageInterface         $storage
+     * @param array                    $currencyCodeList
+     * @param string                   $referenceCurrencyCode
+     * @param EventDispatcherInterface $dispatcher
+     */
     public function __construct(
         StorageInterface $storage,
         $currencyCodeList,
         $referenceCurrencyCode,
         EventDispatcherInterface $dispatcher
-    )
-    {
+    ) {
         $this->storage = $storage;
         $this->currencyCodeList = $currencyCodeList;
         $this->referenceCurrencyCode = $referenceCurrencyCode;
@@ -46,17 +52,18 @@ class PairManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function convert(Money $amount, $currencyCode)
     {
         $ratio = $this->getRelativeRatio($amount->getCurrency()->getName(), $currencyCode);
         $pair = new CurrencyPair($amount->getCurrency(), new Currency($currencyCode), $ratio);
+
         return $pair->convert($amount);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function saveRatio($currencyCode, $ratio)
     {
@@ -82,7 +89,7 @@ class PairManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getRelativeRatio($referenceCurrencyCode, $currencyCode)
     {
@@ -98,11 +105,12 @@ class PairManager
         if (!array_key_exists($referenceCurrency->getName(), $ratioList)) {
             throw new MoneyException("unknown ratio for currency $referenceCurrencyCode");
         }
+
         return $ratioList[$currency->getName()] / $ratioList[$referenceCurrency->getName()];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCurrencyCodeList()
     {
@@ -110,7 +118,7 @@ class PairManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getReferenceCurrencyCode()
     {
@@ -118,7 +126,7 @@ class PairManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getRatioList()
     {
@@ -126,7 +134,7 @@ class PairManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setRatioProvider(RatioProviderInterface $ratioProvider)
     {
@@ -134,7 +142,7 @@ class PairManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function saveRatioListFromRatioProvider()
     {
@@ -148,6 +156,4 @@ class PairManager
             }
         }
     }
-
-
 }
