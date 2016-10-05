@@ -3,8 +3,11 @@ namespace Tbbc\MoneyBundle\Pair;
 
 use Symfony\Component\EventDispatcher\Event;
 
-class SaveRatioEvent
-    extends Event
+/**
+ * Class SaveRatioEvent
+ * @package Tbbc\MoneyBundle\Pair
+ */
+class SaveRatioEvent extends Event
 {
     /**
      * @var string
@@ -23,13 +26,20 @@ class SaveRatioEvent
      */
     protected $ratio;
 
-    function __construct(
+    /**
+     * SaveRatioEvent constructor.
+     *
+     * @param string    $referenceCurrencyCode
+     * @param string    $currencyCode
+     * @param float     $ratio
+     * @param \DateTime $savedAt
+     */
+    public function __construct(
         $referenceCurrencyCode,
         $currencyCode,
         $ratio,
         $savedAt
-    )
-    {
+    ) {
         $this->currencyCode = $currencyCode;
         $this->ratio = $ratio;
         $this->referenceCurrencyCode = $referenceCurrencyCode;
@@ -99,6 +109,4 @@ class SaveRatioEvent
     {
         return $this->savedAt;
     }
-
-
-} 
+}

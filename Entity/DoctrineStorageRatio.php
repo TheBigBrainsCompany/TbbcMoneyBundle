@@ -1,9 +1,15 @@
 <?php
-
 namespace Tbbc\MoneyBundle\Entity;
 
+/**
+ * Class DoctrineStorageRatio
+ * @package Tbbc\MoneyBundle\Entity
+ */
 class DoctrineStorageRatio
 {
+    /**
+     * @var mixed
+     */
     private $id;
 
     /**
@@ -15,8 +21,14 @@ class DoctrineStorageRatio
      * @var integer
      */
     private $ratio;
-    
-    public function __construct($code = null, $ratio = null) 
+
+    /**
+     * DoctrineStorageRatio constructor.
+     *
+     * @param string $code
+     * @param float  $ratio
+     */
+    public function __construct($code = null, $ratio = null)
     {
         $this->currencyCode = $code;
         $this->ratio = $ratio;
@@ -36,7 +48,7 @@ class DoctrineStorageRatio
      * Set code
      *
      * @param  string $currencyCode
-     * @return Currency
+     * @return $this
      */
     public function setCurrencyCode($currencyCode)
     {
@@ -68,8 +80,8 @@ class DoctrineStorageRatio
     /**
      * Set ratio
      *
-     * @param  float    $ratio
-     * @return Currency
+     * @param  float $ratio
+     * @return $this
      */
     public function setRatio($ratio)
     {

@@ -16,7 +16,7 @@ use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 class YahooFinanceRatioProvider implements RatioProviderInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function fetchRatio($referenceCurrencyCode, $currencyCode)
     {
@@ -75,11 +75,19 @@ class YahooFinanceRatioProvider implements RatioProviderInterface
      */
     protected function getEndpoint(Currency $referenceCurrency, Currency $currency)
     {
-        return
-            'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22'.
-            $referenceCurrency->getName().
-            $currency->getName().
-            '%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
+        $q = sprintf(
+            'select * from yahoo.finance.xchange where pair in ("%s%s")',
+            $referenceCurrency->getName(),
+            $currency->getName()
+        );
+
+        $queryString = http_build_query(array(
+            'q'      => $q,
+            'format' => 'json',
+            'env'    => 'store://datatables.org/alltableswithkeys',
+        ));
+
+        return 'https://query.yahooapis.com/v1/public/yql?'.$queryString;
     }
 
     /**

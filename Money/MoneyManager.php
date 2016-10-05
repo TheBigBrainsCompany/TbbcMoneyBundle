@@ -1,16 +1,15 @@
 <?php
-/**
- * Created by levan on 25/09/2014.
- */
-
 namespace Tbbc\MoneyBundle\Money;
-
 
 use Money\Currency;
 use Money\Money;
 
-class MoneyManager
-    implements MoneyManagerInterface
+/**
+ * Class MoneyManager
+ * @package Tbbc\MoneyBundle\Money
+ * @author levan
+ */
+class MoneyManager implements MoneyManagerInterface
 {
     /** @var  int */
     protected $decimals;
@@ -18,17 +17,20 @@ class MoneyManager
     /** @var  string */
     protected $referenceCurrencyCode;
 
-    public function __construct(
-        $referenceCurrencyCode,
-        $decimals = 2
-    )
+    /**
+     * MoneyManager constructor.
+     *
+     * @param string $referenceCurrencyCode
+     * @param int    $decimals
+     */
+    public function __construct($referenceCurrencyCode, $decimals = 2)
     {
         $this->referenceCurrencyCode = $referenceCurrencyCode;
         $this->decimals = $decimals;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function createMoneyFromFloat($floatAmount, $currencyCode = null)
     {
@@ -40,7 +42,7 @@ class MoneyManager
         $amountAsInt = round($amountAsInt);
         $amountAsInt = intval($amountAsInt);
         $money = new Money($amountAsInt, $currency);
+
         return $money;
     }
-
-} 
+}

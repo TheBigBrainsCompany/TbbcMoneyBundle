@@ -1,12 +1,11 @@
 <?php
-/**
- * Created by Philippe Le Van.
- * Date: 02/07/13
- */
 namespace Tbbc\MoneyBundle;
 
-
-class MoneyException
-    extends \Exception
+/**
+ * Class MoneyException
+ * @package Tbbc\MoneyBundle
+ * @author Philippe Le Van.
+ */
+class MoneyException extends \Exception
 {
 }

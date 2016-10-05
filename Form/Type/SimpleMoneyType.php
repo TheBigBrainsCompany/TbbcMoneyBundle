@@ -9,8 +9,7 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 /**
  * Form type for the Money object.
  */
-class SimpleMoneyType
-    extends MoneyType
+class SimpleMoneyType extends MoneyType
 {
     /** @var  PairManagerInterface */
     protected $pairManager;
@@ -18,14 +17,20 @@ class SimpleMoneyType
     /** @var  int */
     protected $decimals;
 
+    /**
+     * SimpleMoneyType constructor.
+     *
+     * @param PairManagerInterface $pairManager
+     * @param int                  $decimals
+     */
     public function __construct(PairManagerInterface $pairManager, $decimals)
     {
         $this->pairManager = $pairManager;
-        $this->decimals = (int)$decimals;
+        $this->decimals = (int) $decimals;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -37,7 +42,7 @@ class SimpleMoneyType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getBlockPrefix()
     {

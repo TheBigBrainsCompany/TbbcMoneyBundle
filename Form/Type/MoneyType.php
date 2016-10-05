@@ -22,11 +22,11 @@ class MoneyType extends AbstractType
      */
     public function __construct($decimals)
     {
-        $this->decimals = (int)$decimals;
+        $this->decimals = (int) $decimals;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -49,7 +49,8 @@ class MoneyType extends AbstractType
                 'currency_type' => 'Tbbc\MoneyBundle\Form\Type\CurrencyType',
             ))
             ->setAllowedTypes(
-                'currency_type', array(
+                'currency_type',
+                array(
                     'string',
                     'Tbbc\MoneyBundle\Form\Type\CurrencyType',
                 )
@@ -58,7 +59,7 @@ class MoneyType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getBlockPrefix()
     {

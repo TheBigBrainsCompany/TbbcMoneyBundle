@@ -23,7 +23,9 @@ install:
 after_install:
   - mv composer.json.bck composer.json
 
-script: vendor/bin/phpunit --coverage-text
+script:
+  - vendor/bin/phpunit --coverage-text
+  - vendor/bin/phpcs . --standard=vendor/m6web/symfony2-coding-standard/Symfony2 -sp --ignore=vendor,Tests --extensions=php
 
 matrix:
   exclude:
