@@ -35,7 +35,9 @@
         "doctrine/orm": "~2.3",
         "phpunit/phpunit": "~4|~5",
         "phpunit/dbunit": "~1.4",
-        "symfony/phpunit-bridge": "~2.8|~3.0"
+        "symfony/phpunit-bridge": "~2.8|~3.0",
+        "squizlabs/php_codesniffer": "^2.7",
+        "m6web/Symfony2-coding-standard": "^3.3"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "~1.1",

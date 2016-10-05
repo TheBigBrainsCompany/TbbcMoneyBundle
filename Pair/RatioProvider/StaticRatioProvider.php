@@ -20,7 +20,7 @@ class StaticRatioProvider implements RatioProviderInterface
     /**
      * @param string $referenceCurrencyCode
      * @param string $currencyCode
-     * @param float $ratio
+     * @param float  $ratio
      */
     public function setRatio($referenceCurrencyCode, $currencyCode, $ratio)
     {
@@ -29,7 +29,7 @@ class StaticRatioProvider implements RatioProviderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function fetchRatio($referenceCurrencyCode, $currencyCode)
     {
@@ -45,10 +45,11 @@ class StaticRatioProvider implements RatioProviderInterface
     /**
      * @param $referenceCurrencyCode
      * @param $currencyCode
+     *
      * @return string
      */
     private function getPairCode($referenceCurrencyCode, $currencyCode)
     {
-        return $referenceCurrencyCode . '-' . $currencyCode;
+        return $referenceCurrencyCode.'-'.$currencyCode;
     }
 }

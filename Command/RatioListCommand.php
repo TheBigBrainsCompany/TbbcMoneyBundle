@@ -6,9 +6,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
-class RatioListCommand
-    extends ContainerAwareCommand
+/**
+ * Class RatioListCommand
+ * @package Tbbc\MoneyBundle\Command
+ */
+class RatioListCommand extends ContainerAwareCommand
 {
+    /**
+     * Configure command
+     */
     protected function configure()
     {
         $this
@@ -16,9 +22,14 @@ class RatioListCommand
             ->setHelp("The <info>tbbc:money:ratio-list</info> display list of registered ratio")
             ->setDescription('display list of registered ratio')
         ;
-
-
     }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         /** @var PairManagerInterface $pairManager */
@@ -29,7 +40,4 @@ class RatioListCommand
             $output->writeln("$currencyCode;$ratio");
         }
     }
-
-
-
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Tbbc\MoneyBundle\Templating\Helper;
 
 use Money\Money;
@@ -7,6 +6,10 @@ use Symfony\Component\Templating\Helper\Helper;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
+/**
+ * Class MoneyHelper
+ * @package Tbbc\MoneyBundle\Templating\Helper
+ */
 class MoneyHelper extends Helper
 {
     /**

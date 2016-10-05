@@ -14,16 +14,13 @@ env:
 before_install:
   - export SYMFONY_DEPRECATIONS_HELPER=weak #set this to "strict" to make build fail on deprecation messages
   - composer self-update
-  - mv composer.json composer.json.bck
-  - sed 's/${env:SYMFONY_VERSION}/'$SYMFONY_VERSION'/g' composer-template.json > composer.json #replace composer dependencies with actual symfony version
 
 install:
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/framework-bundle:${SYMFONY_VERSION}" --no-update; fi;
   - composer update --prefer-dist --no-interaction
-
-after_install:
-  - mv composer.json.bck composer.json
-
-script: vendor/bin/phpunit --coverage-text
+script:
+  - vendor/bin/phpunit --coverage-text
+  - vendor/bin/phpcs . --standard=vendor/m6web/symfony2-coding-standard/Symfony2 -sp --ignore=vendor,Tests --extensions=php
 
 matrix:
   exclude:

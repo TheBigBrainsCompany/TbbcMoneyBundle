@@ -3,16 +3,21 @@ namespace Tbbc\MoneyBundle\Pair;
 
 use Money\Money;
 
+/**
+ * Interface PairManagerInterface
+ * @package Tbbc\MoneyBundle\Pair
+ */
 interface PairManagerInterface
 {
     /**
      * convert the amount into the currencyCode given in parameter
      *
-     * @param Money $amout
+     * @param Money  $amount
      * @param string $currencyCode in the list of currencies from config.yml
+     *
      * @return Money
      */
-    public function convert(Money $amout, $currencyCode);
+    public function convert(Money $amount, $currencyCode);
 
     /**
      * set ratio between the currency in parameter and the reference currency.
@@ -21,7 +26,7 @@ interface PairManagerInterface
      * with a SaveRatioEvent
      *
      * @param string $currencyCode from the list of currencies
-     * @param float $ratio
+     * @param float  $ratio
      */
     public function saveRatio($currencyCode, $ratio);
 
@@ -30,9 +35,10 @@ interface PairManagerInterface
      *
      * @param string $referenceCurrencyCode
      * @param string $currencyCode
+     *
      * @return float
      */
-    public function getRelativeRatio($referenceCurrencyCode,$currencyCode);
+    public function getRelativeRatio($referenceCurrencyCode, $currencyCode);
 
     /**
      * @return array of type array("EUR", "USD");

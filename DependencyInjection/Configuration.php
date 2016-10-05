@@ -37,6 +37,7 @@ class Configuration implements ConfigurationInterface
      */
     private function addCurrencySection(ArrayNodeDefinition $node)
     {
+        // @codingStandardsIgnoreStart
         $node
             ->children()
                 ->arrayNode('currencies')
@@ -89,5 +90,6 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
+        // @codingStandardsIgnoreEnd
     }
 }

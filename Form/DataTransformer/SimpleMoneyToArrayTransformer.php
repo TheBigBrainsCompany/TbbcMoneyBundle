@@ -8,11 +8,17 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 /**
  * Transforms between a Money instance and an array.
  */
-class SimpleMoneyToArrayTransformer
-    extends MoneyToArrayTransformer
+class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
 {
     /** @var  PairManagerInterface */
     protected $pairManager;
+
+    /**
+     * SimpleMoneyToArrayTransformer constructor.
+     *
+     * @param PairManagerInterface $pairManager
+     * @param int                  $decimals
+     */
     public function __construct(PairManagerInterface $pairManager, $decimals)
     {
         parent::__construct($decimals);
@@ -20,7 +26,7 @@ class SimpleMoneyToArrayTransformer
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function transform($value)
     {
@@ -28,19 +34,20 @@ class SimpleMoneyToArrayTransformer
         if (!$tab) {
             return null;
         }
-        unset ($tab["tbbc_currency"]);
+        unset($tab["tbbc_currency"]);
+
         return $tab;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function reverseTransform($value)
     {
         if (is_array($value)) {
             $value["tbbc_currency"] = new Currency($this->pairManager->getReferenceCurrencyCode());
         }
+
         return parent::reverseTransform($value);
     }
-
 }

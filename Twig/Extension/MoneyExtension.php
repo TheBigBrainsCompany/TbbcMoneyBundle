@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by Philippe Le Van.
- * Date: 03/07/13
- */
-
 namespace Tbbc\MoneyBundle\Twig\Extension;
 
 use Money\Money;

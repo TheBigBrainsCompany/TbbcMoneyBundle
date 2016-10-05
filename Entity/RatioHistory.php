@@ -1,7 +1,10 @@
 <?php
 namespace Tbbc\MoneyBundle\Entity;
 
-
+/**
+ * Class RatioHistory
+ * @package Tbbc\MoneyBundle\Entity
+ */
 class RatioHistory
 {
     /**
@@ -104,6 +107,4 @@ class RatioHistory
     {
         return $this->savedAt;
     }
-
-
-} 
+}

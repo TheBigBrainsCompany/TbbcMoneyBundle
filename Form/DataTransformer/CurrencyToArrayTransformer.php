@@ -14,7 +14,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 class CurrencyToArrayTransformer implements DataTransformerInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function transform($value)
     {
@@ -24,11 +24,12 @@ class CurrencyToArrayTransformer implements DataTransformerInterface
         if (!$value instanceof Currency) {
             throw new UnexpectedTypeException($value, 'Currency');
         }
+
         return array("tbbc_name" => $value->getName());
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function reverseTransform($value)
     {
