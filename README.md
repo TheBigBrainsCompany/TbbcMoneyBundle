@@ -6,15 +6,11 @@ TbbcMoneyBundle
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6/big.png)](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6)
 
 This bundle is used to integrate the [Money library from mathiasverraes](https://github.com/mathiasverraes/money) into
-a Symfony2 project.
+a Symfony project.
 
 This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
 
-:zap::zap: **WARNING !** watch out for the Symfony versions and the bundle versions 
-
-* This bundle is stable and tested for Symfony ~2.3 (use branch 2.x or tags v2.*)
-* This bundle is in alpha state for Symfony 3.x (use master or future tags v3.*)
-* There are some BC breaks from 2.x to 3.x versions. See [UPGRADE2-3.md](UPGRADE2-3.md)
+* This bundle is tested and is stable with Symfony 2.8 and Symfony 3.1 
 
 Quick Start
 -----------
@@ -46,7 +42,7 @@ Features
 * Twig filters and PHP helpers for helping with money and currencies in templates
 * A storage system for currency ratios
 * A ratioProvider system for fetching ratio from externals api
-* Symfony2 form integration
+* Symfony form integration
 * Console commands for different operations
 * A configuration parser for specifying website used currencies
 * Access to the history of currency ratio fetched
@@ -146,7 +142,7 @@ $form = $this->createFormBuilder()
 ```
 
 
-### saving moneys in Doctrine
+### Saving Money with Doctrine
 
 #### Solution 1 : two fields in the database
 
@@ -571,8 +567,8 @@ Contributing
 Requirements
 ------------
 
-* PHP 5.3+
-* Symfony 2.1+
+* PHP 5.3.9+
+* Symfony 2.8+
 
 Authors
 -------
@@ -586,7 +582,7 @@ Status
 
 Stable
 
-what is functional :
+what is functional:
 
 * integration of the money library
 * configuration parser
@@ -602,6 +598,11 @@ what is functional :
 
 Versions
 --------
+
+3.0.0 : 2016/10/06
+
+* BC break: minimum supported Symfony version is 2.8
+* Added support for Symfony 3
 
 2.7.1 : 2015/05/19
 
