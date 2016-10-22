@@ -25,11 +25,13 @@ class DoctrineTypeCompilerPass implements CompilerPassInterface
         }
 
         $typeConfig = $container->getParameter($parameter);
-        $typeConfig[MoneyType::NAME] = array(
-            'class' => 'Tbbc\MoneyBundle\Type\MoneyType',
-            'commented' => true,
-        );
-        $container->setParameter($parameter, $typeConfig);
+        if (!isset($typeConfig[MoneyType::NAME])) {
+            $typeConfig[MoneyType::NAME] = array(
+                'class' => 'Tbbc\MoneyBundle\Type\MoneyType',
+                'commented' => true,
+            );
+            $container->setParameter($parameter, $typeConfig);
+        }
 
         foreach ($container->getServiceIds() as $name) {
             if (!preg_match('/^doctrine.dbal.\w+_connection$/', $name)) {
