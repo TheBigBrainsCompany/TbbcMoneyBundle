@@ -121,7 +121,9 @@ class ConfigTest
         
         $this->assertTrue(Type::hasType(MoneyType::NAME));
         
-        $em = $this->client->getContainer()->get('doctrine')->getManager('default');
-        $this->assertEquals(MoneyType::NAME, $em->getConnection()->getDatabasePlatform()->getDoctrineTypeMapping(MoneyType::NAME));
+        foreach (array('default', 'other') as $name) {
+            $em = $this->client->getContainer()->get('doctrine')->getManager($name);
+            $this->assertEquals(MoneyType::NAME, $em->getConnection()->getDatabasePlatform()->getDoctrineTypeMapping(MoneyType::NAME));
+        }
     }
 }
