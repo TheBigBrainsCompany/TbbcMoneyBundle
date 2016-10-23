@@ -33,11 +33,8 @@ class DoctrineTypeCompilerPass implements CompilerPassInterface
             $container->setParameter($parameter, $typeConfig);
         }
 
-        foreach ($container->getServiceIds() as $name) {
-            if (!preg_match('/^doctrine.dbal.\w+_connection$/', $name)) {
-                continue;
-            }
-            $connection = $container->getDefinition($name);
+        foreach ($container->getParameter('doctrine.connections') as $service) {
+            $connection = $container->getDefinition($service);
             $mappingTypes = $connection->getArgument(3);
             if (isset($mappingTypes[MoneyType::NAME])) {
                 continue;
