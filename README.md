@@ -2,10 +2,10 @@ TbbcMoneyBundle
 ===============
 
 [![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle.png?branch=master)](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle)
-
+[![Symfony](https://img.shields.io/badge/symfony-~2.8%7C~3.0-green.svg)]()
 [![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg)]()
-
 [![license](https://img.shields.io/github/license/TheBigBrainsCompany/TbbcMoneyBundle.svg)]()
+
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6/big.png)](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6)
 
