@@ -2,6 +2,8 @@
 
 namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 
+use Money\Currencies\ISOCurrencies;
+use Money\Currency;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 /**
@@ -43,7 +45,7 @@ abstract class AbstractRatioProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testExceptionForUnknownCurrency()
     {
-        $this->setExpectedException('Tbbc\MoneyBundle\MoneyException');
+        $this->expectException('Tbbc\MoneyBundle\MoneyException');
         $this->ratioProvider->fetchRatio('ZZZ', 'USD');
     }
 

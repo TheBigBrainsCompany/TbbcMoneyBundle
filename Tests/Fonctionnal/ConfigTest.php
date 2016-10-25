@@ -66,7 +66,7 @@ class ConfigTest
         /** @var MoneyManager $moneyManager */
         $moneyManager = $this->client->getContainer()->get("tbbc_money.money_manager");
         $money = $moneyManager->createMoneyFromFloat('2.5', 'USD');
-        $this->assertEquals("USD", $money->getCurrency()->getName());
+        $this->assertEquals("USD", $money->getCurrency()->getCode());
         $this->assertEquals(2500, $money->getAmount()); // note : 3 decimals in config for theses tests
     }
 

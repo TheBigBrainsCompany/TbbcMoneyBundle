@@ -15,10 +15,10 @@
         }
     ],
     "require": {
-        "php": ">=5.3.9",
+        "php": ">=5.5",
         "ext-curl" : "*",
         "symfony/framework-bundle": "~2.8|~3.0",
-        "mathiasverraes/money": "^1.2.1",
+        "mathiasverraes/money": "~3.0@beta",
         "symfony/form": "~2.8|~3.0",
         "symfony/twig-bundle": "~2.8|~3.0",
         "symfony/console": "~2.8|~3.0",
