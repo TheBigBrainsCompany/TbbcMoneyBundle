@@ -3,6 +3,10 @@ TbbcMoneyBundle
 
 [![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle.png?branch=master)](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle)
 
+[![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg)]()
+
+[![license](https://img.shields.io/github/license/TheBigBrainsCompany/TbbcMoneyBundle.svg)]()
+
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6/big.png)](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6)
 
 This bundle is used to integrate the [Money library from mathiasverraes](https://github.com/mathiasverraes/money) into
@@ -594,114 +598,3 @@ what is functional:
 * commands for ratio creation and ratio display
 * automatic ratio fetch (with 2 ratio providers)
 * history of currency ratio
-
-
-Versions
---------
-
-3.0.0 : 2016/10/06
-
-* BC break: minimum supported Symfony version is 2.8
-* Added support for Symfony 3
-
-2.7.1 : 2015/05/19
-
-* better error management in YahooFinanceRatioProvider
-
-2.7.0 : 2015/04/27
-
-* possible BC Break : rate exchange ratio provider is removed from the bundle (the remote api is now stopped).
-* new ratio provider with yahoo finance
-* this yahoo finance provider is set as the default provider
-* the rate exchange provider is removed
-
-2.6.0 : 2014/12/09
-
-* no BC Break
-* new : removed dependency to Doctrine
-* fix : currencies with 0 decimals are allowed 
-
-2.5.0 : 2014/10/16
-
-* no BC Break
-* new : A brand new ratio provider based on google finance convert
-* new : a simple way to choose the ratio provider from the config.yml
-* doc : readme updated
-* doc : better phpdoc for the RatioProviderInterface.php
-
-2.4.0 : 2014/09/25
-
-* no BC Break
-* major update in form types : form types are injected by names so extensions are invoked
-* new : a brand new MoneyManager that allows to create a Money object from a float value
-* doc : small fixes
-
-2.3.1 : 2014/07/16
-
-* no BC Break
-* fix : history or ratio was saved more than once
-* fix : history of the reference currency returns a 1 ratio
-
-2.3.0 : 2014/07/11
-
-* no BC Break
-* new : history of currency ratio saved
-
-2.2.0 : 2014/07/11
-
-* no BC Break
-* New : new formater MoneyFormatter::localizedFormatMoney that displays money with PHP
-NumberFormatter class : http://www.php.net/manual/en/numberformatter.formatcurrency.php
-* new : twig filter money_localized_format
-
-2.1.1 : 2014/06/02
-
-* no BC Break
-* fix access to multiple entity manager : PR : https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/pull/17
-* fix updating multiple currencies : PR : https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/pull/18
-* thx Xobb on github for it's PR
-
-2.1.0 : 2014/02/01
-
-* no BC Break
-* new parameter : decimal count in config.yml for number of decimals (for every money)
-
-2.0.1 : 2013/12/18
-
-* only README fixes
-
-2.0.0 : 2013/12/17
-
-* BC Break : Twig/MoneyExtension moved to Twig/Extension/MoneyExtension
-* BC Break : Twig/Extension/MoneyExtension changed it's internals => possible BC Break in
-* new : separation between formaters and twig extension
-
-1.5.0 : 2013/12/17
-
-* fix : use statement missing in exception case
-
-1.4.0 : 26/07/2013
-
-* fix : datatransformer returned a null values for amounts above 1000 with a space grouping separator
-* new : tbbc_simple_money field type without currency (reference currency used by default)
-
-1.3.0 : 16/07/2013
-
-* new : Doctrine storage (thanks to @armetiz)
-
-1.2.0 : 12/07/2013
-
-* new : ratio provider mecanism for fetch currency ratios from external api
-* Warning : small BC Break : command save-ratio is renamed ratio-save
-* doc enhancement
-
-1.1.0 : 2013/07/04
-
-* refactor : storage extracted in another service (CsvStorage)
-* new : command creation : tbbc:money:ratio-save, tbbc:money:ratio-list
-
-1.0.0 : 2013/07/03
-
-* first realease
-
-
