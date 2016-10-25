@@ -1,6 +1,7 @@
 <?php
 namespace Tbbc\MoneyBundle\DependencyInjection\Compiler;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -37,6 +38,13 @@ class PairHistoryCompilerPass implements CompilerPassInterface
             ));
 
             $container->setDefinition('tbbc_money.pair_history_manager', $pairHistoryDefinition);
+
+            //Add doctrine schema mappings
+            $modelDir = realpath(__DIR__.'/../../Resources/config/doctrine/ratios');
+            $path = DoctrineOrmMappingsPass::createXmlMappingDriver([
+                $modelDir => 'Tbbc\MoneyBundle\Entity',
+            ]);
+            $path->process($container);
         }
     }
 }
