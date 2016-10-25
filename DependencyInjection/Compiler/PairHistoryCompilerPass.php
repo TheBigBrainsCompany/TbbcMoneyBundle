@@ -41,9 +41,9 @@ class PairHistoryCompilerPass implements CompilerPassInterface
 
             //Add doctrine schema mappings
             $modelDir = realpath(__DIR__.'/../../Resources/config/doctrine/ratios');
-            $path = DoctrineOrmMappingsPass::createXmlMappingDriver([
+            $path = DoctrineOrmMappingsPass::createXmlMappingDriver(array(
                 $modelDir => 'Tbbc\MoneyBundle\Entity',
-            ]);
+            ));
             $path->process($container);
         }
     }
