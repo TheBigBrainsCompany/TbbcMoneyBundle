@@ -12,10 +12,19 @@ framework:
 
 doctrine:
     dbal:
-        driver:   "pdo_sqlite"
-        memory:   true
-        path:     ":memory:"
+        connections:
+            default:
+                driver:   "pdo_sqlite"
+                memory:   true
+                path:     ":memory:"
+            other:
+                driver:   "pdo_sqlite"
+                memory:   true
+                path:     ":memory:"
+
     orm:
         entity_managers:
             default:
                 auto_mapping: true
+            other:
+                connection: other
