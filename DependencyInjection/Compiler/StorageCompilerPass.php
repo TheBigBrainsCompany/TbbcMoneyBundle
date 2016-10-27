@@ -1,6 +1,7 @@
 <?php
 namespace Tbbc\MoneyBundle\DependencyInjection\Compiler;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -25,6 +26,13 @@ class StorageCompilerPass implements CompilerPassInterface
             if (!isset($bundles['DoctrineBundle'])) {
                 throw new \RuntimeException('TbbcMoneyBundle - DoctrineBundle is needed to use Doctrine as a storage');
             }
+
+            //Add doctrine schema mappings
+            $modelDir = realpath(__DIR__.'/../../Resources/config/doctrine/ratios');
+            $path = DoctrineOrmMappingsPass::createXmlMappingDriver(array(
+                $modelDir => 'Tbbc\MoneyBundle\Entity',
+            ));
+            $path->process($container);
 
             $storageDoctrineDefinition = new Definition('Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage', array(
                 new Reference('doctrine.orm.entity_manager'),

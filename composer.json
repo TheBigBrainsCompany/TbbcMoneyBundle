@@ -1,7 +1,7 @@
 {
     "name": "tbbc/money-bundle",
     "type": "symfony-bundle",
-    "description": "This is a Symfony2 bundle that integrates the php money library from Mathias Verraes (Fowler pattern): https://github.com/mathiasverraes/money.",
+    "description": "This is a Symfony bundle that integrates moneyphp/money library (Fowler pattern): https://github.com/moneyphp/money.",
     "keywords": ["money", "currency", "fowler", "conversion"],
     "homepage": "https://github.com/TheBigBrainsCompany/TbbcMoneyBundle",
     "license": "MIT",
@@ -18,7 +18,7 @@
         "php": ">=5.5",
         "ext-curl" : "*",
         "symfony/framework-bundle": "~2.8|~3.0",
-        "mathiasverraes/money": "~3.0@beta",
+        "mathiasverraes/money": "^3.0",
         "symfony/form": "~2.8|~3.0",
         "symfony/twig-bundle": "~2.8|~3.0",
         "symfony/console": "~2.8|~3.0",
