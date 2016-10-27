@@ -6,12 +6,10 @@ use Money\Currencies;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\CurrencyPair;
-use Money\Exception\UnresolvableCurrencyPairException;
 use Money\Exchange;
 use Money\Money;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tbbc\MoneyBundle\MoneyException;
-use Tbbc\MoneyBundle\Pair\StorageInterface;
 use Tbbc\MoneyBundle\TbbcMoneyEvents;
 
 /**

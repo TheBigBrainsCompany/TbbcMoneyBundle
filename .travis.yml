@@ -10,7 +10,7 @@ env:
   - SYMFONY_VERSION=3.1.*
 
 before_install:
-  - export SYMFONY_DEPRECATIONS_HELPER=weak #set this to "strict" to make build fail on deprecation messages
+  - export SYMFONY_DEPRECATIONS_HELPER=strict
   - composer self-update
 
 install:
