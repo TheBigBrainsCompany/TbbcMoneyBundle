@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Parses the kitpages_cms.block config section
+     * Parses the tbbc_money config section
      * Example for yaml driver:
      * tbbc_money:
      *     currencies: ["USD", "EUR"]
