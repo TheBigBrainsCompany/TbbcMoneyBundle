@@ -27,7 +27,7 @@ class DoctrineTypeCompilerPass implements CompilerPassInterface
         $typeConfig = $container->getParameter($parameter);
         if (!isset($typeConfig[MoneyType::NAME])) {
             $typeConfig[MoneyType::NAME] = array(
-                'class' => 'Tbbc\MoneyBundle\Type\MoneyType',
+                'class' => $container->getParameter('tbbc_money.dbal_type_class'),
                 'commented' => true,
             );
             $container->setParameter($parameter, $typeConfig);
