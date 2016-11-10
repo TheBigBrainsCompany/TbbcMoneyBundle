@@ -100,6 +100,15 @@ twig:
             - 'TbbcMoneyBundle:Form:fields.html.twig'
 ```
 
+You should also register custom Doctrine Money type:
+
+```yaml
+doctrine:
+    dbal:
+        types:
+            money: Tbbc\MoneyBundle\Type\MoneyType
+```
+
 
 Usage
 -----
