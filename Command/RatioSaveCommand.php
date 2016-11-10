@@ -45,7 +45,7 @@ class RatioSaveCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $currencyCode = $input->getArgument('currencyCode');
-        $ratio = (float)$input->getArgument('ratio');
+        $ratio = (float) $input->getArgument('ratio');
 
         /** @var PairManagerInterface $pairManager */
         $pairManager = $this->getContainer()->get('tbbc_money.pair_manager');
