@@ -115,15 +115,4 @@ class ConfigTest
         /** @var CurrencyExtension $currencyExtension */
         $currencyExtension = $this->client->getContainer()->get("tbbc_money.twig.currency");
     }
-    
-    public function testDoctrineMoneyTypeAvailable()
-    {
-        
-        $this->assertTrue(Type::hasType(MoneyType::NAME));
-        
-        foreach (array('default', 'other') as $name) {
-            $em = $this->client->getContainer()->get('doctrine')->getManager($name);
-            $this->assertEquals(MoneyType::NAME, $em->getConnection()->getDatabasePlatform()->getDoctrineTypeMapping(MoneyType::NAME));
-        }
-    }
 }
