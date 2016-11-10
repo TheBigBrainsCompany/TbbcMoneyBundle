@@ -3,6 +3,8 @@
 namespace Tbbc\MoneyBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Tbbc\MoneyBundle\Form\DataTransformer\SimpleMoneyToArrayTransformer;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
@@ -11,22 +13,28 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
  */
 class SimpleMoneyType extends MoneyType
 {
-    /** @var  PairManagerInterface */
-    protected $pairManager;
-
     /** @var  int */
     protected $decimals;
 
+    /** @var  array of string (currency code like "USD", "EUR") */
+    protected $currencyCodeList;
+
+    /** @var  string (currency code like "USD", "EUR") */
+    protected $referenceCurrencyCode;
+
     /**
-     * SimpleMoneyType constructor.
-     *
-     * @param PairManagerInterface $pairManager
-     * @param int                  $decimals
+     * @param int    $decimals
+     * @param array  $currencyCodeList
+     * @param string $referenceCurrencyCode
      */
-    public function __construct(PairManagerInterface $pairManager, $decimals)
-    {
-        $this->pairManager = $pairManager;
+    public function __construct(
+        $decimals,
+        $currencyCodeList,
+        $referenceCurrencyCode
+    ) {
         $this->decimals = (int) $decimals;
+        $this->currencyCodeList = $currencyCodeList;
+        $this->referenceCurrencyCode = $referenceCurrencyCode;
     }
 
     /**
@@ -36,9 +44,14 @@ class SimpleMoneyType extends MoneyType
     {
         $builder
             ->add('tbbc_amount', 'Symfony\Component\Form\Extension\Core\Type\TextType')
-            ->addModelTransformer(
-                new SimpleMoneyToArrayTransformer($this->pairManager, $this->decimals)
-            );
+        ;
+
+        $transformer = new SimpleMoneyToArrayTransformer($this->decimals);
+        $transformer->setCurrency($options['currency']);
+
+        $builder
+            ->addModelTransformer($transformer)
+        ;
     }
 
     /**
@@ -47,5 +60,26 @@ class SimpleMoneyType extends MoneyType
     public function getBlockPrefix()
     {
         return 'tbbc_simple_money';
+    }
+
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'currency' => $this->referenceCurrencyCode,
+        ));
+        $resolver->setAllowedTypes('currency', 'string');
+        $resolver->setAllowedValues('currency', $this->currencyCodeList);
+    }
+
+    /**
+     * BC for SF < 2.7
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
     }
 }

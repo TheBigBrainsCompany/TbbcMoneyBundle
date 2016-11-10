@@ -74,6 +74,9 @@ class SimpleMoneyTypeTest
         //This is probably not ideal, but I'm not sure how to set up the pair manager
         // with different decimals for different tests in Symfony 3.0
         $decimals = 2;
+        $currencies = array('EUR', 'USD');
+        $referenceCurrency = 'EUR';
+
         if($this->getName() === "testBindValidDecimals")
             $decimals = 3;
 
@@ -86,9 +89,19 @@ class SimpleMoneyTypeTest
 
         return array(
             new PreloadedExtension(
-                array(new SimpleMoneyType($this->pairManager, $decimals)), array()
+                array(new SimpleMoneyType($decimals, $currencies, $referenceCurrency)), array()
             )
         );
+    }
+
+    public function testOverrideCurrency()
+    {
+        \Locale::setDefault("fr_FR");
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, ["currency" => "USD"]);
+        $form->submit(array(
+            "tbbc_amount" => '1 252,5'
+        ));
+        $this->assertEquals(Money::USD(125250), $form->getData());
     }
 
 }
