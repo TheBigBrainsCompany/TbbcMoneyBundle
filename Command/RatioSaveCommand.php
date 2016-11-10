@@ -21,7 +21,7 @@ class RatioSaveCommand extends ContainerAwareCommand
     {
         $this
             ->setName('tbbc:money:ratio-save')
-            ->setHelp("The <info>tbbc:money:ratio-save</info> save a currency ratio")
+            ->setHelp('The <info>tbbc:money:ratio-save</info> save a currency ratio')
             ->setDescription('save a currency ratio')
             ->addArgument(
                 'currencyCode',
@@ -45,15 +45,15 @@ class RatioSaveCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $currencyCode = $input->getArgument('currencyCode');
-        $ratio = floatval($input->getArgument('ratio'));
+        $ratio = (float)$input->getArgument('ratio');
 
         /** @var PairManagerInterface $pairManager */
-        $pairManager = $this->getContainer()->get("tbbc_money.pair_manager");
+        $pairManager = $this->getContainer()->get('tbbc_money.pair_manager');
         try {
             $pairManager->saveRatio($currencyCode, $ratio);
-            $output->writeln("ratio saved");
+            $output->writeln('ratio saved');
         } catch (MoneyException $e) {
-            $output->writeln("ERROR : ratio no saved du to error : ".$e->getMessage());
+            $output->writeln('ERROR : ratio no saved du to error : '.$e->getMessage());
         }
     }
 }

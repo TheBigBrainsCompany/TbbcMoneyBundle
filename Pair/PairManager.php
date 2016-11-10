@@ -71,7 +71,7 @@ class PairManager implements PairManagerInterface
         // end of hack
         $ratio = floatval($ratio);
         if ($ratio <= 0) {
-            throw new MoneyException("ratio has to be strictly positive");
+            throw new MoneyException('ratio has to be strictly positive');
         }
         $ratioList = $this->storage->loadRatioList(true);
         $ratioList[$currency->getName()] = $ratio;
@@ -100,10 +100,10 @@ class PairManager implements PairManagerInterface
         }
         $ratioList = $this->storage->loadRatioList();
         if (!array_key_exists($currency->getName(), $ratioList)) {
-            throw new MoneyException("unknown ratio for currency $currencyCode");
+            throw new MoneyException('unknown ratio for currency '.$currencyCode);
         }
         if (!array_key_exists($referenceCurrency->getName(), $ratioList)) {
-            throw new MoneyException("unknown ratio for currency $referenceCurrencyCode");
+            throw new MoneyException('unknown ratio for currency '.$referenceCurrencyCode);
         }
 
         return $ratioList[$currency->getName()] / $ratioList[$referenceCurrency->getName()];
@@ -147,7 +147,7 @@ class PairManager implements PairManagerInterface
     public function saveRatioListFromRatioProvider()
     {
         if (!$this->ratioProvider) {
-            throw new MoneyException("no ratio provider defined");
+            throw new MoneyException('no ratio provider defined');
         }
         foreach ($this->getCurrencyCodeList() as $currencyCode) {
             if ($currencyCode != $this->getReferenceCurrencyCode()) {
