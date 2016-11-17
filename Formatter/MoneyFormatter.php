@@ -45,10 +45,10 @@ class MoneyFormatter
     public function localizedFormatMoney(Money $money, $locale = null, \NumberFormatter $numberFormatter = null)
     {
         if (!($numberFormatter instanceof \NumberFormatter)) {
-            $numberFormatter = $this->getDefaultNumberFormatter($money->getCurrency()->getName(), $locale);
+            $numberFormatter = $this->getDefaultNumberFormatter($money->getCurrency()->getCode(), $locale);
         }
 
-        return $numberFormatter->formatCurrency($this->asFloat($money), $money->getCurrency()->getName());
+        return $numberFormatter->formatCurrency($this->asFloat($money), $money->getCurrency()->getCode());
     }
 
     /**
@@ -122,7 +122,7 @@ class MoneyFormatter
      */
     public function formatCurrencyAsSymbol(Currency $currency)
     {
-        return Intl::getCurrencyBundle()->getCurrencySymbol($currency->getName());
+        return Intl::getCurrencyBundle()->getCurrencySymbol($currency->getCode());
     }
 
     /**
@@ -133,7 +133,7 @@ class MoneyFormatter
      */
     public function formatCurrencyAsName(Currency $currency)
     {
-        return $currency->getName();
+        return $currency->getCode();
     }
 
     /**

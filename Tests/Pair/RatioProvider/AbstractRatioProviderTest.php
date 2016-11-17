@@ -2,6 +2,8 @@
 
 namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 
+use Money\Currencies\ISOCurrencies;
+use Money\Currency;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 /**

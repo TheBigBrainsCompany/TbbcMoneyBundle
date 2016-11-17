@@ -1,8 +1,8 @@
 <?php
 namespace Tbbc\MoneyBundle\Pair\RatioProvider;
 
+use Money\Currencies\ISOCurrencies;
 use Money\Currency;
-use Money\UnknownCurrencyException;
 use Symfony\Component\DomCrawler\Crawler;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
@@ -19,16 +19,17 @@ class GoogleRatioProvider implements RatioProviderInterface
      */
     public function fetchRatio($referenceCurrencyCode, $currencyCode)
     {
-        try {
-            $baseCurrency = new Currency($referenceCurrencyCode);
-        } catch (UnknownCurrencyException $e) {
+        $isoCurrencies = new ISOCurrencies();
+
+        $baseCurrency = new Currency($referenceCurrencyCode);
+        if (!$baseCurrency->isAvailableWithin($isoCurrencies)) {
             throw new MoneyException(
                 sprintf('The currency code %s does not exists', $referenceCurrencyCode)
             );
         }
-        try {
-            $currency = new Currency($currencyCode);
-        } catch (UnknownCurrencyException $e) {
+
+        $currency = new Currency($currencyCode);
+        if (!$currency->isAvailableWithin($isoCurrencies)) {
             throw new MoneyException(
                 sprintf('The currency code %s does not exists', $currencyCode)
             );
@@ -54,8 +55,8 @@ class GoogleRatioProvider implements RatioProviderInterface
         return sprintf(
             'https://www.google.com/finance/converter?a=%s&from=%s&to=%s',
             $units,
-            $referenceCurrency->getName(),
-            $currency->getName()
+            $referenceCurrency->getCode(),
+            $currency->getCode()
         );
     }
 

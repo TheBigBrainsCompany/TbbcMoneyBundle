@@ -1,11 +1,11 @@
 TbbcMoneyBundle
 ===============
 
-[![Build Status](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle.png?branch=master)](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle)
-[![Symfony](https://img.shields.io/badge/symfony-~2.8%7C~3.0-green.svg)]()
-[![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg)]()
-[![license](https://img.shields.io/github/license/TheBigBrainsCompany/TbbcMoneyBundle.svg)]()
-
+[![Build Status](https://img.shields.io/travis/TheBigBrainsCompany/TbbcMoneyBundle/master.svg?style=flat-square)](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle)
+[![PHP](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg?style=flat-square)]()
+[![Symfony](https://img.shields.io/badge/symfony-~2.8%7C~3.0-green.svg?style=flat-square)]()
+[![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg?style=flat-square)]()
+[![license](https://img.shields.io/github/license/TheBigBrainsCompany/TbbcMoneyBundle.svg?style=flat-square)]()
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6/big.png)](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6)
 
@@ -98,6 +98,15 @@ twig:
     form:
         resources:
             - 'TbbcMoneyBundle:Form:fields.html.twig'
+```
+
+You should also register custom Doctrine Money type:
+
+```yaml
+doctrine:
+    dbal:
+        types:
+            money: Tbbc\MoneyBundle\Type\MoneyType
 ```
 
 
@@ -233,7 +242,7 @@ class TestMoney
     public function setPrice(Money $price)
     {
         $this->priceAmount = $price->getAmount();
-        $this->priceCurrency = $price->getCurrency()->getName();
+        $this->priceCurrency = $price->getCurrency()->getCode();
 
         return $this;
     }
@@ -459,7 +468,7 @@ Create a money object from a float can be a bit tricky because of rounding issue
 <?php
 $moneyManager = $this->get("tbbc_money.money_manager");
 $money = $moneyManager->createMoneyFromFloat('2.5', 'USD');
-$this->assertEquals("USD", $money->getCurrency()->getName());
+$this->assertEquals("USD", $money->getCurrency()->getCode());
 $this->assertEquals(250, $money->getAmount());
 ```
 

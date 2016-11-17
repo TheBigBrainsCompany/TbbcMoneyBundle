@@ -1,12 +1,15 @@
 <?php
 namespace Tbbc\MoneyBundle\Pair;
 
+use Money\Converter;
+use Money\Currencies;
+use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\CurrencyPair;
+use Money\Exchange;
 use Money\Money;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tbbc\MoneyBundle\MoneyException;
-use Tbbc\MoneyBundle\Pair\StorageInterface;
 use Tbbc\MoneyBundle\TbbcMoneyEvents;
 
 /**
@@ -14,7 +17,7 @@ use Tbbc\MoneyBundle\TbbcMoneyEvents;
  * @package Tbbc\MoneyBundle\Pair
  * @author Philippe Le Van.
  */
-class PairManager implements PairManagerInterface
+class PairManager implements PairManagerInterface, Exchange
 {
     /** @var  StorageInterface */
     protected $storage;
@@ -30,6 +33,11 @@ class PairManager implements PairManagerInterface
 
     /** @var EventDispatcherInterface  */
     protected $dispatcher;
+
+    /**
+     * @var Currencies
+     */
+    protected $currencies;
 
     /**
      * PairManager constructor.
@@ -49,6 +57,7 @@ class PairManager implements PairManagerInterface
         $this->currencyCodeList = $currencyCodeList;
         $this->referenceCurrencyCode = $referenceCurrencyCode;
         $this->dispatcher = $dispatcher;
+        $this->currencies = new ISOCurrencies();
     }
 
     /**
@@ -56,10 +65,19 @@ class PairManager implements PairManagerInterface
      */
     public function convert(Money $amount, $currencyCode)
     {
-        $ratio = $this->getRelativeRatio($amount->getCurrency()->getName(), $currencyCode);
-        $pair = new CurrencyPair($amount->getCurrency(), new Currency($currencyCode), $ratio);
+        $converter = new Converter($this->currencies, $this);
 
-        return $pair->convert($amount);
+        return $converter->convert($amount, new Currency($currencyCode));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function quote(Currency $baseCurrency, Currency $counterCurrency)
+    {
+        $ratio = $this->getRelativeRatio($baseCurrency->getCode(), $counterCurrency->getCode());
+
+        return new CurrencyPair($baseCurrency, $counterCurrency, $ratio);
     }
 
     /**
@@ -74,7 +92,7 @@ class PairManager implements PairManagerInterface
             throw new MoneyException('ratio has to be strictly positive');
         }
         $ratioList = $this->storage->loadRatioList(true);
-        $ratioList[$currency->getName()] = $ratio;
+        $ratioList[$currency->getCode()] = $ratio;
         $ratioList[$this->getReferenceCurrencyCode()] = (float) 1;
         $this->storage->saveRatioList($ratioList);
 
@@ -99,14 +117,14 @@ class PairManager implements PairManagerInterface
             return (float) 1;
         }
         $ratioList = $this->storage->loadRatioList();
-        if (!array_key_exists($currency->getName(), $ratioList)) {
+        if (!array_key_exists($currency->getCode(), $ratioList)) {
             throw new MoneyException('unknown ratio for currency '.$currencyCode);
         }
-        if (!array_key_exists($referenceCurrency->getName(), $ratioList)) {
+        if (!array_key_exists($referenceCurrency->getCode(), $ratioList)) {
             throw new MoneyException('unknown ratio for currency '.$referenceCurrencyCode);
         }
 
-        return $ratioList[$currency->getName()] / $ratioList[$referenceCurrency->getName()];
+        return $ratioList[$currency->getCode()] / $ratioList[$referenceCurrency->getCode()];
     }
 
     /**

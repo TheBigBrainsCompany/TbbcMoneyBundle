@@ -24,6 +24,5 @@ class TbbcMoneyBundle extends Bundle
         $container->addCompilerPass(new StorageCompilerPass());
         $container->addCompilerPass(new PairHistoryCompilerPass());
         $container->addCompilerPass(new RatioProviderCompilerPass());
-        $container->addCompilerPass(new DoctrineTypeCompilerPass());
     }
 }
