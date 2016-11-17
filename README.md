@@ -62,7 +62,6 @@ Table of contents
 * [Requirements](#requirements)
 * [Authors](#authors)
 * [Status](#status)
-* [Versions](#versions)
 
 Installation
 ------------
