@@ -385,7 +385,7 @@ class IndexController extends Controller
 
 ```twig
 {{ $amount | money_localized_format('fr') }} => 1 234 567,89 €
-{{ $amount | money_localized_format('en_US') }} => €1,234,567.89
+{{ $amount | money_localized_format('en_US') }} => $1,234,567.89
 {{ $amount | money_localized_format }} => depends on your default locale
 {{ $amount | money_format }}
 {{ $amount | money_as_float }}
