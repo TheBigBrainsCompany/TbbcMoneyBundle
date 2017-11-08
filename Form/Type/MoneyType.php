@@ -31,8 +31,8 @@ class MoneyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tbbc_amount', 'Symfony\Component\Form\Extension\Core\Type\TextType')
-            ->add('tbbc_currency', $options['currency_type'])
+            ->add('tbbc_amount', 'Symfony\Component\Form\Extension\Core\Type\TextType', $options['tbbc_amount_options'])
+            ->add('tbbc_currency', $options['currency_type'], $options['tbbc_currency_options'])
             ->addModelTransformer(
                 new MoneyToArrayTransformer($this->decimals)
             );
@@ -47,6 +47,8 @@ class MoneyType extends AbstractType
             ->setDefaults(array(
                 'data_class' => null,
                 'currency_type' => 'Tbbc\MoneyBundle\Form\Type\CurrencyType',
+                'tbbc_amount_options' => array(),
+                'tbbc_currency_options' => array(),
             ))
             ->setAllowedTypes(
                 'currency_type',
