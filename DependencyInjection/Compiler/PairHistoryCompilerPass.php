@@ -31,6 +31,7 @@ class PairHistoryCompilerPass implements CompilerPassInterface
                 new Reference('doctrine.orm.entity_manager'),
                 $container->getParameter('tbbc_money.reference_currency'),
             ));
+            $pairHistoryDefinition->setPublic(true);
 
             $pairHistoryDefinition->addTag('kernel.event_listener', array(
                 'event' => 'tbbc_money.after_ratio_save',
