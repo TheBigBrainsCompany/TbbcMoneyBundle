@@ -46,5 +46,8 @@
     "autoload": {
         "psr-0": { "Tbbc\\MoneyBundle": "" }
     },
+    "autoload-dev": {
+        "classmap": [ "Tests/app/AppKernel.php" ]
+    },
     "target-dir": "Tbbc/MoneyBundle"
 }
