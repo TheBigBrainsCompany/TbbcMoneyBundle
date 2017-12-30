@@ -14,6 +14,9 @@
         <parameter key="tbbc_money.ratio_provider.google.class">Tbbc\MoneyBundle\Pair\RatioProvider\GoogleRatioProvider</parameter>
         <parameter key="tbbc_money.formatter.money_formatter.class">Tbbc\MoneyBundle\Formatter\MoneyFormatter</parameter>
 
+        <parameter key="tbbc_money.command.ratio_fetch.class">Tbbc\MoneyBundle\Command\RatioFetchCommand</parameter>
+        <parameter key="tbbc_money.command.ratio_list.class">Tbbc\MoneyBundle\Command\RatioListCommand</parameter>
+        <parameter key="tbbc_money.command.ratio_save.class">Tbbc\MoneyBundle\Command\RatioSaveCommand</parameter>
     </parameters>
 
     <services>
@@ -43,13 +46,13 @@
         </service>
 
         <!-- Commands -->
-        <service id="tbbc_money.command.ratio_fetch">
+        <service id="tbbc_money.command.ratio_fetch" class="%tbbc_money.command.ratio_fetch.class%">
             <tag name="console.command" command="tbbc:money:ratio-fetch" />
         </service>
-        <service id="tbbc_money.command.ratio_list">
+        <service id="tbbc_money.command.ratio_list" class="%tbbc_money.command.ratio_list.class%">
             <tag name="console.command" command="tbbc:money:ratio-list" />
         </service>
-        <service id="tbbc_money.command.ratio_save">
+        <service id="tbbc_money.command.ratio_save" class="%tbbc_money.command.ratio_save.class%">
             <tag name="console.command" command="tbbc:money:ratio-save" />
         </service>
     </services>
