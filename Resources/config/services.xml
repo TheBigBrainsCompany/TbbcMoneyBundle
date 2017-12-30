@@ -41,6 +41,17 @@
         <service id="tbbc_money.formatter.money_formatter" class="%tbbc_money.formatter.money_formatter.class%">
             <argument>%tbbc_money.decimals%</argument>
         </service>
+
+        <!-- Commands -->
+        <service id="tbbc_money.command.ratio_fetch">
+            <tag name="console.command" command="tbbc:money:ratio-fetch" />
+        </service>
+        <service id="tbbc_money.command.ratio_list">
+            <tag name="console.command" command="tbbc:money:ratio-list" />
+        </service>
+        <service id="tbbc_money.command.ratio_save">
+            <tag name="console.command" command="tbbc:money:ratio-save" />
+        </service>
     </services>
 
 </container>
