@@ -17,13 +17,13 @@
     </parameters>
 
     <services>
-        <service id="tbbc_money.pair_manager" class="%tbbc_money.pair_manager.class%">
+        <service id="tbbc_money.pair_manager" class="%tbbc_money.pair_manager.class%" public="true" >
             <argument type="service" id="tbbc_money.pair.csv_storage"/>
             <argument>%tbbc_money.currencies%</argument>
             <argument>%tbbc_money.reference_currency%</argument>
             <argument type="service" id="event_dispatcher"/>
         </service>
-        <service id="tbbc_money.money_manager" class="%tbbc_money.money_manager.class%">
+        <service id="tbbc_money.money_manager" class="%tbbc_money.money_manager.class%" public="true" >
             <argument>%tbbc_money.reference_currency%</argument>
             <argument>%tbbc_money.decimals%</argument>
         </service>

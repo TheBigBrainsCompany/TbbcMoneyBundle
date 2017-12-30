@@ -10,12 +10,12 @@
     </parameters>
 
     <services>
-        <service id="tbbc_money.twig.money" class="%tbbc_money.twig.money.class%">
+        <service id="tbbc_money.twig.money" class="%tbbc_money.twig.money.class%" public="true">
             <argument type="service" id="tbbc_money.formatter.money_formatter"/>
             <argument type="service" id="tbbc_money.pair_manager"/>
             <tag name="twig.extension" />
         </service>
-        <service id="tbbc_money.twig.currency" class="%tbbc_money.twig.currency.class%">
+        <service id="tbbc_money.twig.currency" class="%tbbc_money.twig.currency.class%" public="true">
             <argument type="service" id="tbbc_money.formatter.money_formatter"/>
             <tag name="twig.extension" />
         </service>
