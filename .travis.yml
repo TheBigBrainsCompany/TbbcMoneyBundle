@@ -12,7 +12,7 @@ env:
     # some symfony's internal deprecation were only fixed in
     # later version than 3.1, so if we run with strict
     # deprecation the CI will fail without nothing we can do
-  - SYMFONY_VERSION=3.1.*
+  - SYMFONY_VERSION=3.1.* SYMFONY_DEPRECATIONS_HELPER=weak_vendors
   - SYMFONY_VERSION=3.4.* SYMFONY_DEPRECATIONS_HELPER=strict
 
 matrix:
