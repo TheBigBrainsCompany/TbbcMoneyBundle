@@ -4,13 +4,33 @@ php:
   - 5.5
   - 5.6
   - 7.0
+  - 7.1
+  - 7.2
 
 env:
-  - SYMFONY_VERSION=2.8.*
-  - SYMFONY_VERSION=3.1.*
+  - SYMFONY_VERSION=2.8.* SYMFONY_DEPRECATIONS_HELPER=strict
+    # some symfony's internal deprecation were only fixed in
+    # later version than 3.1, so if we run with strict
+    # deprecation the CI will fail without nothing we can do
+  - SYMFONY_VERSION=3.1.* SYMFONY_DEPRECATIONS_HELPER=weak_vendors
+  - SYMFONY_VERSION=3.4.* SYMFONY_DEPRECATIONS_HELPER=strict
+
+matrix:
+    fast_finish: true
+    include:
+        - php: 7.1
+          env:
+              - DEPENDENCIES=beta
+              - SYMFONY_VERSION=4.0.*
+              - SYMFONY_DEPRECATIONS_HELPER=strict
+        - php: 7.2
+          env:
+              - DEPENDENCIES=beta
+              - SYMFONY_VERSION=4.0.*
+              - SYMFONY_DEPRECATIONS_HELPER=strict
 
 before_install:
-  - export SYMFONY_DEPRECATIONS_HELPER=strict
+  - if [ "$DEPENDENCIES" = "beta"  ]; then composer config minimum-stability beta; fi;
   - composer self-update
 
 install:

@@ -14,16 +14,19 @@
         <parameter key="tbbc_money.ratio_provider.google.class">Tbbc\MoneyBundle\Pair\RatioProvider\GoogleRatioProvider</parameter>
         <parameter key="tbbc_money.formatter.money_formatter.class">Tbbc\MoneyBundle\Formatter\MoneyFormatter</parameter>
 
+        <parameter key="tbbc_money.command.ratio_fetch.class">Tbbc\MoneyBundle\Command\RatioFetchCommand</parameter>
+        <parameter key="tbbc_money.command.ratio_list.class">Tbbc\MoneyBundle\Command\RatioListCommand</parameter>
+        <parameter key="tbbc_money.command.ratio_save.class">Tbbc\MoneyBundle\Command\RatioSaveCommand</parameter>
     </parameters>
 
     <services>
-        <service id="tbbc_money.pair_manager" class="%tbbc_money.pair_manager.class%">
+        <service id="tbbc_money.pair_manager" class="%tbbc_money.pair_manager.class%" public="true" >
             <argument type="service" id="tbbc_money.pair.csv_storage"/>
             <argument>%tbbc_money.currencies%</argument>
             <argument>%tbbc_money.reference_currency%</argument>
             <argument type="service" id="event_dispatcher"/>
         </service>
-        <service id="tbbc_money.money_manager" class="%tbbc_money.money_manager.class%">
+        <service id="tbbc_money.money_manager" class="%tbbc_money.money_manager.class%" public="true" >
             <argument>%tbbc_money.reference_currency%</argument>
             <argument>%tbbc_money.decimals%</argument>
         </service>
@@ -40,6 +43,17 @@
         <!-- Formatter -->
         <service id="tbbc_money.formatter.money_formatter" class="%tbbc_money.formatter.money_formatter.class%">
             <argument>%tbbc_money.decimals%</argument>
+        </service>
+
+        <!-- Commands -->
+        <service id="tbbc_money.command.ratio_fetch" class="%tbbc_money.command.ratio_fetch.class%">
+            <tag name="console.command" command="tbbc:money:ratio-fetch" />
+        </service>
+        <service id="tbbc_money.command.ratio_list" class="%tbbc_money.command.ratio_list.class%">
+            <tag name="console.command" command="tbbc:money:ratio-list" />
+        </service>
+        <service id="tbbc_money.command.ratio_save" class="%tbbc_money.command.ratio_save.class%">
+            <tag name="console.command" command="tbbc:money:ratio-save" />
         </service>
     </services>
 
