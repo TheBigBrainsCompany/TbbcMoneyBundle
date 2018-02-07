@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="tbbc_money.pair_manager.class">Tbbc\MoneyBundle\Pair\PairManager</parameter>
+        <parameter key="tbbc_money.pair_manager_interface.class">Tbbc\MoneyBundle\Pair\PairManagerInterface</parameter>
         <parameter key="tbbc_money.money_manager.class">Tbbc\MoneyBundle\Money\MoneyManager</parameter>
         <parameter key="tbbc_money.pair_history_manager.class">Tbbc\MoneyBundle\PairHistory\PairHistoryManager</parameter>
         <parameter key="tbbc_money.pair.csv_storage.class">Tbbc\MoneyBundle\Pair\Storage\CsvStorage</parameter>
@@ -26,6 +27,8 @@
             <argument>%tbbc_money.reference_currency%</argument>
             <argument type="service" id="event_dispatcher"/>
         </service>
+        <service id="%tbbc_money.pair_manager_interface.class%" alias="tbbc_money.pair_manager" public="false">
+        </service>
         <service id="tbbc_money.money_manager" class="%tbbc_money.money_manager.class%" public="true" >
             <argument>%tbbc_money.reference_currency%</argument>
             <argument>%tbbc_money.decimals%</argument>
@@ -43,6 +46,8 @@
         <!-- Formatter -->
         <service id="tbbc_money.formatter.money_formatter" class="%tbbc_money.formatter.money_formatter.class%">
             <argument>%tbbc_money.decimals%</argument>
+        </service>
+        <service id="%tbbc_money.formatter.money_formatter.class%" alias="tbbc_money.formatter.money_formatter" public="false">
         </service>
 
         <!-- Commands -->
