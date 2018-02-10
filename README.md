@@ -2,10 +2,11 @@ TbbcMoneyBundle
 ===============
 
 [![Build Status](https://img.shields.io/travis/TheBigBrainsCompany/TbbcMoneyBundle/master.svg?style=flat-square)](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle)
-[![PHP](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg?style=flat-square)]()
-[![Symfony](https://img.shields.io/badge/symfony-~2.8%7C~3.0-green.svg?style=flat-square)]()
-[![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg?style=flat-square)]()
-[![license](https://img.shields.io/github/license/TheBigBrainsCompany/TbbcMoneyBundle.svg?style=flat-square)]()
+[![PHP](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg?style=flat-square)](https://php.net)
+[![Symfony](https://img.shields.io/badge/symfony-~2.8%7C~3.0-green.svg?style=flat-square)](https://symfony.com)
+[![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg?style=flat-square)](https://packagist.org/packages/tbbc/money-bundle/stats)
+[![Latest Stable Version](https://img.shields.io/packagist/v/tbbc/money-bundle.svg)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/releases/latest)
+[![license](https://img.shields.io/github/license/TheBigBrainsCompany/TbbcMoneyBundle.svg?style=flat-square)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/LICENSE)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6/big.png)](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6)
 
