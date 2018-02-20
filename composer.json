@@ -44,7 +44,8 @@
         "doctrine/orm": "~2.3"
     },
     "autoload": {
-        "psr-0": { "Tbbc\\MoneyBundle": "" }
+        "psr-4": { "Tbbc\\MoneyBundle\\": "" },
+        "exclude-from-classmap": [ "/Tests/" ]
     },
     "autoload-dev": {
         "classmap": [ "Tests/app/AppKernel.php" ]
