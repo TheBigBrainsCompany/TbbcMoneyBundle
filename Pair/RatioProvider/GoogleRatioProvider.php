@@ -52,7 +52,7 @@ class GoogleRatioProvider implements RatioProviderInterface
     protected function getEndpoint($units, Currency $referenceCurrency, Currency $currency)
     {
         return sprintf(
-            'https://finance.google.com/finance/converter?a=%s&from=%s&to=%s',
+            'https://finance.google.com/bctzjpnsun/converter?a=1&from=%s&from=%s&to=%s',
             $units,
             $referenceCurrency->getName(),
             $currency->getName()
