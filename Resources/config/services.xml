@@ -21,7 +21,7 @@
     </parameters>
 
     <services>
-        <service id="tbbc_money.pair_manager" class="%tbbc_money.pair_manager.class%" public="true" >
+        <service id="tbbc_money.pair_manager" class="%tbbc_money.pair_manager.class%" public="true">
             <argument type="service" id="tbbc_money.pair.csv_storage"/>
             <argument>%tbbc_money.currencies%</argument>
             <argument>%tbbc_money.reference_currency%</argument>
@@ -29,22 +29,22 @@
         </service>
         <service id="%tbbc_money.pair_manager_interface.class%" alias="tbbc_money.pair_manager" public="false">
         </service>
-        <service id="tbbc_money.money_manager" class="%tbbc_money.money_manager.class%" public="true" >
+        <service id="tbbc_money.money_manager" class="%tbbc_money.money_manager.class%" public="true">
             <argument>%tbbc_money.reference_currency%</argument>
             <argument>%tbbc_money.decimals%</argument>
         </service>
         <!-- Storage -->
-        <service id="tbbc_money.pair.csv_storage" class="%tbbc_money.pair.csv_storage.class%">
+        <service id="tbbc_money.pair.csv_storage" class="%tbbc_money.pair.csv_storage.class%" public="true">
             <argument>%tbbc_money.pair_manager.ratio_file_name%</argument>
             <argument>%tbbc_money.reference_currency%</argument>
         </service>
         <!-- Ratio providers -->
-        <service id="tbbc_money.ratio_provider.yahoo_finance" class="%tbbc_money.ratio_provider.yahoo_finance.class%">
+        <service id="tbbc_money.ratio_provider.yahoo_finance" class="%tbbc_money.ratio_provider.yahoo_finance.class%" public="true">
         </service>
-        <service id="tbbc_money.ratio_provider.google" class="%tbbc_money.ratio_provider.google.class%">
+        <service id="tbbc_money.ratio_provider.google" class="%tbbc_money.ratio_provider.google.class%" public="true">
         </service>
         <!-- Formatter -->
-        <service id="tbbc_money.formatter.money_formatter" class="%tbbc_money.formatter.money_formatter.class%">
+        <service id="tbbc_money.formatter.money_formatter" class="%tbbc_money.formatter.money_formatter.class%" public="true">
             <argument>%tbbc_money.decimals%</argument>
         </service>
         <service id="%tbbc_money.formatter.money_formatter.class%" alias="tbbc_money.formatter.money_formatter" public="false">
