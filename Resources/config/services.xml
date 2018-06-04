@@ -13,6 +13,7 @@
         <parameter key="tbbc_money.pair_manager.ratio_file_name">%kernel.root_dir%/data/tbbc_money/ratio_file_name.csv</parameter>
         <parameter key="tbbc_money.ratio_provider.yahoo_finance.class">Tbbc\MoneyBundle\Pair\RatioProvider\YahooFinanceRatioProvider</parameter>
         <parameter key="tbbc_money.ratio_provider.google.class">Tbbc\MoneyBundle\Pair\RatioProvider\GoogleRatioProvider</parameter>
+        <parameter key="tbbc_money.ratio_provider.ecb.class">Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider</parameter>
         <parameter key="tbbc_money.formatter.money_formatter.class">Tbbc\MoneyBundle\Formatter\MoneyFormatter</parameter>
 
         <parameter key="tbbc_money.command.ratio_fetch.class">Tbbc\MoneyBundle\Command\RatioFetchCommand</parameter>
@@ -42,6 +43,8 @@
         <service id="tbbc_money.ratio_provider.yahoo_finance" class="%tbbc_money.ratio_provider.yahoo_finance.class%" public="true">
         </service>
         <service id="tbbc_money.ratio_provider.google" class="%tbbc_money.ratio_provider.google.class%" public="true">
+        </service>
+        <service id="tbbc_money.ratio_provider.ecb" class="%tbbc_money.ratio_provider.ecb.class%">
         </service>
         <!-- Formatter -->
         <service id="tbbc_money.formatter.money_formatter" class="%tbbc_money.formatter.money_formatter.class%" public="true">
