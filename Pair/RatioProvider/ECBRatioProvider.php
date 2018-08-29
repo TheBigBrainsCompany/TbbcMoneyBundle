@@ -62,6 +62,7 @@ class ECBRatioProvider implements RatioProviderInterface
 
         // return ratio
         $ratio = (float) $rates[$currency->getName()];
+
         return $ratio;
     }
 
@@ -103,10 +104,12 @@ class ECBRatioProvider implements RatioProviderInterface
         // // this wil generate a date like '2018-06-01' for the last updated date for the rates - we do not implement this now
         // $updatedDate = ((array) $xmlObject->Cube->Cube->attributes())['@attributes']['time'];
 
-        $pairs = [];
-        foreach($xmlObject->Cube->Cube->children() as $rateObject) {
+        $pairs = array();
+
+        // @codingStandardsIgnoreLine
+        foreach ($xmlObject->Cube->Cube->children() as $rateObject) {
             $attributes = (array) $rateObject->attributes();
-            $pairs[$attributes['@attributes']['currency']] = $rate['@attributes']['rate'];
+            $pairs[$attributes['@attributes']['currency']] = $attributes['@attributes']['rate'];
         }
 
         return $pairs;
