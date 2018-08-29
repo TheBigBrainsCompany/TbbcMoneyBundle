@@ -105,9 +105,8 @@ class ECBRatioProvider implements RatioProviderInterface
 
         $pairs = [];
         foreach($xmlObject->Cube->Cube->children() as $rateObject) {
-            $rate     = ((array) $rateObject->attributes())['@attributes']['rate'];
-            $currency = ((array) $rateObject->attributes())['@attributes']['currency'];
-            $pairs[$currency] = $rate;
+            $attributes = (array) $rateObject->attributes();
+            $pairs[$attributes['@attributes']['currency']] = $rate['@attributes']['rate'];
         }
 
         return $pairs;
