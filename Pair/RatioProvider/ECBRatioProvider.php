@@ -62,6 +62,7 @@ class ECBRatioProvider implements RatioProviderInterface
 
         // return ratio
         $ratio = (float) $rates[$currency->getName()];
+
         return $ratio;
     }
 
@@ -104,7 +105,9 @@ class ECBRatioProvider implements RatioProviderInterface
         // $updatedDate = ((array) $xmlObject->Cube->Cube->attributes())['@attributes']['time'];
 
         $pairs = array();
-        foreach($xmlObject->Cube->Cube->children() as $rateObject) {
+
+        // @codingStandardsIgnoreLine
+        foreach ($xmlObject->Cube->Cube->children() as $rateObject) {
             $attributes = (array) $rateObject->attributes();
             $pairs[$attributes['@attributes']['currency']] = $attributes['@attributes']['rate'];
         }
