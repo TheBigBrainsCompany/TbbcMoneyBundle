@@ -6,11 +6,12 @@ use Money\Currency;
 use Money\Money;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Twig\Extension\MoneyExtension;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Benjamin Dulau <benjamin@thebigbrainscompany.com>
  */
-class MoneyExtensionTest extends \PHPUnit_Framework_TestCase
+class MoneyExtensionTest extends TestCase
 {
     /**
      * @var MoneyExtension

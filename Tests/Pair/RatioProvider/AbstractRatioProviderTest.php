@@ -5,13 +5,14 @@ namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class can be used to easily test your custom ratio providers.
  *
  * @author Hugues Maignol <hugues.maignol@kitpages.fr>
  */
-abstract class AbstractRatioProviderTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractRatioProviderTest extends TestCase
 {
     /**
      * The currently tested RatioProvider.

@@ -4,12 +4,13 @@ namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 
 use Money\Currency;
 use Tbbc\MoneyBundle\Pair\RatioProvider\YahooFinanceRatioProvider;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Hugues Maignol <hugues.maignol@kitpages.fr>
  * @group  manager
  */
-class YahooFinanceRatioProviderTest extends \PHPUnit_Framework_TestCase
+class YahooFinanceRatioProviderTest extends TestCase
 {
     public function testRatioFetchingEUR_USD()
     {

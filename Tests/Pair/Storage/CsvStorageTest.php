@@ -6,11 +6,12 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManager;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group manager
  */
-class CsvStorageTest extends \PHPUnit_Framework_TestCase
+class CsvStorageTest extends TestCase
 {
     /** @var  CsvStorage */
     protected $storage;
