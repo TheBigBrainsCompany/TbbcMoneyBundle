@@ -420,10 +420,11 @@ class IndexController extends Controller
 
 The ratio provider by default is base on the service 'tbbc_money.ratio_provider.yahoo_finance'
 
-This bundles contains two ratio providers :
+This bundles contains three ratio providers :
 
 * tbbc_money.ratio_provider.yahoo_finance based on the Yahoo finance APIs https://developer.yahoo.com/
 * tbbc_money.ratio_provider.google based on the https://www.google.com/finance/converter service
+* tbbc_money.ratio_provider.ecb based on the data provided here https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
 
 You can change the service to use in the config.yml file :
 
