@@ -5,11 +5,12 @@ namespace Tbbc\MoneyBundle\Tests\Twig\Extension;
 use Money\Currency;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Twig\Extension\CurrencyExtension;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Benjamin Dulau <benjamin@thebigbrainscompany.com>
  */
-class CurrencyExtensionTest extends \PHPUnit_Framework_TestCase
+class CurrencyExtensionTest extends TestCase
 {
     /**
      * @var CurrencyExtension

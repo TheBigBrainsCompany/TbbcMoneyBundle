@@ -5,13 +5,14 @@ namespace Tbbc\MoneyBundle\Tests\Formatter;
 use Money\Currency;
 use Money\Money;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class MoneyFormatterTest
  * @package Tbbc\MoneyBundle\Tests\Formatter
  * @group formatter
  */
-class MoneyFormatterTest extends \PHPUnit_Framework_TestCase
+class MoneyFormatterTest extends TestCase
 {
     /**
      * @var MoneyFormatter
