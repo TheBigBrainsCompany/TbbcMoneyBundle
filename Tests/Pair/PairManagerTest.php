@@ -6,11 +6,12 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManager;
 use Tbbc\MoneyBundle\Pair\RatioProvider\StaticRatioProvider;
 use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group manager
  */
-class PairManagerTest extends \PHPUnit_Framework_TestCase
+class PairManagerTest extends TestCase
 {
     /** @var  PairManager */
     protected $manager;

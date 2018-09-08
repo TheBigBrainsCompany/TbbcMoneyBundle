@@ -4,11 +4,12 @@ namespace Tbbc\MoneyBundle\Tests\Money;
 use Money\Money;
 use Tbbc\MoneyBundle\Money\MoneyManager;
 use Tbbc\MoneyBundle\MoneyException;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group moneymanager
  */
-class MoneyManagerTest extends \PHPUnit_Framework_TestCase
+class MoneyManagerTest extends TestCase
 {
     /** @var  MoneyManager */
     protected $manager;
