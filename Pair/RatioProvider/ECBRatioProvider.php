@@ -81,7 +81,7 @@ class ECBRatioProvider implements RatioProviderInterface
         //get current exchange rate XML
         $curlHandle = curl_init();
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curlHandle, CURLOPT_URL, "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
+        curl_setopt($curlHandle, CURLOPT_URL, "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
         $curlResponse = curl_exec($curlHandle);
         curl_close($curlHandle);
 
