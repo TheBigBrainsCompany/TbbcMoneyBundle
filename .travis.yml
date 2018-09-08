@@ -18,7 +18,7 @@ before_install:
 
 install:
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/framework-bundle:${SYMFONY_VERSION}" --no-update; fi;
-  - if [ "$TRAVIS_PHP_VERSION" >= 5.5 ]; then composer require "florianv/exchanger" "php-http/message" "php-http/guzzle6-adapter" --no-update; fi;
+  - if [ "$TRAVIS_PHP_VERSION" != "5.4" ]; then composer require "florianv/exchanger" "php-http/message" "php-http/guzzle6-adapter" --no-update; fi;
   - composer update --prefer-dist --no-interaction
 script:
   - vendor/bin/phpunit --coverage-text

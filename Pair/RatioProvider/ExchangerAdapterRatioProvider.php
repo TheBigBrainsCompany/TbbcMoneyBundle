@@ -47,7 +47,7 @@ final class ExchangerAdapterRatioProvider implements RatioProviderInterface
         try {
             $exchangeRate = $this->exchangeRateProvider->getExchangeRate($exchangeQuery);
         } catch (\Exception $e) {
-            throw new MoneyException($e);
+            throw new MoneyException($e->getMessage());
         }
 
         return (float) $exchangeRate->getValue();
