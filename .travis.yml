@@ -38,7 +38,8 @@ install:
   - if [ "$TRAVIS_PHP_VERSION" != "5.4" ]; then composer require "florianv/exchanger" "php-http/message" "php-http/guzzle6-adapter" --no-update; fi;
   - composer update --prefer-dist --no-interaction
 script:
-  - vendor/bin/phpunit --coverage-text
+  - if [ "$TRAVIS_PHP_VERSION" != "5.4" ]; then vendor/bin/phpunit --coverage-text; fi;
+  - if [ "$TRAVIS_PHP_VERSION" = "5.4" ]; then vendor/bin/phpunit --coverage-text --exclude-group=php5.5+; fi;
   - vendor/bin/phpcs . --standard=vendor/m6web/symfony2-coding-standard/Symfony2 -sp --ignore=vendor,Tests --extensions=php
 
 notifications:

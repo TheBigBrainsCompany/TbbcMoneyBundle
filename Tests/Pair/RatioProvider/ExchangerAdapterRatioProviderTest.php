@@ -8,6 +8,7 @@ use Exchanger\Service\PhpArray;
 /**
  * @author Pavel Dubinin <geekdevs@gmail.com>
  * @group  manager
+ * @group  php5.5+
  */
 class ExchangerAdapterRatioProviderTest extends AbstractRatioProviderTest
 {
