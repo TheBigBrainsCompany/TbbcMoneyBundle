@@ -95,9 +95,8 @@ In your config.yml, add the form fields presentations
 
 ```yaml
 twig:
-    form:
-        resources:
-            - 'TbbcMoneyBundle:Form:fields.html.twig'
+    form_themes:
+        - 'TbbcMoneyBundle:Form:fields.html.twig'
 ```
 
 You should also register custom Doctrine Money type:
@@ -418,13 +417,13 @@ class IndexController extends Controller
 
 ### Change the ratio provider
 
-The ratio provider by default is base on the service 'tbbc_money.ratio_provider.yahoo_finance'
+The ratio provider by default is base on the service 'tbbc_money.ratio_provider.ecb'
 
 This bundles contains three ratio providers :
 
-* tbbc_money.ratio_provider.yahoo_finance based on the Yahoo finance APIs https://developer.yahoo.com/
-* tbbc_money.ratio_provider.google based on the https://www.google.com/finance/converter service
 * tbbc_money.ratio_provider.ecb based on the data provided here https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
+* tbbc_money.ratio_provider.yahoo_finance based on the Yahoo finance APIs https://developer.yahoo.com/ (yahoo does not provide this api anymore)
+* tbbc_money.ratio_provider.google based on the https://www.google.com/finance/converter service (google does not provide this api anymore)
 
 You can change the service to use in the config.yml file :
 
@@ -434,6 +433,76 @@ tbbc_money:
     ratio_provider: tbbc_money.ratio_provider.google
 ```
 
+### Additional rate providers from Exchanger
+
+This project integrates https://github.com/florianv/exchanger library to work with currency exchange rates from various services.
+
+Installation: 
+
+`composer require "florianv/exchanger" "php-http/message" "php-http/guzzle6-adapter"`
+
+Configuration:
+
+First, you need to add services you would like to use into your services.yml file, e.g:
+    
+```
+ratio_provider.service.ecb:
+  class: Exchanger\Service\EuropeanCentralBank
+```
+
+Second, you need to update ratio provider used by MoneyBundle on your config.yml file:
+
+```
+tbbc_money:
+    [...]
+    ratio_provider: ratio_provider.service.ecb
+```
+
+Recommended:
+
+Some providers focus on a limited set of currencies, but give better data. 
+You can use several rate providers seamlessly on your project by bundling them into the chain.
+If some provider does not support certain currency, next provider in the chain would be attempted.
+
+Example of chained providers:
+
+```
+ratio_provider.service.ecb:
+  class: Exchanger\Service\EuropeanCentralBank
+
+ratio_provider.service.rcb:
+  class: Exchanger\Service\RussianCentralBank
+
+ratio_provider.service.cryptonator:
+  class: Exchanger\Service\Cryptonator
+
+ratio_provider.service.array:
+  class: Exchanger\Service\PhpArray
+  arguments:
+    -
+      'EUR/USD': 1.157
+      'EUR/AUD': 1.628
+
+ratio_provider.service.default:
+  class: Exchanger\Service\Chain
+  arguments:
+    -
+      - "@ratio_provider.service.ecb"
+      - "@ratio_provider.service.rcb"
+      - "@ratio_provider.service.cryptonator"
+      - "@ratio_provider.service.array"
+```
+
+As you can see here 4 providers would be attempted one after another until conversion rate is found.
+Check this page for a fill list of supported services and their configurations: https://github.com/florianv/exchanger/blob/master/doc/readme.md#supported-services
+
+And then you need to assign rate provider on your config.yml file:
+
+```
+tbbc_money:
+    [...]
+    ratio_provider: ratio_provider.service.default
+```
 
 ### Create your own ratio provider
 
