@@ -47,6 +47,5 @@
     "autoload": {
         "psr-4": { "Tbbc\\MoneyBundle\\": "" },
         "exclude-from-classmap": [ "/Tests/" ]
-    },
-    "target-dir": "Tbbc/MoneyBundle"
+    }
 }
