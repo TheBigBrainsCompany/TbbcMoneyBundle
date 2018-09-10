@@ -54,14 +54,14 @@ class ECBRatioProvider implements RatioProviderInterface
         $xml = $this->getXML();
         $rates = $this->parseXML($xml);
 
-        if (!isset($rates[$currency->getName()])) {
+        if (!isset($rates[$currency->getCode()])) {
             throw new MoneyException(
                 sprintf('The currency code %s does not exist in the ECB feed', $currencyCode)
             );
         }
 
         // return ratio
-        $ratio = (float) $rates[$currency->getName()];
+        $ratio = (float) $rates[$currency->getCode()];
 
         return $ratio;
     }
