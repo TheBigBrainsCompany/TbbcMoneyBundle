@@ -7,12 +7,13 @@
 namespace Tbbc\MoneyBundle\Twig\Extension;
 
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
+use Twig\Extension\AbstractExtension;
 
 /**
  * @author Philippe Le Van <philippe.levan@kitpages.fr>
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
-class CurrencyExtension extends \Twig_Extension
+class CurrencyExtension extends AbstractExtension
 {
     /**
      * @var MoneyFormatter

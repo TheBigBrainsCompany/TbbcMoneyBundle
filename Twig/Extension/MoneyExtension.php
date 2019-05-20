@@ -4,12 +4,13 @@ namespace Tbbc\MoneyBundle\Twig\Extension;
 use Money\Money;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
+use Twig\Extension\AbstractExtension;
 
 /**
  * @author Philippe Le Van <philippe.levan@kitpages.fr>
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
-class MoneyExtension extends \Twig_Extension
+class MoneyExtension extends AbstractExtension
 {
     /**
      * @var MoneyFormatter
