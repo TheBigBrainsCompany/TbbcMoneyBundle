@@ -21,6 +21,9 @@ class RatioSaveCommand extends Command
      */
     private $pairManager;
 
+    /**
+     * @param PairManagerInterface $pairManager
+     */
     public function __construct(PairManagerInterface $pairManager)
     {
         parent::__construct();
@@ -57,7 +60,7 @@ class RatioSaveCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $currencyCode = $input->getArgument('currencyCode');
-        $ratio = (float)$input->getArgument('ratio');
+        $ratio = (float) $input->getArgument('ratio');
 
         try {
             $this->pairManager->saveRatio($currencyCode, $ratio);

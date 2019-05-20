@@ -20,6 +20,9 @@ class RatioFetchCommand extends Command
      */
     private $pairManager;
 
+    /**
+     * @param PairManagerInterface $pairManager
+     */
     public function __construct(PairManagerInterface $pairManager)
     {
         parent::__construct();
