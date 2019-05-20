@@ -38,7 +38,7 @@
         "symfony/phpunit-bridge": "~2.8|~3.0|^4.0",
         "squizlabs/php_codesniffer": "^2.7",
         "m6web/symfony2-coding-standard": "^3.3",
-        "florianv/exchanger": "^2.2",
+        "florianv/exchanger": "^1.0|^2.0",
         "php-http/message": "^1.7",
         "php-http/guzzle6-adapter": "^2.0"
     },
