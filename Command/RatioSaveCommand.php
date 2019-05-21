@@ -1,7 +1,8 @@
 <?php
+
 namespace Tbbc\MoneyBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,8 +13,23 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
  * Class RatioSaveCommand
  * @package Tbbc\MoneyBundle\Command
  */
-class RatioSaveCommand extends ContainerAwareCommand
+class RatioSaveCommand extends Command
 {
+
+    /**
+     * @var PairManagerInterface
+     */
+    private $pairManager;
+
+    /**
+     * @param PairManagerInterface $pairManager
+     */
+    public function __construct(PairManagerInterface $pairManager)
+    {
+        parent::__construct();
+        $this->pairManager = $pairManager;
+    }
+
     /**
      * Configure command
      */
@@ -32,12 +48,11 @@ class RatioSaveCommand extends ContainerAwareCommand
                 'ratio',
                 InputArgument::REQUIRED,
                 'Ratio to the reference currency (ex: 1.2563) ?'
-            )
-        ;
+            );
     }
 
     /**
-     * @param InputInterface  $input
+     * @param InputInterface $input
      * @param OutputInterface $output
      *
      * @return void
@@ -47,10 +62,8 @@ class RatioSaveCommand extends ContainerAwareCommand
         $currencyCode = $input->getArgument('currencyCode');
         $ratio = (float) $input->getArgument('ratio');
 
-        /** @var PairManagerInterface $pairManager */
-        $pairManager = $this->getContainer()->get('tbbc_money.pair_manager');
         try {
-            $pairManager->saveRatio($currencyCode, $ratio);
+            $this->pairManager->saveRatio($currencyCode, $ratio);
             $output->writeln('ratio saved');
         } catch (MoneyException $e) {
             $output->writeln('ERROR : ratio no saved du to error : '.$e->getMessage());
