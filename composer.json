@@ -40,7 +40,7 @@
         "m6web/symfony2-coding-standard": "^3.3",
         "florianv/exchanger": "^1.0|^2.0",
         "php-http/message": "^1.7",
-        "php-http/guzzle6-adapter": "^2.0"
+        "php-http/guzzle6-adapter": "^1.0|^2.0"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "~1.1",
