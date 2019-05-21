@@ -4,12 +4,14 @@ namespace Tbbc\MoneyBundle\Twig\Extension;
 use Money\Money;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 /**
  * @author Philippe Le Van <philippe.levan@kitpages.fr>
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
-class MoneyExtension extends \Twig_Extension
+class MoneyExtension extends AbstractExtension
 {
     /**
      * @var MoneyFormatter
@@ -39,13 +41,13 @@ class MoneyExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('money_localized_format', array($this->moneyFormatter, 'localizedFormatMoney')),
-            new \Twig_SimpleFilter('money_format', array($this->moneyFormatter, 'formatMoney')),
-            new \Twig_SimpleFilter('money_format_amount', array($this->moneyFormatter, 'formatAmount')),
-            new \Twig_SimpleFilter('money_format_currency', array($this->moneyFormatter, 'formatCurrency')),
-            new \Twig_SimpleFilter('money_as_float', array($this->moneyFormatter, 'asFloat')),
-            new \Twig_SimpleFilter('money_get_currency', array($this->moneyFormatter, 'getCurrency')),
-            new \Twig_SimpleFilter('money_convert', array($this, 'convert')),
+            new TwigFilter('money_localized_format', array($this->moneyFormatter, 'localizedFormatMoney')),
+            new TwigFilter('money_format', array($this->moneyFormatter, 'formatMoney')),
+            new TwigFilter('money_format_amount', array($this->moneyFormatter, 'formatAmount')),
+            new TwigFilter('money_format_currency', array($this->moneyFormatter, 'formatCurrency')),
+            new TwigFilter('money_as_float', array($this->moneyFormatter, 'asFloat')),
+            new TwigFilter('money_get_currency', array($this->moneyFormatter, 'getCurrency')),
+            new TwigFilter('money_convert', array($this, 'convert')),
         );
     }
 

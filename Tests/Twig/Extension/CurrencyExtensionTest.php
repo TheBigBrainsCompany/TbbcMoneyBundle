@@ -6,6 +6,8 @@ use Money\Currency;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Twig\Extension\CurrencyExtension;
 use PHPUnit\Framework\TestCase;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 /**
  * @author Benjamin Dulau <benjamin@thebigbrainscompany.com>
@@ -47,8 +49,8 @@ class CurrencyExtensionTest extends TestCase
 
     protected function getTemplate($template)
     {
-        $loader = new \Twig_Loader_Array(array('index' => $template));
-        $twig = new \Twig_Environment($loader, array('debug' => true, 'cache' => false));
+        $loader = new ArrayLoader(array('index' => $template));
+        $twig = new Environment($loader, array('debug' => true, 'cache' => false));
         $twig->addExtension($this->extension);
 
         return $twig->loadTemplate('index');
