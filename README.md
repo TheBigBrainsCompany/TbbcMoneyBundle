@@ -153,6 +153,27 @@ $form = $this->createFormBuilder()
     ->getForm();
 ```
 
+Manipulating the form
+
+With `MoneyType` you can manipulate the form elements with
+
+`amount_options` for the amount field, and `currency_options` for the currency field, fx if you want to change the label.
+
+```php
+$form = $this->createFormBuilder()
+    ->add('price', MoneyType::class, [
+        'data' => Money::EUR(1000), //EUR 10
+        'amount_options' => array(
+            'label' => 'Amount',
+        ),
+        'currency_options' => array(
+            'label' => 'Currency',
+        ),
+    ])
+    ->getForm();
+```
+
+With `CurrencyType` only `currency_options` can be used, and with `SimpleMoneyType` only `amount_options` can be used.
 
 ### Saving Money with Doctrine
 

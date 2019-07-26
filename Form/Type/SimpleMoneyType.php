@@ -43,7 +43,7 @@ class SimpleMoneyType extends MoneyType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tbbc_amount', 'Symfony\Component\Form\Extension\Core\Type\TextType')
+            ->add('tbbc_amount', 'Symfony\Component\Form\Extension\Core\Type\TextType', $options['amount_options'])
         ;
 
         $transformer = new SimpleMoneyToArrayTransformer($this->decimals);
@@ -69,9 +69,11 @@ class SimpleMoneyType extends MoneyType
     {
         $resolver->setDefaults(array(
             'currency' => $this->referenceCurrencyCode,
+            'amount_options' => array(),
         ));
         $resolver->setAllowedTypes('currency', 'string');
         $resolver->setAllowedValues('currency', $this->currencyCodeList);
+        $resolver->setAllowedTypes('amount_options', 'array');
     }
 
     /**

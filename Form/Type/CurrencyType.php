@@ -38,10 +38,10 @@ class CurrencyType extends AbstractType
         foreach ($options["currency_choices"] as $currencyCode) {
             $choiceList[$currencyCode] = $currencyCode;
         }
-        $builder->add('tbbc_name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
+        $builder->add('tbbc_name', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array_merge(array(
             "choices" => $choiceList,
             "preferred_choices" => array($options["reference_currency"]),
-        ));
+        ), $options['currency_options']));
         $builder->addModelTransformer(new CurrencyToArrayTransformer());
     }
 
@@ -54,10 +54,12 @@ class CurrencyType extends AbstractType
         $resolver->setDefaults(array(
             'reference_currency' => $this->referenceCurrencyCode,
             'currency_choices' => $this->currencyCodeList,
+            'currency_options' => array(),
         ));
         $resolver->setAllowedTypes('reference_currency', 'string');
         $resolver->setAllowedTypes('currency_choices', 'array');
         $resolver->setAllowedValues('reference_currency', $this->currencyCodeList);
+        $resolver->setAllowedTypes('currency_options', 'array');
     }
 
     /**

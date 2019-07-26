@@ -9,6 +9,7 @@ namespace Tbbc\MoneyBundle\Tests\Form\Type;
 use Money\Currency;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
+use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Money\Money;
@@ -67,6 +68,32 @@ class SimpleMoneyTypeTest
         $formView = $form->createView();
 
         $this->assertEquals("1,20", $formView->children["tbbc_amount"]->vars["value"]);
+    }
+
+    public function testOptions()
+    {
+        \Locale::setDefault("fr_FR");
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array(
+            'amount_options' => array(
+                'label' => 'Amount',
+            ),
+        ));
+        $form->setData(Money::EUR(120));
+        $formView = $form->createView();
+
+        $this->assertEquals("1,20", $formView->children["tbbc_amount"]->vars["value"]);
+    }
+
+    public function testOptionsFailsIfNotValid()
+    {
+        $this->expectException(UndefinedOptionsException::class);
+        $this->expectExceptionMessageRegExp('/this_does_not_exists/');
+
+        $this->factory->create($this->simpleMoneyTypeClass, null, array(
+            'amount_options' => array(
+                'this_does_not_exists' => 'Amount',
+            ),
+        ));
     }
 
     protected function getExtensions()
