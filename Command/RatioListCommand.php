@@ -12,13 +12,14 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
  */
 class RatioListCommand extends ContainerAwareCommand
 {
+    protected static $defaultName = 'tbbc:money:ratio-list';
+    
     /**
      * Configure command
      */
     protected function configure()
     {
         $this
-            ->setName('tbbc:money:ratio-list')
             ->setHelp('The <info>tbbc:money:ratio-list</info> display list of registered ratio')
             ->setDescription('display list of registered ratio')
         ;
