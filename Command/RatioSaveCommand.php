@@ -14,13 +14,14 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
  */
 class RatioSaveCommand extends ContainerAwareCommand
 {
+    protected static $defaultName = 'tbbc:money:ratio-save';
+    
     /**
      * Configure command
      */
     protected function configure()
     {
         $this
-            ->setName('tbbc:money:ratio-save')
             ->setHelp('The <info>tbbc:money:ratio-save</info> save a currency ratio')
             ->setDescription('save a currency ratio')
             ->addArgument(
