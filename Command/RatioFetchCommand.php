@@ -13,13 +13,14 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
  */
 class RatioFetchCommand extends ContainerAwareCommand
 {
+    protected static $defaultName = 'tbbc:money:ratio-fetch';
+    
     /**
      * Configure command
      */
     protected function configure()
     {
         $this
-            ->setName('tbbc:money:ratio-fetch')
             ->setHelp('The <info>tbbc:money:ratio-fetch</info> fetch all needed ratio from a external ratio provider')
             ->setDescription('fetch all needed ratio from a external ratio provider')
         ;
