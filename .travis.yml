@@ -1,11 +1,12 @@
 language: php
 
 php:
-  - 5.5
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
+  - '5.5'
+  - '5.6'
+  - '7.0'
+  - '7.1'
+  - '7.2'
+  - '7.3'
 
 env:
   - SYMFONY_VERSION=2.8.* SYMFONY_DEPRECATIONS_HELPER=strict
@@ -18,12 +19,12 @@ env:
 matrix:
     fast_finish: true
     include:
-        - php: 7.1
+        - php: '7.1'
           env:
               - DEPENDENCIES=beta
               - SYMFONY_VERSION=4.0.*
               - SYMFONY_DEPRECATIONS_HELPER=strict
-        - php: 7.2
+        - php: '7.2'
           env:
               - DEPENDENCIES=beta
               - SYMFONY_VERSION=4.0.*
@@ -35,11 +36,9 @@ before_install:
 
 install:
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/framework-bundle:${SYMFONY_VERSION}" --no-update; fi;
-  - if [ "$TRAVIS_PHP_VERSION" != "5.4" ]; then composer require "florianv/exchanger" "php-http/message" "php-http/guzzle6-adapter" --no-update; fi;
-  - composer update --prefer-dist --no-interaction
+  - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer install --prefer-dist --no-interaction
 script:
-  - if [ "$TRAVIS_PHP_VERSION" != "5.4" ]; then vendor/bin/phpunit --coverage-text; fi;
-  - if [ "$TRAVIS_PHP_VERSION" = "5.4" ]; then vendor/bin/phpunit --coverage-text --exclude-group=php5.5+; fi;
+  - vendor/bin/phpunit --coverage-text
   - vendor/bin/phpcs . --standard=vendor/m6web/symfony2-coding-standard/Symfony2 -sp --ignore=vendor,Tests --extensions=php
 
 notifications:
