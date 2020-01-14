@@ -70,7 +70,7 @@ Installation
 Use [Composer](http://getcomposer.org/) and install with  
 `$ composer require tbbc/money-bundle`
 
-Then add the bundle in AppKernel :
+If you use Symfony 1, 2 or 3 then add the bundle to AppKernel:
 
 ```php
     public function registerBundles()
@@ -82,7 +82,18 @@ Then add the bundle in AppKernel :
     }
 ```
 
-In your config.yml, add the currencies you want to use and the reference currency.
+For Symfony 4 add the bundle to config/bundles.php (if it was not automatically added during the 
+installation of the package):
+
+```php
+    return [
+        // ...
+        Tbbc\MoneyBundle\TbbcMoneyBundle::class => ['all' => true],
+    ];
+```
+
+For Symfony 1, 2 or 3, in your config.yml, add the currencies you want to use and the reference currency. 
+For Symfony 4 create a file like config/packages/tbbc_money.yml and add it there.
 
 ```yaml
 tbbc_money:
@@ -91,7 +102,7 @@ tbbc_money:
     decimals: 2
 ```
 
-In your config.yml, add the form fields presentations
+In your config.yml or config/packages/tbbc_money.yml, add the form fields presentations
 
 ```yaml
 twig:

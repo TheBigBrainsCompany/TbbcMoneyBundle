@@ -55,12 +55,15 @@
 
         <!-- Commands -->
         <service id="tbbc_money.command.ratio_fetch" class="%tbbc_money.command.ratio_fetch.class%">
+            <argument type="service" id="tbbc_money.pair_manager" />
             <tag name="console.command" command="tbbc:money:ratio-fetch" />
         </service>
         <service id="tbbc_money.command.ratio_list" class="%tbbc_money.command.ratio_list.class%">
+            <argument type="service" id="tbbc_money.pair_manager" />
             <tag name="console.command" command="tbbc:money:ratio-list" />
         </service>
         <service id="tbbc_money.command.ratio_save" class="%tbbc_money.command.ratio_save.class%">
+            <argument type="service" id="tbbc_money.pair_manager" />
             <tag name="console.command" command="tbbc:money:ratio-save" />
         </service>
     </services>

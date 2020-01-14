@@ -5,6 +5,7 @@ namespace Tbbc\MoneyBundle\Tests\Twig\Extension;
 use Money\Currency;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Twig\Extension\CurrencyExtension;
+use Twig\Loader\ArrayLoader;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;

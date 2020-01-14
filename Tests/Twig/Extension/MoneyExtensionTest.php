@@ -6,6 +6,7 @@ use Money\Currency;
 use Money\Money;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Twig\Extension\MoneyExtension;
+use Twig\Loader\ArrayLoader;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Tbbc\MoneyBundle\Twig\Extension;
 
 use Money\Money;
