@@ -7,12 +7,14 @@
 namespace Tbbc\MoneyBundle\Twig\Extension;
 
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 /**
  * @author Philippe Le Van <philippe.levan@kitpages.fr>
  * @author Benjamin Dulau <benjamin.dulau@gmail.com>
  */
-class CurrencyExtension extends \Twig_Extension
+class CurrencyExtension extends AbstractExtension
 {
     /**
      * @var MoneyFormatter
@@ -35,8 +37,8 @@ class CurrencyExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('currency_name', array($this->moneyFormatter, 'formatCurrencyAsName')),
-            new \Twig_SimpleFilter('currency_symbol', array($this->moneyFormatter, 'formatCurrencyAsSymbol')),
+            new TwigFilter('currency_name', array($this->moneyFormatter, 'formatCurrencyAsName')),
+            new TwigFilter('currency_symbol', array($this->moneyFormatter, 'formatCurrencyAsSymbol')),
         );
     }
 
