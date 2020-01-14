@@ -8,6 +8,8 @@ use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Twig\Extension\MoneyExtension;
 use Twig\Loader\ArrayLoader;
 use PHPUnit\Framework\TestCase;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 /**
  * @author Benjamin Dulau <benjamin@thebigbrainscompany.com>
@@ -63,7 +65,7 @@ class MoneyExtensionTest extends TestCase
     protected function getTemplate($template)
     {
         $loader = new ArrayLoader(array('index' => $template));
-        $twig = new \Twig_Environment($loader, array('debug' => true, 'cache' => false));
+        $twig = new Environment($loader, array('debug' => true, 'cache' => false));
         $twig->addExtension($this->extension);
 
         return $twig->loadTemplate('index');
