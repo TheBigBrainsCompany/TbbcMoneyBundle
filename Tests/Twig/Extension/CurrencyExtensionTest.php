@@ -8,7 +8,6 @@ use Tbbc\MoneyBundle\Twig\Extension\CurrencyExtension;
 use Twig\Loader\ArrayLoader;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
-use Twig\Loader\ArrayLoader;
 
 /**
  * @author Benjamin Dulau <benjamin@thebigbrainscompany.com>
