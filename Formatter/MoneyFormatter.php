@@ -122,7 +122,13 @@ class MoneyFormatter
      */
     public function formatCurrencyAsSymbol(Currency $currency)
     {
-        return Intl::getCurrencyBundle()->getCurrencySymbol($currency->getCode());
+        //BC: Symfony < 4.3
+        if (!class_exists('Symfony\Component\Intl\Currencies')) {
+            return Intl::getCurrencyBundle()->getCurrencySymbol($currency->getCode());
+        }
+        //
+
+        return \Symfony\Component\Intl\Currencies::getSymbol($currency->getCode());
     }
 
     /**

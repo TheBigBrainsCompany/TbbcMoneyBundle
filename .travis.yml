@@ -7,10 +7,16 @@ php:
   - '7.4'
 
 env:
-  - SYMFONY_VERSION=3.4.* SYMFONY_DEPRECATIONS_HELPER=strict
-  - SYMFONY_VERSION=4.3.* SYMFONY_DEPRECATIONS_HELPER=strict
-  - SYMFONY_VERSION=4.4.* SYMFONY_DEPRECATIONS_HELPER=strict
-  - SYMFONY_VERSION=5.0.* SYMFONY_DEPRECATIONS_HELPER=strict
+  - SYMFONY_VERSION=3.4.* SYMFONY_DEPRECATIONS_HELPER=weak_vendors
+  - SYMFONY_VERSION=4.3.* SYMFONY_DEPRECATIONS_HELPER=weak_vendors
+  - SYMFONY_VERSION=4.4.* SYMFONY_DEPRECATIONS_HELPER=weak_vendors
+  - SYMFONY_VERSION=5.0.* SYMFONY_DEPRECATIONS_HELPER=weak_vendors
+
+matrix:
+  fast_finish: true
+  exclude:
+    - php: '7.1'
+      env: SYMFONY_VERSION=5.0.*
 
 before_install:
   - if [ "$DEPENDENCIES" = "beta"  ]; then composer config minimum-stability beta; fi;
@@ -22,7 +28,3 @@ install:
 script:
   - vendor/bin/phpunit --coverage-text
   - vendor/bin/phpcs . --standard=vendor/m6web/symfony2-coding-standard/Symfony2 -sp --ignore=vendor,Tests --extensions=php
-
-notifications:
-  email:
-    - travis-ci@kitpages.fr
