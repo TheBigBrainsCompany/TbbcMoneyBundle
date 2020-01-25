@@ -20,6 +20,7 @@
                 <directory>./Resources</directory>
                 <directory>./Tests</directory>
                 <directory>./vendor</directory>
+                <directory>./var</directory>
             </exclude>
         </whitelist>
     </filter>
