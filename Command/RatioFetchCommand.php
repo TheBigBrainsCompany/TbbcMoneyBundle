@@ -44,7 +44,7 @@ class RatioFetchCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @return void
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -54,5 +54,7 @@ class RatioFetchCommand extends Command
         } catch (MoneyException $e) {
             $output->writeln('ERROR during fetch ratio : '.$e->getMessage());
         }
+
+        return 0;
     }
 }

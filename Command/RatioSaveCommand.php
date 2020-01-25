@@ -55,7 +55,7 @@ class RatioSaveCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @return void
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -68,5 +68,7 @@ class RatioSaveCommand extends Command
         } catch (MoneyException $e) {
             $output->writeln('ERROR : ratio no saved du to error : '.$e->getMessage());
         }
+
+        return 0;
     }
 }

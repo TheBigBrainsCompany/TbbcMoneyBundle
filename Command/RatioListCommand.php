@@ -43,7 +43,7 @@ class RatioListCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @return void
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -52,5 +52,7 @@ class RatioListCommand extends Command
         foreach ($ratioList as $currencyCode => $ratio) {
             $output->writeln($currencyCode.';'.$ratio);
         }
+
+        return 0;
     }
 }
