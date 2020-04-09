@@ -10,7 +10,7 @@
         <parameter key="tbbc_money.money_manager.class">Tbbc\MoneyBundle\Money\MoneyManager</parameter>
         <parameter key="tbbc_money.pair_history_manager.class">Tbbc\MoneyBundle\PairHistory\PairHistoryManager</parameter>
         <parameter key="tbbc_money.pair.csv_storage.class">Tbbc\MoneyBundle\Pair\Storage\CsvStorage</parameter>
-        <parameter key="tbbc_money.pair_manager.ratio_file_name">%kernel.root_dir%/data/tbbc_money/ratio_file_name.csv</parameter>
+        <parameter key="tbbc_money.pair_manager.ratio_file_name">%kernel.project_dir%/../data/tbbc_money/ratio_file_name.csv</parameter>
         <parameter key="tbbc_money.ratio_provider.yahoo_finance.class">Tbbc\MoneyBundle\Pair\RatioProvider\YahooFinanceRatioProvider</parameter>
         <parameter key="tbbc_money.ratio_provider.google.class">Tbbc\MoneyBundle\Pair\RatioProvider\GoogleRatioProvider</parameter>
         <parameter key="tbbc_money.ratio_provider.ecb.class">Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider</parameter>
