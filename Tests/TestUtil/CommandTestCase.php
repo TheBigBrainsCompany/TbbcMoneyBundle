@@ -13,13 +13,16 @@ use Symfony\Component\Console\Output\StreamOutput;
  *
  * @author Alexandre Salomé <alexandre.salome@gmail.com>
  */
-abstract class CommandTestCase
-    extends WebTestCase
+abstract class CommandTestCase extends WebTestCase
 {
     /**
      * Runs a command and returns it output
+     * @param KernelBrowser $client
+     * @param $command
+     * @return string|StreamOutput
+     * @throws \Exception
      */
-    public function runCommand(KernelBrowser $client, $command)
+    public function runCommand($client, $command)
     {
         $application = new Application($client->getKernel());
         $application->setAutoExit(false);
