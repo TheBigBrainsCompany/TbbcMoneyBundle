@@ -47,6 +47,7 @@ class DoctrineStorage implements StorageInterface
             return $this->ratioList;
         }
 
+
         $repository = $this->objectManager->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio');
         $doctrineStorageRatios = $repository->findAll();
 

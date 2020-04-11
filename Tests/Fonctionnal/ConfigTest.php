@@ -2,29 +2,27 @@
 namespace Tbbc\MoneyBundle\Tests\Config;
 
 use Money\Money;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Input\StringInput;
 use Tbbc\MoneyBundle\Money\MoneyManager;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
-use Tbbc\MoneyBundle\Twig\CurrencyExtension;
-use Tbbc\MoneyBundle\Twig\MoneyExtension;
-use Tbbc\MoneyBundle\Type\MoneyType;
-use Doctrine\DBAL\Types\Type;
+use Tbbc\MoneyBundle\Twig\Extension\CurrencyExtension;
+use Tbbc\MoneyBundle\Twig\Extension\MoneyExtension;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 /**
  * @group functionnal
  */
-class ConfigTest
-    extends WebTestCase
+class ConfigTest extends WebTestCase
 {
-    /** @var  \Symfony\Bundle\FrameworkBundle\Client */
+    /** @var KernelBrowser */
     private $client;
     public function setUp()
     {
         parent::setUp();
-        /** @var \Symfony\Bundle\FrameworkBundle\Client client */
         $this->client = static::createClient();
+        $this->runCommand('doctrine:database:drop --force');
         $this->runCommand('doctrine:database:create');
         $this->runCommand('doctrine:schema:update --force');
     }
@@ -114,5 +112,7 @@ class ConfigTest
         \Locale::setDefault('en');
         /** @var CurrencyExtension $currencyExtension */
         $currencyExtension = $this->client->getContainer()->get("tbbc_money.twig.currency");
+
+        $this->assertInstanceOf(CurrencyExtension::class, $currencyExtension);
     }
 }

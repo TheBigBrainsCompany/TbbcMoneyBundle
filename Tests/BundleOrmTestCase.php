@@ -1,28 +1,21 @@
 <?php
 namespace Tbbc\MoneyBundle\Tests;
 
-use Tbbc\MoneyBundle\Tests\SchemaSetupListener;
-
 use Doctrine\Common\EventManager;
 use Doctrine\Common\Cache\ArrayCache;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver;
+use PHPUnit\DbUnit\Database\DataSet;
 
-use DoctrineExtensions\PHPUnit\OrmTestCase;
-
-class BundleOrmTestCase
-    extends OrmTestCase
+class BundleOrmTestCase extends OrmTestCase
 {
     /**
      * @return \Doctrine\ORM\EntityManager
      */
     protected function createEntityManager()
     {
-        $eventManager = new EventManager();
-        $eventManager->addEventListener(array("preTestSetUp"), new SchemaSetupListener());
-        
         $driver = new SimplifiedXmlDriver(array(
             __DIR__ . '/../Resources/config/doctrine/ratios' => 'Tbbc\MoneyBundle\Entity'
         ));
@@ -42,13 +35,12 @@ class BundleOrmTestCase
                 'driver' => 'pdo_sqlite',
                 'path' => "/tmp/sqlite-tbbc-money-test.db"
             ),
-            $config,
-            $eventManager
+            $config
         );
     }
 
     /**
-     * @return PHPUnit_Extensions_Database_DataSet_IDataSet
+     * @return DataSet
      */
     protected function getDataSet()
     {

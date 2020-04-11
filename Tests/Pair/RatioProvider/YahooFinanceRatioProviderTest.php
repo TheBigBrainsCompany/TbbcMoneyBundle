@@ -54,7 +54,7 @@ class YahooFinanceRatioProviderTest extends TestCase
     {
         $ratioProvider = new YahooFinanceRatioProvider();
 
-        $this->setExpectedException('Tbbc\MoneyBundle\MoneyException');
+        $this->expectException('Tbbc\MoneyBundle\MoneyException');
         $ratioProvider->fetchRatio('ZZZ', 'USD');
     }
 

@@ -15,7 +15,7 @@ class DoctrineStorageTest extends BundleOrmTestCase
      */
     protected $doctrineStorage;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         

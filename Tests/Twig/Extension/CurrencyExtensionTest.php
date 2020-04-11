@@ -53,6 +53,6 @@ class CurrencyExtensionTest extends TestCase
         $twig = new Environment($loader, array('debug' => true, 'cache' => false));
         $twig->addExtension($this->extension);
 
-        return $twig->loadTemplate('index');
+        return $twig->load('index');
     }
 }

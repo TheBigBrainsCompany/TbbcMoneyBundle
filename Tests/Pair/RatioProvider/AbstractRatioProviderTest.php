@@ -46,7 +46,7 @@ abstract class AbstractRatioProviderTest extends TestCase
 
     public function testExceptionForUnknownCurrency()
     {
-        $this->setExpectedException('Tbbc\MoneyBundle\MoneyException');
+        $this->expectException('Tbbc\MoneyBundle\MoneyException');
         $this->ratioProvider->fetchRatio('ZZZ', 'USD');
     }
 

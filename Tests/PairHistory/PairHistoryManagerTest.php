@@ -18,7 +18,7 @@ class PairHistoryManagerTest extends BundleOrmTestCase
 
     protected $ratioHistoryRepo;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $em = $this->getEntityManager();

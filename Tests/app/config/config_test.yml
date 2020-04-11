@@ -23,15 +23,9 @@ doctrine:
             default:
                 driver:   "pdo_sqlite"
                 memory:   true
-                path:     ":memory:"
-            other:
-                driver:   "pdo_sqlite"
-                memory:   true
-                path:     ":memory:"
+                path:     "/tmp/sqlite-tbbc-money-test.db"
 
     orm:
         entity_managers:
             default:
                 auto_mapping: true
-            other:
-                connection: other

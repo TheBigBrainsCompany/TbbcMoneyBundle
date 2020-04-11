@@ -103,7 +103,7 @@ class PairManager implements PairManagerInterface, Exchange
             $ratio,
             $savedAt
         );
-        $this->dispatcher->dispatch(TbbcMoneyEvents::AFTER_RATIO_SAVE, $event);
+        $this->dispatcher->dispatch($event, TbbcMoneyEvents::AFTER_RATIO_SAVE);
     }
 
     /**
@@ -167,6 +167,7 @@ class PairManager implements PairManagerInterface, Exchange
         if (!$this->ratioProvider) {
             throw new MoneyException('no ratio provider defined');
         }
+
         foreach ($this->getCurrencyCodeList() as $currencyCode) {
             if ($currencyCode != $this->getReferenceCurrencyCode()) {
                 $ratio = $this->ratioProvider->fetchRatio($this->getReferenceCurrencyCode(), $currencyCode);

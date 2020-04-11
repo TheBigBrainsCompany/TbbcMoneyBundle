@@ -1,6 +1,7 @@
 <?php
 namespace Tbbc\MoneyBundle\Tests\Console;
 
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 use Tbbc\MoneyBundle\Tests\TestUtil\CommandTestCase;
 
@@ -10,12 +11,12 @@ use Tbbc\MoneyBundle\Tests\TestUtil\CommandTestCase;
 class ConsoleTest
     extends CommandTestCase
 {
-    /** @var  \Symfony\Bundle\FrameworkBundle\Client */
+    /** @var  \Symfony\Bundle\FrameworkBundle\KernelBrowser */
     private $client;
     public function setUp()
     {
         parent::setUp();
-        /** @var \Symfony\Bundle\FrameworkBundle\Client client */
+        /** @var \Symfony\Bundle\FrameworkBundle\KernelBrowser client */
         $this->client = static::createClient();
 
         $this->runCommand($this->client,'doctrine:database:create');
