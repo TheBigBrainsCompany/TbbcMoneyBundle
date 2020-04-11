@@ -27,4 +27,4 @@ install:
   - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer install --prefer-dist --no-interaction
 script:
   - vendor/bin/phpunit --coverage-text
-  - vendor/bin/phpcs . --standard=vendor/m6web/symfony2-coding-standard/Symfony2 -sp --ignore=vendor,Tests --extensions=php
+  - vendor/bin/phpcs . --standard=vendor/m6web/symfony2-coding-standard/Symfony2 -sp --ignore=vendor,var,Tests --extensions=php
