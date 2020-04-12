@@ -51,6 +51,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('reference_currency')
                     ->isRequired()
+                    ->defaultValue('EUR')
                     ->cannotBeEmpty()
                 ->end()
                 ->booleanNode('enable_pair_history')

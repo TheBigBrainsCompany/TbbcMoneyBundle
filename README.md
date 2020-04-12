@@ -107,7 +107,7 @@ In your config.yml or config/packages/tbbc_money.yml, add the form fields presen
 ```yaml
 twig:
     form_themes:
-        - 'TbbcMoneyBundle:Form:fields.html.twig'
+        - '@TbbcMoney/Form/fields.html.twig'
 ```
 
 You should also register custom Doctrine Money type:
