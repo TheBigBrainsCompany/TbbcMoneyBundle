@@ -50,7 +50,6 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->scalarNode('reference_currency')
-                    ->isRequired()
                     ->defaultValue('EUR')
                     ->cannotBeEmpty()
                 ->end()
