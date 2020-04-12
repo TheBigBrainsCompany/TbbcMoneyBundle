@@ -2,8 +2,8 @@ TbbcMoneyBundle
 ===============
 
 [![Build Status](https://img.shields.io/travis/TheBigBrainsCompany/TbbcMoneyBundle/master.svg?style=flat-square)](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle)
-[![PHP](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg?style=flat-square)](https://php.net)
-[![Symfony](https://img.shields.io/badge/symfony-~2.8%7C~3.0-green.svg?style=flat-square)](https://symfony.com)
+[![PHP](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=flat-square)](https://php.net)
+[![Symfony](https://img.shields.io/badge/symfony-%5E4%7C%5E5-green.svg?style=flat-square)](https://symfony.com)
 [![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg?style=flat-square)](https://packagist.org/packages/tbbc/money-bundle/stats)
 [![Latest Stable Version](https://img.shields.io/packagist/v/tbbc/money-bundle.svg)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/releases/latest)
 [![license](https://img.shields.io/github/license/TheBigBrainsCompany/TbbcMoneyBundle.svg?style=flat-square)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/LICENSE)
@@ -15,7 +15,7 @@ a Symfony project.
 
 This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
 
-* This bundle is tested and is stable with Symfony 2.8 and Symfony 3.1 
+* This bundle is tested and is stable with Symfony 3.4, 4.3, 4.4, 5.0 
 
 Quick Start
 -----------
@@ -70,7 +70,7 @@ Installation
 Use [Composer](http://getcomposer.org/) and install with  
 `$ composer require tbbc/money-bundle`
 
-If you use Symfony 1, 2 or 3 then add the bundle to AppKernel:
+If you use Symfony 3 then add the bundle to AppKernel:
 
 ```php
     public function registerBundles()
@@ -82,7 +82,7 @@ If you use Symfony 1, 2 or 3 then add the bundle to AppKernel:
     }
 ```
 
-For Symfony 4 add the bundle to config/bundles.php (if it was not automatically added during the 
+For Symfony 4 and higher add the bundle to config/bundles.php (if it was not automatically added during the 
 installation of the package):
 
 ```php
@@ -92,8 +92,8 @@ installation of the package):
     ];
 ```
 
-For Symfony 1, 2 or 3, in your config.yml, add the currencies you want to use and the reference currency. 
-For Symfony 4 create a file like config/packages/tbbc_money.yml and add it there.
+For Symfony 3, in your config.yml, add the currencies you want to use and the reference currency. 
+For Symfony 4 and higher create a file like config/packages/tbbc_money.yml and add it there.
 
 ```yaml
 tbbc_money:
@@ -662,14 +662,6 @@ tbbc_money:
     enable_pair_history: true
     ratio_provider: tbbc_money.ratio_provider.yahoo_finance
 ```
-
-Note about older versions
--------------------------
-
-- Examples above use Symfony 3 syntax for the console (`./bin/console`), for version 2.8 you should use `./app/console` instead.
-- "class" constant (e.g. `MoneyType::class`) is only supported since PHP 5.5, if you have an older version, you should use the full 
-class name instead (e.g. `Tbbc\MoneyBundle\Type\MoneyType`)
-
 
 Contributing
 ------------
