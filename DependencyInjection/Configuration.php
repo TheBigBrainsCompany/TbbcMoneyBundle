@@ -47,6 +47,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('currencies')
                     ->prototype('scalar')
+                    ->defaultValue(['EUR', 'USD'])
                     ->end()
                 ->end()
                 ->scalarNode('reference_currency')
