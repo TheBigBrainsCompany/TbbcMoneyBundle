@@ -15,7 +15,7 @@ tbbc_money:
 framework:
     trusted_hosts: ~
     secret: "test"
-    test: true
+    test: ~
 
 doctrine:
     dbal:

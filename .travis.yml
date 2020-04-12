@@ -24,6 +24,7 @@ before_install:
 
 install:
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/framework-bundle:${SYMFONY_VERSION}" --no-update; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/browser-kit:${SYMFONY_VERSION}" --no-update; fi;
   - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer install --prefer-dist --no-interaction
 script:
   - vendor/bin/phpunit --coverage-text
