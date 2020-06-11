@@ -103,7 +103,7 @@ class PairManager implements PairManagerInterface, Exchange
             $ratio,
             $savedAt
         );
-        $this->dispatcher->dispatch($event, TbbcMoneyEvents::AFTER_RATIO_SAVE);
+        $this->dispatcher->dispatch(TbbcMoneyEvents::AFTER_RATIO_SAVE, $event);
     }
 
     /**
