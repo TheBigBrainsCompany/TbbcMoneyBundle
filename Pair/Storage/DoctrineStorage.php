@@ -4,7 +4,6 @@ namespace Tbbc\MoneyBundle\Pair\Storage;
 use Doctrine\ORM\EntityManagerInterface;
 use Tbbc\MoneyBundle\Entity\DoctrineStorageRatio;
 use Tbbc\MoneyBundle\Pair\StorageInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Class DoctrineStorage
