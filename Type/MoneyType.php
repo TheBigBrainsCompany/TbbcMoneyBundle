@@ -53,7 +53,7 @@ class MoneyType extends Type
 
         list($currency, $amount) = explode(' ', $value, 2);
 
-        return new Money((int) $amount, new Currency($currency));
+        return new Money($amount, new Currency($currency));
     }
 
     /**
