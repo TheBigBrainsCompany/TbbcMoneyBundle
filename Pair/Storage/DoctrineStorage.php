@@ -1,9 +1,9 @@
 <?php
 namespace Tbbc\MoneyBundle\Pair\Storage;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Tbbc\MoneyBundle\Entity\DoctrineStorageRatio;
 use Tbbc\MoneyBundle\Pair\StorageInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Class DoctrineStorage
@@ -12,11 +12,11 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class DoctrineStorage implements StorageInterface
 {
-    /** @var \Doctrine\Common\Persistence\ObjectManager */
-    protected $objectManager = null;
+    /** @var EntityManagerInterface|null */
+    protected $entityManager = null;
 
     /** @var array  */
-    protected $ratioList = array();
+    protected $ratioList = [];
 
     /** @var  string */
     protected $referenceCurrencyCode;
@@ -24,12 +24,12 @@ class DoctrineStorage implements StorageInterface
     /**
      * DoctrineStorage constructor.
      *
-     * @param ObjectManager $objectManager
-     * @param string        $referenceCurrencyCode
+     * @param EntityManagerInterface $entityManager
+     * @param string $referenceCurrencyCode
      */
-    public function __construct(ObjectManager $objectManager, $referenceCurrencyCode)
+    public function __construct(EntityManagerInterface $entityManager, string $referenceCurrencyCode)
     {
-        $this->objectManager = $objectManager;
+        $this->entityManager = $entityManager;
         $this->referenceCurrencyCode = $referenceCurrencyCode;
     }
 
@@ -41,14 +41,13 @@ class DoctrineStorage implements StorageInterface
      *
      * @throws \Tbbc\MoneyBundle\MoneyException
      */
-    public function loadRatioList($force = false)
+    public function loadRatioList(bool $force = false): array
     {
         if (($force === false) && (count($this->ratioList) > 0)) {
             return $this->ratioList;
         }
 
-
-        $repository = $this->objectManager->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio');
+        $repository = $this->entityManager->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio');
         $doctrineStorageRatios = $repository->findAll();
 
         // FIXME
@@ -72,22 +71,22 @@ class DoctrineStorage implements StorageInterface
     /**
      * @param array $ratioList
      */
-    public function saveRatioList($ratioList)
+    public function saveRatioList(array $ratioList)
     {
-        $doctrineStorageRatios = $this->objectManager->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio')->findAll();
+        $doctrineStorageRatios = $this->entityManager->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio')->findAll();
 
         foreach ($doctrineStorageRatios as $doctrineStorageRatio) {
-            $this->objectManager->remove($doctrineStorageRatio);
+            $this->entityManager->remove($doctrineStorageRatio);
         }
 
-        $this->objectManager->flush();
+        $this->entityManager->flush();
 
         foreach ($ratioList as $currencyCode => $ratio) {
-            $this->objectManager->persist(new DoctrineStorageRatio($currencyCode, $ratio));
+            $this->entityManager->persist(new DoctrineStorageRatio($currencyCode, $ratio));
         }
 
-        $this->objectManager->flush();
-        $this->objectManager->clear();
+        $this->entityManager->flush();
+        $this->entityManager->clear();
 
         $this->ratioList = $ratioList;
     }
