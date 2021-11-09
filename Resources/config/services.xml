@@ -34,6 +34,8 @@
             <argument>%tbbc_money.reference_currency%</argument>
             <argument>%tbbc_money.decimals%</argument>
         </service>
+        <service id="%tbbc_money.money_manager.class%" alias="tbbc_money.money_manager" public="false">
+        </service>
         <!-- Storage -->
         <service id="tbbc_money.pair.csv_storage" class="%tbbc_money.pair.csv_storage.class%" public="true">
             <argument>%tbbc_money.pair_manager.ratio_file_name%</argument>
