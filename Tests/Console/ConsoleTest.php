@@ -13,7 +13,7 @@ class ConsoleTest
 {
     /** @var  \Symfony\Bundle\FrameworkBundle\KernelBrowser */
     private $client;
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         /** @var \Symfony\Bundle\FrameworkBundle\KernelBrowser client */
@@ -53,6 +53,6 @@ class ConsoleTest
 
         $output = $this->runCommand($client, "tbbc:money:ratio-list");
 
-        $this->assertRegExp("/^Ratio list\nEUR;1\nUSD;\d.\d+\nCAD;\d.\d+\n\n$/", $output);
+        $this->assertMatchesRegularExpression("/^Ratio list\nEUR;1\nUSD;\d.\d+\nCAD;\d.\d+\n\n$/", $output);
     }
 }

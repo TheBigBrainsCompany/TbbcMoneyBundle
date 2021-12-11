@@ -1,0 +1,31 @@
+services:
+  test_ratio_provider:
+    class: Tbbc\MoneyBundle\Pair\RatioProvider\StaticRatioProvider
+    calls:
+      - ["setRatio", ["EUR", "USD", 1.089]]
+      - ["setRatio", ["EUR", "CAD", 1.452]]
+
+tbbc_money:
+  currencies: ["USD", "EUR", "CAD"]
+  reference_currency: "EUR"
+  decimals: 3
+  enable_pair_history: true
+  ratio_provider: test_ratio_provider
+
+framework:
+  trusted_hosts: ~
+  secret: "test"
+  test: ~
+
+doctrine:
+  dbal:
+    connections:
+      default:
+        driver:   "pdo_sqlite"
+        memory:   true
+        path:     "%kernel.cache_dir%/sqlite-tbbc-money-test.db"
+
+  orm:
+    entity_managers:
+      default:
+        auto_mapping: true

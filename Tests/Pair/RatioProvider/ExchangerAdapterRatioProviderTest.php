@@ -1,9 +1,11 @@
 <?php
-namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
+namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
 
 use Tbbc\MoneyBundle\Pair\RatioProvider\ExchangerAdapterRatioProvider;
 use Exchanger\Exchanger;
 use Exchanger\Service\PhpArray;
+use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
+use Tbbc\MoneyBundle\Tests\Pair\Storage\AbstractRatioProviderTest;
 
 /**
  * @author Pavel Dubinin <geekdevs@gmail.com>
@@ -15,7 +17,7 @@ class ExchangerAdapterRatioProviderTest extends AbstractRatioProviderTest
     /**
      * @inheritdoc
      */
-    protected function getRatioProvider()
+    protected function getRatioProvider(): RatioProviderInterface
     {
         $ratios = $this->getRatiosToTest();
 
@@ -38,7 +40,7 @@ class ExchangerAdapterRatioProviderTest extends AbstractRatioProviderTest
      *
      * @return float
      */
-    private function randomRatio($ratioMin, $ratioMax, $seed)
+    private function randomRatio(float $ratioMin, float $ratioMax, int $seed): float
     {
         $precision = 100;
         mt_srand($seed); //so that values are same across tests

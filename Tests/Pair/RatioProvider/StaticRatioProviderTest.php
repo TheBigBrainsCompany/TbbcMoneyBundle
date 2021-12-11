@@ -1,8 +1,10 @@
 <?php
 
-namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
+namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
 
 use Tbbc\MoneyBundle\Pair\RatioProvider\StaticRatioProvider;
+use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
+use Tbbc\MoneyBundle\Tests\Pair\Storage\AbstractRatioProviderTest;
 
 /**
  * @author Pavel Dubinin <geekdevs@gmail.com>
@@ -13,12 +15,12 @@ class StaticRatioProviderTest extends AbstractRatioProviderTest
     /**
      * @inheritdoc
      */
-    protected function getRatioProvider()
+    protected function getRatioProvider(): RatioProviderInterface
     {
         return new StaticRatioProvider();
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -57,7 +59,7 @@ class StaticRatioProviderTest extends AbstractRatioProviderTest
      *
      * @return float
      */
-    private function randomRatio($ratioMin, $ratioMax, $seed)
+    private function randomRatio(float $ratioMin, float $ratioMax, int $seed): float
     {
         $precision = 100;
         mt_srand($seed); //so that values are same across tests

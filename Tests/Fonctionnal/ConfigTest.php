@@ -1,6 +1,7 @@
 <?php
-namespace Tbbc\MoneyBundle\Tests\Config;
+namespace Tbbc\MoneyBundle\Tests\Fonctionnal;
 
+use Locale;
 use Money\Money;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -16,9 +17,8 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
  */
 class ConfigTest extends WebTestCase
 {
-    /** @var KernelBrowser */
-    private $client;
-    public function setUp()
+    private KernelBrowser $client;
+    public function setUp(): void
     {
         parent::setUp();
         $this->client = static::createClient();
@@ -27,7 +27,7 @@ class ConfigTest extends WebTestCase
         $this->runCommand('doctrine:schema:update --force');
     }
 
-    protected function runCommand($command)
+    protected function runCommand($command): int
     {
         $command = sprintf('%s --quiet', $command);
 
@@ -48,7 +48,7 @@ class ConfigTest extends WebTestCase
 
     public function testMoneyTwigExtension()
     {
-        \Locale::setDefault('en');
+        Locale::setDefault('en');
         /** @var PairManagerInterface $pairManager */
         $pairManager = $this->client->getContainer()->get("tbbc_money.pair_manager");
         $pairManager->saveRatio("USD", 1.25);
@@ -70,7 +70,7 @@ class ConfigTest extends WebTestCase
 
     public function testHistoryRatio()
     {
-        \Locale::setDefault('en');
+        Locale::setDefault('en');
         /** @var PairManagerInterface $pairManager */
         $pairManager = $this->client->getContainer()->get("tbbc_money.pair_manager");
         $pairManager->saveRatio("USD", 1.25);
@@ -93,7 +93,7 @@ class ConfigTest extends WebTestCase
         $em = $this->client->getContainer()->get("doctrine.orm.entity_manager");
         $repo = $em->getRepository('\Tbbc\MoneyBundle\Entity\RatioHistory');
         $list = $repo->findAll();
-        $this->assertEquals(2, count($list));
+        $this->assertCount(2, $list);
 
     }
 
@@ -104,12 +104,12 @@ class ConfigTest extends WebTestCase
         $repo = $em->getRepository('\Tbbc\MoneyBundle\Entity\RatioHistory');
         $list = $repo->findAll();
 
-        $this->assertEquals(2, count($list));
+        $this->assertCount(2, $list);
     }
 
     public function testCurrencyTwigExtension()
     {
-        \Locale::setDefault('en');
+        Locale::setDefault('en');
         /** @var CurrencyExtension $currencyExtension */
         $currencyExtension = $this->client->getContainer()->get("tbbc_money.twig.currency");
 

@@ -6,6 +6,7 @@
 
 namespace Tbbc\MoneyBundle\Tests\Form\Type;
 
+use Locale;
 use Money\Currency;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
@@ -15,12 +16,11 @@ use Tbbc\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Money\Money;
 
-class MoneyTypeTest
-    extends TypeTestCase
+class MoneyTypeTest extends TypeTestCase
 {
 
-    private $currencyTypeClass = 'Tbbc\MoneyBundle\Form\Type\CurrencyType';
-    private $moneyTypeClass = 'Tbbc\MoneyBundle\Form\Type\MoneyType';
+    private string $currencyTypeClass = 'Tbbc\MoneyBundle\Form\Type\CurrencyType';
+    private string $moneyTypeClass = 'Tbbc\MoneyBundle\Form\Type\MoneyType';
 
     public function testBindValid()
     {
@@ -36,7 +36,7 @@ class MoneyTypeTest
 
     public function testBindDecimalValid()
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->moneyTypeClass, null, array(
             "currency_type" => $this->currencyTypeClass,
         ));
@@ -49,7 +49,7 @@ class MoneyTypeTest
 
     public function testGreaterThan1000Valid()
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->moneyTypeClass, null, array(
             "currency_type" => $this->currencyTypeClass,
         ));
@@ -62,7 +62,7 @@ class MoneyTypeTest
 
     public function testSetData()
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->moneyTypeClass, null, array(
             "currency_type" => $this->currencyTypeClass,
         ));
@@ -74,7 +74,7 @@ class MoneyTypeTest
 
     public function testOptions()
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->moneyTypeClass, null, array(
             "currency_type" => $this->currencyTypeClass,
             "amount_options" => array(
@@ -93,7 +93,7 @@ class MoneyTypeTest
     public function testOptionsFailsIfNotValid()
     {
         $this->expectException(UndefinedOptionsException::class);
-        $this->expectExceptionMessageRegExp('/this_does_not_exists/');
+        $this->expectExceptionMessageMatches('/this_does_not_exists/');
 
         $this->factory->create($this->moneyTypeClass, null, array(
             "currency_type" => $this->currencyTypeClass,
@@ -106,7 +106,7 @@ class MoneyTypeTest
         ));
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         return array(
             new PreloadedExtension(

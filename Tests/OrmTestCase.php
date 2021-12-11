@@ -20,17 +20,13 @@ use Tbbc\MoneyBundle\Tests\DatabaseTestCase;
 
 abstract class OrmTestCase extends DatabaseTestCase
 {
-    /**
-     * @var EntityManager
-     */
-    private $_em = null;
+    private ?EntityManager $_em = null;
 
     /**
      * Performs operation returned by getSetUpOperation().
      */
     protected function setUp(): void
     {
-        $this->databaseTester = NULL;
         $tester = $this->getDatabaseTester();
 
         $tester->setSetUpOperation($this->getSetUpOperation());

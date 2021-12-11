@@ -2,6 +2,7 @@
 
 namespace Tbbc\MoneyBundle\Tests\TestUtil;
 
+use Exception;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -19,10 +20,10 @@ abstract class CommandTestCase extends WebTestCase
      * Runs a command and returns it output
      * @param KernelBrowser $client
      * @param $command
-     * @return string|StreamOutput
-     * @throws \Exception
+     * @return string
+     * @throws Exception
      */
-    public function runCommand($client, $command)
+    public function runCommand(KernelBrowser $client, $command): string
     {
         $application = new Application($client->getKernel());
         $application->setAutoExit(false);

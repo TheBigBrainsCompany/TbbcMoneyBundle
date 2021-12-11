@@ -6,21 +6,16 @@
 
 namespace Tbbc\MoneyBundle\Tests\Form\Type;
 
-use Money\Currency;
-use Symfony\Component\Form\PreloadedExtension;
-use Symfony\Component\Form\Test\FormIntegrationTestCase;
-use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
-use Tbbc\MoneyBundle\Form\Type\CurrencyType;
-use Symfony\Component\Form\Test\TypeTestCase;
+use Locale;
 use Money\Money;
+use Symfony\Component\Form\PreloadedExtension;
+use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Tbbc\MoneyBundle\Form\Type\SimpleMoneyType;
-use Tbbc\MoneyBundle\Pair\PairManager;
 
-class SimpleMoneyTypeTest
-    extends TypeTestCase
+class SimpleMoneyTypeTest extends TypeTestCase
 {
-    private $pairManager;
-    private $simpleMoneyTypeClass = 'Tbbc\MoneyBundle\Form\Type\SimpleMoneyType';
+    private string $simpleMoneyTypeClass = 'Tbbc\MoneyBundle\Form\Type\SimpleMoneyType';
 
     public function testBindValid()
     {
@@ -30,9 +25,10 @@ class SimpleMoneyTypeTest
         ));
         $this->assertEquals(Money::EUR(1200), $form->getData());
     }
+
     public function testBindValidDecimals()
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
         $form->submit(array(
             "tbbc_amount" => '1,2'
@@ -42,7 +38,7 @@ class SimpleMoneyTypeTest
 
     public function testBindDecimalValid()
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
         $form->submit(array(
             "tbbc_amount" => '12,5'
@@ -52,7 +48,7 @@ class SimpleMoneyTypeTest
 
     public function testGreaterThan1000Valid()
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
         $form->submit(array(
             "tbbc_amount" => '1 252,5'
@@ -62,7 +58,7 @@ class SimpleMoneyTypeTest
 
     public function testSetData()
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
         $form->setData(Money::EUR(120));
         $formView = $form->createView();
@@ -72,7 +68,7 @@ class SimpleMoneyTypeTest
 
     public function testOptions()
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->simpleMoneyTypeClass, null, array(
             'amount_options' => array(
                 'label' => 'Amount',
@@ -96,7 +92,7 @@ class SimpleMoneyTypeTest
         ));
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         //This is probably not ideal, but I'm not sure how to set up the pair manager
         // with different decimals for different tests in Symfony 3.0
@@ -104,13 +100,13 @@ class SimpleMoneyTypeTest
         $currencies = array('EUR', 'USD');
         $referenceCurrency = 'EUR';
 
-        if($this->getName() === "testBindValidDecimals")
+        if ($this->getName() === "testBindValidDecimals")
             $decimals = 3;
 
-        $this->pairManager = $this->getMockBuilder('Tbbc\MoneyBundle\Pair\PairManager')
+        $pairManager = $this->getMockBuilder('Tbbc\MoneyBundle\Pair\PairManager')
             ->disableOriginalConstructor()
             ->getMock();
-        $this->pairManager->expects($this->any())
+        $pairManager->expects($this->any())
             ->method('getReferenceCurrencyCode')
             ->will($this->returnValue("EUR"));
 
@@ -121,9 +117,9 @@ class SimpleMoneyTypeTest
         );
     }
 
-    public function testOverrideCurrency()
+    public function testOverrideCurrency(): void
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->simpleMoneyTypeClass, null, ["currency" => "USD"]);
         $form->submit(array(
             "tbbc_amount" => '1 252,5'

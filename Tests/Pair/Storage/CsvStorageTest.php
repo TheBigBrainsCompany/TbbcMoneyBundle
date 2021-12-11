@@ -1,33 +1,30 @@
 <?php
+
 namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 
-use Money\Money;
-use Tbbc\MoneyBundle\MoneyException;
-use Tbbc\MoneyBundle\Pair\PairManager;
-use Tbbc\MoneyBundle\Pair\PairManagerInterface;
-use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 use PHPUnit\Framework\TestCase;
+use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 
 /**
  * @group manager
  */
 class CsvStorageTest extends TestCase
 {
-    /** @var  CsvStorage */
-    protected $storage;
-    protected $fileName;
-    public function setUp()
+    protected CsvStorage $storage;
+    protected string $fileName;
+
+    public function setUp(): void
     {
-        $this->fileName = __DIR__."/../app/data/tbbc_money/pair.csv";
+        $this->fileName = __DIR__ . "/../app/data/tbbc_money/pair.csv";
         $dir = dirname($this->fileName);
-        exec("rm -rf ".escapeshellarg($dir));
+        exec("rm -rf " . escapeshellarg($dir));
         $this->storage = new CsvStorage($this->fileName, "EUR");
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $dir = dirname($this->fileName);
-        exec("rm -rf ".escapeshellarg($dir));
+        exec("rm -rf " . escapeshellarg($dir));
     }
 
     public function testSave()
@@ -45,7 +42,7 @@ class CsvStorageTest extends TestCase
         );
 
         $ratioList = $this->storage->loadRatioList();
-        $this->assertEquals(array("EUR"=>1.0, "USD"=>1.25), $ratioList);
+        $this->assertEquals(array("EUR" => 1.0, "USD" => 1.25), $ratioList);
 
         $this->storage->saveRatioList($ratioList);
         $this->assertEquals(

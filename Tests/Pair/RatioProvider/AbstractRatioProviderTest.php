@@ -19,9 +19,9 @@ abstract class AbstractRatioProviderTest extends TestCase
      *
      * @var RatioProviderInterface
      */
-    protected $ratioProvider;
+    protected RatioProviderInterface $ratioProvider;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ratioProvider = $this->getRatioProvider();
     }
@@ -30,7 +30,7 @@ abstract class AbstractRatioProviderTest extends TestCase
     {
         foreach ($this->getRatiosToTest() as $testParameters) {
             $ratio = $this->ratioProvider->fetchRatio($testParameters['reference'], $testParameters['currency']);
-            $this->assertInternalType('float', $ratio, 'The fetched ratio must be a float');
+            $this->assertIsFloat($ratio, 'The fetched ratio must be a float');
             $this->assertLessThan(
                 $testParameters['ratio_max'],
                 $ratio,
@@ -52,10 +52,8 @@ abstract class AbstractRatioProviderTest extends TestCase
 
     /**
      * Returns the instanciated RatioProvider service that will be tested.
-     *
-     * @return RatioProviderInterface
      */
-    abstract protected function getRatioProvider();
+    abstract protected function getRatioProvider(): RatioProviderInterface;
 
     /**
      * Each array value returned is an array with the keys :
@@ -63,10 +61,8 @@ abstract class AbstractRatioProviderTest extends TestCase
      *  - currency : The currency for which we want the ratio
      *  - ratio_min : The minimum ratio value considered valid
      *  - ratio_max : The maximum ratio value considered valid.
-     *
-     * @return array[]
      */
-    protected function getRatiosToTest()
+    protected function getRatiosToTest(): array
     {
         return array(
             array(

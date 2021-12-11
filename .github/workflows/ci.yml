@@ -1,0 +1,48 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  ci:
+    strategy:
+      matrix:
+        php-versions: [ '8.0', '8.1' ]
+        composer-versions: ['update', 'update --prefer-lowest']
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: xdebug
+          tools: phpcpd
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Setup composer versions
+        run: composer ${{ matrix.composer-versions }}
+
+      - name: Setup tools
+        run: composer install --working-dir=tools
+
+      - name: Run phpcpd
+        run: phpcpd src tests
+
+      - name: Run phpcsfixer
+        run: tools/vendor/bin/php-cs-fixer --dry-run --diff
+
+      - name: Psalm
+        run: vendor/bin/psalm
+
+      - name: Run tests
+        run: vendor/bin/phpunit --coverage-text

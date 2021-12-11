@@ -1,6 +1,6 @@
 <?php
 
-namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
+namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
 
 use Money\Currency;
 use Tbbc\MoneyBundle\Pair\RatioProvider\YahooFinanceRatioProvider;
@@ -14,9 +14,7 @@ class YahooFinanceRatioProviderTest extends TestCase
 {
     public function testRatioFetchingEUR_USD()
     {
-        $providerMock = $this->getMockBuilder('Tbbc\MoneyBundle\Pair\RatioProvider\YahooFinanceRatioProvider')
-            ->setMethods(array('getEndpoint', 'executeQuery'))
-            ->getMock();
+        $providerMock = $this->createMock('Tbbc\MoneyBundle\Pair\RatioProvider\YahooFinanceRatioProvider');
 
         $providerMock->expects($this->any())
             ->method('getEndpoint')
@@ -33,10 +31,7 @@ class YahooFinanceRatioProviderTest extends TestCase
 
     public function testRatioFetchingGBP_EUR()
     {
-        $providerMock = $this->getMockBuilder('Tbbc\MoneyBundle\Pair\RatioProvider\YahooFinanceRatioProvider')
-            ->setMethods(array('getEndpoint', 'executeQuery'))
-            ->getMock();
-
+        $providerMock = $this->createMock('Tbbc\MoneyBundle\Pair\RatioProvider\YahooFinanceRatioProvider');
         $providerMock->expects($this->any())
             ->method('getEndpoint')
             ->with(new Currency('GBP'), new Currency('EUR'))
@@ -58,34 +53,22 @@ class YahooFinanceRatioProviderTest extends TestCase
         $ratioProvider->fetchRatio('ZZZ', 'USD');
     }
 
-    /**
-     * @return string
-     */
-    private function getUrl_EUR_USD()
+    private function getUrl_EUR_USD(): string
     {
         return 'https://query.yahooapis.com/v1/public/yql?q=select+%2A+from+yahoo.finance.xchange+where+pair+in+%28%22EURUSD%22%29&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
     }
 
-    /**
-     * @return string
-     */
-    private function getOutput_EUR_USD()
+    private function getOutput_EUR_USD(): string
     {
         return '{"query":{"count":1,"created":"2016-10-25T17:07:37Z","lang":"en-US","results":{"rate":{"id":"EURUSD","Name":"EUR/USD","Rate":"1.0856","Date":"10/25/2016","Time":"3:55pm","Ask":"1.0857","Bid":"1.0856"}}}}';
     }
 
-    /**
-     * @return string
-     */
-    private function getUrl_GBP_EUR()
+    private function getUrl_GBP_EUR(): string
     {
         return 'https://query.yahooapis.com/v1/public/yql?q=select+%2A+from+yahoo.finance.xchange+where+pair+in+%28%22GBPEUR%22%29&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
     }
 
-    /**
-     * @return string
-     */
-    private function getOutput_GBP_EUR()
+    private function getOutput_GBP_EUR(): string
     {
         return '{"query":{"count":1,"created":"2016-10-25T17:07:39Z","lang":"en-US","results":{"rate":{"id":"GBPEUR","Name":"GBP/EUR","Rate":"1.1181","Date":"10/25/2016","Time":"5:21pm","Ask":"1.1182","Bid":"1.1181"}}}}';
     }

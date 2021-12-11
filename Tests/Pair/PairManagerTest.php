@@ -13,10 +13,10 @@ use PHPUnit\Framework\TestCase;
  */
 class PairManagerTest extends TestCase
 {
-    /** @var  PairManager */
-    protected $manager;
-    protected $fileName;
-    public function setUp()
+    protected PairManager $manager;
+    protected string $fileName;
+
+    public function setUp(): void
     {
         $this->fileName = __DIR__."/../app/data/tbbc_money/pair.csv";
         $dir = dirname($this->fileName);
@@ -33,7 +33,7 @@ class PairManagerTest extends TestCase
         );
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $dir = dirname($this->fileName);
         exec("rm -rf ".escapeshellarg($dir));
@@ -46,7 +46,7 @@ class PairManagerTest extends TestCase
         $this->assertEquals(Money::EUR(100), $sameEur);
         try {
             $this->manager->convert($eur, "USD");
-            $this->assertTrue(false);
+            $this->fail();
         } catch (MoneyException $e) {
             $this->assertTrue(true);
         }
@@ -89,20 +89,19 @@ class PairManagerTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \Tbbc\MoneyBundle\MoneyException
-     */
     public function testRatioExceptions()
     {
+        $this->expectException(MoneyException::class);
+
         $this->manager->saveRatio("USD", -2.3);
     }
-    /**
-     * @expectedException \Tbbc\MoneyBundle\MoneyException
-     */
+
     public function testCurrencyWithoutRatio()
     {
+        $this->expectException(MoneyException::class);
+
         $eur = Money::BSD(100);
-        $bsd = $this->manager->convert($eur, "EUR");
+        $this->manager->convert($eur, "EUR");
     }
 
     public function testRatioProvider()
@@ -127,11 +126,10 @@ class PairManagerTest extends TestCase
         $this->assertSame(1.54, $this->manager->getRelativeRatio("EUR", "CAD"));
     }
 
-    /**
-     * @expectedException \Tbbc\MoneyBundle\MoneyException
-     */
     public function testNoRatioProvider()
     {
+        $this->expectException(MoneyException::class);
+
         $this->manager->saveRatioListFromRatioProvider();
     }
 }

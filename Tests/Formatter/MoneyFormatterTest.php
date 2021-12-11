@@ -14,17 +14,11 @@ use PHPUnit\Framework\TestCase;
  */
 class MoneyFormatterTest extends TestCase
 {
-    /**
-     * @var MoneyFormatter
-     */
-    protected $formatter;
+    protected MoneyFormatter $formatter;
 
-    /**
-     * @var Money
-     */
-    protected $inputMoney;
+    protected Money $inputMoney;
 
-    public function setUp()
+    public function setUp(): void
     {
         \Locale::setDefault('fr_FR');
         $this->formatter = new MoneyFormatter(2);

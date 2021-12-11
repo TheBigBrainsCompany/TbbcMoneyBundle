@@ -12,39 +12,58 @@
         },
         {
             "name": "Sebastien Lefebvre"
+        },
+        {
+            "name": "Martin Aarhof"
         }
     ],
     "require": {
-        "php": ">=7.1",
+        "php": ">=8.0",
         "ext-curl" : "*",
-        "symfony/framework-bundle": "^3.4|^4.0|^5.0",
+        "ext-intl": "*",
+        "ext-simplexml": "*",
         "moneyphp/money": "^3.0",
-        "symfony/form": "^3.4|^4.0|^5.0",
-        "symfony/twig-bundle": "^3.4|^4.0|^5.0",
-        "symfony/console": "^3.4|^4.0|^5.0",
-        "symfony/dom-crawler": "^3.4|^4.0|^5.0"
+        "symfony/form": "^5.4|^6.0",
+        "symfony/twig-bundle": "^5.4|^6.0",
+        "symfony/console": "^5.4|^6.0",
+        "symfony/dom-crawler": "^5.4|^6.0",
+        "symfony/event-dispatcher": "^5.4|^6.0",
+        "symfony/templating": "^5.4|^6.0",
+        "symfony/http-client": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tbbc\\MoneyBundle\\": "src"
+        }
     },
     "require-dev": {
-        "symfony/browser-kit": "^3.4|^4.0|^5.0",
         "ext-sqlite3": "*",
+        "symfony/browser-kit": "^5.4|^6.0",
         "doctrine/doctrine-bundle": "^1.12|^2.0",
-        "doctrine/orm": "~2.7",
-        "phpunit/phpunit": "~7|~8",
-        "phpunit/dbunit": "^4",
-        "symfony/phpunit-bridge": "^3.0|^4.0|^5.0",
-        "squizlabs/php_codesniffer": "^2.7",
-        "m6web/symfony2-coding-standard": "^3.3",
-        "florianv/exchanger": "^1.0|^2.0",
+        "doctrine/orm": "^2.7|^3.0",
+        "florianv/exchanger": "^2.0",
         "php-http/message": "^1.0",
-        "php-http/guzzle6-adapter": "^1.0|^2.0"
+        "php-http/guzzle6-adapter": "^2.0",
+        "vimeo/psalm": "^4.13",
+        "symfony/phpunit-bridge": "^5.4 | ^6.0",
+        "phpunit/phpunit": "^9.5",
+        "symfony/yaml": "^6.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tbbc\\MoneyBundle\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "fix": [
+            "tools/vendor/bin/php-cs-fixer fix",
+            "vendor/bin/psalm",
+            "vendor/bin/phpunit --coverage-text --coverage-html=.build"
+        ]
     },
     "suggest": {
         "doctrine/doctrine-bundle": "~1.1",
         "doctrine/orm": "~2.7",
         "florianv/exchanger": "Exchanger is a PHP framework to work with currency exchange rates from various services."
-    },
-    "autoload": {
-        "psr-4": { "Tbbc\\MoneyBundle\\": "" },
-        "exclude-from-classmap": [ "/Tests/" ]
     }
 }

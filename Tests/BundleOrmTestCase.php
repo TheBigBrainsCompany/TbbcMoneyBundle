@@ -1,20 +1,13 @@
 <?php
 namespace Tbbc\MoneyBundle\Tests;
 
-use Doctrine\Common\EventManager;
-use Doctrine\Common\Cache\ArrayCache;
-
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver;
-use PHPUnit\DbUnit\Database\DataSet;
 
 class BundleOrmTestCase extends OrmTestCase
 {
-    /**
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function createEntityManager()
+    protected function createEntityManager(): EntityManager
     {
         $driver = new SimplifiedXmlDriver(array(
             __DIR__ . '/../Resources/config/doctrine/ratios' => 'Tbbc\MoneyBundle\Entity'
@@ -22,7 +15,7 @@ class BundleOrmTestCase extends OrmTestCase
 
         // create config object
         $config = new Configuration();
-        $config->setMetadataCacheImpl(new ArrayCache());
+        //$config->setMetadataCache(new ArrayCache());
         $config->setMetadataDriverImpl($driver);
         $config->setProxyDir(__DIR__ . '/TestProxies');
         $config->setProxyNamespace('Tbbc\MoneyBundle\Tests\TestProxies');

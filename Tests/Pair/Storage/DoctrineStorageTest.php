@@ -10,10 +10,7 @@ use Tbbc\MoneyBundle\Entity\DoctrineStorageRatio;
  */
 class DoctrineStorageTest extends BundleOrmTestCase
 {
-    /**
-     * @var \Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage
-     */
-    protected $doctrineStorage;
+    protected DoctrineStorage $doctrineStorage;
 
     public function setUp(): void
     {
@@ -22,7 +19,7 @@ class DoctrineStorageTest extends BundleOrmTestCase
         $this->doctrineStorage = new DoctrineStorage($this->getEntityManager(), 'USD');
     }
     
-    public function testLoadDefaultCurrency ()
+    public function testLoadDefaultCurrency()
     {
         $ratioList = $this->doctrineStorage->loadRatioList();
 

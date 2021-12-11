@@ -6,16 +6,16 @@
 
 namespace Tbbc\MoneyBundle\Tests\Form\Type;
 
+use Locale;
 use Money\Currency;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 
-class CurrencyTypeTest
-    extends TypeTestCase
+class CurrencyTypeTest extends TypeTestCase
 {
-    private $currencyTypeClass = 'Tbbc\MoneyBundle\Form\Type\CurrencyType';
+    private string $currencyTypeClass = 'Tbbc\MoneyBundle\Form\Type\CurrencyType';
 
     public function testBindValid()
     {
@@ -26,7 +26,7 @@ class CurrencyTypeTest
 
     public function testSetData()
     {
-        \Locale::setDefault("fr_FR");
+        Locale::setDefault("fr_FR");
         $form = $this->factory->create($this->currencyTypeClass, null, array());
         $form->setData(new Currency("USD"));
         $formView = $form->createView();
@@ -51,7 +51,7 @@ class CurrencyTypeTest
     public function testOptionsFailsIfNotValid()
     {
         $this->expectException(UndefinedOptionsException::class);
-        $this->expectExceptionMessageRegExp('/this_does_not_exists/');
+        $this->expectExceptionMessageMatches('/this_does_not_exists/');
 
         $this->factory->create($this->currencyTypeClass, null, array(
             'currency_options' => array(
@@ -60,7 +60,7 @@ class CurrencyTypeTest
         ));
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         return array(
             new PreloadedExtension(
