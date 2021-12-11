@@ -2,3 +2,4 @@ composer.lock
 vendor
 /*.cache
 .build
+/var
