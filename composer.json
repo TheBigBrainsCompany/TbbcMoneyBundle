@@ -46,5 +46,10 @@
     "autoload": {
         "psr-4": { "Tbbc\\MoneyBundle\\": "" },
         "exclude-from-classmap": [ "/Tests/" ]
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     }
 }

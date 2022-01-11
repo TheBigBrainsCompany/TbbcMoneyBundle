@@ -76,16 +76,16 @@ class DoctrineStorage implements StorageInterface
     {
         $doctrineStorageRatios = $this->entityManager->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio')->findAll();
 
+        // first remove all existing ratios
         foreach ($doctrineStorageRatios as $doctrineStorageRatio) {
             $this->entityManager->remove($doctrineStorageRatio);
         }
-
-        $this->entityManager->flush();
-
+        // then add new ones
         foreach ($ratioList as $currencyCode => $ratio) {
             $this->entityManager->persist(new DoctrineStorageRatio($currencyCode, $ratio));
         }
 
+        // flush to database to do remove and insert in one transaction
         $this->entityManager->flush();
         $this->entityManager->clear();
 
