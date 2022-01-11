@@ -74,21 +74,38 @@ class DoctrineStorage implements StorageInterface
      */
     public function saveRatioList($ratioList)
     {
+        /** @var DoctrineStorageRatio[] $doctrineStorageRatios */
         $doctrineStorageRatios = $this->entityManager->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio')->findAll();
 
-        // do it all in a transaction to avoid concurrency issue while we insert new ones
-        $this->entityManager->transactional(function($em) use ($doctrineStorageRatios, $ratioList) {
-            // first remove all existing ratios
-            foreach ($doctrineStorageRatios as $doctrineStorageRatio) {
-                $em->remove($doctrineStorageRatio);
-            }
-            // then add new ones
-            foreach ($ratioList as $currencyCode => $ratio) {
-                $em->persist(new DoctrineStorageRatio($currencyCode, $ratio));
-            }
-        });
+        // index them in an associative array
+        $existingStorageRatios = [];
+        foreach ($doctrineStorageRatios as $doctrineStorageRatio) {
+            $existingStorageRatios[$doctrineStorageRatio->getCurrencyCode()] = $doctrineStorageRatio;
+        }
 
-        // flush to database to do remove and insert in one transaction
+        // for each ratio to save
+        foreach ($ratioList as $currencyCode => $ratio) {
+            // load from existing, or create a new
+            $existingStorageRatio = isset($existingStorageRatios[$currencyCode])
+                ? $existingStorageRatios[$currencyCode]
+                : new DoctrineStorageRatio($currencyCode, $ratio)
+            ;
+
+            // update it (not really needed if we just created it)
+            $existingStorageRatio->setRatio($ratio);
+            // persist (not really needed if we loaded from doctrine)
+            $this->entityManager->persist($existingStorageRatio);
+
+            // remove from the array, as we do not want to remove this one
+            unset($existingStorageRatios[$currencyCode]);
+        }
+
+        // remove the remaining ones
+        foreach ($existingStorageRatios as $doctrineStorageRatio) {
+            $this->entityManager->remove($doctrineStorageRatio);
+        }
+
+        // flush to database
         $this->entityManager->flush();
         $this->entityManager->clear();
 
