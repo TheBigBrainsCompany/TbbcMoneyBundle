@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="tests/bootstrap.php" colors="true"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd">
 
-<phpunit bootstrap="./Tests/bootstrap.php" colors="true">
-    <!-- Les fichiers de tests à lancer -->
+    <php>
+        <server name="KERNEL_DIR" value="tests"/>
+        <env name="KERNEL_CLASS" value="Tbbc\MoneyBundle\Tests\AppKernel"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
+    </php>
+
     <testsuites>
         <testsuite name="TbbcMoneyBundle test suite">
-            <directory suffix="Test.php">./Tests</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
-    <php>
-        <server name="KERNEL_DIR" value="./Tests/app/" />
-        <env name="KERNEL_CLASS" value="AppKernel" />
-    </php>
-    <!-- Quels fichiers sont concernés par l'évaluation du code coverage -->
-    <filter>
-        <whitelist>
-            <directory>./</directory>
-            <exclude>
-                <directory>./Resources</directory>
-                <directory>./Tests</directory>
-                <directory>./vendor</directory>
-                <directory>./var</directory>
-            </exclude>
-        </whitelist>
-    </filter>
+    <coverage>
+        <include>
+            <directory>src</directory>
+        </include>
+        <exclude>
+            <directory>src/DependencyInjection</directory>
+        </exclude>
+    </coverage>
 </phpunit>

@@ -5,5 +5,7 @@ Tests/app/cache/*
 Tests/app/logs/*
 Tests/coverage/*
 Tests/app/coverage/*
+/*.cache
 
 .idea
+.build

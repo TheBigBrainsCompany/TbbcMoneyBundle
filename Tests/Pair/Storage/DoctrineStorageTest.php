@@ -1,95 +1,104 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 
-use Tbbc\MoneyBundle\Tests\BundleOrmTestCase;
-use Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Tbbc\MoneyBundle\Entity\DoctrineStorageRatio;
+use Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage;
+use Tbbc\MoneyBundle\Tests\DatabaseTrait;
 
-/**
- * @group manager
- */
-class DoctrineStorageTest extends BundleOrmTestCase
+class DoctrineStorageTest extends KernelTestCase
 {
-    /**
-     * @var \Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage
-     */
-    protected $doctrineStorage;
+    use DatabaseTrait;
+
+    private ObjectManager $entityManager;
 
     public function setUp(): void
     {
         parent::setUp();
-        
-        $this->doctrineStorage = new DoctrineStorage($this->getEntityManager(), 'USD');
+        self::bootKernel();
+        $this->entityManager = self::getContainer()->get('doctrine')->getManager();
+        $this->doctrineStorage = new DoctrineStorage($this->entityManager, 'USD');
+        $this->createDatabase();
     }
-    
-    public function testLoadDefaultCurrency ()
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        $this->dropDatabase();
+    }
+
+    public function testLoadDefaultCurrency(): void
     {
         $ratioList = $this->doctrineStorage->loadRatioList();
 
         $this->assertCount(1, $ratioList);
         $this->assertArrayHasKey('USD', $ratioList);
-        $this->assertEquals(1, $ratioList['USD']);
+        $this->assertSame(1.0, $ratioList['USD']);
     }
-    
-    public function testLoadForceOption ()
+
+    public function testLoadForceOption(): void
     {
-        $this->getEntityManager()->persist(new DoctrineStorageRatio('USD', 1));
-        $this->getEntityManager()->flush();
-        
+        $this->entityManager->persist(new DoctrineStorageRatio('USD', 1));
+        $this->entityManager->flush();
+
         $this->assertCount(1, $this->doctrineStorage->loadRatioList());
 
         $storageRatio = new DoctrineStorageRatio('USD', 1);
-        $storageRatio->setCurrencyCode("EUR");
+        $storageRatio->setCurrencyCode('EUR');
         $storageRatio->setRatio(1.6);
-        $this->getEntityManager()->persist(new DoctrineStorageRatio('EUR', 1.6));
-        $this->getEntityManager()->flush();
-        
+        $this->entityManager->persist(new DoctrineStorageRatio('EUR', 1.6));
+        $this->entityManager->flush();
+
         $this->assertCount(1, $this->doctrineStorage->loadRatioList());
         $this->assertCount(2, $this->doctrineStorage->loadRatioList(true));
         $ratioList = $this->doctrineStorage->loadRatioList();
-        $this->assertEquals(1.6, $ratioList["EUR"]);
+        $this->assertSame(1.6, $ratioList['EUR']);
     }
 
-    public function testSave ()
+    public function testSave(): void
     {
-        $em = $this->getEntityManager();
-        $repository = $em->getRepository('Tbbc\MoneyBundle\Entity\DoctrineStorageRatio');
+        $em = $this->entityManager;
+        $repository = $em->getRepository(DoctrineStorageRatio::class);
 
-        $this->doctrineStorage->saveRatioList(array (
+        $this->doctrineStorage->saveRatioList([
             'EUR' => 1,
-            'USD' => 1.6
-        ));
+            'USD' => 1.6,
+        ]);
 
         $this->assertCount(2, $repository->findAll());
-        
-        $this->doctrineStorage->saveRatioList(array (
+
+        $this->doctrineStorage->saveRatioList([
             'EUR' => 1,
             'USD' => 1.6,
-            'JPY' => 1.8
-        ));
-        
+            'JPY' => 1.8,
+        ]);
+
         $this->assertCount(3, $repository->findAll());
-        
-        $this->doctrineStorage->saveRatioList(array (
-            'EUR' => 1
-        ));
-        
+
+        $this->doctrineStorage->saveRatioList([
+            'EUR' => 1,
+        ]);
+
         $this->assertCount(1, $repository->findAll());
     }
-    
-    public function testSaveAndLoad ()
-    {
-        $this->doctrineStorage->saveRatioList(array (
-            'EUR' => 1,
-            'USD' => 1.6
-        ));
 
-        $this->assertCount(2, $this->doctrineStorage->loadRatioList());
-        $this->doctrineStorage->saveRatioList(array (
+    public function testSaveAndLoad(): void
+    {
+        $this->doctrineStorage->saveRatioList([
             'EUR' => 1,
             'USD' => 1.6,
-            'JPY' => 2
-        ));
+        ]);
+
+        $this->assertCount(2, $this->doctrineStorage->loadRatioList());
+        $this->doctrineStorage->saveRatioList([
+            'EUR' => 1,
+            'USD' => 1.6,
+            'JPY' => 2,
+        ]);
 
         $this->assertCount(3, $this->doctrineStorage->loadRatioList());
     }

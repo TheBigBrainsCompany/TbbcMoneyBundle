@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gesmes:Envelope xmlns:gesmes="http://www.gesmes.org/xml/2002-08-01" xmlns="http://www.ecb.int/vocabulary/2002-08-01/eurofxref">
+    <gesmes:subject>Reference rates</gesmes:subject>
+    <gesmes:Sender>
+        <gesmes:name>European Central Bank</gesmes:name>
+    </gesmes:Sender>
+    <Cube>
+        <Cube time='2021-12-10'>
+            <Cube currency='USD' rate='1.1273'/>
+            <Cube currency='JPY' rate='128.20'/>
+            <Cube currency='BGN' rate='1.9558'/>
+            <Cube currency='CZK' rate='25.365'/>
+            <Cube currency='DKK' rate='7.4362'/>
+            <Cube currency='GBP' rate='0.85355'/>
+            <Cube currency='HUF' rate='365.58'/>
+            <Cube currency='PLN' rate='4.6123'/>
+            <Cube currency='RON' rate='4.9494'/>
+            <Cube currency='SEK' rate='10.2463'/>
+            <Cube currency='CHF' rate='1.0424'/>
+            <Cube currency='ISK' rate='147.80'/>
+            <Cube currency='NOK' rate='10.1335'/>
+            <Cube currency='HRK' rate='7.5250'/>
+            <Cube currency='RUB' rate='82.8024'/>
+            <Cube currency='TRY' rate='15.6908'/>
+            <Cube currency='AUD' rate='1.5765'/>
+            <Cube currency='BRL' rate='6.2923'/>
+            <Cube currency='CAD' rate='1.4340'/>
+            <Cube currency='CNY' rate='7.1814'/>
+            <Cube currency='HKD' rate='8.7918'/>
+            <Cube currency='IDR' rate='16202.70'/>
+            <Cube currency='ILS' rate='3.4931'/>
+            <Cube currency='INR' rate='85.3105'/>
+            <Cube currency='KRW' rate='1331.35'/>
+            <Cube currency='MXN' rate='23.6094'/>
+            <Cube currency='MYR' rate='4.7488'/>
+            <Cube currency='NZD' rate='1.6635'/>
+            <Cube currency='PHP' rate='56.746'/>
+            <Cube currency='SGD' rate='1.5396'/>
+            <Cube currency='THB' rate='37.945'/>
+            <Cube currency='ZAR' rate='18.0414'/>
+        </Cube>
+    </Cube>
+</gesmes:Envelope>
