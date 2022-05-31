@@ -44,7 +44,9 @@
         "florianv/exchanger": "Exchanger is a PHP framework to work with currency exchange rates from various services."
     },
     "autoload": {
-        "psr-4": { "Tbbc\\MoneyBundle\\": "" },
+        "psr-4": {
+            "Tbbc\\MoneyBundle\\": "src"
+        },
         "exclude-from-classmap": [ "/Tests/" ]
     }
 }
