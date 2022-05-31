@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
@@ -17,7 +19,7 @@ class TbbcMoneyExtension extends Extension
     /**
      * {@inheritDoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
@@ -26,33 +28,26 @@ class TbbcMoneyExtension extends Extension
         $loader->load('services.xml');
         $loader->load('form_types.xml');
 
-        if (in_array('twig', $config['templating']['engines'])) {
+        if (in_array('twig', $config['templating']['engines'], true)) {
             $loader->load('twig_extension.xml');
         }
 
-        if (in_array('php', $config['templating']['engines'])) {
+        if (in_array('php', $config['templating']['engines'], true)) {
             $loader->load('templating_helper.xml');
         }
 
-        $this->remapParameters($config, $container, array(
-            'currencies'  => 'tbbc_money.currencies',
-            'reference_currency'  => 'tbbc_money.reference_currency',
-            'decimals'  => 'tbbc_money.decimals',
-            'enable_pair_history'  => 'tbbc_money.enable_pair_history',
-            'ratio_provider'  => 'tbbc_money.ratio_provider',
-        ));
+        $this->remapParameters($config, $container, [
+            'currencies' => 'tbbc_money.currencies',
+            'reference_currency' => 'tbbc_money.reference_currency',
+            'decimals' => 'tbbc_money.decimals',
+            'enable_pair_history' => 'tbbc_money.enable_pair_history',
+            'ratio_provider' => 'tbbc_money.ratio_provider',
+        ]);
 
         $container->setParameter('tbbc_money.pair.storage', $config['storage']);
     }
 
-    /**
-     *
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param array            $map
-     * @return void
-     */
-    protected function remapParameters(array $config, ContainerBuilder $container, array $map)
+    protected function remapParameters(array $config, ContainerBuilder $container, array $map): void
     {
         foreach ($map as $name => $paramName) {
             if (isset($config[$name])) {

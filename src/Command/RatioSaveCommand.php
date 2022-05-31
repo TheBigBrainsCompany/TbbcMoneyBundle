@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
@@ -10,30 +12,16 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 /**
- * Class RatioSaveCommand
- * @package Tbbc\MoneyBundle\Command
+ * Class RatioSaveCommand.
  */
 class RatioSaveCommand extends Command
 {
-
-    /**
-     * @var PairManagerInterface
-     */
-    private $pairManager;
-
-    /**
-     * @param PairManagerInterface $pairManager
-     */
-    public function __construct(PairManagerInterface $pairManager)
+    public function __construct(private PairManagerInterface $pairManager)
     {
         parent::__construct();
-        $this->pairManager = $pairManager;
     }
 
-    /**
-     * Configure command
-     */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('tbbc:money:ratio-save')
@@ -51,24 +39,20 @@ class RatioSaveCommand extends Command
             );
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return int
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $currencyCode = $input->getArgument('currencyCode');
+        $currencyCode = (string) $input->getArgument('currencyCode');
         $ratio = (float) $input->getArgument('ratio');
 
         try {
             $this->pairManager->saveRatio($currencyCode, $ratio);
             $output->writeln('ratio saved');
+
+            return Command::SUCCESS;
         } catch (MoneyException $e) {
             $output->writeln('ERROR : ratio no saved du to error : '.$e->getMessage());
-        }
 
-        return 0;
+            return Command::FAILURE;
+        }
     }
 }

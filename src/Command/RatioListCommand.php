@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
@@ -8,30 +10,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 /**
- * Class RatioListCommand
- * @package Tbbc\MoneyBundle\Command
+ * Class RatioListCommand.
  */
 class RatioListCommand extends Command
 {
-
-    /**
-     * @var PairManagerInterface
-     */
-    private $pairManager;
-
-    /**
-     * @param PairManagerInterface $pairManager
-     */
-    public function __construct(PairManagerInterface $pairManager)
+    public function __construct(private PairManagerInterface $pairManager)
     {
         parent::__construct();
-        $this->pairManager = $pairManager;
     }
 
-    /**
-     * Configure command
-     */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('tbbc:money:ratio-list')
@@ -39,18 +27,15 @@ class RatioListCommand extends Command
             ->setDescription('display list of registered ratio');
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return int
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $ratioList = $this->pairManager->getRatioList();
         $output->writeln('Ratio list');
+        /**
+         * @var float $ratio
+         */
         foreach ($ratioList as $currencyCode => $ratio) {
-            $output->writeln($currencyCode.';'.$ratio);
+            $output->writeln($currencyCode.';'.(string) $ratio);
         }
 
         return 0;

@@ -1,113 +1,118 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Pair\RatioProvider;
 
+use InvalidArgumentException;
 use Money\Currency;
-use Money\UnknownCurrencyException;
-use Symfony\Component\DomCrawler\Crawler;
+use Money\Exception\UnknownCurrencyException;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 /**
  * ECBRatioProvider
- * Fetches currencies ratios from ECB
+ * Fetches currencies ratios from ECB.
+ *
  * @author Johan Wilfer <johan@jttech.se>
  */
 class ECBRatioProvider implements RatioProviderInterface
 {
     /**
-     * Fetch cache time in seconds (10 minutes)
+     * Fetch cache time in seconds (10 minutes).
      */
-    const FETCH_CACHE_TIME = 600;
+    public const FETCH_CACHE_TIME = 600;
+    private const URL = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
 
     /**
-     * @var null|string Cached document from ECB to avoid fetching the same url multiple times on the same request.
+     * Cached document from ECB to avoid fetching the same url multiple times on the same request.
      */
-    protected $fetchedData;
+    protected ?string $fetchedData = null;
 
     /**
-     * @var null|integer Timestamp when we fetched the document, we will fetch it again after FETCH_CACHE_TIME
+     * Timestamp when we fetched the document, we will fetch it again after FETCH_CACHE_TIME.
      */
-    protected $fetchedTimestamp;
+    protected ?int $fetchedTimestamp = null;
 
-
+    public function __construct(private HttpClientInterface $client)
+    {
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function fetchRatio($referenceCurrencyCode, $currencyCode)
+    public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float
     {
-        // we could possible take the feed and convert twice, to allow the other currencies as base currencies, but for now only allow EUR
+        // we could possibly take the feed and convert twice, to allow the other currencies as base currencies, but for now only allow EUR
 
-        if ($referenceCurrencyCode !== 'EUR') {
+        if ('EUR' !== $referenceCurrencyCode) {
             throw new MoneyException(sprintf('The reference currency code for ECB provider must be EUR, got: "%s"', $referenceCurrencyCode));
         }
-        $baseCurrency = new Currency('EUR');
 
         try {
             $currency = new Currency($currencyCode);
-        } catch (UnknownCurrencyException $e) {
-            throw new MoneyException(
-                sprintf('The currency code %s does not exists', $currencyCode)
-            );
+        } catch (UnknownCurrencyException|InvalidArgumentException) {
+            throw new MoneyException(sprintf('The currency code "%s" does not exists', $currencyCode));
         }
 
-        $xml = $this->getXML();
+        if (!$xml = $this->getXML()) {
+            throw new MoneyException('Could not fetch XML from ECB');
+        }
+
         $rates = $this->parseXML($xml);
 
         if (!isset($rates[$currency->getCode()])) {
-            throw new MoneyException(
-                sprintf('The currency code %s does not exist in the ECB feed', $currencyCode)
-            );
+            throw new MoneyException(sprintf('The currency code %s does not exist in the ECB feed', $currencyCode));
         }
 
-        // return ratio
-        $ratio = (float) $rates[$currency->getCode()];
-
-        return $ratio;
+        return (float) $rates[$currency->getCode()];
     }
 
     /**
-     * Get the XML from ECB website - and cache it for some time
-     *
-     * @return null|string
+     * Get the XML from ECB website - and cache it for some time.
      */
-    protected function getXML()
+    protected function getXML(): ?string
     {
         // if our cached data is ok
-        if ($this->fetchedTimestamp !== null && (time() < $this->fetchedTimestamp + self::FETCH_CACHE_TIME) && $this->fetchedData !== null) {
+        if (null !== $this->fetchedTimestamp && (time() < $this->fetchedTimestamp + self::FETCH_CACHE_TIME) && null !== $this->fetchedData) {
             return $this->fetchedData;
         }
 
-        //get current exchange rate XML
-        $curlHandle = curl_init();
-        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curlHandle, CURLOPT_URL, "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
-        $curlResponse = curl_exec($curlHandle);
-        curl_close($curlHandle);
+        $response = $this->client->request('GET', self::URL);
+        if (200 !== $response->getStatusCode()) {
+            throw new MoneyException(sprintf('The request to %s failed with status code %d', self::URL, $response->getStatusCode()));
+        }
 
-        // FIXME! Better error handling
-
-        $this->fetchedData = $curlResponse;
         $this->fetchedTimestamp = time();
+        $this->fetchedData = $response->getContent();
 
         return $this->fetchedData;
     }
 
     /**
-     * Parse XML and turn it into an associative array with [ currency => rate, currency => rate, ... ]
-     * @return array
+     * Parse XML and turn it into an associative array with [ currency => rate, currency => rate, ... ].
+     *
+     * @psalm-suppress all
      */
-    protected function parseXML($xml)
+    protected function parseXML(string $xml): array
     {
-        $xmlObject = simplexml_load_string($xml);
+        if (!$xmlObject = @simplexml_load_string($xml)) {
+            throw new MoneyException('Failed to parse XML from ECB');
+        }
 
         // // this wil generate a date like '2018-06-01' for the last updated date for the rates - we do not implement this now
         // $updatedDate = ((array) $xmlObject->Cube->Cube->attributes())['@attributes']['time'];
 
-        $pairs = array();
+        $pairs = [];
 
-        // @codingStandardsIgnoreLine
         foreach ($xmlObject->Cube->Cube->children() as $rateObject) {
+            // @codeCoverageIgnoreStart
+            if (null === $rateObject) {
+                continue;
+            }
+            // @codeCoverageIgnoreEnd
+
             $attributes = (array) $rateObject->attributes();
             $pairs[$attributes['@attributes']['currency']] = $attributes['@attributes']['rate'];
         }

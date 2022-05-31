@@ -1,109 +1,84 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Entity;
 
+use DateTime;
+use DateTimeInterface;
+
 /**
- * Class RatioHistory
- * @package Tbbc\MoneyBundle\Entity
+ * Class RatioHistory.
  */
 class RatioHistory
 {
-    /**
-     * @var integer
-     */
-    protected $id;
-    /**
-     * @var string
-     */
-    protected $referenceCurrencyCode;
-    /**
-     * @var string
-     */
-    protected $currencyCode;
-    /**
-     * @var float
-     */
-    protected $ratio;
-    /**
-     * @var \DateTime
-     */
-    protected $savedAt;
+    protected mixed $id = null;
+    protected string $referenceCurrencyCode = '';
+    protected string $currencyCode = '';
+    protected float $ratio = 0;
+    protected DateTimeInterface $savedAt;
 
-    /**
-     * @param string $currencyCode
-     */
-    public function setCurrencyCode($currencyCode)
+    public function __construct()
     {
-        $this->currencyCode = $currencyCode;
+        $this->savedAt = new DateTime();
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrencyCode()
-    {
-        return $this->currencyCode;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
+    public function setId(mixed $id): self
     {
         $this->id = $id;
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId(): mixed
     {
         return $this->id;
     }
 
-    /**
-     * @param float $ratio
-     */
-    public function setRatio($ratio)
+    public function setCurrencyCode(string $currencyCode): self
     {
-        $this->ratio = $ratio;
+        $this->currencyCode = $currencyCode;
+
+        return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getRatio()
+    public function getCurrencyCode(): string
+    {
+        return $this->currencyCode;
+    }
+
+    public function setRatio(float $ratio): self
+    {
+        $this->ratio = $ratio;
+
+        return $this;
+    }
+
+    public function getRatio(): float
     {
         return $this->ratio;
     }
 
-    /**
-     * @param string $referenceCurrencyCode
-     */
-    public function setReferenceCurrencyCode($referenceCurrencyCode)
+    public function setReferenceCurrencyCode(string $referenceCurrencyCode): self
     {
         $this->referenceCurrencyCode = $referenceCurrencyCode;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getReferenceCurrencyCode()
+    public function getReferenceCurrencyCode(): string
     {
         return $this->referenceCurrencyCode;
     }
 
-    /**
-     * @param \DateTime $savedAt
-     */
-    public function setSavedAt($savedAt)
+    public function setSavedAt(DateTimeInterface $savedAt): self
     {
         $this->savedAt = $savedAt;
+
+        return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getSavedAt()
+    public function getSavedAt(): DateTimeInterface
     {
         return $this->savedAt;
     }

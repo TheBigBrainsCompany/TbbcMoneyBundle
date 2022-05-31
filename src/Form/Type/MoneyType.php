@@ -1,61 +1,54 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer;
 
 /**
- * Form type for the Money object.
+ * Formtype for the Money object.
  */
 class MoneyType extends AbstractType
 {
-    /** @var  int */
-    protected $decimals;
-
-    /**
-     * MoneyType constructor.
-     *
-     * @param int $decimals
-     */
-    public function __construct($decimals)
+    public function __construct(protected int $decimals)
     {
-        $this->decimals = (int) $decimals;
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @psalm-suppress MixedArgument
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('tbbc_amount', 'Symfony\Component\Form\Extension\Core\Type\TextType', $options['amount_options'])
+            ->add('tbbc_amount', TextType::class, $options['amount_options'])
             ->add('tbbc_currency', $options['currency_type'], $options['currency_options'])
             ->addModelTransformer(
                 new MoneyToArrayTransformer($this->decimals)
             );
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => null,
-                'currency_type' => 'Tbbc\MoneyBundle\Form\Type\CurrencyType',
-                'amount_options' => array(),
-                'currency_options' => array(),
-            ))
+                'currency_type' => CurrencyType::class,
+                'amount_options' => [],
+                'currency_options' => [],
+            ])
             ->setAllowedTypes(
                 'currency_type',
-                array(
+                [
                     'string',
-                    'Tbbc\MoneyBundle\Form\Type\CurrencyType',
-                )
+                    CurrencyType::class,
+                ]
             )
             ->setAllowedTypes(
                 'amount_options',
@@ -71,7 +64,7 @@ class MoneyType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'tbbc_money';
     }

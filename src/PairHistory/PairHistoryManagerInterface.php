@@ -1,38 +1,25 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\PairHistory;
 
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
 
 /**
- * Interface PairHistoryManagerInterface
- * @package Tbbc\MoneyBundle\PairHistory
+ * Interface PairHistoryManagerInterface.
  */
 interface PairHistoryManagerInterface
 {
     /**
-     * returns the ratio of a currency at a given date
-     *
-     * @param string    $currencyCode
-     * @param \DateTime $savedAt
-     *
-     * @return float
+     * returns the ratio of a currency at a given date.
      */
-    public function getRatioAtDate($currencyCode, \DateTime $savedAt);
+    public function getRatioAtDate(string $currencyCode, \DateTimeInterface $savedAt): ?float;
 
     /**
-     * returns the list of all currency ratio saved between two dates
-     *
-     * @param string    $currencyCode
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
-     *
-     * @return array of {'savedAt'=>\DateTime, 'ratio' => float}
+     * returns the list of all currency ratio saved between two dates.
      */
-    public function getRatioHistory($currencyCode, $startDate, $endDate);
+    public function getRatioHistory(string $currencyCode, \DateTimeInterface $startDate, \DateTimeInterface $endDate): array;
 
-    /**
-     * @param SaveRatioEvent $event
-     * @return void
-     */
-    public function listenSaveRatioEvent(SaveRatioEvent $event);
+    public function listenSaveRatioEvent(SaveRatioEvent $event): void;
 }

@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Form\DataTransformer;
 
+use Money\Currency;
 use Money\Money;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -12,27 +15,17 @@ use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedString
  */
 class MoneyToArrayTransformer implements DataTransformerInterface
 {
-    /** @var  MoneyToLocalizedStringTransformer */
-    protected $sfTransformer;
+    protected MoneyToLocalizedStringTransformer $sfTransformer;
 
-    /** @var  int */
-    protected $decimals;
-
-    /**
-     * MoneyToArrayTransformer constructor.
-     *
-     * @param int $decimals
-     */
-    public function __construct($decimals = 2)
+    public function __construct(protected int $decimals = 2)
     {
-        $this->decimals = (int) $decimals;
-        $this->sfTransformer = new MoneyToLocalizedStringTransformer($decimals, null, null, pow(10, $this->decimals));
+        $this->sfTransformer = new MoneyToLocalizedStringTransformer($decimals, null, null, 10 ** $this->decimals);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function transform($value)
+    public function transform($value): ?array
     {
         if (null === $value) {
             return null;
@@ -42,18 +35,18 @@ class MoneyToArrayTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($value, 'Money');
         }
 
-        $amount = $this->sfTransformer->transform($value->getAmount());
+        $amount = $this->sfTransformer->transform((float) $value->getAmount());
 
-        return array(
+        return [
             'tbbc_amount' => $amount,
             'tbbc_currency' => $value->getCurrency(),
-        );
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?Money
     {
         if (null === $value) {
             return null;
@@ -65,12 +58,19 @@ class MoneyToArrayTransformer implements DataTransformerInterface
         if (!isset($value['tbbc_amount']) || !isset($value['tbbc_currency'])) {
             return null;
         }
+
         $amount = (string) $value['tbbc_amount'];
-        $amount = str_replace(" ", "", $amount);
-        $amount = $this->sfTransformer->reverseTransform($amount);
+        $amount = str_replace(' ', '', $amount);
+        $amount = (float) $this->sfTransformer->reverseTransform($amount);
         $amount = round($amount);
         $amount = (int) $amount;
 
-        return new Money($amount, $value['tbbc_currency']);
+        /** @var string|Currency $currency */
+        $currency = $value['tbbc_currency'];
+        if (!$currency instanceof Currency) {
+            $currency = new Currency($currency);
+        }
+
+        return new Money($amount, $currency);
     }
 }

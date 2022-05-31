@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Templating\Helper;
 
 use Money\Currency;
@@ -6,52 +9,34 @@ use Symfony\Component\Templating\Helper\Helper;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 
 /**
- * Class CurrencyHelper
- * @package Tbbc\MoneyBundle\Templating\Helper
+ * Class CurrencyHelper.
  */
 class CurrencyHelper extends Helper
 {
     /**
-     * @var MoneyFormatter
+     * Constructor.
      */
-    protected $moneyFormatter;
-
-    /**
-     * Constructor
-     *
-     * @param MoneyFormatter $moneyFormatter
-     */
-    public function __construct(MoneyFormatter $moneyFormatter)
+    public function __construct(protected MoneyFormatter $moneyFormatter)
     {
-        $this->moneyFormatter = $moneyFormatter;
     }
 
     /**
-     * Returns the name as string of the given currency
-     *
-     * @param Currency $currency
-     * @return string
+     * Returns the name as string of the given currency.
      */
-    public function name(Currency $currency)
+    public function name(Currency $currency): string
     {
         return $this->moneyFormatter->formatCurrencyAsName($currency);
     }
 
     /**
-     * Returns the symbol corresponding to the given currency
-     *
-     * @param Currency $currency
-     * @return string
+     * Returns the symbol corresponding to the given currency.
      */
-    public function symbol(Currency $currency)
+    public function symbol(Currency $currency): string
     {
         return $this->moneyFormatter->formatCurrencyAsSymbol($currency);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'tbbc_money_currency_helper';
     }

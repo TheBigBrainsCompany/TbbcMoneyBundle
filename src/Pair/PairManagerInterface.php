@@ -1,74 +1,61 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Pair;
 
 use Money\Money;
 
 /**
- * Interface PairManagerInterface
- * @package Tbbc\MoneyBundle\Pair
+ * Interface PairManagerInterface.
  */
 interface PairManagerInterface
 {
     /**
-     * convert the amount into the currencyCode given in parameter
-     *
-     * @param Money  $amount
-     * @param string $currencyCode in the list of currencies from config.yml
-     *
-     * @return Money
+     * convert the amount into the currencyCode given in parameter.
      */
-    public function convert(Money $amount, $currencyCode);
+    public function convert(Money $amount, string $currencyCode): Money;
 
     /**
      * set ratio between the currency in parameter and the reference currency.
      *
      * WARNING: This method has to dispatch a \TbbcMoneyEvents::AFTER_RATIO_SAVE event
      * with a SaveRatioEvent
-     *
-     * @param string $currencyCode from the list of currencies
-     * @param float  $ratio
      */
-    public function saveRatio($currencyCode, $ratio);
+    public function saveRatio(string $currencyCode, float $ratio): void;
 
     /**
-     * get ratio between two currencies
-     *
-     * @param string $referenceCurrencyCode
-     * @param string $currencyCode
-     *
-     * @return float
+     * get ratio between two currencies.
      */
-    public function getRelativeRatio($referenceCurrencyCode, $currencyCode);
+    public function getRelativeRatio(string $referenceCurrencyCode, string $currencyCode): float;
 
     /**
-     * @return array of type array("EUR", "USD");
+     * array of type array("EUR", "USD");.
+     *
+     * @return string[]
      */
-    public function getCurrencyCodeList();
+    public function getCurrencyCodeList(): array;
 
     /**
      * returns  currency used as reference currency
-     *
-     * @return string "USD"|"EUR"|...
+     * string "USD"|"EUR"|...
      */
-    public function getReferenceCurrencyCode();
+    public function getReferenceCurrencyCode(): string;
 
     /**
      * return ratio list for currencies in comparison to reference currency
-     *
-     * @return array of type array("EUR" => 1, "USD" => 1.25);
+     * array of type array("EUR" => 1, "USD" => 1.25);.
      */
-    public function getRatioList();
+    public function getRatioList(): array;
 
     /**
-     * just for dependency injection. inject if needed the ratio provider
-     *
-     * @param RatioProviderInterface $ratioProvider
+     * just for dependency injection. inject if needed the ratio provider.
      */
-    public function setRatioProvider(RatioProviderInterface $ratioProvider);
+    public function setRatioProvider(RatioProviderInterface $ratioProvider): void;
 
     /**
      * If ratio provider is defined, get currency code list, and fetch ratio
      * from the ratio provider.
      */
-    public function saveRatioListFromRatioProvider();
+    public function saveRatioListFromRatioProvider(): void;
 }

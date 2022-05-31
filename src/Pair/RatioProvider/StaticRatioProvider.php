@@ -1,28 +1,25 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Pair\RatioProvider;
 
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 /**
- * Static ratio provider
+ * Static ratio provider.
  *
  * @author Pavel Dubinin <geekdevs@gmail.com>
- * @package Tbbc\MoneyBundle\Pair\RatioProvider
  */
 class StaticRatioProvider implements RatioProviderInterface
 {
     /**
-     * @var array
+     * @var float[]
      */
-    private $ratios = array();
+    private array $ratios = [];
 
-    /**
-     * @param string $referenceCurrencyCode
-     * @param string $currencyCode
-     * @param float  $ratio
-     */
-    public function setRatio($referenceCurrencyCode, $currencyCode, $ratio)
+    public function setRatio(string $referenceCurrencyCode, string $currencyCode, float $ratio): void
     {
         $pair = $this->getPairCode($referenceCurrencyCode, $currencyCode);
         $this->ratios[$pair] = $ratio;
@@ -31,7 +28,7 @@ class StaticRatioProvider implements RatioProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function fetchRatio($referenceCurrencyCode, $currencyCode)
+    public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float
     {
         $pair = $this->getPairCode($referenceCurrencyCode, $currencyCode);
 
@@ -42,13 +39,7 @@ class StaticRatioProvider implements RatioProviderInterface
         return $this->ratios[$pair];
     }
 
-    /**
-     * @param $referenceCurrencyCode
-     * @param $currencyCode
-     *
-     * @return string
-     */
-    private function getPairCode($referenceCurrencyCode, $currencyCode)
+    private function getPairCode(string $referenceCurrencyCode, string $currencyCode): string
     {
         return $referenceCurrencyCode.'-'.$currencyCode;
     }

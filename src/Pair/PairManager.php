@@ -1,6 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Pair;
 
+use DateTime;
 use Money\Converter;
 use Money\Currencies;
 use Money\Currencies\ISOCurrencies;
@@ -13,57 +17,28 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\TbbcMoneyEvents;
 
 /**
- * Class PairManager
- * @package Tbbc\MoneyBundle\Pair
+ * Class PairManager.
+ *
  * @author Philippe Le Van.
  */
 class PairManager implements PairManagerInterface, Exchange
 {
-    /** @var  StorageInterface */
-    protected $storage;
+    protected ?RatioProviderInterface $ratioProvider = null;
+    protected Currencies $currencies;
 
-    /** @var  array */
-    protected $currencyCodeList;
-
-    /** @var  string */
-    protected $referenceCurrencyCode;
-
-    /** @var  RatioProviderInterface */
-    protected $ratioProvider;
-
-    /** @var EventDispatcherInterface  */
-    protected $dispatcher;
-
-    /**
-     * @var Currencies
-     */
-    protected $currencies;
-
-    /**
-     * PairManager constructor.
-     *
-     * @param StorageInterface         $storage
-     * @param array                    $currencyCodeList
-     * @param string                   $referenceCurrencyCode
-     * @param EventDispatcherInterface $dispatcher
-     */
     public function __construct(
-        StorageInterface $storage,
-        $currencyCodeList,
-        $referenceCurrencyCode,
-        EventDispatcherInterface $dispatcher
+        protected StorageInterface $storage,
+        protected array $currencyCodeList,
+        protected string $referenceCurrencyCode,
+        protected EventDispatcherInterface $dispatcher
     ) {
-        $this->storage = $storage;
-        $this->currencyCodeList = $currencyCodeList;
-        $this->referenceCurrencyCode = $referenceCurrencyCode;
-        $this->dispatcher = $dispatcher;
         $this->currencies = new ISOCurrencies();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function convert(Money $amount, $currencyCode)
+    public function convert(Money $amount, string $currencyCode): Money
     {
         $converter = new Converter($this->currencies, $this);
 
@@ -73,7 +48,7 @@ class PairManager implements PairManagerInterface, Exchange
     /**
      * {@inheritdoc}
      */
-    public function quote(Currency $baseCurrency, Currency $counterCurrency)
+    public function quote(Currency $baseCurrency, Currency $counterCurrency): CurrencyPair
     {
         $ratio = $this->getRelativeRatio($baseCurrency->getCode(), $counterCurrency->getCode());
 
@@ -83,7 +58,7 @@ class PairManager implements PairManagerInterface, Exchange
     /**
      * {@inheritdoc}
      */
-    public function saveRatio($currencyCode, $ratio)
+    public function saveRatio(string $currencyCode, float $ratio): void
     {
         $currency = new Currency($currencyCode);
         // end of hack
@@ -93,44 +68,52 @@ class PairManager implements PairManagerInterface, Exchange
         }
         $ratioList = $this->storage->loadRatioList(true);
         $ratioList[$currency->getCode()] = $ratio;
-        $ratioList[$this->getReferenceCurrencyCode()] = (float) 1;
+        $ratioList[$this->getReferenceCurrencyCode()] = 1.0;
         $this->storage->saveRatioList($ratioList);
 
-        $savedAt = new \DateTime();
+        $savedAt = new DateTime();
         $event = new SaveRatioEvent(
             $this->getReferenceCurrencyCode(),
             $currencyCode,
             $ratio,
             $savedAt
         );
-        $this->dispatcher->dispatch(TbbcMoneyEvents::AFTER_RATIO_SAVE, $event);
+
+        $this->dispatcher->dispatch($event, TbbcMoneyEvents::AFTER_RATIO_SAVE);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRelativeRatio($referenceCurrencyCode, $currencyCode)
+    public function getRelativeRatio(string $referenceCurrencyCode, string $currencyCode): float
     {
         $currency = new Currency($currencyCode);
         $referenceCurrency = new Currency($referenceCurrencyCode);
         if ($currencyCode === $referenceCurrencyCode) {
-            return (float) 1;
+            return 1.0;
         }
+
         $ratioList = $this->storage->loadRatioList();
         if (!array_key_exists($currency->getCode(), $ratioList)) {
             throw new MoneyException('unknown ratio for currency '.$currencyCode);
         }
+
         if (!array_key_exists($referenceCurrency->getCode(), $ratioList)) {
             throw new MoneyException('unknown ratio for currency '.$referenceCurrencyCode);
         }
 
-        return $ratioList[$currency->getCode()] / $ratioList[$referenceCurrency->getCode()];
+        /** @var float $source */
+        $source = $ratioList[$currency->getCode()];
+        /** @var float $reference */
+        $reference = $ratioList[$referenceCurrency->getCode()];
+
+        return $source / $reference;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCurrencyCodeList()
+    public function getCurrencyCodeList(): array
     {
         return $this->currencyCodeList;
     }
@@ -138,7 +121,7 @@ class PairManager implements PairManagerInterface, Exchange
     /**
      * {@inheritdoc}
      */
-    public function getReferenceCurrencyCode()
+    public function getReferenceCurrencyCode(): string
     {
         return $this->referenceCurrencyCode;
     }
@@ -146,7 +129,7 @@ class PairManager implements PairManagerInterface, Exchange
     /**
      * {@inheritdoc}
      */
-    public function getRatioList()
+    public function getRatioList(): array
     {
         return $this->storage->loadRatioList();
     }
@@ -154,7 +137,7 @@ class PairManager implements PairManagerInterface, Exchange
     /**
      * {@inheritdoc}
      */
-    public function setRatioProvider(RatioProviderInterface $ratioProvider)
+    public function setRatioProvider(RatioProviderInterface $ratioProvider): void
     {
         $this->ratioProvider = $ratioProvider;
     }
@@ -162,9 +145,9 @@ class PairManager implements PairManagerInterface, Exchange
     /**
      * {@inheritdoc}
      */
-    public function saveRatioListFromRatioProvider()
+    public function saveRatioListFromRatioProvider(): void
     {
-        if (!$this->ratioProvider) {
+        if (null === $this->ratioProvider) {
             throw new MoneyException('no ratio provider defined');
         }
 

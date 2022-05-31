@@ -1,92 +1,46 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Entity;
 
 /**
- * Class DoctrineStorageRatio
- * @package Tbbc\MoneyBundle\Entity
+ * Class DoctrineStorageRatio.
  */
 class DoctrineStorageRatio
 {
-    /**
-     * @var mixed
-     */
-    private $id;
+    private mixed $id = null;
 
-    /**
-     * @var string
-     */
-    private $currencyCode;
-
-    /**
-     * @var integer
-     */
-    private $ratio;
-
-    /**
-     * DoctrineStorageRatio constructor.
-     *
-     * @param string $code
-     * @param float  $ratio
-     */
-    public function __construct($code = null, $ratio = null)
+    public function __construct(private ?string $currencyCode = null, private ?float $ratio = null)
     {
-        $this->currencyCode = $code;
-        $this->ratio = $ratio;
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): mixed
     {
         return $this->id;
     }
 
-    /**
-     * Set code
-     *
-     * @param  string $currencyCode
-     * @return $this
-     */
-    public function setCurrencyCode($currencyCode)
+    public function setCurrencyCode(string $currencyCode): self
     {
         $this->currencyCode = $currencyCode;
 
         return $this;
     }
 
-    /**
-     * Get currencyCode
-     *
-     * @return string
-     */
-    public function getCurrencyCode()
+    public function getCurrencyCode(): ?string
     {
         return $this->currencyCode;
     }
 
-    /**
-     * get ratio
-     *
-     * @return float
-     */
-    public function getRatio()
-    {
-        return $this->ratio;
-    }
-
-    /**
-     * Set ratio
-     *
-     * @param  float $ratio
-     * @return $this
-     */
-    public function setRatio($ratio)
+    public function setRatio(float $ratio): self
     {
         $this->ratio = $ratio;
 
         return $this;
+    }
+
+    public function getRatio(): ?float
+    {
+        return $this->ratio;
     }
 }

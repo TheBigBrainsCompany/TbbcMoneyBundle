@@ -1,26 +1,28 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Pair;
 
 /**
- * Interface StorageInterface
- * @package Tbbc\MoneyBundle\Pair
+ * Interface StorageInterface.
+ *
  * @author Philippe Le Van.
  */
 interface StorageInterface
 {
     /**
-     * save ratio list in a storage
+     * save ratio list in a storage.
      *
-     * @param array $ratioList
+     * @psalm-param array<string, null|float> $ratioList
      */
-    public function saveRatioList($ratioList);
+    public function saveRatioList(array $ratioList): void;
 
     /**
-     * load ratioList from the storage
-     *
-     * @param bool $force
+     * load ratioList from the storage.
      *
      * @return array of type array("EUR"=>1, "USD" => 1.25)
+     * @psalm-return array<string, null|float>
      */
-    public function loadRatioList($force = false);
+    public function loadRatioList(bool $force = false): array;
 }

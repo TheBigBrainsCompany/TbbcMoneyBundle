@@ -1,43 +1,32 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Pair\RatioProvider;
 
+use Exception;
+use Exchanger\Contract\ExchangeRateProvider;
+use Exchanger\ExchangeRateQueryBuilder;
+use InvalidArgumentException;
 use Money\Currency;
-use Money\UnknownCurrencyException;
+use Money\Exception\UnknownCurrencyException;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
-use Exchanger\CurrencyPair;
-use Exchanger\ExchangeRateQueryBuilder;
-use Exchanger\Contract\ExchangeRateProvider;
 
 /**
  * Class ExchangerAdapterRatioProvider
- * This depends on "florianv/exchanger" package being installed
- *
- * @package Tbbc\MoneyBundle\Pair
- *
- * This adapter takes Exchanger Rate Provider as an input and fetches rates in format suitable for RatioProviderInterface
+ * This depends on "florianv/exchanger" package being installed.
  */
 final class ExchangerAdapterRatioProvider implements RatioProviderInterface
 {
-    /**
-     * @var ExchangeRateProvider
-     */
-    private $exchangeRateProvider;
-
-    /**
-     * SwapAdapterRatioProvider constructor.
-     *
-     * @param ExchangeRateProvider $exchangeRateProvider
-     */
-    public function __construct(ExchangeRateProvider $exchangeRateProvider)
+    public function __construct(private ExchangeRateProvider $exchangeRateProvider)
     {
-        $this->exchangeRateProvider = $exchangeRateProvider;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function fetchRatio($referenceCurrencyCode, $currencyCode)
+    public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float
     {
         $exchangeQueryBuilder = new ExchangeRateQueryBuilder(
             $this->getCurrencyPair($referenceCurrencyCode, $currencyCode)
@@ -46,41 +35,27 @@ final class ExchangerAdapterRatioProvider implements RatioProviderInterface
 
         try {
             $exchangeRate = $this->exchangeRateProvider->getExchangeRate($exchangeQuery);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new MoneyException($e->getMessage());
         }
 
-        return (float) $exchangeRate->getValue();
+        return $exchangeRate->getValue();
     }
 
-    /**
-     * @param string $referenceCurrencyCode
-     * @param string $currencyCode
-     *
-     * @return CurrencyPair
-     */
-    private function getCurrencyPair($referenceCurrencyCode, $currencyCode)
+    private function getCurrencyPair(string $referenceCurrencyCode, string $currencyCode): string
     {
         $this->ensureValidCurrency($referenceCurrencyCode);
         $this->ensureValidCurrency($currencyCode);
 
-        return new CurrencyPair($referenceCurrencyCode, $currencyCode);
+        return sprintf('%s/%s', $referenceCurrencyCode, $currencyCode);
     }
 
-    /**
-     * @param string $currencyCode
-     *
-     * @return Currency
-     * @throws MoneyException
-     */
-    private function ensureValidCurrency($currencyCode)
+    private function ensureValidCurrency(string $currencyCode): void
     {
         try {
-            return new Currency($currencyCode);
-        } catch (UnknownCurrencyException $e) {
-            throw new MoneyException(
-                sprintf('The currency code %s does not exist', $currencyCode)
-            );
+            new Currency($currencyCode);
+        } catch (UnknownCurrencyException|InvalidArgumentException) {
+            throw new MoneyException(sprintf('The currency code %s does not exist', $currencyCode));
         }
     }
 }

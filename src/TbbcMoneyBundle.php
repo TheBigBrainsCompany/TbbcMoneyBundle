@@ -1,23 +1,21 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\PairHistoryCompilerPass;
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\RatioProviderCompilerPass;
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\StorageCompilerPass;
-use Tbbc\MoneyBundle\DependencyInjection\Compiler\DoctrineTypeCompilerPass;
 
 /**
- * Class TbbcMoneyBundle
- * @package Tbbc\MoneyBundle
+ * Class TbbcMoneyBundle.
  */
 class TbbcMoneyBundle extends Bundle
 {
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 

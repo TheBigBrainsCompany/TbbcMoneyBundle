@@ -1,30 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * This is the class that validates and merges configuration from your app/config files
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
- */
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('tbbc_money');
-        if (method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            $rootNode = $treeBuilder->root('tbbc_money');
-        }
-
+        $rootNode = $treeBuilder->getRootNode();
         $this->addCurrencySection($rootNode);
 
         return $treeBuilder;
@@ -35,14 +24,10 @@ class Configuration implements ConfigurationInterface
      * Example for yaml driver:
      * tbbc_money:
      *     currencies: ["USD", "EUR"]
-     *     reference_currency: "EUR"
-     *
-     * @param ArrayNodeDefinition $node
-     * @return void
+     *     reference_currency: "EUR".
      */
-    private function addCurrencySection(ArrayNodeDefinition $node)
+    private function addCurrencySection(ArrayNodeDefinition $node): void
     {
-        // @codingStandardsIgnoreStart
         $node
             ->children()
                 ->arrayNode('currencies')
@@ -65,7 +50,7 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->defaultValue('csv')
                     ->validate()
-                    ->ifNotInArray(array('csv', 'doctrine'))
+                    ->ifNotInArray(['csv', 'doctrine'])
                         ->thenInvalid('Invalid storage "%s"')
                     ->end()
                 ->end()
@@ -79,23 +64,22 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('engines')
                             ->isRequired()
                             ->requiresAtLeastOneElement()
-                            ->example(array('twig'))
+                            ->example(['twig'])
                             ->beforeNormalization()
-                                ->ifTrue(function($v){ return !is_array($v); })
-                                ->then(function($v){ return array($v); })
+                                ->ifTrue(fn ($v) => !is_array($v))
+                                ->then(fn ($v) => [$v])
                             ->end()
                             ->prototype('scalar')
                                 ->validate()
-                                    ->ifNotInArray(array('twig', 'php'))
+                                    ->ifNotInArray(['twig', 'php'])
                                     ->thenInvalid('Only "twig" and "php" engines are supported.')
                                 ->end()
                             ->end()
-                            ->defaultValue(array('twig'))
+                            ->defaultValue(['twig'])
                         ->end()
                     ->end()
                 ->end()
             ->end()
         ;
-        // @codingStandardsIgnoreEnd
     }
 }

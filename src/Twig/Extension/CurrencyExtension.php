@@ -1,7 +1,9 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Created by Philippe Le Van.
- * Date: 03/07/13
+ * Date: 03/07/13.
  */
 
 namespace Tbbc\MoneyBundle\Twig\Extension;
@@ -16,36 +18,19 @@ use Twig\TwigFilter;
  */
 class CurrencyExtension extends AbstractExtension
 {
-    /**
-     * @var MoneyFormatter
-     */
-    protected $moneyFormatter;
-
-    /**
-     * Constructor
-     *
-     * @param MoneyFormatter $moneyFormatter
-     */
-    public function __construct(MoneyFormatter $moneyFormatter)
+    public function __construct(protected MoneyFormatter $moneyFormatter)
     {
-        $this->moneyFormatter = $moneyFormatter;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getFilters()
+    public function getFilters(): array
     {
-        return array(
-            new TwigFilter('currency_name', array($this->moneyFormatter, 'formatCurrencyAsName')),
-            new TwigFilter('currency_symbol', array($this->moneyFormatter, 'formatCurrencyAsSymbol')),
-        );
+        return [
+            new TwigFilter('currency_name', [$this->moneyFormatter, 'formatCurrencyAsName']),
+            new TwigFilter('currency_symbol', [$this->moneyFormatter, 'formatCurrencyAsSymbol']),
+        ];
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'tbbc_money_currency_extension';
     }

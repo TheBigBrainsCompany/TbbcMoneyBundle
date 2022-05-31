@@ -1,48 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Formatter;
 
 use Money\Currency;
 use Money\Money;
-use Symfony\Component\Intl\Intl;
 
 /**
- * Money formatter
+ * Money formatter.
  *
  * @author Benjamin Dulau <benjamin@thebigbrainscompany.com>
  */
 class MoneyFormatter
 {
-    /**
-     * @var int
-     */
-    protected $decimals;
-
-    /**
-     * MoneyFormatter constructor.
-     *
-     * @param int $decimals
-     */
-    public function __construct($decimals = 2)
+    public function __construct(protected int $decimals = 2)
     {
-        $this->decimals = $decimals;
     }
 
     /**
-     * Format money with the NumberFormatter class
+     * Format money with the NumberFormatter class.
      *
      * You can force the locale or event use your own $numberFormatter instance to format
      * the output as you wish.
      *
      * @see http://www.php.net/manual/en/numberformatter.formatcurrency.php
-     *
-     * @param Money                 $money
-     * @param null|string           $locale
-     * @param null|\NumberFormatter $numberFormatter
-     *
-     * @return string
      */
-    public function localizedFormatMoney(Money $money, $locale = null, \NumberFormatter $numberFormatter = null)
+    public function localizedFormatMoney(Money $money, ?string $locale = null, ?\NumberFormatter $numberFormatter = null): string
     {
         if (!($numberFormatter instanceof \NumberFormatter)) {
             $numberFormatter = $this->getDefaultNumberFormatter($money->getCurrency()->getCode(), $locale);
@@ -53,113 +37,77 @@ class MoneyFormatter
 
     /**
      * Formats the given Money object
-     * INCLUDING the currency symbol
-     *
-     * @param Money  $money
-     * @param string $decPoint
-     * @param string $thousandsSep
-     *
-     * @return string
+     * INCLUDING the currency symbol.
      */
-    public function formatMoney(Money $money, $decPoint = ',', $thousandsSep = ' ')
+    public function formatMoney(Money $money, string $decPoint = ',', string $thousandsSep = ' '): string
     {
         $symbol = $this->formatCurrency($money);
         $amount = $this->formatAmount($money, $decPoint, $thousandsSep);
-        $price = $amount." ".$symbol;
 
-        return $price;
+        return $amount.' '.$symbol;
     }
 
     /**
      * Formats the amount part of the given Money object
-     * WITHOUT INCLUDING the currency symbol
-     *
-     * @param Money  $money
-     * @param string $decPoint
-     * @param string $thousandsSep
-     *
-     * @return string
+     * WITHOUT INCLUDING the currency symbol.
      */
-    public function formatAmount(Money $money, $decPoint = ',', $thousandsSep = ' ')
+    public function formatAmount(Money $money, string $decPoint = ',', string $thousandsSep = ' '): string
     {
         $amount = $this->asFloat($money);
-        $amount = number_format($amount, $this->decimals, $decPoint, $thousandsSep);
 
-        return $amount;
+        return number_format($amount, $this->decimals, $decPoint, $thousandsSep);
     }
 
     /**
-     * Returns the amount for the given Money object as simple float
-     *
-     * @param Money $money
-     * @return float
+     * Returns the amount for the given Money object as simple float.
      */
-    public function asFloat(Money $money)
+    public function asFloat(Money $money): float
     {
         $amount = $money->getAmount();
         $amount = (float) $amount;
-        $amount = $amount / pow(10, $this->decimals);
 
-        return $amount;
+        return $amount / 10 ** $this->decimals;
     }
 
     /**
-     * Formats only the currency part of the given Money object
-     *
-     * @param Money $money
-     * @return string
+     * Formats only the currency part of the given Money object.
      */
-    public function formatCurrency(Money $money)
+    public function formatCurrency(Money $money): string
     {
         return $this->formatCurrencyAsSymbol($money->getCurrency());
     }
 
     /**
-     * Returns the symbol corresponding to the given currency
-     *
-     * @param Currency $currency
-     * @return string
+     * Returns the symbol corresponding to the given currency.
      */
-    public function formatCurrencyAsSymbol(Currency $currency)
+    public function formatCurrencyAsSymbol(Currency $currency): string
     {
-        //BC: Symfony < 4.3
-        if (!class_exists('Symfony\Component\Intl\Currencies')) {
-            return Intl::getCurrencyBundle()->getCurrencySymbol($currency->getCode());
-        }
-        //
+        // @todo make sure this returns the correct thing
+        $formatter = new \NumberFormatter(
+            sprintf('en-US@currency=%s', $this->formatCurrencyAsName($currency)),
+            \NumberFormatter::CURRENCY
+        );
 
-        return \Symfony\Component\Intl\Currencies::getSymbol($currency->getCode());
+        return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
     }
 
     /**
-     * Returns the name as string of the given currency
-     *
-     * @param Currency $currency
-     * @return string
+     * Returns the name as string of the given currency.
      */
-    public function formatCurrencyAsName(Currency $currency)
+    public function formatCurrencyAsName(Currency $currency): string
     {
         return $currency->getCode();
     }
 
     /**
-     * Returns the Currency object
-     *
-     * @param Money $money
-     * @return \Money\Currency
+     * Returns the Currency object.
      */
-    public function getCurrency(Money $money)
+    public function getCurrency(Money $money): Currency
     {
         return $money->getCurrency();
     }
 
-    /**
-     * @param string $currencyCode
-     * @param string $locale
-     *
-     * @return \NumberFormatter
-     */
-    protected function getDefaultNumberFormatter($currencyCode, $locale = null)
+    protected function getDefaultNumberFormatter(string $currencyCode, string $locale = null): \NumberFormatter
     {
         if (is_null($locale)) {
             $locale = \Locale::getDefault();

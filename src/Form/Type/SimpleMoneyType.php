@@ -1,87 +1,74 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Tbbc\MoneyBundle\Form\DataTransformer\SimpleMoneyToArrayTransformer;
-use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 /**
- * Form type for the Money object.
+ * Formtype for the Money object.
  */
 class SimpleMoneyType extends MoneyType
 {
-    /** @var  int */
-    protected $decimals;
+    protected int $decimals;
 
-    /** @var  array of string (currency code like "USD", "EUR") */
-    protected $currencyCodeList;
-
-    /** @var  string (currency code like "USD", "EUR") */
-    protected $referenceCurrencyCode;
-
-    /**
-     * @param int    $decimals
-     * @param array  $currencyCodeList
-     * @param string $referenceCurrencyCode
-     */
     public function __construct(
-        $decimals,
-        $currencyCodeList,
-        $referenceCurrencyCode
+        int $decimals,
+        /**
+         * array of string (currency code like "USD", "EUR").
+         */
+        protected array $currencyCodeList,
+        /**
+         * string (currency code like "USD", "EUR").
+         */
+        protected string $referenceCurrencyCode
     ) {
-        $this->decimals = (int) $decimals;
-        $this->currencyCodeList = $currencyCodeList;
-        $this->referenceCurrencyCode = $referenceCurrencyCode;
+        parent::__construct($decimals);
+
+        $this->decimals = $decimals;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var array<string, mixed> $amountOptions */
+        $amountOptions = $options['amount_options'];
         $builder
-            ->add('tbbc_amount', 'Symfony\Component\Form\Extension\Core\Type\TextType', $options['amount_options'])
+            ->add('tbbc_amount', TextType::class, $amountOptions)
         ;
 
         $transformer = new SimpleMoneyToArrayTransformer($this->decimals);
-        $transformer->setCurrency($options['currency']);
+        /** @var string $currency */
+        $currency = $options['currency'];
+        $transformer->setCurrency($currency);
 
         $builder
             ->addModelTransformer($transformer)
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        return 'tbbc_simple_money';
-    }
-
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'currency' => $this->referenceCurrencyCode,
-            'amount_options' => array(),
-        ));
+            'amount_options' => [],
+        ]);
         $resolver->setAllowedTypes('currency', 'string');
         $resolver->setAllowedValues('currency', $this->currencyCodeList);
         $resolver->setAllowedTypes('amount_options', 'array');
     }
 
     /**
-     * BC for SF < 2.7
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getBlockPrefix(): string
     {
-        $this->configureOptions($resolver);
+        return 'tbbc_simple_money';
     }
 }

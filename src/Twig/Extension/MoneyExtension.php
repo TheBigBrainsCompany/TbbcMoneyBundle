@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Twig\Extension;
 
 use Money\Money;
@@ -14,61 +16,36 @@ use Twig\TwigFilter;
  */
 class MoneyExtension extends AbstractExtension
 {
-    /**
-     * @var MoneyFormatter
-     */
-    protected $moneyFormatter;
-
-    /**
-     * @var PairManagerInterface
-     */
-    protected $pairManager;
-
-    /**
-     * Constructor
-     *
-     * @param MoneyFormatter       $moneyFormatter
-     * @param PairManagerInterface $pairManager
-     */
-    public function __construct(MoneyFormatter $moneyFormatter, PairManagerInterface $pairManager)
+    public function __construct(protected MoneyFormatter $moneyFormatter, protected PairManagerInterface $pairManager)
     {
-        $this->moneyFormatter = $moneyFormatter;
-        $this->pairManager = $pairManager;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getFilters()
+    public function getFilters(): array
     {
-        return array(
-            new TwigFilter('money_localized_format', array($this->moneyFormatter, 'localizedFormatMoney')),
-            new TwigFilter('money_format', array($this->moneyFormatter, 'formatMoney')),
-            new TwigFilter('money_format_amount', array($this->moneyFormatter, 'formatAmount')),
-            new TwigFilter('money_format_currency', array($this->moneyFormatter, 'formatCurrency')),
-            new TwigFilter('money_as_float', array($this->moneyFormatter, 'asFloat')),
-            new TwigFilter('money_get_currency', array($this->moneyFormatter, 'getCurrency')),
-            new TwigFilter('money_convert', array($this, 'convert')),
-        );
+        return [
+            new TwigFilter('money_localized_format', [$this->moneyFormatter, 'localizedFormatMoney']),
+            new TwigFilter('money_format', [$this->moneyFormatter, 'formatMoney']),
+            new TwigFilter('money_format_amount', [$this->moneyFormatter, 'formatAmount']),
+            new TwigFilter('money_format_currency', [$this->moneyFormatter, 'formatCurrency']),
+            new TwigFilter('money_as_float', [$this->moneyFormatter, 'asFloat']),
+            new TwigFilter('money_get_currency', [$this->moneyFormatter, 'getCurrency']),
+            new TwigFilter('money_convert', [$this, 'convert']),
+        ];
     }
 
     /**
      * Converts the given Money object into another
-     * currency and returns a new Money object
-     *
-     * @param Money  $money
-     * @param string $currencyCode
-     * @return Money
+     * currency and returns new Money object.
      */
-    public function convert(Money $money, $currencyCode)
+    public function convert(Money $money, string $currencyCode): Money
     {
         return $this->pairManager->convert($money, $currencyCode);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'tbbc_money_extension';
     }

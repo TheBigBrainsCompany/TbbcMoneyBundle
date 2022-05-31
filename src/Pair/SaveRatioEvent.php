@@ -1,111 +1,37 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Pair;
 
-use Symfony\Component\EventDispatcher\Event;
+use DateTimeInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class SaveRatioEvent
- * @package Tbbc\MoneyBundle\Pair
+ * Class SaveRatioEvent.
  */
 class SaveRatioEvent extends Event
 {
-    /**
-     * @var string
-     */
-    protected $referenceCurrencyCode;
-    /**
-     * @var string
-     */
-    protected $currencyCode;
-    /**
-     * @var \DateTime
-     */
-    protected $savedAt;
-    /**
-     * @var float
-     */
-    protected $ratio;
-
-    /**
-     * SaveRatioEvent constructor.
-     *
-     * @param string    $referenceCurrencyCode
-     * @param string    $currencyCode
-     * @param float     $ratio
-     * @param \DateTime $savedAt
-     */
-    public function __construct(
-        $referenceCurrencyCode,
-        $currencyCode,
-        $ratio,
-        $savedAt
-    ) {
-        $this->currencyCode = $currencyCode;
-        $this->ratio = $ratio;
-        $this->referenceCurrencyCode = $referenceCurrencyCode;
-        $this->savedAt = $savedAt;
-    }
-
-    /**
-     * @param string $currencyCode
-     */
-    public function setCurrencyCode($currencyCode)
+    public function __construct(protected string $referenceCurrencyCode, protected string $currencyCode, protected float $ratio, protected DateTimeInterface $savedAt)
     {
-        $this->currencyCode = $currencyCode;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrencyCode()
+    public function getCurrencyCode(): string
     {
         return $this->currencyCode;
     }
 
-    /**
-     * @param float $ratio
-     */
-    public function setRatio($ratio)
-    {
-        $this->ratio = $ratio;
-    }
-
-    /**
-     * @return float
-     */
-    public function getRatio()
+    public function getRatio(): float
     {
         return $this->ratio;
     }
 
-    /**
-     * @param string $referenceCurrencyCode
-     */
-    public function setReferenceCurrencyCode($referenceCurrencyCode)
-    {
-        $this->referenceCurrencyCode = $referenceCurrencyCode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getReferenceCurrencyCode()
+    public function getReferenceCurrencyCode(): string
     {
         return $this->referenceCurrencyCode;
     }
 
-    /**
-     * @param \DateTime $savedAt
-     */
-    public function setSavedAt($savedAt)
-    {
-        $this->savedAt = $savedAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getSavedAt()
+    public function getSavedAt(): DateTimeInterface
     {
         return $this->savedAt;
     }

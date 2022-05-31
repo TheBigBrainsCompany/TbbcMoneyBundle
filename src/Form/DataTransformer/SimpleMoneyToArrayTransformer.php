@@ -1,23 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Form\DataTransformer;
 
-use Money\Currency;
-use Tbbc\MoneyBundle\Pair\PairManagerInterface;
+use Money\Money;
 
 /**
  * Transforms between a Money instance and an array.
  */
 class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
 {
-    protected $currency;
+    protected string $currency = '';
 
-    /**
-     * SimpleMoneyToArrayTransformer constructor.
-     *
-     * @param int $decimals
-     */
-    public function __construct($decimals)
+    public function __construct(int $decimals)
     {
         parent::__construct($decimals);
     }
@@ -25,13 +21,13 @@ class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
     /**
      * {@inheritdoc}
      */
-    public function transform($value)
+    public function transform($value): ?array
     {
-        $tab = parent::transform($value);
-        if (!$tab) {
+        if (!$tab = parent::transform($value)) {
             return null;
         }
-        unset($tab["tbbc_currency"]);
+
+        unset($tab['tbbc_currency']);
 
         return $tab;
     }
@@ -39,20 +35,19 @@ class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($value)
+    public function reverseTransform($value): ?Money
     {
         if (is_array($value)) {
-            $value["tbbc_currency"] = new Currency($this->currency);
+            $value['tbbc_currency'] = $this->currency;
         }
 
         return parent::reverseTransform($value);
     }
 
-    /**
-     * @param string $currency
-     */
-    public function setCurrency($currency)
+    public function setCurrency(string $currency): self
     {
         $this->currency = $currency;
+
+        return $this;
     }
 }

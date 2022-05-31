@@ -1,111 +1,71 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Templating\Helper;
 
+use Money\Currency;
 use Money\Money;
 use Symfony\Component\Templating\Helper\Helper;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 /**
- * Class MoneyHelper
- * @package Tbbc\MoneyBundle\Templating\Helper
+ * Class MoneyHelper.
  */
 class MoneyHelper extends Helper
 {
-    /**
-     * @var MoneyFormatter
-     */
-    protected $moneyFormatter;
-
-    /**
-     * @var PairManagerInterface
-     */
-    protected $pairManager;
-
-    /**
-     * Constructor
-     *
-     * @param MoneyFormatter       $moneyFormatter
-     * @param PairManagerInterface $pairManager
-     */
-    public function __construct(MoneyFormatter $moneyFormatter, PairManagerInterface $pairManager)
+    public function __construct(protected MoneyFormatter $moneyFormatter, protected PairManagerInterface $pairManager)
     {
-        $this->moneyFormatter = $moneyFormatter;
-        $this->pairManager = $pairManager;
     }
 
     /**
      * Formats the given Money object
-     * INCLUDING the currency symbol
-     *
-     * @param Money  $money
-     * @param string $decPoint
-     * @param string $thousandsSep
-     *
-     * @return string
+     * INCLUDING the currency symbol.
      */
-    public function format(Money $money, $decPoint = ',', $thousandsSep = ' ')
+    public function format(Money $money, string $decPoint = ',', string $thousandsSep = ' '): string
     {
         return $this->moneyFormatter->formatMoney($money, $decPoint, $thousandsSep);
     }
 
     /**
      * Formats the amount part of the given Money object
-     * WITHOUT INCLUDING the currency symbol
-     *
-     * @param Money  $money
-     * @param string $decPoint
-     * @param string $thousandsSep
-     *
-     * @return string
+     * WITHOUT INCLUDING the currency symbol.
      */
-    public function formatAmount(Money $money, $decPoint = ',', $thousandsSep = ' ')
+    public function formatAmount(Money $money, string $decPoint = ',', string $thousandsSep = ' '): string
     {
         return $this->moneyFormatter->formatAmount($money, $decPoint, $thousandsSep);
     }
 
     /**
-     * Returns the amount for the given Money object as simple float
-     *
-     * @param Money $money
-     * @return float
+     * Returns the amount for the given Money object as simple float.
      */
-    public function asFloat(Money $money)
+    public function asFloat(Money $money): float
     {
         return $this->moneyFormatter->asFloat($money);
     }
 
     /**
-     * Formats only the currency part of the given Money object
-     *
-     * @param Money $money
-     * @return string
+     * Formats only the currency part of the given Money object.
      */
-    public function formatCurrency($money)
+    public function formatCurrency(Money $money): string
     {
         return $this->moneyFormatter->formatCurrency($money);
     }
 
     /**
-     * Returns the Currency object
-     *
-     * @param Money $money
-     * @return \Money\Currency
+     * Returns the Currency object.
      */
-    public function getCurrency(Money $money)
+    public function getCurrency(Money $money): Currency
     {
         return $this->moneyFormatter->getCurrency($money);
     }
 
     /**
      * Converts the given Money object into another
-     * currency and returns a new Money object
-     *
-     * @param Money  $money
-     * @param string $currencyCode
-     * @return Money
+     * currency and returns new Money object.
      */
-    public function convert(Money $money, $currencyCode)
+    public function convert(Money $money, string $currencyCode): Money
     {
         return $this->pairManager->convert($money, $currencyCode);
     }
@@ -113,7 +73,7 @@ class MoneyHelper extends Helper
     /**
      * {@inheritDoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'tbbc_money_helper';
     }

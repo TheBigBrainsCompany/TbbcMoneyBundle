@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
@@ -9,30 +11,16 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 /**
- * Class RatioFetchCommand
- * @package Tbbc\MoneyBundle\Command
+ * Class RatioFetchCommand.
  */
 class RatioFetchCommand extends Command
 {
-
-    /**
-     * @var PairManagerInterface
-     */
-    private $pairManager;
-
-    /**
-     * @param PairManagerInterface $pairManager
-     */
-    public function __construct(PairManagerInterface $pairManager)
+    public function __construct(private PairManagerInterface $pairManager)
     {
         parent::__construct();
-        $this->pairManager = $pairManager;
     }
 
-    /**
-     * Configure command
-     */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('tbbc:money:ratio-fetch')
@@ -40,21 +28,17 @@ class RatioFetchCommand extends Command
             ->setDescription('fetch all needed ratio from a external ratio provider');
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return int
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $this->pairManager->saveRatioListFromRatioProvider();
             $output->writeln('ratio fetched from provider'.PHP_EOL.print_r($this->pairManager->getRatioList(), true));
+
+            return Command::SUCCESS;
         } catch (MoneyException $e) {
             $output->writeln('ERROR during fetch ratio : '.$e->getMessage());
-        }
 
-        return 0;
+            return Command::FAILURE;
+        }
     }
 }
