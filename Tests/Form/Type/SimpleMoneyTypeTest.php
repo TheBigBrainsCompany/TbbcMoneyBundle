@@ -1,134 +1,139 @@
 <?php
-/**
- * Created by Philippe Le Van.
- * Date: 01/07/13
- */
+
+declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Tests\Form\Type;
 
-use Money\Currency;
-use Symfony\Component\Form\PreloadedExtension;
-use Symfony\Component\Form\Test\FormIntegrationTestCase;
-use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
-use Tbbc\MoneyBundle\Form\Type\CurrencyType;
-use Symfony\Component\Form\Test\TypeTestCase;
+use Locale;
 use Money\Money;
+use Symfony\Component\Form\PreloadedExtension;
+use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Tbbc\MoneyBundle\Form\Type\SimpleMoneyType;
 use Tbbc\MoneyBundle\Pair\PairManager;
 
-class SimpleMoneyTypeTest
-    extends TypeTestCase
+class SimpleMoneyTypeTest extends TypeTestCase
 {
-    private $pairManager;
-    private $simpleMoneyTypeClass = 'Tbbc\MoneyBundle\Form\Type\SimpleMoneyType';
+    private string $simpleMoneyTypeClass = SimpleMoneyType::class;
 
-    public function testBindValid()
+    public function testBindValid(): void
     {
-        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
-        $form->submit(array(
-            "tbbc_amount" => '12'
-        ));
-        $this->assertEquals(Money::EUR(1200), $form->getData());
-    }
-    public function testBindValidDecimals()
-    {
-        \Locale::setDefault("fr_FR");
-        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
-        $form->submit(array(
-            "tbbc_amount" => '1,2'
-        ));
-        $this->assertEquals(Money::EUR(1200), $form->getData());
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, []);
+        $form->submit([
+            'tbbc_amount' => '12',
+        ]);
+        $money = Money::EUR(1200);
+        $this->assertSame($money->getAmount(), $form->getData()->getAmount());
+        $this->assertSame($money->getCurrency()->getCode(), $form->getData()->getCurrency()->getCode());
     }
 
-    public function testBindDecimalValid()
+    public function testBindValidDecimals(): void
     {
-        \Locale::setDefault("fr_FR");
-        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
-        $form->submit(array(
-            "tbbc_amount" => '12,5'
-        ));
-        $this->assertEquals(Money::EUR(1250), $form->getData());
+        Locale::setDefault('fr_FR');
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, []);
+        $form->submit([
+            'tbbc_amount' => '1,2',
+        ]);
+        $money = Money::EUR(1200);
+        $this->assertSame($money->getAmount(), $form->getData()->getAmount());
+        $this->assertSame($money->getCurrency()->getCode(), $form->getData()->getCurrency()->getCode());
     }
 
-    public function testGreaterThan1000Valid()
+    public function testBindDecimalValid(): void
     {
-        \Locale::setDefault("fr_FR");
-        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
-        $form->submit(array(
-            "tbbc_amount" => '1 252,5'
-        ));
-        $this->assertEquals(Money::EUR(125250), $form->getData());
+        Locale::setDefault('fr_FR');
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, []);
+        $form->submit([
+            'tbbc_amount' => '12,5',
+        ]);
+        $money = Money::EUR(1250);
+        $this->assertSame($money->getAmount(), $form->getData()->getAmount());
+        $this->assertSame($money->getCurrency()->getCode(), $form->getData()->getCurrency()->getCode());
     }
 
-    public function testSetData()
+    public function testGreaterThan1000Valid(): void
     {
-        \Locale::setDefault("fr_FR");
-        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array());
+        Locale::setDefault('fr_FR');
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, []);
+        $form->submit([
+            'tbbc_amount' => '1 252,5',
+        ]);
+        $money = Money::EUR(125250);
+        $this->assertSame($money->getAmount(), $form->getData()->getAmount());
+        $this->assertSame($money->getCurrency()->getCode(), $form->getData()->getCurrency()->getCode());
+    }
+
+    public function testSetData(): void
+    {
+        Locale::setDefault('fr_FR');
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, []);
         $form->setData(Money::EUR(120));
         $formView = $form->createView();
 
-        $this->assertEquals("1,20", $formView->children["tbbc_amount"]->vars["value"]);
+        $this->assertSame('1,20', $formView->children['tbbc_amount']->vars['value']);
     }
 
-    public function testOptions()
+    public function testOptions(): void
     {
-        \Locale::setDefault("fr_FR");
-        $form = $this->factory->create($this->simpleMoneyTypeClass, null, array(
-            'amount_options' => array(
+        Locale::setDefault('fr_FR');
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, [
+            'amount_options' => [
                 'label' => 'Amount',
-            ),
-        ));
+            ],
+        ]);
         $form->setData(Money::EUR(120));
         $formView = $form->createView();
 
-        $this->assertEquals("1,20", $formView->children["tbbc_amount"]->vars["value"]);
+        $this->assertSame('1,20', $formView->children['tbbc_amount']->vars['value']);
     }
 
-    public function testOptionsFailsIfNotValid()
+    public function testOptionsFailsIfNotValid(): void
     {
         $this->expectException(UndefinedOptionsException::class);
-        $this->expectExceptionMessageRegExp('/this_does_not_exists/');
+        $this->expectExceptionMessageMatches('/this_does_not_exists/');
 
-        $this->factory->create($this->simpleMoneyTypeClass, null, array(
-            'amount_options' => array(
+        $this->factory->create($this->simpleMoneyTypeClass, null, [
+            'amount_options' => [
                 'this_does_not_exists' => 'Amount',
-            ),
-        ));
+            ],
+        ]);
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         //This is probably not ideal, but I'm not sure how to set up the pair manager
         // with different decimals for different tests in Symfony 3.0
         $decimals = 2;
-        $currencies = array('EUR', 'USD');
+        $currencies = ['EUR', 'USD'];
         $referenceCurrency = 'EUR';
 
-        if($this->getName() === "testBindValidDecimals")
+        if ('testBindValidDecimals' === $this->getName()) {
             $decimals = 3;
+        }
 
-        $this->pairManager = $this->getMockBuilder('Tbbc\MoneyBundle\Pair\PairManager')
+        $pairManager = $this->getMockBuilder(PairManager::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $this->pairManager->expects($this->any())
+        $pairManager->expects($this->any())
             ->method('getReferenceCurrencyCode')
-            ->will($this->returnValue("EUR"));
+            ->will($this->returnValue('EUR'));
 
-        return array(
+        return [
             new PreloadedExtension(
-                array(new SimpleMoneyType($decimals, $currencies, $referenceCurrency)), array()
-            )
-        );
+                [new SimpleMoneyType($decimals, $currencies, $referenceCurrency)], []
+            ),
+        ];
     }
 
-    public function testOverrideCurrency()
+    public function testOverrideCurrency(): void
     {
-        \Locale::setDefault("fr_FR");
-        $form = $this->factory->create($this->simpleMoneyTypeClass, null, ["currency" => "USD"]);
-        $form->submit(array(
-            "tbbc_amount" => '1 252,5'
-        ));
-        $this->assertEquals(Money::USD(125250), $form->getData());
+        Locale::setDefault('fr_FR');
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, ['currency' => 'USD']);
+        $form->submit([
+            'tbbc_amount' => '1 252,5',
+        ]);
+        $money = Money::USD(125250);
+        $this->assertSame($money->getAmount(), $form->getData()->getAmount());
+        $this->assertSame($money->getCurrency()->getCode(), $form->getData()->getCurrency()->getCode());
     }
-
 }

@@ -1,43 +1,35 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Tbbc\MoneyBundle\Tests\Money;
 
-use Money\Money;
-use Tbbc\MoneyBundle\Money\MoneyManager;
-use Tbbc\MoneyBundle\MoneyException;
 use PHPUnit\Framework\TestCase;
+use Tbbc\MoneyBundle\Money\MoneyManager;
 
-/**
- * @group moneymanager
- */
 class MoneyManagerTest extends TestCase
 {
-    /** @var  MoneyManager */
-    protected $manager;
+    protected MoneyManager $manager;
 
-    public function setUp()
+    public function setUp(): void
     {
-        $this->manager = new MoneyManager("EUR", 2);
+        $this->manager = new MoneyManager('EUR', 2);
     }
 
-    public function tearDown()
-    {
-    }
-
-    public function testCreateMoneyFromFloat()
+    public function testCreateMoneyFromFloat(): void
     {
         $money = $this->manager->createMoneyFromFloat(2.5);
-        $this->assertEquals("EUR", $money->getCurrency()->getCode());
-        $this->assertEquals(250, $money->getAmount());
+        $this->assertSame('EUR', $money->getCurrency()->getCode());
+        $this->assertSame('250', $money->getAmount());
 
         $money = $this->manager->createMoneyFromFloat(2.5, 'USD');
-        $this->assertEquals("USD", $money->getCurrency()->getCode());
-        $this->assertEquals(250, $money->getAmount());
+        $this->assertSame('USD', $money->getCurrency()->getCode());
+        $this->assertSame('250', $money->getAmount());
 
         $money = $this->manager->createMoneyFromFloat(2.49999999999999);
-        $this->assertEquals(250, $money->getAmount());
+        $this->assertSame('250', $money->getAmount());
 
         $money = $this->manager->createMoneyFromFloat(2.529999999999);
-        $this->assertEquals(253, $money->getAmount());
+        $this->assertSame('253', $money->getAmount());
     }
-
 }

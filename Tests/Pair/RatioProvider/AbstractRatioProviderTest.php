@@ -1,11 +1,12 @@
 <?php
 
-namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
+declare(strict_types=1);
 
-use Money\Currencies\ISOCurrencies;
+namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
+
 use Money\Currency;
-use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 use PHPUnit\Framework\TestCase;
+use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 /**
  * This class can be used to easily test your custom ratio providers.
@@ -16,21 +17,19 @@ abstract class AbstractRatioProviderTest extends TestCase
 {
     /**
      * The currently tested RatioProvider.
-     *
-     * @var RatioProviderInterface
      */
-    protected $ratioProvider;
+    protected RatioProviderInterface $ratioProvider;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->ratioProvider = $this->getRatioProvider();
     }
 
-    public function testRatioFetching()
+    public function testRatioFetching(): void
     {
         foreach ($this->getRatiosToTest() as $testParameters) {
             $ratio = $this->ratioProvider->fetchRatio($testParameters['reference'], $testParameters['currency']);
-            $this->assertInternalType('float', $ratio, 'The fetched ratio must be a float');
+            $this->assertIsFloat($ratio, 'The fetched ratio must be a float');
             $this->assertLessThan(
                 $testParameters['ratio_max'],
                 $ratio,
@@ -44,7 +43,7 @@ abstract class AbstractRatioProviderTest extends TestCase
         }
     }
 
-    public function testExceptionForUnknownCurrency()
+    public function testExceptionForUnknownCurrency(): void
     {
         $this->expectException('Tbbc\MoneyBundle\MoneyException');
         $this->ratioProvider->fetchRatio('ZZZ', 'USD');
@@ -52,10 +51,8 @@ abstract class AbstractRatioProviderTest extends TestCase
 
     /**
      * Returns the instanciated RatioProvider service that will be tested.
-     *
-     * @return RatioProviderInterface
      */
-    abstract protected function getRatioProvider();
+    abstract protected function getRatioProvider(): RatioProviderInterface;
 
     /**
      * Each array value returned is an array with the keys :
@@ -63,24 +60,43 @@ abstract class AbstractRatioProviderTest extends TestCase
      *  - currency : The currency for which we want the ratio
      *  - ratio_min : The minimum ratio value considered valid
      *  - ratio_max : The maximum ratio value considered valid.
-     *
-     * @return array[]
      */
-    protected function getRatiosToTest()
+    protected function getRatiosToTest(): array
     {
-        return array(
-            array(
+        return [
+            [
                 'reference' => 'EUR',
                 'currency' => 'USD',
                 'ratio_min' => 0.3,
                 'ratio_max' => 3,
-            ),
-            array(
+            ],
+            [
                 'reference' => 'GBP',
                 'currency' => 'EUR',
                 'ratio_min' => 0.3,
                 'ratio_max' => 3,
-            ),
-        );
+            ],
+        ];
+    }
+
+    protected function randomRatio(float $ratioMin, float $ratioMax, int $seed): float
+    {
+        $precision = 100;
+        mt_srand($seed);
+
+        $float = random_int(
+                ((int) $ratioMin * $precision),
+                ((int) $ratioMax * $precision)
+            ) / $precision;
+
+        if ($float <= 0.3) {
+            $float = 0.31;
+        }
+
+        if ($float >= 3) {
+            $float = 2.99;
+        }
+
+        return $float;
     }
 }

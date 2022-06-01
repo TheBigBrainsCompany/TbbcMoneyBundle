@@ -1,21 +1,18 @@
 <?php
-namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 
-use Tbbc\MoneyBundle\Pair\RatioProvider\ExchangerAdapterRatioProvider;
+declare(strict_types=1);
+
+namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
+
 use Exchanger\Exchanger;
 use Exchanger\Service\PhpArray;
+use Tbbc\MoneyBundle\MoneyException;
+use Tbbc\MoneyBundle\Pair\RatioProvider\ExchangerAdapterRatioProvider;
+use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
-/**
- * @author Pavel Dubinin <geekdevs@gmail.com>
- * @group  manager
- * @group  php5.5+
- */
 class ExchangerAdapterRatioProviderTest extends AbstractRatioProviderTest
 {
-    /**
-     * @inheritdoc
-     */
-    protected function getRatioProvider()
+    protected function getRatioProvider(): RatioProviderInterface
     {
         $ratios = $this->getRatiosToTest();
 
@@ -31,17 +28,15 @@ class ExchangerAdapterRatioProviderTest extends AbstractRatioProviderTest
         return new ExchangerAdapterRatioProvider($exchanger);
     }
 
-    /**
-     * @param float $ratioMin
-     * @param float $ratioMax
-     * @param int $seed
-     *
-     * @return float
-     */
-    private function randomRatio($ratioMin, $ratioMax, $seed)
+    public function testInvalidCurrencyCode(): void
     {
-        $precision = 100;
-        mt_srand($seed); //so that values are same across tests
-        return mt_rand($ratioMin*$precision, $ratioMax*$precision) / $precision;
+        $this->expectException(MoneyException::class);
+        $this->expectExceptionMessage('The currency code "" does not exist');
+
+        $ratiosSetup['EUR/123'] = $this->randomRatio(1, 3, 1);
+        $service = new PhpArray($ratiosSetup);
+        $exchanger = new Exchanger($service);
+        $provider = new ExchangerAdapterRatioProvider($exchanger);
+        $provider->fetchRatio('EUR', '');
     }
 }
