@@ -15,7 +15,7 @@ a Symfony project.
 
 This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
 
-* This bundle is tested and is stable with Symfony 3.4, 4.3, 4.4, 5.0 
+* This bundle is tested and is stable with Symfony 3.4, 4.3, 4.4, 5.0, 6.0 
 
 Quick Start
 -----------
