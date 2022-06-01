@@ -52,7 +52,7 @@ class PairManager implements PairManagerInterface, Exchange
     {
         $ratio = $this->getRelativeRatio($baseCurrency->getCode(), $counterCurrency->getCode());
 
-        return new CurrencyPair($baseCurrency, $counterCurrency, $ratio);
+        return new CurrencyPair($baseCurrency, $counterCurrency, (string) $ratio);
     }
 
     /**
@@ -61,11 +61,11 @@ class PairManager implements PairManagerInterface, Exchange
     public function saveRatio(string $currencyCode, float $ratio): void
     {
         $currency = new Currency($currencyCode);
-        // end of hack
-        $ratio = floatval($ratio);
+
         if ($ratio <= 0) {
             throw new MoneyException('ratio has to be strictly positive');
         }
+
         $ratioList = $this->storage->loadRatioList(true);
         $ratioList[$currency->getCode()] = $ratio;
         $ratioList[$this->getReferenceCurrencyCode()] = 1.0;
