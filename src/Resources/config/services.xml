@@ -47,6 +47,7 @@
         <service id="tbbc_money.ratio_provider.google" class="%tbbc_money.ratio_provider.google.class%" public="true">
         </service>
         <service id="tbbc_money.ratio_provider.ecb" class="%tbbc_money.ratio_provider.ecb.class%">
+            <argument type="service" id="Symfony\Contracts\HttpClient\HttpClientInterface"/>
         </service>
         <!-- Formatter -->
         <service id="tbbc_money.formatter.money_formatter" class="%tbbc_money.formatter.money_formatter.class%" public="true">
