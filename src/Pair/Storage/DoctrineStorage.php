@@ -56,18 +56,31 @@ class DoctrineStorage implements StorageInterface
      */
     public function saveRatioList(array $ratioList): void
     {
+        /** @var DoctrineStorageRatio[] $doctrineStorageRatios */
         $doctrineStorageRatios = $this->entityManager->getRepository(DoctrineStorageRatio::class)->findAll();
 
+        // index them in an associative array
+        $existingStorageRatios = [];
         foreach ($doctrineStorageRatios as $doctrineStorageRatio) {
+            $existingStorageRatios[$doctrineStorageRatio->getCurrencyCode()] = $doctrineStorageRatio;
+        }
+
+        foreach ($ratioList as $currencyCode => $ratio) {
+            // load from existing, or create a new
+            $existingStorageRatio = $existingStorageRatios[$currencyCode] ?? new DoctrineStorageRatio($currencyCode, $ratio);
+            $existingStorageRatio->setRatio($ratio);
+            $this->entityManager->persist($existingStorageRatio);
+
+            // remove from the array, as we do not want to remove this one
+            unset($existingStorageRatios[$currencyCode]);
+        }
+
+        // remove the remaining ones
+        foreach ($existingStorageRatios as $doctrineStorageRatio) {
             $this->entityManager->remove($doctrineStorageRatio);
         }
 
-        $this->entityManager->flush();
-
-        foreach ($ratioList as $currencyCode => $ratio) {
-            $this->entityManager->persist(new DoctrineStorageRatio($currencyCode, $ratio));
-        }
-
+        // flush to database
         $this->entityManager->flush();
         $this->entityManager->clear();
 
