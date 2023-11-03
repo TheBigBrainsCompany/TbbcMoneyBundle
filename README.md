@@ -449,20 +449,32 @@ class IndexController extends Controller
 
 ### Change the ratio provider
 
-The ratio provider by default is base on the service 'tbbc_money.ratio_provider.ecb'
+The ratio provider by default is base on the service `tbbc_money.ratio_provider.ecb`.
 
-This bundles contains three ratio providers :
+* `tbbc_money.ratio_provider.ecb` ratio provider is based on the data provided here https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
 
-* tbbc_money.ratio_provider.ecb based on the data provided here https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
-* tbbc_money.ratio_provider.yahoo_finance based on the Yahoo finance APIs https://developer.yahoo.com/ (yahoo does not provide this api anymore)
-* tbbc_money.ratio_provider.google based on the https://www.google.com/finance/converter service (google does not provide this api anymore)
+You can write your own ratio provider by creating and custom class that implements the `RatioProviderInterface` interface.
 
-You can change the service to use in the config.yml file :
+```php
+namespace App\Money;
+
+use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
+
+final class YourRatioProviderService implements RatioProviderInterface
+{
+    public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float
+    {
+        // implement your custom logic here
+    }
+}
+```
+
+You can change the service to use in the `config/packages/tbbc_money.yaml` file :
 
 ```
 tbbc_money:
     [...]
-    ratio_provider: tbbc_money.ratio_provider.google
+    ratio_provider: App\Money\YourRatioProviderService
 ```
 
 ### Additional rate providers from Exchanger
