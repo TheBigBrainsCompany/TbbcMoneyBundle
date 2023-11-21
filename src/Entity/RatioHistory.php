@@ -12,7 +12,7 @@ use DateTimeInterface;
  */
 class RatioHistory
 {
-    protected mixed $id = null;
+    protected ?int $id = null;
     protected string $referenceCurrencyCode = '';
     protected string $currencyCode = '';
     protected float $ratio = 0;

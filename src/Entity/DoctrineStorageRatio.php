@@ -9,7 +9,7 @@ namespace Tbbc\MoneyBundle\Entity;
  */
 class DoctrineStorageRatio
 {
-    private mixed $id = null;
+    private ?int $id = null;
 
     public function __construct(private ?string $currencyCode = null, private ?float $ratio = null)
     {
