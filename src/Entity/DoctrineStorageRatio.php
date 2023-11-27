@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Entity;
 
-/**
- * Class DoctrineStorageRatio.
- */
 class DoctrineStorageRatio
 {
-    private mixed $id = null;
+    private ?int $id = null;
 
-    public function __construct(private ?string $currencyCode = null, private ?float $ratio = null)
-    {
+    public function __construct(
+        private ?string $currencyCode = null,
+        private ?float $ratio = null,
+    ) {
     }
 
-    public function getId(): mixed
+    public function getId(): int
     {
         return $this->id;
     }

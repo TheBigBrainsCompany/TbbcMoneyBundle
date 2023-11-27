@@ -7,12 +7,9 @@ namespace Tbbc\MoneyBundle\Entity;
 use DateTime;
 use DateTimeInterface;
 
-/**
- * Class RatioHistory.
- */
 class RatioHistory
 {
-    protected mixed $id = null;
+    protected ?int $id = null;
     protected string $referenceCurrencyCode = '';
     protected string $currencyCode = '';
     protected float $ratio = 0;
@@ -23,14 +20,14 @@ class RatioHistory
         $this->savedAt = new DateTime();
     }
 
-    public function setId(mixed $id): self
+    public function setId(int $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getId(): mixed
+    public function getId(): int
     {
         return $this->id;
     }
