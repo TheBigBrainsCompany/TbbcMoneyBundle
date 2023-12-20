@@ -9,6 +9,7 @@ use Money\Currency;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use TypeError;
 
 /**
  * Transforms between a Currency and a string.
@@ -48,9 +49,10 @@ class CurrencyToArrayTransformer implements DataTransformerInterface
         if (!isset($value['tbbc_name'])) {
             return null;
         }
+
         try {
             return new Currency($value['tbbc_name']);
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException|TypeError $e) {
             throw new TransformationFailedException($e->getMessage());
         }
     }

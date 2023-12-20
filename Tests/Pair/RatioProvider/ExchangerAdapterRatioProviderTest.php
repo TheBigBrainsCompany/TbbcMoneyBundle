@@ -6,6 +6,7 @@ namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
 
 use Exchanger\Exchanger;
 use Exchanger\Service\PhpArray;
+use InvalidArgumentException;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProvider\ExchangerAdapterRatioProvider;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
@@ -31,7 +32,9 @@ class ExchangerAdapterRatioProviderTest extends AbstractRatioProviderTest
     public function testInvalidCurrencyCode(): void
     {
         $this->expectException(MoneyException::class);
-        $this->expectExceptionMessage('The currency code "" does not exist');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The currency pair must be in the form "EUR/USD".');
+        //$this->expectExceptionMessage('The currency code "" does not exist');
 
         $ratiosSetup['EUR/123'] = $this->randomRatio(1, 3, 1);
         $service = new PhpArray($ratiosSetup);
