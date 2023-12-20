@@ -20,8 +20,8 @@ class RatioHistoryTest extends TestCase
         $ratioHistory = new RatioHistory();
 
         self::assertNull($ratioHistory->getId());
-        $ratioHistory->setId('id');
-        self::assertSame('id', $ratioHistory->getId());
+        $ratioHistory->setId(1);
+        self::assertSame(1, $ratioHistory->getId());
 
         $ratioHistory->setCurrencyCode('USD');
         self::assertSame('USD', $ratioHistory->getCurrencyCode());

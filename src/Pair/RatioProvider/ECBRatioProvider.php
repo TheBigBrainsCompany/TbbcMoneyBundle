@@ -50,6 +50,10 @@ class ECBRatioProvider implements RatioProviderInterface
             throw new MoneyException(sprintf('The reference currency code for ECB provider must be EUR, got: "%s"', $referenceCurrencyCode));
         }
 
+        if ('' === $currencyCode) {
+            throw new MoneyException(sprintf('The currency code "%s" does not exist', $currencyCode));
+        }
+
         try {
             $currency = new Currency($currencyCode);
         } catch (UnknownCurrencyException|InvalidArgumentException) {
