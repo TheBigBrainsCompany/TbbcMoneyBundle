@@ -51,7 +51,7 @@ class ECBRatioProvider implements RatioProviderInterface
         }
 
         if ('' === $currencyCode) {
-            throw new MoneyException(sprintf('The currency code "%s" does not exists', $currencyCode));
+            throw new MoneyException(sprintf('The currency code "%s" does not exist', $currencyCode));
         }
 
         try {
