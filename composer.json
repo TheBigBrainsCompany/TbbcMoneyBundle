@@ -46,7 +46,7 @@
         "php-http/guzzle6-adapter": "^2.0",
         "vimeo/psalm": "^4.13 | ^5.20",
         "symfony/phpunit-bridge": "^5.4|^6.0|^7.0",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.6|^10.5",
         "symfony/yaml": "^5.4|^6.0|^7.0",
         "http-interop/http-factory-guzzle": "^1.2"
     },

@@ -60,7 +60,7 @@ class MoneyExtensionTest extends TestCase
         $this->assertSame($expected, $this->getTemplate($template)->render($this->variables));
     }
 
-    public function getMoneyTests(): array
+    public static function getMoneyTests(): array
     {
         return [
             ['{{ price|money_localized_format }}', "1\u{202f}234\u{202f}567,89\u{a0}€"],
