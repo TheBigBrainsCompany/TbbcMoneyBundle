@@ -1,0 +1,86 @@
+name: Code_Checks
+
+on: ["push", "pull_request"]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.2']
+        stability: [ prefer-stable ]
+        symfony-version: ['7.0.*']
+        include:
+          - php: '8.0'
+            symfony-version: 5.4.*
+            stability: prefer-lowest
+          - php: '8.0'
+            symfony-version: 5.4.*
+            stability: prefer-stable
+          - php: '8.1'
+            symfony-version: 6.0.*
+            stability: prefer-stable
+          - php: '8.2'
+            symfony-version: 7.0.*
+            stability: prefer-stable
+          - php: '8.3'
+            symfony-version: 7.0.*
+            stability: prefer-stable
+
+    name: PHP ${{ matrix.php }} - ${{ matrix.symfony-version }} - ${{ matrix.stability }}
+    steps:
+      # basically git clone
+      - uses: actions/checkout@v4
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      # use PHP of specific version
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pcov, curl
+          coverage: pcov
+
+      - name: Install dependencies
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony-version }}
+        run: |
+          composer global config --no-plugins allow-plugins.symfony/flex true
+          composer global require --no-progress --no-scripts --no-plugins symfony/flex
+          composer update --no-interaction --prefer-dist
+          vendor/bin/simple-phpunit install
+
+      - name: Execute tests
+        env:
+          SYMFONY_DEPRECATIONS_HELPER: 'weak'
+        run: vendor/bin/phpunit --coverage-text
+
+
+  cs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          coverage: none
+      - run: |
+          composer install --no-progress
+          composer require friendsofphp/php-cs-fixer "^3.48"
+          vendor/bin/php-cs-fixer
+
+  psalm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          coverage: none
+      - run: composer install --no-progress
+      - run: vendor/bin/psalm
