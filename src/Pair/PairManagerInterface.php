@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tbbc\MoneyBundle\Pair;
 
 use Money\Money;
+use Tbbc\MoneyBundle\MoneyException;
 
 /**
  * Interface PairManagerInterface.
@@ -21,6 +22,8 @@ interface PairManagerInterface
      *
      * WARNING: This method has to dispatch a \TbbcMoneyEvents::AFTER_RATIO_SAVE event
      * with a SaveRatioEvent
+     *
+     * @throws MoneyException
      */
     public function saveRatio(string $currencyCode, float $ratio): void;
 
@@ -56,6 +59,8 @@ interface PairManagerInterface
     /**
      * If ratio provider is defined, get currency code list, and fetch ratio
      * from the ratio provider.
+     *
+     * @throws MoneyException
      */
     public function saveRatioListFromRatioProvider(): void;
 }
