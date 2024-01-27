@@ -45,6 +45,8 @@ interface PairManagerInterface
     /**
      * return ratio list for currencies in comparison to reference currency
      * array of type array("EUR" => 1, "USD" => 1.25);.
+     *
+     * @return array<string, float>
      */
     public function getRatioList(): array;
 
