@@ -28,7 +28,6 @@
         "symfony/console": "^5.4|^6.0|^7.0",
         "symfony/dom-crawler": "^5.4|^6.0|^7.0",
         "symfony/event-dispatcher": "^5.4|^6.0|^7.0",
-        "symfony/templating": "^5.4|^6.0|^7.0",
         "symfony/http-client": "^5.4|^6.0|^7.0"
     },
     "autoload": {

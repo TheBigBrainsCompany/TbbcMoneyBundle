@@ -7,6 +7,8 @@ Versions from 6.0
 
 **BC breaking changes**
 
+- Drop `symfony/templating` and template function (use twig)
+
 - Drop `YahooFinanceRatioProvider` ratio provider support
   - Remove `tbbc_money.ratio_provider.yahoo_finance.class` container parameter
   - Remove `tbbc_money.ratio_provider.yahoo_finance` service definition
