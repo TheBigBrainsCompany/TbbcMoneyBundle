@@ -442,6 +442,8 @@ class IndexController extends Controller
 
 # display ratio list
 ./bin/console tbbc:money:ratio-list
+./bin/console tbbc:money:ratio-list --format=table
+./bin/console tbbc:money:ratio-list --format=json
 
 # fetch all the ratio for all defined currencies from an external API
 ./bin/console tbbc:money:ratio-fetch
