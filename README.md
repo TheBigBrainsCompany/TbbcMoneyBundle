@@ -427,13 +427,6 @@ class IndexController extends Controller
 {{ $amount | money_format_currency }}
 ```
 
-### PHP templating integration
-
-```php
-<span class="price"><?php echo $view['tbbc_money']->format($price) ?></span>
-<span class="money"><?php echo $view['tbbc_money_currency']->formatCurrencyAsSymbol($price->getCurrency()) ?></span>
-```
-
 ### Fetching ratio values from remote provider
 
 ```bash
@@ -663,7 +656,6 @@ Optimizations
 
 In your config.yml, you can :
 
-* select the templating engine to use. By default, only Twig is loaded.
 * define the decimals count after a unit (ex : 12.25€ : 2 decimals ; 11.5678€ : 4 decimals)
 
 ```yaml

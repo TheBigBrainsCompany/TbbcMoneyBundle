@@ -32,10 +32,6 @@ class TbbcMoneyExtension extends Extension
             $loader->load('twig_extension.xml');
         }
 
-        if (in_array('php', $config['templating']['engines'], true)) {
-            $loader->load('templating_helper.xml');
-        }
-
         $this->remapParameters($config, $container, [
             'currencies' => 'tbbc_money.currencies',
             'reference_currency' => 'tbbc_money.reference_currency',

@@ -60,6 +60,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('templating')
                     ->addDefaultsIfNotSet()
+                    ->setDeprecated('TbbcMoneyBundle', '5.2.0', 'Only Twig is supported')
                     ->children()
                         ->arrayNode('engines')
                             ->isRequired()
