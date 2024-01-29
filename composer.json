@@ -44,20 +44,19 @@
         "florianv/exchanger": "^2.0",
         "php-http/message": "^1.0",
         "php-http/guzzle6-adapter": "^2.0",
-        "vimeo/psalm": "^4.13",
+        "vimeo/psalm": "^4.13 | ^5.20",
         "symfony/phpunit-bridge": "^5.4|^6.0|^7.0",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.6|^10.5",
         "symfony/yaml": "^5.4|^6.0|^7.0",
         "http-interop/http-factory-guzzle": "^1.2"
     },
     "autoload-dev": {
         "psr-4": {
-            "Tbbc\\MoneyBundle\\Tests\\": "tests"
+            "Tbbc\\MoneyBundle\\Tests\\": "Tests"
         }
     },
     "scripts": {
         "fix": [
-            "tools/vendor/bin/php-cs-fixer fix",
             "vendor/bin/psalm",
             "vendor/bin/phpunit --coverage-text --coverage-html=.build"
         ]

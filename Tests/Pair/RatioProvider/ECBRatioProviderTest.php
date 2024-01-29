@@ -55,7 +55,7 @@ class ECBRatioProviderTest extends TestCase
     public function testUnknownCurrency(): void
     {
         $this->expectException(MoneyException::class);
-        $this->expectExceptionMessage('The currency code "" does not exists');
+        $this->expectExceptionMessage('The currency code "" does not exist');
         $this->ratio->fetchRatio('EUR', '');
     }
 

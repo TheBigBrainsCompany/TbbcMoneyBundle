@@ -1,7 +1,7 @@
 TbbcMoneyBundle
 ===============
 
-[![Build Status](https://img.shields.io/travis/TheBigBrainsCompany/TbbcMoneyBundle/master.svg?style=flat-square)](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle)
+[![Build Status](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/actions/workflows/code_checks.yaml/badge.svg)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/actions/workflows/code_checks.yaml)
 [![PHP](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=flat-square)](https://php.net)
 [![Symfony](https://img.shields.io/badge/symfony-%5E4%7C%5E5-green.svg?style=flat-square)](https://symfony.com)
 [![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg?style=flat-square)](https://packagist.org/packages/tbbc/money-bundle/stats)
@@ -15,7 +15,7 @@ a Symfony project.
 
 This library is based on Fowler's [Money pattern](https://verraes.net/2011/04/fowler-money-pattern-in-php/)
 
-* This bundle is tested and is stable with Symfony 3.4, 4.3, 4.4, 5.0, 6.0 
+* This bundle is tested and is stable with Symfony 3.4, 4.3, 4.4, 5.0, 6.0, 7.0
 
 Quick Start
 -----------
