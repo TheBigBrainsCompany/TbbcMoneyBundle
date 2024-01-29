@@ -107,7 +107,13 @@ class SimpleMoneyTypeTest extends TypeTestCase
         $currencies = ['EUR', 'USD'];
         $referenceCurrency = 'EUR';
 
-        if ('testBindValidDecimals' === $this->getName()) {
+        # PHPUnit 10
+        if (method_exists($this, 'name') && 'testBindValidDecimals' === $this->name()) {
+            $decimals = 3;
+        }
+
+        # PHPUnit 9
+        if (method_exists($this, 'getName') && 'testBindValidDecimals' === $this->getName()) {
             $decimals = 3;
         }
 
