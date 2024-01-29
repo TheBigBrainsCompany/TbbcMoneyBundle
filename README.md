@@ -10,10 +10,10 @@ TbbcMoneyBundle
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6/big.png)](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6)
 
-This bundle is used to integrate the [Money library from mathiasverraes](https://github.com/mathiasverraes/money) into
+This bundle is used to integrate the [Money library](https://github.com/moneyphp/money) into
 a Symfony project.
 
-This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
+This library is based on Fowler's [Money pattern](https://verraes.net/2011/04/fowler-money-pattern-in-php/)
 
 * This bundle is tested and is stable with Symfony 3.4, 4.3, 4.4, 5.0, 6.0 
 
