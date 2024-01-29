@@ -11,7 +11,7 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProvider\ExchangerAdapterRatioProvider;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
-class ExchangerAdapterRatioProviderTest extends AbstractRatioProviderTest
+class ExchangerAdapterRatioProviderTest extends AbstractRatioProvider
 {
     protected function getRatioProvider(): RatioProviderInterface
     {

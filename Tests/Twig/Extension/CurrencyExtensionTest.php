@@ -38,7 +38,7 @@ class CurrencyExtensionTest extends TestCase
         $this->assertSame($expected, $this->getTemplate($template)->render($this->variables));
     }
 
-    public function getCurrencyTests(): array
+    public static function getCurrencyTests(): array
     {
         return [
             ['{{ currency|currency_name }}', 'EUR'],
