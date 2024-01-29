@@ -13,7 +13,7 @@ use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
  *
  * @author Hugues Maignol <hugues.maignol@kitpages.fr>
  */
-abstract class AbstractRatioProviderTest extends TestCase
+abstract class AbstractRatioProvider extends TestCase
 {
     /**
      * The currently tested RatioProvider.

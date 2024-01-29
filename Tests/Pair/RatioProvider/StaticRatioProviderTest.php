@@ -7,7 +7,7 @@ namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
 use Tbbc\MoneyBundle\Pair\RatioProvider\StaticRatioProvider;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
-class StaticRatioProviderTest extends AbstractRatioProviderTest
+class StaticRatioProviderTest extends AbstractRatioProvider
 {
     protected function getRatioProvider(): RatioProviderInterface
     {

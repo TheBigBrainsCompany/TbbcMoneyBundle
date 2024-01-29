@@ -1,7 +1,7 @@
 TbbcMoneyBundle
 ===============
 
-[![Build Status](https://img.shields.io/travis/TheBigBrainsCompany/TbbcMoneyBundle/master.svg?style=flat-square)](https://travis-ci.org/TheBigBrainsCompany/TbbcMoneyBundle)
+[![Build Status](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/actions/workflows/code_checks.yaml/badge.svg)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/actions/workflows/code_checks.yaml)
 [![PHP](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=flat-square)](https://php.net)
 [![Symfony](https://img.shields.io/badge/symfony-%5E4%7C%5E5-green.svg?style=flat-square)](https://symfony.com)
 [![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg?style=flat-square)](https://packagist.org/packages/tbbc/money-bundle/stats)
@@ -10,12 +10,12 @@ TbbcMoneyBundle
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6/big.png)](https://insight.sensiolabs.com/projects/cb69e820-135b-4906-93fd-7921ba46a6e6)
 
-This bundle is used to integrate the [Money library from mathiasverraes](https://github.com/mathiasverraes/money) into
+This bundle is used to integrate the [Money library](https://github.com/moneyphp/money) into
 a Symfony project.
 
-This library is based on Fowler's [Money pattern](http://blog.verraes.net/2011/04/fowler-money-pattern-in-php/)
+This library is based on Fowler's [Money pattern](https://verraes.net/2011/04/fowler-money-pattern-in-php/)
 
-* This bundle is tested and is stable with Symfony 3.4, 4.3, 4.4, 5.0, 6.0 
+* This bundle is tested and is stable with Symfony 3.4, 4.3, 4.4, 5.0, 6.0, 7.0
 
 Quick Start
 -----------
@@ -27,7 +27,7 @@ use Tbbc\MoneyBundle\Form\Type\MoneyType;
 // the money library
 $fiveEur = Money::EUR(500);
 $tenEur = $fiveEur->add($fiveEur);
-list($part1, $part2, $part3) = $tenEur->allocate(array(1, 1, 1));
+[$part1, $part2, $part3] = $tenEur->allocate([1, 1, 1]);
 assert($part1->equals(Money::EUR(334)));
 assert($part2->equals(Money::EUR(333)));
 assert($part3->equals(Money::EUR(333)));
@@ -43,7 +43,7 @@ $formBuilder->add('price', MoneyType::class);
 Features
 --------
 
-* Integrates money library from mathiasverraes
+* Integrates money library from Mathias Verraes
 * Twig filters and PHP helpers for helping with money and currencies in templates
 * A storage system for currency ratios
 * A ratioProvider system for fetching ratio from externals api
@@ -58,7 +58,7 @@ Table of contents
 
 * [Installation](#installation)
 * [Usage](#usage)
-* [Storage](#storage)
+* [Storage](#RatioStorage)
 * [Contributing](#contributing)
 * [Requirements](#requirements)
 * [Authors](#authors)
@@ -75,10 +75,10 @@ If you use Symfony 3 then add the bundle to AppKernel:
 ```php
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
             // ...
             new Tbbc\MoneyBundle\TbbcMoneyBundle(),
-        );
+        ];
     }
 ```
 
@@ -130,7 +130,7 @@ use Money\Money;
 
 $fiveEur = Money::EUR(500);
 $tenEur = $fiveEur->add($fiveEur);
-list($part1, $part2, $part3) = $tenEur->allocate(array(1, 1, 1));
+[$part1, $part2, $part3] = $tenEur->allocate([1, 1, 1]);
 assert($part1->equals(Money::EUR(334)));
 assert($part2->equals(Money::EUR(333)));
 assert($part3->equals(Money::EUR(333)));
@@ -174,12 +174,12 @@ With `MoneyType` you can manipulate the form elements with
 $form = $this->createFormBuilder()
     ->add('price', MoneyType::class, [
         'data' => Money::EUR(1000), //EUR 10
-        'amount_options' => array(
+        'amount_options' => [
             'label' => 'Amount',
-        ),
-        'currency_options' => array(
+        ],
+        'currency_options' => [
             'label' => 'Currency',
-        ),
+        ],
     ])
     ->getForm();
 ```
@@ -207,53 +207,27 @@ use Doctrine\ORM\Mapping as ORM;
 use Money\Currency;
 use Money\Money;
 
-/**
- * TestMoney
- *
- * @ORM\Table("test_money")
- * @ORM\Entity
- */
+#[ORM\Table(name: 'test_money')]
+#[ORM\Entity]
 class TestMoney
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    #[ORM\Column(type: Types::INTEGER)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    private ?int $id;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="price_amount", type="integer")
-     */
-    private $priceAmount;
+    #[ORM\Column]
+    private int $priceAmount;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="price_currency", type="string", length=64)
-     */
-    private $priceCurrency;
+    #[ORM\Column(length: 64)]
+    private string $priceCurrency;
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * get Money
-     *
-     * @return Money
-     */
-    public function getPrice()
+    public function getPrice(): Money
     {
         if (!$this->priceCurrency) {
             return null;
@@ -264,13 +238,7 @@ class TestMoney
         return new Money($this->priceAmount, new Currency($this->priceCurrency));
     }
 
-    /**
-     * Set price
-     *
-     * @param Money $price
-     * @return TestMoney
-     */
-    public function setPrice(Money $price)
+    public function setPrice(Money $price): self
     {
         $this->priceAmount = $price->getAmount();
         $this->priceCurrency = $price->getCurrency()->getCode();
@@ -299,58 +267,30 @@ namespace App\AdministratorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Money\Money;
-
-/**
- * TestMoney
- *
- * @ORM\Table("test_money")
- * @ORM\Entity
- */
+ 
+#[ORM\Table(name: 'test_money')]
+#[ORM\Entity]
 class TestMoney
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    #[ORM\Column(type: Types::INTEGER)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    private ?int $id;
+    
+    #[ORM\Column(type: 'money')]
+    private Money $price;
 
-    /**
-     * @var Money
-     *
-     * @ORM\Column(name="price", type="money")
-     */
-    private $price;
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * get Money
-     *
-     * @return Money
-     */
-    public function getPrice()
+    public function getPrice(): Money
     {
         return $this->price;
     }
 
-    /**
-     * Set price
-     *
-     * @param Money $price
-     * @return TestMoney
-     */
-    public function setPrice(Money $price)
+    public function setPrice(Money $price): self
     {
         $this->price = $price;
         return $this;
@@ -485,7 +425,7 @@ This project integrates https://github.com/florianv/exchanger library to work wi
 
 Installation: 
 
-`composer require "florianv/exchanger" "php-http/message" "php-http/guzzle6-adapter"`
+`composer require "florianv/exchanger" "php-http/message" "php-http/guzzle7-adapter"`
 
 Configuration:
 
@@ -605,13 +545,13 @@ Then you can use the service :
 
 ```php
 $pairHistoryManager = $this->get("tbbc_money.pair_history_manager");
-$dt = new \DateTime("2012-07-08 11:14:15.638276");
+$dt = new \DateTime("2023-07-08 11:14:15.638276");
 
 // returns ratio for at a given date
-$ratio = $pairHistoryManager->getRatioAtDate('USD',$dt);
+$ratio = $pairHistoryManager->getRatioAtDate('USD', $dt);
 
 // returns the list of USD ratio (relative to the reference value)
-$ratioList = $pairHistoryManager->getRatioHistory('USD',$startDate, $endDate);
+$ratioList = $pairHistoryManager->getRatioHistory('USD', $startDate, $endDate);
 ```
 
 RatioStorage
@@ -627,7 +567,15 @@ tbbc_money:
     storage: doctrine
 ```
 
-Update your database schema :
+Update your database schema:
+
+If you're using DoctrineMigrationsBundle (recommended way):
+```bash
+./bin/console bin/console make:migration
+./bin/console bin/console doctrine:migrations:migrate
+```
+
+Without DoctrineMigrationsBundle:
 ```bash
 ./bin/console doctrine:schema:update --force
 ```
@@ -644,7 +592,7 @@ to format money.
 You can :
 
 * give your own \NumberFormatter instance as a parameter of MoneyFormatter::localizedFormatMoney
-* subclass the MoneyFormatter and rewrite the getDefaultNumberFormater method to set a application wide
+* subclass the MoneyFormatter and rewrite the getDefaultNumberFormatter method to set a application wide
 NumberFormatter
 
 Using the TbbcMoneyBundle without Doctrine
@@ -684,12 +632,6 @@ Contributing
 2. Fork
 3. Write a test (for either new feature or bug)
 4. Make a PR
-
-Requirements
-------------
-
-* PHP 5.3.9+
-* Symfony 2.8+
 
 Authors
 -------
