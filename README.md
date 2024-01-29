@@ -238,7 +238,7 @@ class TestMoney
         return new Money($this->priceAmount, new Currency($this->priceCurrency));
     }
 
-    public function setPrice(Money $price): TestMoney
+    public function setPrice(Money $price): self
     {
         $this->priceAmount = $price->getAmount();
         $this->priceCurrency = $price->getCurrency()->getCode();
@@ -290,7 +290,7 @@ class TestMoney
         return $this->price;
     }
 
-    public function setPrice(Money $price): TestMoney
+    public function setPrice(Money $price): self
     {
         $this->price = $price;
         return $this;
