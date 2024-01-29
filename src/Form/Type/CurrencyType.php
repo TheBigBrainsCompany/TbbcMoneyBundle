@@ -7,6 +7,7 @@ namespace Tbbc\MoneyBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Intl\Currencies;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer;
 
@@ -36,7 +37,12 @@ class CurrencyType extends AbstractType
     {
         $choiceList = [];
         foreach ($options['currency_choices'] as $currencyCode) {
-            $choiceList[$currencyCode] = $currencyCode;
+
+            if($options['currency_choices_label_format']==1) {
+                $choiceList[$currencyCode . ' - '.Currencies::getName($currencyCode)] = $currencyCode;
+            } else {
+                $choiceList[$currencyCode] = $currencyCode;
+            }
         }
 
         $builder->add('tbbc_name', ChoiceType::class, array_merge([
@@ -57,9 +63,11 @@ class CurrencyType extends AbstractType
             'reference_currency' => $this->referenceCurrencyCode,
             'currency_choices' => $this->currencyCodeList,
             'currency_options' => [],
+            'currency_choices_label_format' => 0,
         ]);
         $resolver->setAllowedTypes('reference_currency', 'string');
         $resolver->setAllowedTypes('currency_choices', 'array');
+        $resolver->setAllowedTypes('currency_choices_label_format', 'int');
         $resolver->setAllowedValues('reference_currency', $this->currencyCodeList);
         $resolver->setAllowedTypes('currency_options', 'array');
     }
