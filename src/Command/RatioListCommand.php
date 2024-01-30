@@ -18,7 +18,7 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 class RatioListCommand extends Command
 {
-    private string $format;
+    private string $format = 'txt';
 
     public function __construct(private PairManagerInterface $pairManager)
     {
@@ -81,8 +81,8 @@ class RatioListCommand extends Command
         $ratioList = $this->pairManager->getRatioList();
 
         return match ($this->format) {
-            'txt' => $this->displayTxt($ratioList, $output, $io),
-            'json' => $this->displayJson($ratioList, $output),
+            'txt'   => $this->displayTxt($ratioList, $output, $io),
+            'json'  => $this->displayJson($ratioList, $output),
             'table' => $this->displayTable($ratioList, $output, $io),
             default => throw new InvalidArgumentException(sprintf('Supported formats are "%s".', implode('", "', $this->getAvailableFormatOptions()))),
         };
@@ -91,7 +91,10 @@ class RatioListCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $this->format = $input->getOption('format') ?? 'txt';
+
+        /** @var string $format */
+        $format = $input->getOption('format') ?? 'txt';
+        $this->format = $format;
 
         return $this->display($output, $io);
     }
