@@ -7,6 +7,7 @@ namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
 use Money\Currency;
 use PHPUnit\Framework\TestCase;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
+use Tbbc\MoneyBundle\MoneyException;
 
 /**
  * This class can be used to easily test your custom ratio providers.
@@ -45,7 +46,7 @@ abstract class AbstractRatioProvider extends TestCase
 
     public function testExceptionForUnknownCurrency(): void
     {
-        $this->expectException('Tbbc\MoneyBundle\MoneyException');
+        $this->expectException(MoneyException::class);
         $this->ratioProvider->fetchRatio('ZZZ', 'USD');
     }
 

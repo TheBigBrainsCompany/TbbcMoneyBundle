@@ -2,26 +2,27 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          bootstrap="Tests/bootstrap.php"
          colors="true"
-         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd">
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+>
+  <php>
+    <server name="KERNEL_DIR" value="tests"/>
+    <env name="KERNEL_CLASS" value="Tbbc\MoneyBundle\Tests\AppKernel"/>
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak"/>
+  </php>
 
-    <php>
-        <server name="KERNEL_DIR" value="tests"/>
-        <env name="KERNEL_CLASS" value="Tbbc\MoneyBundle\Tests\AppKernel"/>
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
-    </php>
+  <testsuites>
+    <testsuite name="TbbcMoneyBundle test suite">
+      <directory>Tests</directory>
+    </testsuite>
+  </testsuites>
 
-    <testsuites>
-        <testsuite name="TbbcMoneyBundle test suite">
-            <directory>Tests</directory>
-        </testsuite>
-    </testsuites>
+  <source>
+    <include>
+      <directory>src</directory>
+    </include>
+    <exclude>
+      <directory>src/DependencyInjection</directory>
+    </exclude>
+  </source>
 
-    <coverage>
-        <include>
-            <directory>src</directory>
-        </include>
-        <exclude>
-            <directory>src/DependencyInjection</directory>
-        </exclude>
-    </coverage>
 </phpunit>

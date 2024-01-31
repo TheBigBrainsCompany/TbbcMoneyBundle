@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-curl" : "*",
         "ext-intl": "*",
         "ext-simplexml": "*",
@@ -39,14 +39,14 @@
     "require-dev": {
         "ext-sqlite3": "*",
         "symfony/browser-kit": "^5.4|^6.0|^7.0",
-        "doctrine/doctrine-bundle": "^1.12|^2.0",
-        "doctrine/orm": "^2.7|^3.0",
-        "florianv/exchanger": "^2.0",
+        "doctrine/doctrine-bundle": "^2.11",
+        "doctrine/orm": "^2.11",
+        "florianv/exchanger": "^2.8.1",
         "php-http/message": "^1.0",
-        "php-http/guzzle6-adapter": "^2.0",
-        "vimeo/psalm": "^4.13 | ^5.20",
+        "php-http/guzzle7-adapter": "^1.0",
+        "vimeo/psalm": "^5.20",
         "symfony/phpunit-bridge": "^5.4|^6.0|^7.0",
-        "phpunit/phpunit": "^9.6|^10.5",
+        "phpunit/phpunit": "^10.5.9",
         "symfony/yaml": "^5.4|^6.0|^7.0",
         "http-interop/http-factory-guzzle": "^1.2"
     },
@@ -62,8 +62,8 @@
         ]
     },
     "suggest": {
-        "doctrine/doctrine-bundle": "~1.1",
-        "doctrine/orm": "~2.7",
+        "doctrine/doctrine-bundle": "~2.11",
+        "doctrine/orm": "~2.17",
         "florianv/exchanger": "Exchanger is a PHP framework to work with currency exchange rates from various services."
     },
     "config": {
