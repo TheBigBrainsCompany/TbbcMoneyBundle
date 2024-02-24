@@ -6,9 +6,6 @@ namespace Tbbc\MoneyBundle\Money;
 
 use Money\Money;
 
-/**
- * Interface MoneyManagerInterface.
- */
 interface MoneyManagerInterface
 {
     /**
