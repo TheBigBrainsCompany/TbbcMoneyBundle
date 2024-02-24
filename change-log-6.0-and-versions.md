@@ -9,6 +9,7 @@ Versions from 6.0
 
 **BC breaking changes**
 - Drop `symfony/templating` and template function (use twig)
+- Make `PairManagerInterface` readonly in commands
 
 **Internal Developer things**
 - Drop PHPUnit 9 support
