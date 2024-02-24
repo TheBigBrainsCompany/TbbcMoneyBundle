@@ -68,7 +68,9 @@ Installation
 ------------
 
 Use [Composer](http://getcomposer.org/) and install with  
-`$ composer require tbbc/money-bundle`
+```bash
+composer require tbbc/money-bundle
+```
 
 If you use Symfony 3 then add the bundle to AppKernel:
 
@@ -406,9 +408,8 @@ final class YourRatioProviderService implements RatioProviderInterface
 
 You can change the service to use in the `config/packages/tbbc_money.yaml` file :
 
-```
+```yaml
 tbbc_money:
-    [...]
     ratio_provider: App\Money\YourRatioProviderService
 ```
 
@@ -418,22 +419,23 @@ This project integrates https://github.com/florianv/exchanger library to work wi
 
 Installation: 
 
-`composer require "florianv/exchanger" "php-http/message" "php-http/guzzle7-adapter"`
+```bash
+composer require "florianv/exchanger" "php-http/message" "php-http/guzzle7-adapter"`
+```
 
 Configuration:
 
 First, you need to add services you would like to use into your services.yml file, e.g:
     
-```
+```yaml
 ratio_provider.service.ecb:
   class: Exchanger\Service\EuropeanCentralBank
 ```
 
 Second, you need to update ratio provider used by MoneyBundle on your config.yml file:
 
-```
+```yaml
 tbbc_money:
-    [...]
     ratio_provider: ratio_provider.service.ecb
 ```
 
@@ -445,7 +447,7 @@ If some provider does not support certain currency, next provider in the chain w
 
 Example of chained providers:
 
-```
+```yaml
 ratio_provider.service.ecb:
   class: Exchanger\Service\EuropeanCentralBank
 
@@ -593,7 +595,7 @@ Using the TbbcMoneyBundle without Doctrine
 
 You have to disable the pair history service in order to use the TbbcMoneyBundle without Doctrine.
 
-```
+```yaml
 tbbc_money:
     enable_pair_history: true
 ```
