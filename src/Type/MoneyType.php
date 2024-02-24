@@ -24,7 +24,7 @@ class MoneyType extends Type
 
     public function getSqlDeclaration(array $column, AbstractPlatform $platform): string
     {
-        return $platform->getVarcharTypeDeclarationSQL($column);
+        return $platform->getStringTypeDeclarationSQL($column);
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool
