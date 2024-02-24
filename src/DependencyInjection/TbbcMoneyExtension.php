@@ -27,14 +27,7 @@ class TbbcMoneyExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
         $loader->load('form_types.xml');
-
-        if (in_array('twig', $config['templating']['engines'], true)) {
-            $loader->load('twig_extension.xml');
-        }
-
-        if (in_array('php', $config['templating']['engines'], true)) {
-            $loader->load('templating_helper.xml');
-        }
+        $loader->load('twig_extension.xml');
 
         $this->remapParameters($config, $container, [
             'currencies' => 'tbbc_money.currencies',
