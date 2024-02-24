@@ -6,9 +6,6 @@ namespace Tbbc\MoneyBundle\PairHistory;
 
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
 
-/**
- * Interface PairHistoryManagerInterface.
- */
 interface PairHistoryManagerInterface
 {
     /**
