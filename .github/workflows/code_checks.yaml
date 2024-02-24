@@ -12,10 +12,10 @@ jobs:
         stability: [ prefer-stable ]
         symfony-version: ['7.0.*']
         include:
-          - php: '8.0'
+          - php: '8.1'
             symfony-version: 5.4.*
             stability: prefer-lowest
-          - php: '8.0'
+          - php: '8.1'
             symfony-version: 5.4.*
             stability: prefer-stable
           - php: '8.1'

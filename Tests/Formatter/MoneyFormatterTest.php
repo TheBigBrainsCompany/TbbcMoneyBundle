@@ -84,7 +84,7 @@ class MoneyFormatterTest extends TestCase
     public function testAsFloatIsReturningAFloat(): void
     {
         $value = $this->formatter->asFloat($this->inputMoney);
-        $this->assertTrue(is_float($value));
+        $this->assertIsFloat($value);
     }
 
     public function testFormatCurrency(): void

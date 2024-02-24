@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Tests;
 
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Tbbc\MoneyBundle\TbbcMoneyBundle;
 
 class AppKernel extends Kernel
 {
+    use MicroKernelTrait;
+
     public function __construct()
     {
         parent::__construct('test', false);
@@ -17,9 +23,9 @@ class AppKernel extends Kernel
     public function registerBundles(): iterable
     {
         return [
-            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new \Tbbc\MoneyBundle\TbbcMoneyBundle(),
+            yield new FrameworkBundle(),
+            yield new DoctrineBundle(),
+            yield new TbbcMoneyBundle(),
         ];
     }
 

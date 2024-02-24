@@ -122,7 +122,7 @@ class SimpleMoneyTypeTest extends TypeTestCase
             ->getMock();
         $pairManager->expects($this->any())
             ->method('getReferenceCurrencyCode')
-            ->will($this->returnValue('EUR'));
+            ->willReturn('EUR');
 
         return [
             new PreloadedExtension(

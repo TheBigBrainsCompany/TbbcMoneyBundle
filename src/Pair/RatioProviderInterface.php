@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Pair;
 
+use Tbbc\MoneyBundle\MoneyException;
+
 /**
  * This interface is used to define the way any ratio provider has to work.
  *
@@ -24,6 +26,8 @@ interface RatioProviderInterface
      *
      * @param string $referenceCurrencyCode (ex: "EUR")
      * @param string $currencyCode          (ex: "USD")
+     *
+     * @throws MoneyException
      */
     public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float;
 }

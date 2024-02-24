@@ -15,6 +15,7 @@ class DoctrineStorageTest extends KernelTestCase
     use DatabaseTrait;
 
     private ObjectManager $entityManager;
+    private DoctrineStorage $doctrineStorage;
 
     public function setUp(): void
     {
@@ -22,7 +23,7 @@ class DoctrineStorageTest extends KernelTestCase
         self::bootKernel();
         $this->entityManager = self::getContainer()->get('doctrine')->getManager();
         $this->doctrineStorage = new DoctrineStorage($this->entityManager, 'USD');
-        $this->createDatabase();
+        self::createDatabase();
     }
 
     protected function tearDown(): void
