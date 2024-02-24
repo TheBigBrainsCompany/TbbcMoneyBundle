@@ -39,7 +39,7 @@
         "ext-sqlite3": "*",
         "symfony/browser-kit": "^5.4|^6.0|^7.0",
         "doctrine/doctrine-bundle": "^1.12|^2.0",
-        "doctrine/orm": "^2.7|^3.0",
+        "doctrine/orm": "^2.7",
         "florianv/exchanger": "^2.0",
         "php-http/message": "^1.0",
         "php-http/guzzle6-adapter": "^2.0",
