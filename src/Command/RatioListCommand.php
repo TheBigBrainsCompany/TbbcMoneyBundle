@@ -20,7 +20,7 @@ class RatioListCommand extends Command
 {
     private string $format = 'txt';
 
-    public function __construct(private PairManagerInterface $pairManager)
+    public function __construct(private readonly PairManagerInterface $pairManager)
     {
         parent::__construct();
     }
@@ -68,10 +68,11 @@ class RatioListCommand extends Command
 
     /**
      * @param array<string, float> $ratioList
+     * @throws \JsonException
      */
     protected function displayJson(array $ratioList, OutputInterface $output): int
     {
-        $output->writeln(json_encode($ratioList, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES));
+        $output->writeln(json_encode($ratioList, JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES));
 
         return Command::SUCCESS;
     }
