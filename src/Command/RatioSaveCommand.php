@@ -11,12 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
-/**
- * Class RatioSaveCommand.
- */
 class RatioSaveCommand extends Command
 {
-    public function __construct(private PairManagerInterface $pairManager)
+    public function __construct(private readonly PairManagerInterface $pairManager)
     {
         parent::__construct();
     }

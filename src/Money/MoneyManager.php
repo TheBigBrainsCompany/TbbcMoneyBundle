@@ -8,15 +8,10 @@ use Money\Currency;
 use Money\Money;
 
 /**
- * Class MoneyManager.
- *
  * @author levan
  */
 class MoneyManager implements MoneyManagerInterface
 {
-    /**
-     * MoneyManager constructor.
-     */
     public function __construct(protected string $referenceCurrencyCode, protected int $decimals = 2)
     {
     }
@@ -32,7 +27,7 @@ class MoneyManager implements MoneyManagerInterface
         $currency = new Currency($currencyCode);
         $amountAsInt = $floatAmount * 10 ** $this->decimals;
         $amountAsInt = round($amountAsInt);
-        $amountAsInt = intval($amountAsInt);
+        $amountAsInt = (int)$amountAsInt;
 
         return new Money($amountAsInt, $currency);
     }

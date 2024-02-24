@@ -17,8 +17,6 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\TbbcMoneyEvents;
 
 /**
- * Class PairManager.
- *
  * @author Philippe Le Van.
  */
 class PairManager implements PairManagerInterface, Exchange
