@@ -6,5 +6,6 @@ Versions from 6.0
 **New features**
 
 **BC breaking changes**
-
 - Drop `symfony/templating` and template function (use twig)
+
+**Internal Developer things**
