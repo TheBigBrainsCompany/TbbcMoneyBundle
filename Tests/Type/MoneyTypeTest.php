@@ -27,7 +27,7 @@ class MoneyTypeTest extends TestCase
     {
         $this->platform
             ->expects($this->once())
-            ->method('getVarcharTypeDeclarationSQL')
+            ->method('getStringTypeDeclarationSQL')
             ->with(['varchar'])
             ->willReturn('varchar(255)');
         self::assertSame('varchar(255)', $this->type->getSqlDeclaration(['varchar'], $this->platform));
