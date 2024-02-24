@@ -2,8 +2,8 @@ TbbcMoneyBundle
 ===============
 
 [![Build Status](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/actions/workflows/code_checks.yaml/badge.svg)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/actions/workflows/code_checks.yaml)
-[![PHP](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=flat-square)](https://php.net)
-[![Symfony](https://img.shields.io/badge/symfony-%5E4%7C%5E5-green.svg?style=flat-square)](https://symfony.com)
+[![PHP](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg?style=flat-square)](https://php.net)
+[![Symfony](https://img.shields.io/badge/symfony-%5E5|%5E6|%5E7-green.svg?style=flat-square)](https://symfony.com)
 [![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg?style=flat-square)](https://packagist.org/packages/tbbc/money-bundle/stats)
 [![Latest Stable Version](https://img.shields.io/packagist/v/tbbc/money-bundle.svg)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/releases/latest)
 [![license](https://img.shields.io/github/license/TheBigBrainsCompany/TbbcMoneyBundle.svg?style=flat-square)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/LICENSE)
@@ -15,7 +15,7 @@ a Symfony project.
 
 This library is based on Fowler's [Money pattern](https://verraes.net/2011/04/fowler-money-pattern-in-php/)
 
-* This bundle is tested and is stable with Symfony 3.4, 4.3, 4.4, 5.0, 6.0, 7.0
+* This bundle is tested and is stable with Symfony 5.4, 6.4, 7.0
 
 Quick Start
 -----------
@@ -68,23 +68,12 @@ Installation
 ------------
 
 Use [Composer](http://getcomposer.org/) and install with  
-`$ composer require tbbc/money-bundle`
-
-If you use Symfony 3 then add the bundle to AppKernel:
-
-```php
-    public function registerBundles()
-    {
-        $bundles = [
-            // ...
-            new Tbbc\MoneyBundle\TbbcMoneyBundle(),
-        ];
-    }
+```bash
+composer require tbbc/money-bundle
 ```
 
-For Symfony 4 and higher add the bundle to config/bundles.php (if it was not automatically added during the 
+Add the bundle to config/bundles.php (if it was not automatically added during the 
 installation of the package):
-
 ```php
     return [
         // ...
@@ -92,9 +81,7 @@ installation of the package):
     ];
 ```
 
-For Symfony 3, in your config.yml, add the currencies you want to use and the reference currency. 
-For Symfony 4 and higher create a file like config/packages/tbbc_money.yml and add it there.
-
+Create a file like config/packages/tbbc_money.yml and add it there:
 ```yaml
 tbbc_money:
     currencies: ["USD", "EUR"]
@@ -102,8 +89,7 @@ tbbc_money:
     decimals: 2
 ```
 
-In your config.yml or config/packages/tbbc_money.yml, add the form fields presentations
-
+In your config.yml or config/packages/tbbc_money.yml, add the form fields presentations:
 ```yaml
 twig:
     form_themes:
@@ -111,7 +97,6 @@ twig:
 ```
 
 You should also register custom Doctrine Money type:
-
 ```yaml
 doctrine:
     dbal:
@@ -406,9 +391,8 @@ final class YourRatioProviderService implements RatioProviderInterface
 
 You can change the service to use in the `config/packages/tbbc_money.yaml` file :
 
-```
+```yaml
 tbbc_money:
-    [...]
     ratio_provider: App\Money\YourRatioProviderService
 ```
 
@@ -418,22 +402,23 @@ This project integrates https://github.com/florianv/exchanger library to work wi
 
 Installation: 
 
-`composer require "florianv/exchanger" "php-http/message" "php-http/guzzle7-adapter"`
+```bash
+composer require "florianv/exchanger" "php-http/message" "php-http/guzzle7-adapter"`
+```
 
 Configuration:
 
 First, you need to add services you would like to use into your services.yml file, e.g:
     
-```
+```yaml
 ratio_provider.service.ecb:
   class: Exchanger\Service\EuropeanCentralBank
 ```
 
 Second, you need to update ratio provider used by MoneyBundle on your config.yml file:
 
-```
+```yaml
 tbbc_money:
-    [...]
     ratio_provider: ratio_provider.service.ecb
 ```
 
@@ -445,7 +430,7 @@ If some provider does not support certain currency, next provider in the chain w
 
 Example of chained providers:
 
-```
+```yaml
 ratio_provider.service.ecb:
   class: Exchanger\Service\EuropeanCentralBank
 
@@ -593,7 +578,7 @@ Using the TbbcMoneyBundle without Doctrine
 
 You have to disable the pair history service in order to use the TbbcMoneyBundle without Doctrine.
 
-```
+```yaml
 tbbc_money:
     enable_pair_history: true
 ```
