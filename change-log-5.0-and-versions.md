@@ -13,6 +13,13 @@ Versions from 5.0
   - Dropped support for yahoo finance provider (they don't offer this anymore)
   - Dropped support for Google provider (doesn't exist anymore)
 
+- Drop `YahooFinanceRatioProvider` ratio provider support
+    - Remove `tbbc_money.ratio_provider.yahoo_finance.class` container parameter
+    - Remove `tbbc_money.ratio_provider.yahoo_finance` service definition
+- Drop `GoogleRatioProvider` ratio provider support
+    - Remove `tbbc_money.ratio_provider.google.class` container parameter
+    - Remove `tbbc_money.ratio_provider.google` service definition
+
 **Internal Developer things**
 - Added psalm level 1 (highest level)
 - Added php cs fixer
