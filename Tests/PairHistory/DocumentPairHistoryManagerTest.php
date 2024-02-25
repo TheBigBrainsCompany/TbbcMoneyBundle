@@ -4,40 +4,40 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Tests\PairHistory;
 
-use Doctrine\Persistence\ObjectManager;
-use Doctrine\Persistence\ObjectRepository;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\Repository\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
-use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
-use Tbbc\MoneyBundle\Tests\DatabaseTrait;
-use Tbbc\MoneyBundle\Entity\RatioHistory;
+use Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager;
+use Tbbc\MoneyBundle\Tests\DocumentDatabaseTrait;
+use Tbbc\MoneyBundle\Document\DocumentRatioHistory;
 
-class PairHistoryManagerTest extends KernelTestCase
+class DocumentPairHistoryManagerTest extends KernelTestCase
 {
-    use DatabaseTrait;
+    use DocumentDatabaseTrait;
 
-    protected PairHistoryManager $pairHistoryManager;
-    protected ObjectRepository $ratioHistoryRepo;
-    private ?ObjectManager $em;
+    protected DocumentPairHistoryManager $documentPairHistoryManager;
+    protected DocumentRepository $documentRatioHistoryRepo;
+    private ?DocumentManager $dm;
 
     public function setUp(): void
     {
         parent::setUp();
         self::$kernelOptions = [
-            'environment' => 'testDoctrine',
+            'environment' => 'testDocument',
             'configs' => [
-                __DIR__.'/../config/doctrine.yaml'
+                __DIR__.'/../config/document.yaml'
             ],
         ];
         self::bootKernel(self::$kernelOptions);
-        $this->em = self::getContainer()->get('doctrine')->getManager();
-        $this->pairHistoryManager = new PairHistoryManager(
-            $this->em,
+        $this->dm = self::getContainer()->get('doctrine_mongodb')->getManager();
+        $this->documentPairHistoryManager = new DocumentPairHistoryManager(
+            $this->dm,
             'EUR'
         );
-        $this->ratioHistoryRepo = $this->em->getRepository(RatioHistory::class);
+        $this->documentRatioHistoryRepo = $this->dm->getRepository(DocumentRatioHistory::class);
         $this->createDatabase();
     }
 
@@ -45,8 +45,8 @@ class PairHistoryManagerTest extends KernelTestCase
     {
         parent::tearDown();
         $this->dropDatabase();
-        $this->em->close();
-        $this->em = null;
+        $this->dm->close();
+        $this->dm = null;
     }
 
     protected static function createKernel(array $options = []): KernelInterface
@@ -63,26 +63,26 @@ class PairHistoryManagerTest extends KernelTestCase
     public function testSaveRatioHistory(): void
     {
         $event = new SaveRatioEvent('EUR', 'USD', 1.25, new \DateTime('2012-07-08 12:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
-        $ratioHistoryList = $this->ratioHistoryRepo->findAll();
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
+        $ratioHistoryList = $this->documentRatioHistoryRepo->findAll();
         $this->assertCount(1, $ratioHistoryList);
 
         $event = new SaveRatioEvent('EUR', 'USD', 1.50, new \DateTime('2012-07-08 13:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
-        $ratioHistoryList = $this->ratioHistoryRepo->findAll();
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
+        $ratioHistoryList = $this->documentRatioHistoryRepo->findAll();
         $this->assertCount(2, $ratioHistoryList);
     }
 
     public function testGetRatioList(): void
     {
         $event = new SaveRatioEvent('EUR', 'USD', 1.25, new \DateTime('2012-07-08 12:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
         $event = new SaveRatioEvent('EUR', 'USD', 1.50, new \DateTime('2012-07-08 13:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
         $event = new SaveRatioEvent('EUR', 'USD', 1.75, new \DateTime('2012-07-08 14:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
 
-        $ratioList = $this->pairHistoryManager->getRatioHistory('USD', null, null);
+        $ratioList = $this->documentPairHistoryManager->getRatioHistory('USD', null, null);
         $this->assertCount(3, $ratioList);
         $this->assertSame(1.25, $ratioList[0]['ratio']);
         $this->assertSame(1.50, $ratioList[1]['ratio']);
@@ -91,31 +91,31 @@ class PairHistoryManagerTest extends KernelTestCase
         $this->assertSame('2012-07-08 13:00:00', $ratioList[1]['savedAt']->format('Y-m-d H:i:s'));
         $this->assertSame('2012-07-08 14:00:00', $ratioList[2]['savedAt']->format('Y-m-d H:i:s'));
 
-        $ratioList = $this->pairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'), null);
+        $ratioList = $this->documentPairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'), null);
         $this->assertCount(2, $ratioList);
-        $ratioList = $this->pairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'), new \DateTime('2012-07-08 13:30:00'));
+        $ratioList = $this->documentPairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'), new \DateTime('2012-07-08 13:30:00'));
         $this->assertCount(1, $ratioList);
     }
 
     public function testGetRatio(): void
     {
         $event = new SaveRatioEvent('EUR', 'USD', 1.25, new \DateTime('2012-07-08 12:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
         $event = new SaveRatioEvent('EUR', 'USD', 1.50, new \DateTime('2012-07-08 13:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
         $event = new SaveRatioEvent('EUR', 'USD', 1.75, new \DateTime('2012-07-08 14:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
 
-        $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 12:30:00'));
+        $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 12:30:00'));
         $this->assertSame(1.25, $ratio);
-        $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
+        $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
         $this->assertSame(1.50, $ratio);
-        $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-10 12:30:00'));
+        $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-10 12:30:00'));
         $this->assertSame(1.75, $ratio);
-        $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2011-07-10 12:30:00'));
+        $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2011-07-10 12:30:00'));
         $this->assertNull($ratio);
 
-        $ratio = $this->pairHistoryManager->getRatioAtDate('EUR', new \DateTime('2011-07-10 12:30:00'));
+        $ratio = $this->documentPairHistoryManager->getRatioAtDate('EUR', new \DateTime('2011-07-10 12:30:00'));
         $this->assertSame(1.0, $ratio);
         $this->assertIsFloat($ratio);
     }
@@ -123,23 +123,23 @@ class PairHistoryManagerTest extends KernelTestCase
     public function testGetRatioException(): void
     {
         $event = new SaveRatioEvent('EUR', 'USD', 1.25, new \DateTime('2012-07-08 12:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
         $event = new SaveRatioEvent('CAD', 'USD', 1.50, new \DateTime('2012-07-08 13:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
         $event = new SaveRatioEvent('EUR', 'USD', 1.75, new \DateTime('2012-07-08 14:00:00'));
-        $this->pairHistoryManager->listenSaveRatioEvent($event);
+        $this->documentPairHistoryManager->listenSaveRatioEvent($event);
 
-        $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 12:30:00'));
+        $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 12:30:00'));
         $this->assertSame(1.25, $ratio);
         try {
-            $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
+            $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
             $this->fail('should throw an exception du to reference currency code');
         } catch (MoneyException $e) {
             $this->assertTrue(true);
         }
-        $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-10 12:30:00'));
+        $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-10 12:30:00'));
         $this->assertSame(1.75, $ratio);
-        $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2011-07-10 12:30:00'));
+        $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2011-07-10 12:30:00'));
         $this->assertNull($ratio);
     }
 }

@@ -50,7 +50,7 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->defaultValue('csv')
                     ->validate()
-                    ->ifNotInArray(['csv', 'doctrine'])
+                    ->ifNotInArray(['csv', 'doctrine', 'document'])
                         ->thenInvalid('Invalid storage "%s"')
                     ->end()
                 ->end()

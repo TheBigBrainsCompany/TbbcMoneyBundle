@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Tests\Pair\Storage;
 
-use Doctrine\Persistence\ObjectManager;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Tbbc\MoneyBundle\Entity\DoctrineStorageRatio;
-use Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage;
-use Tbbc\MoneyBundle\Tests\DatabaseTrait;
+use Tbbc\MoneyBundle\Document\DocumentStorageRatio;
+use Tbbc\MoneyBundle\Pair\Storage\DocumentStorage;
+use Tbbc\MoneyBundle\Tests\DocumentDatabaseTrait;
 
-class DoctrineStorageTest extends KernelTestCase
+class DocumentStorageTest extends KernelTestCase
 {
-    use DatabaseTrait;
+    use DocumentDatabaseTrait;
 
-    private ObjectManager $entityManager;
-    private DoctrineStorage $doctrineStorage;
+    private DocumentManager $documentManager;
+    private DocumentStorage $documentStorage;
 
     public function setUp(): void
     {
         parent::setUp();
         self::$kernelOptions = [
-            'environment' => 'testDoctrine',
+            'environment' => 'testDocument',
             'configs' => [
-                __DIR__.'/../../config/doctrine.yaml'
+                __DIR__.'/../../config/document.yaml'
             ],
         ];
         self::bootKernel(self::$kernelOptions);
-        $this->entityManager = self::getContainer()->get('doctrine')->getManager();
-        $this->doctrineStorage = new DoctrineStorage($this->entityManager, 'USD');
+        $this->documentManager = self::getContainer()->get('doctrine_mongodb')->getManager();
+        $this->documentStorage = new DocumentStorage($this->documentManager, 'USD');
         self::createDatabase();
     }
 
@@ -52,7 +52,7 @@ class DoctrineStorageTest extends KernelTestCase
 
     public function testLoadDefaultCurrency(): void
     {
-        $ratioList = $this->doctrineStorage->loadRatioList();
+        $ratioList = $this->documentStorage->loadRatioList();
 
         $this->assertCount(1, $ratioList);
         $this->assertArrayHasKey('USD', $ratioList);
@@ -61,36 +61,36 @@ class DoctrineStorageTest extends KernelTestCase
 
     public function testLoadForceOption(): void
     {
-        $this->entityManager->persist(new DoctrineStorageRatio('USD', 1));
-        $this->entityManager->flush();
+        $this->documentManager->persist(new DocumentStorageRatio('USD', 1));
+        $this->documentManager->flush();
 
-        $this->assertCount(1, $this->doctrineStorage->loadRatioList());
+        $this->assertCount(1, $this->documentStorage->loadRatioList());
 
-        $storageRatio = new DoctrineStorageRatio('USD', 1);
+        $storageRatio = new DocumentStorageRatio('USD', 1);
         $storageRatio->setCurrencyCode('EUR');
         $storageRatio->setRatio(1.6);
-        $this->entityManager->persist(new DoctrineStorageRatio('EUR', 1.6));
-        $this->entityManager->flush();
+        $this->documentManager->persist(new DocumentStorageRatio('EUR', 1.6));
+        $this->documentManager->flush();
 
-        $this->assertCount(1, $this->doctrineStorage->loadRatioList());
-        $this->assertCount(2, $this->doctrineStorage->loadRatioList(true));
-        $ratioList = $this->doctrineStorage->loadRatioList();
+        $this->assertCount(1, $this->documentStorage->loadRatioList());
+        $this->assertCount(2, $this->documentStorage->loadRatioList(true));
+        $ratioList = $this->documentStorage->loadRatioList();
         $this->assertSame(1.6, $ratioList['EUR']);
     }
 
     public function testSave(): void
     {
-        $em = $this->entityManager;
-        $repository = $em->getRepository(DoctrineStorageRatio::class);
+        $dm = $this->documentManager;
+        $repository = $dm->getRepository(DocumentStorageRatio::class);
 
-        $this->doctrineStorage->saveRatioList([
+        $this->documentStorage->saveRatioList([
             'EUR' => 1,
             'USD' => 1.6,
         ]);
 
         $this->assertCount(2, $repository->findAll());
 
-        $this->doctrineStorage->saveRatioList([
+        $this->documentStorage->saveRatioList([
             'EUR' => 1,
             'USD' => 1.6,
             'JPY' => 1.8,
@@ -98,7 +98,7 @@ class DoctrineStorageTest extends KernelTestCase
 
         $this->assertCount(3, $repository->findAll());
 
-        $this->doctrineStorage->saveRatioList([
+        $this->documentStorage->saveRatioList([
             'EUR' => 1,
         ]);
 
@@ -107,18 +107,18 @@ class DoctrineStorageTest extends KernelTestCase
 
     public function testSaveAndLoad(): void
     {
-        $this->doctrineStorage->saveRatioList([
+        $this->documentStorage->saveRatioList([
             'EUR' => 1,
             'USD' => 1.6,
         ]);
 
-        $this->assertCount(2, $this->doctrineStorage->loadRatioList());
-        $this->doctrineStorage->saveRatioList([
+        $this->assertCount(2, $this->documentStorage->loadRatioList());
+        $this->documentStorage->saveRatioList([
             'EUR' => 1,
             'USD' => 1.6,
             'JPY' => 2,
         ]);
 
-        $this->assertCount(3, $this->doctrineStorage->loadRatioList());
+        $this->assertCount(3, $this->documentStorage->loadRatioList());
     }
 }

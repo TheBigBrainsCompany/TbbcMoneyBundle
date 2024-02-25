@@ -9,7 +9,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 
-trait DatabaseTrait
+trait DocumentDatabaseTrait
 {
     private static array $kernelOptions = [];
 
@@ -32,13 +32,7 @@ trait DatabaseTrait
         $application->setAutoExit(false);
 
         $code = $application->run(new ArrayInput([
-            'command' => 'doctrine:database:create',
-            '--quiet' => true,
-        ]), new NullOutput());
-        self::assertSame(Command::SUCCESS, $code);
-
-        $code = $application->run(new ArrayInput([
-            'command' => 'doctrine:schema:create',
+            'command' => 'doctrine:mongodb:schema:create',
             '--quiet' => true,
         ]), new NullOutput());
         self::assertSame(Command::SUCCESS, $code);
@@ -52,8 +46,7 @@ trait DatabaseTrait
         $application->setAutoExit(false);
 
         $code = $application->run(new ArrayInput([
-            'command' => 'doctrine:database:drop',
-            '--force' => true,
+            'command' => 'doctrine:mongodb:schema:drop',
             '--quiet' => true,
         ]), new NullOutput());
         self::assertSame(Command::SUCCESS, $code);
