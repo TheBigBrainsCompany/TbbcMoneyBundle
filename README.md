@@ -535,7 +535,8 @@ $ratioList = $pairHistoryManager->getRatioHistory('USD', $startDate, $endDate);
 RatioStorage
 ------------
 
-Two storages for storing ratios are available : CSV File, or Doctrine
+Three storages for storing ratios are available : CSV File (csv), Doctrine ORM (doctrine), or MongoDB (document)
+
 By default, TbbcMoneyBundle is configured with CSV File.
 
 If you want to switch to a Doctrine storage, edit your **config.yml**
@@ -573,18 +574,18 @@ You can :
 * subclass the MoneyFormatter and rewrite the getDefaultNumberFormatter method to set a application wide
 NumberFormatter
 
-Using the TbbcMoneyBundle without Doctrine
-------------------------------------------
+Using the TbbcMoneyBundle without Doctrine ORM or MongoDB
+---------------------------------------------------------
 
-You have to disable the pair history service in order to use the TbbcMoneyBundle without Doctrine.
+You have to disable the pair history service in order to use the TbbcMoneyBundle without Doctrine ORM or MongoDB.
 
 ```yaml
 tbbc_money:
     enable_pair_history: true
 ```
 
-Note : you can imagine to code your own PairHistoryManager for MongoDB or Propel, it is very easy to do. Don't
-hesitate to submit a PR with your code and your tests.
+Note : you can imagine to code your own PairHistoryManager for Propel, it is very easy to do. Don't hesitate to
+submit a PR with your code and your tests.
 
 Optimizations
 -------------
