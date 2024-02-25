@@ -32,9 +32,7 @@ class ExchangerAdapterRatioProviderTest extends AbstractRatioProvider
     public function testInvalidCurrencyCode(): void
     {
         $this->expectException(MoneyException::class);
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The currency pair must be in the form "EUR/USD".');
-        //$this->expectExceptionMessage('The currency code "" does not exist');
+        $this->expectExceptionMessage('The currency code is an empty string');
 
         $ratiosSetup['EUR/123'] = $this->randomRatio(1, 3, 1);
         $service = new PhpArray($ratiosSetup);

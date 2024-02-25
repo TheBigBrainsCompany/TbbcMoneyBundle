@@ -7,21 +7,25 @@ namespace Tbbc\MoneyBundle\Form\DataTransformer;
 use Money\Money;
 
 /**
- * Transforms between a Money instance and an array.
+ * Transforms between a Money and an array.
  */
 class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
 {
     protected string $currency = '';
 
-    public function __construct(int $decimals)
+    public function __construct(protected int $decimals)
     {
         parent::__construct($decimals);
     }
 
     /**
      * {@inheritdoc}
+     * 
+     * @psalm-param Money|null $value
+     * 
+     * @psalm-return array{tbbc_amount: string}|null
      */
-    public function transform($value): ?array
+    public function transform(mixed $value): ?array
     {
         if (!$tab = parent::transform($value)) {
             return null;
@@ -34,8 +38,10 @@ class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
 
     /**
      * {@inheritdoc}
+     * 
+     * @psalm-param array|null $value
      */
-    public function reverseTransform($value): ?Money
+    public function reverseTransform(mixed $value): ?Money
     {
         if (is_array($value)) {
             $value['tbbc_currency'] = $this->currency;

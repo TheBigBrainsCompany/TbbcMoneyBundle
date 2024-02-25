@@ -12,14 +12,18 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use TypeError;
 
 /**
- * Transforms between a Currency and a string.
+ * Transforms between a Currency and an array.
+ * 
+ * @implements DataTransformerInterface<Currency, array>
  */
 class CurrencyToArrayTransformer implements DataTransformerInterface
 {
     /**
      * {@inheritdoc}
+     * 
+     * @psalm-param Currency|null $value
      */
-    public function transform($value): ?array
+    public function transform(mixed $value): ?array
     {
         if (null === $value) {
             return null;
@@ -33,21 +37,30 @@ class CurrencyToArrayTransformer implements DataTransformerInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @psalm-suppress MixedArgument
+     * 
+     * @psalm-param array|null $value
      */
-    public function reverseTransform($value): ?Currency
+    public function reverseTransform(mixed $value): ?Currency
     {
         if (null === $value) {
             return null;
         }
 
+        /** @psalm-suppress DocblockTypeContradiction */
         if (!is_array($value)) {
             throw new UnexpectedTypeException($value, 'array');
         }
 
         if (!isset($value['tbbc_name'])) {
             return null;
+        }
+
+        if (!is_string($value['tbbc_name'])) {
+            throw new UnexpectedTypeException($value, 'string');
+        }
+
+        if ('' === $value['tbbc_name']) {
+            throw new TransformationFailedException('name can not be an empty string');
         }
 
         try {

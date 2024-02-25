@@ -35,7 +35,7 @@ class RatioListCommand extends Command
     }
 
     /**
-     * @param array<string, float> $ratioList
+     * @param array<string, null|float> $ratioList
      */
     protected function displayTxt(array $ratioList, OutputInterface $output, SymfonyStyle $io): int
     {
@@ -49,7 +49,7 @@ class RatioListCommand extends Command
     }
 
     /**
-     * @param array<string, float> $ratioList
+     * @param array<string, null|float> $ratioList
      */
     protected function displayTable(array $ratioList, OutputInterface $output, SymfonyStyle $io): int
     {
@@ -67,7 +67,7 @@ class RatioListCommand extends Command
     }
 
     /**
-     * @param array<string, float> $ratioList
+     * @param array<string, null|float> $ratioList
      * @throws \JsonException
      */
     protected function displayJson(array $ratioList, OutputInterface $output): int
