@@ -7,11 +7,14 @@ namespace Tbbc\MoneyBundle\Form\DataTransformer;
 use Money\Currency;
 use Money\Money;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 
 /**
- * Transforms between a Money instance and an array.
+ * Transforms between a Money and an array.
+ * 
+ * @implements DataTransformerInterface<Money, array>
  */
 class MoneyToArrayTransformer implements DataTransformerInterface
 {
@@ -24,10 +27,12 @@ class MoneyToArrayTransformer implements DataTransformerInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @psalm-return array{tbbc_amount: string, tbbc_currency: Currency}|null
+     * 
+     * @psalm-param Money|null $value
+     * 
+     * @psalm-return array{tbbc_amount: string, tbbc_currency: Currency}|array{tbbc_amount: string}|null
      */
-    public function transform($value): ?array
+    public function transform(mixed $value): ?array
     {
         if (null === $value) {
             return null;
@@ -47,16 +52,20 @@ class MoneyToArrayTransformer implements DataTransformerInterface
 
     /**
      * {@inheritdoc}
+     * 
+     * @psalm-param array|null $value
      */
-    public function reverseTransform($value): ?Money
+    public function reverseTransform(mixed $value): ?Money
     {
         if (null === $value) {
             return null;
         }
 
+        /** @psalm-suppress DocblockTypeContradiction */
         if (!is_array($value)) {
             throw new UnexpectedTypeException($value, 'array');
         }
+
         if (!isset($value['tbbc_amount']) || !isset($value['tbbc_currency'])) {
             return null;
         }
@@ -69,6 +78,11 @@ class MoneyToArrayTransformer implements DataTransformerInterface
 
         /** @var string|Currency $currency */
         $currency = $value['tbbc_currency'];
+
+        if ('' === $currency) {
+            throw new TransformationFailedException('currency can not be an empty string');
+        }
+
         if (!$currency instanceof Currency) {
             $currency = new Currency($currency);
         }

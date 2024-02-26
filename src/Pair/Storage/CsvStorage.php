@@ -17,6 +17,7 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
  */
 class CsvStorage implements StorageInterface
 {
+    /** @psalm-var array<string, null|float> */
     protected array $ratioList = [];
 
     public function __construct(protected string $ratioFileName, protected string $referenceCurrencyCode)
@@ -52,6 +53,9 @@ class CsvStorage implements StorageInterface
             [$currencyCode, $ratio] = $data;
 
             // validate that currency exist in currency code list
+            if (null === $currencyCode || '' === $currencyCode) {
+                throw new MoneyException('error in ratioFileName '.$this->ratioFileName.' on line '.$row.', currency is an empty string or is null');
+            }
             // @codeCoverageIgnoreStart
             try {
                 // hack to throw an exception if currency doesn't exist

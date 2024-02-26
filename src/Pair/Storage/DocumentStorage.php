@@ -15,12 +15,16 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
  */
 class DocumentStorage implements StorageInterface
 {
+    /** @psalm-var array<string, null|float> */
     protected array $ratioList = [];
 
     public function __construct(protected DocumentManager $documentManager, protected string $referenceCurrencyCode)
     {
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function loadRatioList(bool $force = false): array
     {
         if ((false === $force) && (count($this->ratioList) > 0)) {
@@ -52,7 +56,7 @@ class DocumentStorage implements StorageInterface
     }
 
     /**
-     * @psalm-param array<string, null|float> $ratioList
+     * {@inheritdoc}
      */
     public function saveRatioList(array $ratioList): void
     {
@@ -61,14 +65,18 @@ class DocumentStorage implements StorageInterface
         // index them in an associative array
         $existingStorageRatios = [];
         foreach ($documentStorageRatios as $documentStorageRatio) {
-            $existingStorageRatios[$documentStorageRatio->getCurrencyCode()] = $documentStorageRatio;
+            if (null !== ($code = $documentStorageRatio->getCurrencyCode())) {
+                $existingStorageRatios[$code] = $documentStorageRatio;
+            }
         }
 
         foreach ($ratioList as $currencyCode => $ratio) {
             // load from existing, or create a new
             $existingStorageRatio = $existingStorageRatios[$currencyCode] ?? new DocumentStorageRatio($currencyCode, $ratio);
-            $existingStorageRatio->setRatio($ratio);
-            $this->documentManager->persist($existingStorageRatio);
+            if (null !== $ratio) {
+                $existingStorageRatio->setRatio($ratio);
+                $this->documentManager->persist($existingStorageRatio);
+            }
 
             // remove from the array, as we do not want to remove this one
             unset($existingStorageRatios[$currencyCode]);

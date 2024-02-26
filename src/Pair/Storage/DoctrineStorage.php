@@ -15,12 +15,16 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
  */
 class DoctrineStorage implements StorageInterface
 {
+    /** @psalm-var array<string, null|float> */
     protected array $ratioList = [];
 
     public function __construct(protected EntityManagerInterface $entityManager, protected string $referenceCurrencyCode)
     {
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function loadRatioList(bool $force = false): array
     {
         if ((false === $force) && (count($this->ratioList) > 0)) {
@@ -52,7 +56,7 @@ class DoctrineStorage implements StorageInterface
     }
 
     /**
-     * @psalm-param array<string, null|float> $ratioList
+     * {@inheritdoc}
      */
     public function saveRatioList(array $ratioList): void
     {
@@ -62,14 +66,18 @@ class DoctrineStorage implements StorageInterface
         // index them in an associative array
         $existingStorageRatios = [];
         foreach ($doctrineStorageRatios as $doctrineStorageRatio) {
-            $existingStorageRatios[$doctrineStorageRatio->getCurrencyCode()] = $doctrineStorageRatio;
+            if (null !== ($code = $doctrineStorageRatio->getCurrencyCode())) {
+                $existingStorageRatios[$code] = $doctrineStorageRatio;
+            }
         }
 
         foreach ($ratioList as $currencyCode => $ratio) {
             // load from existing, or create a new
             $existingStorageRatio = $existingStorageRatios[$currencyCode] ?? new DoctrineStorageRatio($currencyCode, $ratio);
-            $existingStorageRatio->setRatio($ratio);
-            $this->entityManager->persist($existingStorageRatio);
+            if (null !== $ratio) {
+                $existingStorageRatio->setRatio($ratio);
+                $this->entityManager->persist($existingStorageRatio);
+            }
 
             // remove from the array, as we do not want to remove this one
             unset($existingStorageRatios[$currencyCode]);

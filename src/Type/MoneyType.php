@@ -34,13 +34,19 @@ class MoneyType extends Type
 
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?Money
     {
-        if (is_null($value)) {
+        if (null === $value) {
             return null;
         }
 
-        [$currency, $amount] = explode(' ', (string) $value, 2);
+        $money = explode(' ', (string) $value, 2);
 
-        return new Money($amount, new Currency($currency));
+        if (count($money) !== 2 || '' === $money[0] || '' === $money[1]) {
+            return null;
+        }
+
+        [$currency, $amount] = $money;
+
+        return new Money((int) $amount, new Currency($currency));
     }
 
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string

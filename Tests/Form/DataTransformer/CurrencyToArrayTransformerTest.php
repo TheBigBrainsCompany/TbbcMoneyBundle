@@ -70,7 +70,7 @@ class CurrencyToArrayTransformerTest extends TestCase
 
     public function testReverseThrowExceptionIfCurrencyCodeNotValid(): void
     {
-        $this->expectException(TransformationFailedException::class);
+        $this->expectException(UnexpectedTypeException::class);
         $value = ['tbbc_name' => 123];
         $transformer = new CurrencyToArrayTransformer();
         $transformer->reverseTransform($value);

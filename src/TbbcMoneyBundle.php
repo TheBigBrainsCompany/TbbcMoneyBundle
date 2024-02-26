@@ -10,6 +10,9 @@ use Tbbc\MoneyBundle\DependencyInjection\Compiler\PairHistoryCompilerPass;
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\RatioProviderCompilerPass;
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\StorageCompilerPass;
 
+/**
+ * @psalm-suppress MissingConstructor
+ */
 class TbbcMoneyBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
