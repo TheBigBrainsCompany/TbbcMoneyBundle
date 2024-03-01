@@ -609,7 +609,12 @@ Contributing
 1. Take a look at the [list of issues](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/issues).
 2. Fork
 3. Write a test (for either new feature or bug)
-4. Make a PR
+4. Optional: Start MongoDB in Docker for local testing
+```bash
+docker run --name "money-bundle-mongo-db-test" -p 27017:27017 -d mongo:latest
+```
+5. Make a PR
+
 
 Authors
 -------
