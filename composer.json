@@ -63,6 +63,7 @@
     },
     "suggest": {
         "doctrine/doctrine-bundle": "~2.11",
+        "doctrine/mongodb-odm-bundle": "For usage with MongoDB",
         "doctrine/orm": "~2.17",
         "florianv/exchanger": "Exchanger is a PHP framework to work with currency exchange rates from various services."
     },
