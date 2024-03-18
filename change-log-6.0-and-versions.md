@@ -1,7 +1,7 @@
 Versions from 6.0
 -----------------
 
-### TBD : updates for 6.0.0 version
+### Not yet released!
 
 **New features**
 - Bumped minimum PHP version to PHP ^8.1
@@ -15,4 +15,4 @@ Versions from 6.0
 - Drop PHPUnit 9 support
 - bump dev dependencies
 - Migrate phpUnit config to version 10.
-
+- Remove support for moneyphp/money < 4.5 
