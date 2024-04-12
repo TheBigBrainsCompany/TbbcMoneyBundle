@@ -39,7 +39,7 @@ class CurrencyType extends AbstractType
         foreach ($options['currency_choices'] as $currencyCode) {
 
             if($options['currency_choices_label_format']==1) {
-                $choiceList[$currencyCode . ' - '.Currencies::getName($currencyCode)] = $currencyCode;
+                $choiceList[(string) $currencyCode . ' - '.Currencies::getName($currencyCode)] = $currencyCode;
             } else {
                 $choiceList[$currencyCode] = $currencyCode;
             }
