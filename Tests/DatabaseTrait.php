@@ -15,7 +15,7 @@ trait DatabaseTrait
 
     public function setupDatabase(): void
     {
-        self::dropDatabase();
+        $this->dropDatabase();
         self::createDatabase();
     }
 
@@ -30,12 +30,6 @@ trait DatabaseTrait
         $kernel->boot();
         $application = new Application($kernel);
         $application->setAutoExit(false);
-
-        $code = $application->run(new ArrayInput([
-            'command' => 'doctrine:database:create',
-            '--quiet' => true,
-        ]), new NullOutput());
-        self::assertSame(Command::SUCCESS, $code);
 
         $code = $application->run(new ArrayInput([
             'command' => 'doctrine:schema:create',

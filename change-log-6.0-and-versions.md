@@ -4,15 +4,14 @@ Versions from 6.0
 ### Not yet released!
 
 **New features**
-- Bumped minimum PHP version to PHP ^8.1
 - Add support for MongoDB
+- Add support for doctrine/orm 3 and doctrine/dbal 4
 
 **BC breaking changes**
+- Bumped minimum PHP version to PHP ^8.1
+- Drop support for moneyphp/money < 4.5 
 - Drop `symfony/templating` and template function (use twig)
 - Make `PairManagerInterface` readonly in commands
 
 **Internal Developer things**
-- Drop PHPUnit 9 support
-- bump dev dependencies
-- Migrate phpUnit config to version 10.
-- Remove support for moneyphp/money < 4.5 
+- Migrate PHPUnit to version 10.
