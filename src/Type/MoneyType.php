@@ -6,6 +6,7 @@ namespace Tbbc\MoneyBundle\Type;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 use Doctrine\DBAL\Types\Type;
 use Money\Currency;
 use Money\Money;
@@ -59,7 +60,11 @@ class MoneyType extends Type
             return $value->getCurrency().' '.$value->getAmount();
         }
 
-        throw ConversionException::conversionFailed((string) $value, self::NAME);
+        # BC Layer Doctrine dbal 3/4
+        /** @psalm-suppress UndefinedMethod **/
+        throw class_exists(ValueNotConvertible::class) ?
+            ValueNotConvertible::new($value, self::NAME) :
+            ConversionException::conversionFailed($value, self::NAME);
     }
 
     public function getName(): string

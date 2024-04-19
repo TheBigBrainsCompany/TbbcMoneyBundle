@@ -38,7 +38,7 @@ class PairHistoryManagerTest extends KernelTestCase
             'EUR'
         );
         $this->ratioHistoryRepo = $this->em->getRepository(RatioHistory::class);
-        $this->createDatabase();
+        self::createDatabase();
     }
 
     protected function tearDown(): void

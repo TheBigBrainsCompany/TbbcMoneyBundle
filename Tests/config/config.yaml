@@ -24,11 +24,18 @@ doctrine:
         driver:   "pdo_sqlite"
         memory:   true
         path:     "%kernel.cache_dir%/sqlite-tbbc-money-test.db"
+        use_savepoints: true
 
   orm:
-    entity_managers:
-      default:
-        auto_mapping: true
+    auto_generate_proxy_classes: true
+    enable_lazy_ghost_objects: true
+    report_fields_where_declared: true
+    validate_xml_mapping: true
+    auto_mapping: true
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+
+    controller_resolver:
+      auto_mapping: true
 
 doctrine_mongodb:
   connections:
