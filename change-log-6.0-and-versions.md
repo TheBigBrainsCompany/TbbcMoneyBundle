@@ -1,7 +1,7 @@
 Versions from 6.0
 -----------------
 
-### 2024-04-25 : updates for 6.0.0-rc1 version
+### 2024-04-26 : updates for 6.0.0-rc1 version
 
 **New features**
 - Add support for MongoDB
