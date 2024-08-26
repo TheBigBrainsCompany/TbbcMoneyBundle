@@ -39,6 +39,7 @@
         "ext-sqlite3": "*",
         "symfony/browser-kit": "^5.4|^6.0|^7.0",
         "doctrine/doctrine-bundle": "^2.12",
+        "doctrine/mongodb-odm": "<2.8",
         "doctrine/mongodb-odm-bundle": "^4.6|^5.0",
         "doctrine/orm": "^2.19.3|^3.0",
         "florianv/exchanger": "^2.8.1",

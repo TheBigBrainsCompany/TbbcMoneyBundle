@@ -30,7 +30,6 @@
         <service id="%tbbc_money.pair_manager_interface.class%" alias="tbbc_money.pair_manager" public="false">
         </service>
         <service id="tbbc_money.pair_history_manager" class="%tbbc_money.pair_history_manager.class%" public="true">
-            <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument>%tbbc_money.reference_currency%</argument>
         </service>
         <service id="%tbbc_money.pair_history_manager_interface.class%" alias="tbbc_money.pair_history_manager" public="false">
