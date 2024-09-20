@@ -33,6 +33,10 @@ jobs:
             mongodb-version: '7.0'
             symfony-version: 7.0.*
             stability: prefer-stable
+          - php: '8.4'
+            mongodb-version: '7.0'
+            symfony-version: 7.0.*
+            stability: prefer-stable
 
     name: PHP ${{ matrix.php }} - ${{ matrix.symfony-version }} - ${{ matrix.stability }}
     steps:
