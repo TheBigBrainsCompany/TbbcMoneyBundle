@@ -1,10 +1,10 @@
 {% block tbbc_money_widget %}
     {% for child in form %}
-        {{ form_widget(child) | spaceless }}
+        {{ form_widget(child) }}
     {% endfor %}
 {% endblock %}
 {% block tbbc_currency_widget %}
     {% for child in form %}
-        {{ form_widget(child) | spaceless }}
+        {{ form_widget(child) }}
     {% endfor %}
 {% endblock %}
