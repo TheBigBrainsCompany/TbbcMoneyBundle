@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="6.6.0@07e9a53713232e924da9acb4a6e47507461cd411">
+  <file src="src/Command/RatioFetchCommand.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[RatioFetchCommand]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[RatioFetchCommand]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Command/RatioListCommand.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[RatioListCommand]]></code>
+    </ClassMustBeFinal>
+    <PossiblyUnusedParam>
+      <code><![CDATA[$output]]></code>
+      <code><![CDATA[$output]]></code>
+    </PossiblyUnusedParam>
+    <UnusedClass>
+      <code><![CDATA[RatioListCommand]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Command/RatioSaveCommand.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[RatioSaveCommand]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[RatioSaveCommand]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Document/DocumentRatioHistory.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[DocumentRatioHistory]]></code>
+    </ClassMustBeFinal>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getCurrencyCode]]></code>
+      <code><![CDATA[getId]]></code>
+      <code><![CDATA[setId]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Document/DocumentStorageRatio.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[DocumentStorageRatio]]></code>
+    </ClassMustBeFinal>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getId]]></code>
+      <code><![CDATA[setCurrencyCode]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Entity/DoctrineStorageRatio.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[DoctrineStorageRatio]]></code>
+    </ClassMustBeFinal>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getId]]></code>
+      <code><![CDATA[setCurrencyCode]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Entity/RatioHistory.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[RatioHistory]]></code>
+    </ClassMustBeFinal>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getCurrencyCode]]></code>
+      <code><![CDATA[getId]]></code>
+      <code><![CDATA[setId]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Form/DataTransformer/CurrencyToArrayTransformer.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[CurrencyToArrayTransformer]]></code>
+    </ClassMustBeFinal>
+  </file>
+  <file src="src/Form/DataTransformer/SimpleMoneyToArrayTransformer.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[SimpleMoneyToArrayTransformer]]></code>
+    </ClassMustBeFinal>
+  </file>
+  <file src="src/Form/Type/CurrencyType.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[CurrencyType]]></code>
+    </ClassMustBeFinal>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Form/Type/SimpleMoneyType.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[SimpleMoneyType]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[SimpleMoneyType]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Formatter/MoneyFormatter.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[MoneyFormatter]]></code>
+    </ClassMustBeFinal>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Money/MoneyManager.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[MoneyManager]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[MoneyManager]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Money/MoneyManagerInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[createMoneyFromFloat]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/MoneyException.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[MoneyException]]></code>
+    </ClassMustBeFinal>
+  </file>
+  <file src="src/Pair/PairManager.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[PairManager]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[PairManager]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Pair/PairManagerInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[setRatioProvider]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Pair/RatioProvider/ECBRatioProvider.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[ECBRatioProvider]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[ECBRatioProvider]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Pair/RatioProvider/ExchangerAdapterRatioProvider.php">
+    <UnusedClass>
+      <code><![CDATA[ExchangerAdapterRatioProvider]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Pair/RatioProvider/StaticRatioProvider.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[StaticRatioProvider]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[StaticRatioProvider]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Pair/SaveRatioEvent.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[SaveRatioEvent]]></code>
+    </ClassMustBeFinal>
+  </file>
+  <file src="src/Pair/Storage/CsvStorage.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[CsvStorage]]></code>
+    </ClassMustBeFinal>
+    <PossiblyNullArgument>
+      <code><![CDATA[$data]]></code>
+    </PossiblyNullArgument>
+    <UnusedClass>
+      <code><![CDATA[CsvStorage]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Pair/Storage/DoctrineStorage.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[DoctrineStorage]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[DoctrineStorage]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Pair/Storage/DocumentStorage.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[DocumentStorage]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[DocumentStorage]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/PairHistory/DocumentPairHistoryManager.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[DocumentPairHistoryManager]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[DocumentPairHistoryManager]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/PairHistory/PairHistoryManager.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[PairHistoryManager]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[PairHistoryManager]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/PairHistory/PairHistoryManagerInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getRatioAtDate]]></code>
+      <code><![CDATA[getRatioHistory]]></code>
+      <code><![CDATA[listenSaveRatioEvent]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/TbbcMoneyBundle.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[TbbcMoneyBundle]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[TbbcMoneyBundle]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/TbbcMoneyEvents.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[TbbcMoneyEvents]]></code>
+    </ClassMustBeFinal>
+  </file>
+  <file src="src/Twig/Extension/CurrencyExtension.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[CurrencyExtension]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[CurrencyExtension]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Twig/Extension/MoneyExtension.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[MoneyExtension]]></code>
+    </ClassMustBeFinal>
+    <UnusedClass>
+      <code><![CDATA[MoneyExtension]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Type/MoneyType.php">
+    <ClassMustBeFinal>
+      <code><![CDATA[MoneyType]]></code>
+    </ClassMustBeFinal>
+    <PossiblyUnusedParam>
+      <code><![CDATA[$platform]]></code>
+    </PossiblyUnusedParam>
+    <UnusedClass>
+      <code><![CDATA[MoneyType]]></code>
+    </UnusedClass>
+  </file>
+</files>
