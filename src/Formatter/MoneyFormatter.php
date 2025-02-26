@@ -107,7 +107,7 @@ class MoneyFormatter
         return $money->getCurrency();
     }
 
-    protected function getDefaultNumberFormatter(string $currencyCode, string $locale = null): \NumberFormatter
+    protected function getDefaultNumberFormatter(string $currencyCode, ?string $locale = null): \NumberFormatter
     {
         if (is_null($locale)) {
             $locale = \Locale::getDefault();
