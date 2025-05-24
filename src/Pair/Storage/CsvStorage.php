@@ -45,7 +45,8 @@ class CsvStorage implements StorageInterface
         }
         $row = 1;
         $this->ratioList = [];
-        while (($data = fgetcsv($handle, 1000, ';')) !== false) {
+
+        while (($data = fgetcsv($handle, 1000, ';', "\"", "\\")) !== false) {
             // extract data from CSV line
             if (2 !== count($data)) {
                 throw new MoneyException('error in ratioFileName '.$this->ratioFileName.' on line '.$row.', invalid argument count');
