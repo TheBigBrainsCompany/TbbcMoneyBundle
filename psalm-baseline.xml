@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.6.0@07e9a53713232e924da9acb4a6e47507461cd411">
+<files psalm-version="6.12.0@cf420941d061a57050b6c468ef2c778faf40aee2">
   <file src="src/Command/RatioFetchCommand.php">
     <ClassMustBeFinal>
       <code><![CDATA[RatioFetchCommand]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function configure(): void]]></code>
+      <code><![CDATA[protected function execute(InputInterface $input, OutputInterface $output): int]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[RatioFetchCommand]]></code>
     </UnusedClass>
@@ -12,6 +16,11 @@
     <ClassMustBeFinal>
       <code><![CDATA[RatioListCommand]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function configure(): void]]></code>
+      <code><![CDATA[protected function execute(InputInterface $input, OutputInterface $output): int]]></code>
+      <code><![CDATA[public function complete(CompletionInput $input, CompletionSuggestions $suggestions): void]]></code>
+    </MissingOverrideAttribute>
     <PossiblyUnusedParam>
       <code><![CDATA[$output]]></code>
       <code><![CDATA[$output]]></code>
@@ -24,6 +33,10 @@
     <ClassMustBeFinal>
       <code><![CDATA[RatioSaveCommand]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function configure(): void]]></code>
+      <code><![CDATA[protected function execute(InputInterface $input, OutputInterface $output): int]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[RatioSaveCommand]]></code>
     </UnusedClass>
@@ -70,24 +83,55 @@
     <ClassMustBeFinal>
       <code><![CDATA[CurrencyToArrayTransformer]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function reverseTransform(mixed $value): ?Currency]]></code>
+      <code><![CDATA[public function transform(mixed $value): ?array]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Form/DataTransformer/MoneyToArrayTransformer.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function reverseTransform(mixed $value): ?Money]]></code>
+      <code><![CDATA[public function transform(mixed $value): ?array]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="src/Form/DataTransformer/SimpleMoneyToArrayTransformer.php">
     <ClassMustBeFinal>
       <code><![CDATA[SimpleMoneyToArrayTransformer]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function reverseTransform(mixed $value): ?Money]]></code>
+      <code><![CDATA[public function transform(mixed $value): ?array]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="src/Form/Type/CurrencyType.php">
     <ClassMustBeFinal>
       <code><![CDATA[CurrencyType]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function buildForm(FormBuilderInterface $builder, array $options): void]]></code>
+      <code><![CDATA[public function configureOptions(OptionsResolver $resolver): void]]></code>
+      <code><![CDATA[public function getBlockPrefix(): string]]></code>
+    </MissingOverrideAttribute>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Form/Type/MoneyType.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function buildForm(FormBuilderInterface $builder, array $options): void]]></code>
+      <code><![CDATA[public function configureOptions(OptionsResolver $resolver): void]]></code>
+      <code><![CDATA[public function getBlockPrefix(): string]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="src/Form/Type/SimpleMoneyType.php">
     <ClassMustBeFinal>
       <code><![CDATA[SimpleMoneyType]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function buildForm(FormBuilderInterface $builder, array $options): void]]></code>
+      <code><![CDATA[public function configureOptions(OptionsResolver $resolver): void]]></code>
+      <code><![CDATA[public function getBlockPrefix(): string]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[SimpleMoneyType]]></code>
     </UnusedClass>
@@ -96,6 +140,9 @@
     <ClassMustBeFinal>
       <code><![CDATA[MoneyFormatter]]></code>
     </ClassMustBeFinal>
+    <InvalidOperand>
+      <code><![CDATA[$amount / 10 ** $this->decimals]]></code>
+    </InvalidOperand>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -104,6 +151,12 @@
     <ClassMustBeFinal>
       <code><![CDATA[MoneyManager]]></code>
     </ClassMustBeFinal>
+    <InvalidOperand>
+      <code><![CDATA[$floatAmount * 10 ** $this->decimals]]></code>
+    </InvalidOperand>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function createMoneyFromFloat(float $floatAmount, ?string $currencyCode = null): Money]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[MoneyManager]]></code>
     </UnusedClass>
@@ -122,6 +175,17 @@
     <ClassMustBeFinal>
       <code><![CDATA[PairManager]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function convert(Money $amount, string $currencyCode): Money]]></code>
+      <code><![CDATA[public function getCurrencyCodeList(): array]]></code>
+      <code><![CDATA[public function getRatioList(): array]]></code>
+      <code><![CDATA[public function getReferenceCurrencyCode(): string]]></code>
+      <code><![CDATA[public function getRelativeRatio(string $referenceCurrencyCode, string $currencyCode): float]]></code>
+      <code><![CDATA[public function quote(Currency $baseCurrency, Currency $counterCurrency): CurrencyPair]]></code>
+      <code><![CDATA[public function saveRatio(string $currencyCode, float $ratio): void]]></code>
+      <code><![CDATA[public function saveRatioListFromRatioProvider(): void]]></code>
+      <code><![CDATA[public function setRatioProvider(RatioProviderInterface $ratioProvider): void]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[PairManager]]></code>
     </UnusedClass>
@@ -135,11 +199,43 @@
     <ClassMustBeFinal>
       <code><![CDATA[ECBRatioProvider]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float]]></code>
+    </MissingOverrideAttribute>
+    <MixedArrayAccess>
+      <code><![CDATA[$attributes['@attributes']['currency']]]></code>
+      <code><![CDATA[$attributes['@attributes']['rate']]]></code>
+    </MixedArrayAccess>
+    <MixedArrayOffset>
+      <code><![CDATA[$pairs[$attributes['@attributes']['currency']]]]></code>
+    </MixedArrayOffset>
+    <MixedAssignment>
+      <code><![CDATA[$pairs[$attributes['@attributes']['currency']]]]></code>
+      <code><![CDATA[$rateObject]]></code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code><![CDATA[attributes]]></code>
+    </MixedMethodCall>
+    <PossiblyNullIterator>
+      <code><![CDATA[$xmlObject->Cube->Cube->children()]]></code>
+    </PossiblyNullIterator>
+    <PossiblyNullPropertyFetch>
+      <code><![CDATA[$xmlObject->Cube->Cube]]></code>
+    </PossiblyNullPropertyFetch>
+    <PossiblyNullReference>
+      <code><![CDATA[children]]></code>
+    </PossiblyNullReference>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[!$xmlObject = @simplexml_load_string($xml)]]></code>
+    </RiskyTruthyFalsyComparison>
     <UnusedClass>
       <code><![CDATA[ECBRatioProvider]]></code>
     </UnusedClass>
   </file>
   <file src="src/Pair/RatioProvider/ExchangerAdapterRatioProvider.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[ExchangerAdapterRatioProvider]]></code>
     </UnusedClass>
@@ -148,6 +244,9 @@
     <ClassMustBeFinal>
       <code><![CDATA[StaticRatioProvider]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[StaticRatioProvider]]></code>
     </UnusedClass>
@@ -161,6 +260,10 @@
     <ClassMustBeFinal>
       <code><![CDATA[CsvStorage]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function loadRatioList(bool $force = false): array]]></code>
+      <code><![CDATA[public function saveRatioList(array $ratioList): void]]></code>
+    </MissingOverrideAttribute>
     <PossiblyNullArgument>
       <code><![CDATA[$data]]></code>
     </PossiblyNullArgument>
@@ -172,6 +275,10 @@
     <ClassMustBeFinal>
       <code><![CDATA[DoctrineStorage]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function loadRatioList(bool $force = false): array]]></code>
+      <code><![CDATA[public function saveRatioList(array $ratioList): void]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[DoctrineStorage]]></code>
     </UnusedClass>
@@ -180,6 +287,10 @@
     <ClassMustBeFinal>
       <code><![CDATA[DocumentStorage]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function loadRatioList(bool $force = false): array]]></code>
+      <code><![CDATA[public function saveRatioList(array $ratioList): void]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[DocumentStorage]]></code>
     </UnusedClass>
@@ -188,6 +299,11 @@
     <ClassMustBeFinal>
       <code><![CDATA[DocumentPairHistoryManager]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getRatioAtDate(string $currencyCode, DateTimeInterface $savedAt): ?float]]></code>
+      <code><![CDATA[public function getRatioHistory(string $currencyCode, ?DateTimeInterface $startDate = null, ?DateTimeInterface $endDate = null): array]]></code>
+      <code><![CDATA[public function listenSaveRatioEvent(SaveRatioEvent $event): void]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[DocumentPairHistoryManager]]></code>
     </UnusedClass>
@@ -196,6 +312,11 @@
     <ClassMustBeFinal>
       <code><![CDATA[PairHistoryManager]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getRatioAtDate(string $currencyCode, DateTimeInterface $savedAt): ?float]]></code>
+      <code><![CDATA[public function getRatioHistory(string $currencyCode, ?DateTimeInterface $startDate = null, ?DateTimeInterface $endDate = null): array]]></code>
+      <code><![CDATA[public function listenSaveRatioEvent(SaveRatioEvent $event): void]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[PairHistoryManager]]></code>
     </UnusedClass>
@@ -211,6 +332,9 @@
     <ClassMustBeFinal>
       <code><![CDATA[TbbcMoneyBundle]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function build(ContainerBuilder $container): void]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[TbbcMoneyBundle]]></code>
     </UnusedClass>
@@ -224,6 +348,9 @@
     <ClassMustBeFinal>
       <code><![CDATA[CurrencyExtension]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getFilters(): array]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[CurrencyExtension]]></code>
     </UnusedClass>
@@ -232,6 +359,9 @@
     <ClassMustBeFinal>
       <code><![CDATA[MoneyExtension]]></code>
     </ClassMustBeFinal>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getFilters(): array]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[MoneyExtension]]></code>
     </UnusedClass>
@@ -240,6 +370,14 @@
     <ClassMustBeFinal>
       <code><![CDATA[MoneyType]]></code>
     </ClassMustBeFinal>
+    <ImplicitToStringCast>
+      <code><![CDATA[$value->getCurrency()]]></code>
+    </ImplicitToStringCast>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string]]></code>
+      <code><![CDATA[public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?Money]]></code>
+      <code><![CDATA[public function getSqlDeclaration(array $column, AbstractPlatform $platform): string]]></code>
+    </MissingOverrideAttribute>
     <PossiblyUnusedParam>
       <code><![CDATA[$platform]]></code>
     </PossiblyUnusedParam>

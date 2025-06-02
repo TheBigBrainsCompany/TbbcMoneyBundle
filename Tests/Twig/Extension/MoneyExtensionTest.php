@@ -7,6 +7,7 @@ namespace Tbbc\MoneyBundle\Tests\Twig\Extension;
 use Locale;
 use Money\Currency;
 use Money\Money;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
@@ -52,9 +53,7 @@ class MoneyExtensionTest extends TestCase
         self::assertSame('tbbc_money_extension', $this->extension->getName());
     }
 
-    /**
-     * @dataProvider getMoneyTests
-     */
+    #[DataProvider('getMoneyTests')]
     public function testMoney($template, $expected): void
     {
         $this->assertSame($expected, $this->getTemplate($template)->render($this->variables));
