@@ -50,7 +50,11 @@
         "symfony/phpunit-bridge": "^7.0",
         "phpunit/phpunit": "^10.5.46|^11.5.21|^12.1.6",
         "symfony/yaml": "^5.4|^6.0|^7.0",
-        "http-interop/http-factory-guzzle": "^1.2"
+        "http-interop/http-factory-guzzle": "^1.2",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "spaze/phpstan-disallowed-calls": "^4.0"
     },
     "autoload-dev": {
         "psr-4": {
@@ -60,6 +64,7 @@
     "scripts": {
         "cs-check": "vendor/bin/ecs check --ansi",
         "cs-fix": "vendor/bin/ecs check --fix --ansi",
+        "phpstan": "vendor/bin/phpstan analyse --memory-limit=-1",
         "phpunit": "vendor/bin/phpunit --coverage-text --coverage-html=.build",
         "rector-check": "vendor/bin/rector --dry-run",
         "rector-fix": "vendor/bin/rector"

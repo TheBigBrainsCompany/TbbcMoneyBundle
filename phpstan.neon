@@ -1,0 +1,46 @@
+parameters:
+    # https://phpstan.org/config-reference
+    level: max
+    bootstrapFiles:
+        - tests/bootstrap.php
+    paths:
+        - src
+        - Tests
+
+    disallowedSuperglobals:
+        -
+            superglobal: [ '$GLOBALS', '$_SERVER', '$_GET', '$_POST', '$_FILES', '$_COOKIE', '$_SESSION', '$_REQUEST', '$_ENV' ]
+            message: 'use the Request methods instead'
+
+    disallowedFunctionCalls:
+        -
+            function:
+                - 'dump()'
+                - 'die()'
+                - 'exit()'
+                - 'var_dump()'
+                - 'dd()'
+            message: 'Did you forget to remove debug code?'
+        -
+            function:
+                - 'sizeof()'
+            message: 'use count() instead'
+        -
+            function:
+                - 'ctype_digit()'
+            message: 'this method has limitations when the passed variable is not a string, use filter_var() instead'
+        -
+            function:
+                - 'date()'
+                - 'strtotime()'
+            message: 'Use date object methods instead'
+
+includes:
+        # https://github.com/phpstan/phpstan-strict-rules
+        - vendor/phpstan/phpstan-strict-rules/rules.neon
+        - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+        - vendor/phpstan/phpstan-phpunit/extension.neon
+        - vendor/spaze/phpstan-disallowed-calls/extension.neon
+        - vendor/spaze/phpstan-disallowed-calls/disallowed-dangerous-calls.neon
+        - vendor/spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon
+        - vendor/spaze/phpstan-disallowed-calls/disallowed-insecure-calls.neon
