@@ -7,7 +7,7 @@ namespace Tbbc\MoneyBundle\Tests\Money;
 use PHPUnit\Framework\TestCase;
 use Tbbc\MoneyBundle\Money\MoneyManager;
 
-class MoneyManagerTest extends TestCase
+final class MoneyManagerTest extends TestCase
 {
     protected MoneyManager $manager;
 

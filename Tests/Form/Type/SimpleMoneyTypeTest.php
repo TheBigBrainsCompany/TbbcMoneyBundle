@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Tbbc\MoneyBundle\Form\Type\SimpleMoneyType;
 use Tbbc\MoneyBundle\Pair\PairManager;
 
-class SimpleMoneyTypeTest extends TypeTestCase
+final class SimpleMoneyTypeTest extends TypeTestCase
 {
     private string $simpleMoneyTypeClass = SimpleMoneyType::class;
 
@@ -117,10 +117,8 @@ class SimpleMoneyTypeTest extends TypeTestCase
             $decimals = 3;
         }
 
-        $pairManager = $this->getMockBuilder(PairManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $pairManager->expects($this->any())
+        $pairManager = $this->createMock(PairManager::class);
+        $pairManager
             ->method('getReferenceCurrencyCode')
             ->willReturn('EUR');
 

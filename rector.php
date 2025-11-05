@@ -33,7 +33,7 @@ return RectorConfig::configure()
         //instanceOf: true,
         //strictBooleans: true,
         //rectorPreset: true,
-        //phpunitCodeQuality: true,
+        phpunitCodeQuality: true,
     )
     ->withComposerBased(
         phpunit: true,

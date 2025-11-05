@@ -10,26 +10,23 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer;
 
-class MoneyToArrayTransformerTest extends TestCase
+final class MoneyToArrayTransformerTest extends TestCase
 {
     public function testTransformMoneyToArray(): void
     {
         $currency = new Currency('EUR');
         $value = new Money('100', $currency);
         $transformer = new MoneyToArrayTransformer();
-        self::assertSame(
-            [
-                'tbbc_amount' => '1.00',
-                'tbbc_currency' => $currency,
-            ],
-            $transformer->transform($value)
-        );
+        $this->assertSame([
+            'tbbc_amount' => '1.00',
+            'tbbc_currency' => $currency,
+        ], $transformer->transform($value));
     }
 
     public function testTransformNull(): void
     {
         $transformer = new MoneyToArrayTransformer();
-        self::assertNull($transformer->transform(null));
+        $this->assertNull($transformer->transform(null));
     }
 
     public function testTransformThrowErrorIfValueIsNotCurrency(): void
@@ -48,21 +45,16 @@ class MoneyToArrayTransformerTest extends TestCase
         $expected = new Money('100', new Currency('EUR'));
         $transformer = new MoneyToArrayTransformer();
         $transformed = $transformer->reverseTransform($value);
-        self::assertSame(
-            $expected->getAmount(),
-            $transformed->getAmount()
-        );
-        self::assertSame(
-            $expected->getCurrency()->getCode(),
-            $transformed->getCurrency()->getCode()
-        );
+        $this->assertInstanceOf(Money::class, $transformed);
+        $this->assertSame($expected->getAmount(), $transformed->getAmount());
+        $this->assertSame($expected->getCurrency()->getCode(), $transformed->getCurrency()->getCode());
     }
 
     public function testReverseToNullIfValueIsNull(): void
     {
         $value = null;
         $transformer = new MoneyToArrayTransformer();
-        self::assertNull($transformer->reverseTransform($value));
+        $this->assertNotInstanceOf(Money::class, $transformer->reverseTransform($value));
     }
 
     public function testReverseToNullIfFormElementNotSet(): void
@@ -71,7 +63,7 @@ class MoneyToArrayTransformerTest extends TestCase
             'tbbc_name' => null,
         ];
         $transformer = new MoneyToArrayTransformer();
-        self::assertNull($transformer->reverseTransform($value));
+        $this->assertNotInstanceOf(Money::class, $transformer->reverseTransform($value));
     }
 
     public function testReverseFormValueIsNotArray(): void

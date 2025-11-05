@@ -14,7 +14,7 @@ use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
 use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
 use Tbbc\MoneyBundle\Tests\DatabaseTrait;
 
-class PairHistoryManagerTest extends KernelTestCase
+final class PairHistoryManagerTest extends KernelTestCase
 {
     use DatabaseTrait;
 
@@ -86,9 +86,9 @@ class PairHistoryManagerTest extends KernelTestCase
 
         $ratioList = $this->pairHistoryManager->getRatioHistory('USD', null, null);
         $this->assertCount(3, $ratioList);
-        $this->assertSame(1.25, $ratioList[0]['ratio']);
-        $this->assertSame(1.50, $ratioList[1]['ratio']);
-        $this->assertSame(1.75, $ratioList[2]['ratio']);
+        $this->assertEqualsWithDelta(1.25, $ratioList[0]['ratio'], PHP_FLOAT_EPSILON);
+        $this->assertEqualsWithDelta(1.50, $ratioList[1]['ratio'], PHP_FLOAT_EPSILON);
+        $this->assertEqualsWithDelta(1.75, $ratioList[2]['ratio'], PHP_FLOAT_EPSILON);
         $this->assertSame('2012-07-08 12:00:00', $ratioList[0]['savedAt']->format('Y-m-d H:i:s'));
         $this->assertSame('2012-07-08 13:00:00', $ratioList[1]['savedAt']->format('Y-m-d H:i:s'));
         $this->assertSame('2012-07-08 14:00:00', $ratioList[2]['savedAt']->format('Y-m-d H:i:s'));
@@ -109,16 +109,16 @@ class PairHistoryManagerTest extends KernelTestCase
         $this->pairHistoryManager->listenSaveRatioEvent($event);
 
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 12:30:00'));
-        $this->assertSame(1.25, $ratio);
+        $this->assertEqualsWithDelta(1.25, $ratio, PHP_FLOAT_EPSILON);
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
-        $this->assertSame(1.50, $ratio);
+        $this->assertEqualsWithDelta(1.50, $ratio, PHP_FLOAT_EPSILON);
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-10 12:30:00'));
-        $this->assertSame(1.75, $ratio);
+        $this->assertEqualsWithDelta(1.75, $ratio, PHP_FLOAT_EPSILON);
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2011-07-10 12:30:00'));
         $this->assertNull($ratio);
 
         $ratio = $this->pairHistoryManager->getRatioAtDate('EUR', new \DateTime('2011-07-10 12:30:00'));
-        $this->assertSame(1.0, $ratio);
+        $this->assertEqualsWithDelta(1.0, $ratio, PHP_FLOAT_EPSILON);
         $this->assertIsFloat($ratio);
     }
 
@@ -132,7 +132,7 @@ class PairHistoryManagerTest extends KernelTestCase
         $this->pairHistoryManager->listenSaveRatioEvent($event);
 
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 12:30:00'));
-        $this->assertSame(1.25, $ratio);
+        $this->assertEqualsWithDelta(1.25, $ratio, PHP_FLOAT_EPSILON);
         try {
             $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
             $this->fail('should throw an exception due to reference currency code');
@@ -140,7 +140,7 @@ class PairHistoryManagerTest extends KernelTestCase
             $this->assertTrue(true);
         }
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-10 12:30:00'));
-        $this->assertSame(1.75, $ratio);
+        $this->assertEqualsWithDelta(1.75, $ratio, PHP_FLOAT_EPSILON);
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2011-07-10 12:30:00'));
         $this->assertNull($ratio);
     }

@@ -9,24 +9,21 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer;
 
-class CurrencyToArrayTransformerTest extends TestCase
+final class CurrencyToArrayTransformerTest extends TestCase
 {
     public function testTransformCurrencyToArray(): void
     {
         $value = new Currency('EUR');
         $transformer = new CurrencyToArrayTransformer();
-        self::assertSame(
-            [
-                'tbbc_name' => 'EUR',
-            ],
-            $transformer->transform($value)
-        );
+        $this->assertSame([
+            'tbbc_name' => 'EUR',
+        ], $transformer->transform($value));
     }
 
     public function testTransformNull(): void
     {
         $transformer = new CurrencyToArrayTransformer();
-        self::assertNull($transformer->transform(null));
+        $this->assertNull($transformer->transform(null));
     }
 
     public function testTransformThrowErrorIfValueIsNotCurrency(): void
@@ -43,17 +40,14 @@ class CurrencyToArrayTransformerTest extends TestCase
         ];
         $expected = new Currency('EUR');
         $transformer = new CurrencyToArrayTransformer();
-        self::assertSame(
-            $expected->getCode(),
-            $transformer->reverseTransform($value)->getCode()
-        );
+        $this->assertSame($expected->getCode(), $transformer->reverseTransform($value)->getCode());
     }
 
     public function testReverseToNullIfValueIsNull(): void
     {
         $value = null;
         $transformer = new CurrencyToArrayTransformer();
-        self::assertNull($transformer->reverseTransform($value));
+        $this->assertNotInstanceOf(Currency::class, $transformer->reverseTransform($value));
     }
 
     public function testReverseToNullIfFormElementNotSet(): void
@@ -62,7 +56,7 @@ class CurrencyToArrayTransformerTest extends TestCase
             'tbbc_name' => null,
         ];
         $transformer = new CurrencyToArrayTransformer();
-        self::assertNull($transformer->reverseTransform($value));
+        $this->assertNotInstanceOf(Currency::class, $transformer->reverseTransform($value));
     }
 
     public function testReverseFormValueIsNotArray(): void

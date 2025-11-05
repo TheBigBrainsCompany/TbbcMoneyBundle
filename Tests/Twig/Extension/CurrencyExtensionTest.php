@@ -14,7 +14,7 @@ use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Twig\TemplateWrapper;
 
-class CurrencyExtensionTest extends TestCase
+final class CurrencyExtensionTest extends TestCase
 {
     private CurrencyExtension $extension;
 
@@ -31,7 +31,7 @@ class CurrencyExtensionTest extends TestCase
 
     public function testName(): void
     {
-        self::assertSame('tbbc_money_currency_extension', $this->extension->getName());
+        $this->assertSame('tbbc_money_currency_extension', $this->extension->getName());
     }
 
     #[DataProvider('getCurrencyTests')]
@@ -40,12 +40,10 @@ class CurrencyExtensionTest extends TestCase
         $this->assertSame($expected, $this->getTemplate($template)->render($this->variables));
     }
 
-    public static function getCurrencyTests(): array
+    public static function getCurrencyTests(): \Iterator
     {
-        return [
-            ['{{ currency|currency_name }}', 'EUR'],
-            ['{{ currency|currency_symbol(".", ",") }}', '€'],
-        ];
+        yield ['{{ currency|currency_name }}', 'EUR'];
+        yield ['{{ currency|currency_symbol(".", ",") }}', '€'];
     }
 
     protected function getTemplate($template): TemplateWrapper

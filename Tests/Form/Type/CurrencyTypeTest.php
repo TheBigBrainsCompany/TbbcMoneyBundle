@@ -10,7 +10,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 
-class CurrencyTypeTest extends TypeTestCase
+final class CurrencyTypeTest extends TypeTestCase
 {
     private array $currencies;
 
@@ -34,11 +34,11 @@ class CurrencyTypeTest extends TypeTestCase
         $view = $this->factory->create(CurrencyType::class)
             ->createView();
 
-        self::assertSame('tbbc_currency', $view->vars['id']);
-        self::assertCount(1, $view->vars['form']->children);
+        $this->assertSame('tbbc_currency', $view->vars['id']);
+        $this->assertCount(1, $view->vars['form']->children);
         $child = $view->vars['form']->children['tbbc_name'];
-        self::assertSame('tbbc_currency_tbbc_name', $child->vars['id']);
-        self::assertCount(count($this->currencies), $child->vars['choices']);
+        $this->assertSame('tbbc_currency_tbbc_name', $child->vars['id']);
+        $this->assertCount(count($this->currencies), $child->vars['choices']);
     }
 
     public function testSubmittedData(): void
@@ -47,10 +47,7 @@ class CurrencyTypeTest extends TypeTestCase
         $form->submit([
             'tbbc_name' => 'USD',
         ]);
-        self::assertSame(
-            (new Currency('USD'))->getCode(),
-            $form->getData()->getCode()
-        );
+        $this->assertSame((new Currency('USD'))->getCode(), $form->getData()->getCode());
     }
 
     public function testOptions(): void

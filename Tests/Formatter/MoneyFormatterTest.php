@@ -11,7 +11,7 @@ use NumberFormatter;
 use PHPUnit\Framework\TestCase;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 
-class MoneyFormatterTest extends TestCase
+final class MoneyFormatterTest extends TestCase
 {
     protected MoneyFormatter $formatter;
 
