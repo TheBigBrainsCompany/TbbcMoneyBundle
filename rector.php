@@ -24,17 +24,17 @@ return RectorConfig::configure()
     ->withImportNames(importShortClasses: false)
     ->withAttributesSets()
     // https://getrector.com/documentation/set-lists
-    /* ->withPreparedSets(
-        deadCode: true,
-        codeQuality: true,
-        codingStyle: true,
-        typeDeclarations: true,
-        privatization: true,
-        instanceOf: true,
-        strictBooleans: true,
-        rectorPreset: true,
-        phpunitCodeQuality: true,
-    ) */
+     ->withPreparedSets(
+        //deadCode: true,
+        //codeQuality: true,
+        //codingStyle: true,
+        //typeDeclarations: true,
+        //privatization: true,
+        //instanceOf: true,
+        //strictBooleans: true,
+        //rectorPreset: true,
+        //phpunitCodeQuality: true,
+    )
     ->withComposerBased(
         phpunit: true,
     )
