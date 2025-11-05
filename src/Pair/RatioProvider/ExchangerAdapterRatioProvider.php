@@ -18,7 +18,7 @@ use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
  */
 final class ExchangerAdapterRatioProvider implements RatioProviderInterface
 {
-    public function __construct(private ExchangeRateProvider $exchangeRateProvider)
+    public function __construct(private readonly ExchangeRateProvider $exchangeRateProvider)
     {
     }
 

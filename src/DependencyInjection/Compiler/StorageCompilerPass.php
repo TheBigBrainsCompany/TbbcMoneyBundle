@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\DependencyInjection\Compiler;
 
+use Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage;
+use Tbbc\MoneyBundle\Pair\Storage\DocumentStorage;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -34,7 +36,7 @@ class StorageCompilerPass implements CompilerPassInterface
             ]);
             $path->process($container);
 
-            $storageDoctrineDefinition = new Definition(\Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage::class, [
+            $storageDoctrineDefinition = new Definition(DoctrineStorage::class, [
                 new Reference('doctrine.orm.entity_manager'),
                 $container->getParameter('tbbc_money.reference_currency'),
             ]);
@@ -57,7 +59,7 @@ class StorageCompilerPass implements CompilerPassInterface
             ]);
             $path->process($container);
 
-            $storageDocumentDefinition = new Definition(\Tbbc\MoneyBundle\Pair\Storage\DocumentStorage::class, [
+            $storageDocumentDefinition = new Definition(DocumentStorage::class, [
                 new Reference('doctrine_mongodb.odm.document_manager'),
                 $container->getParameter('tbbc_money.reference_currency'),
             ]);

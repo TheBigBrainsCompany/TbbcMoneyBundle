@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\DependencyInjection\Compiler;
 
+use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
+use Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -33,7 +35,7 @@ class PairHistoryCompilerPass implements CompilerPassInterface
 
         //Use DoctrineBundle
         if ('doctrine' === $storage) {
-            $pairHistoryDefinition = new Definition(\Tbbc\MoneyBundle\PairHistory\PairHistoryManager::class, [
+            $pairHistoryDefinition = new Definition(PairHistoryManager::class, [
                 new Reference('doctrine.orm.entity_manager'),
                 $container->getParameter('tbbc_money.reference_currency'),
             ]);
@@ -56,7 +58,7 @@ class PairHistoryCompilerPass implements CompilerPassInterface
 
         //Use DoctrineMongoDBBundle
         if ('document' === $storage) {
-            $pairHistoryDefinition = new Definition(\Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager::class, [
+            $pairHistoryDefinition = new Definition(DocumentPairHistoryManager::class, [
                 new Reference('doctrine_mongodb.odm.document_manager'),
                 $container->getParameter('tbbc_money.reference_currency'),
             ]);
