@@ -94,8 +94,6 @@ class ECBRatioProvider implements RatioProviderInterface
 
     /**
      * Parse XML and turn it into an associative array with [ currency => rate, currency => rate, ... ].
-     *
-     * @psalm-suppress all
      */
     protected function parseXML(string $xml): array
     {

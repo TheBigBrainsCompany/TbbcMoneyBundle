@@ -61,7 +61,6 @@ class MoneyType extends Type
         }
 
         # BC Layer Doctrine dbal 3/4
-        /** @psalm-suppress UndefinedMethod **/
         throw class_exists(ValueNotConvertible::class) ?
             ValueNotConvertible::new($value, self::NAME) :
             ConversionException::conversionFailed($value, self::NAME);

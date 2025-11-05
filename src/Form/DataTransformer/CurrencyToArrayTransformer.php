@@ -18,9 +18,6 @@ use TypeError;
  */
 class CurrencyToArrayTransformer implements DataTransformerInterface
 {
-    /**
-     * @psalm-param Currency|null $value
-     */
     public function transform(mixed $value): ?array
     {
         if (null === $value) {
@@ -36,16 +33,12 @@ class CurrencyToArrayTransformer implements DataTransformerInterface
         ];
     }
 
-    /**
-     * @psalm-param array|null $value
-     */
     public function reverseTransform(mixed $value): ?Currency
     {
         if (null === $value) {
             return null;
         }
 
-        /** @psalm-suppress DocblockTypeContradiction */
         if (!is_array($value)) {
             throw new UnexpectedTypeException($value, 'array');
         }
