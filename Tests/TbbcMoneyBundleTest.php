@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Tbbc\MoneyBundle\TbbcMoneyBundle;
 
-class TbbcMoneyBundleTest extends TestCase
+final class TbbcMoneyBundleTest extends TestCase
 {
     public function testBuild(): void
     {

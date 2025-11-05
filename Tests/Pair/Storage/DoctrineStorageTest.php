@@ -11,7 +11,7 @@ use Tbbc\MoneyBundle\Entity\DoctrineStorageRatio;
 use Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage;
 use Tbbc\MoneyBundle\Tests\DatabaseTrait;
 
-class DoctrineStorageTest extends KernelTestCase
+final class DoctrineStorageTest extends KernelTestCase
 {
     use DatabaseTrait;
 
@@ -57,7 +57,7 @@ class DoctrineStorageTest extends KernelTestCase
 
         $this->assertCount(1, $ratioList);
         $this->assertArrayHasKey('USD', $ratioList);
-        $this->assertSame(1.0, $ratioList['USD']);
+        $this->assertEqualsWithDelta(1.0, $ratioList['USD'], PHP_FLOAT_EPSILON);
     }
 
     public function testLoadForceOption(): void
@@ -76,7 +76,7 @@ class DoctrineStorageTest extends KernelTestCase
         $this->assertCount(1, $this->doctrineStorage->loadRatioList());
         $this->assertCount(2, $this->doctrineStorage->loadRatioList(true));
         $ratioList = $this->doctrineStorage->loadRatioList();
-        $this->assertSame(1.6, $ratioList['EUR']);
+        $this->assertEqualsWithDelta(1.6, $ratioList['EUR'], PHP_FLOAT_EPSILON);
     }
 
     public function testSave(): void

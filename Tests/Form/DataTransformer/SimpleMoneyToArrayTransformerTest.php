@@ -9,7 +9,7 @@ use Money\Money;
 use PHPUnit\Framework\TestCase;
 use Tbbc\MoneyBundle\Form\DataTransformer\SimpleMoneyToArrayTransformer;
 
-class SimpleMoneyToArrayTransformerTest extends TestCase
+final class SimpleMoneyToArrayTransformerTest extends TestCase
 {
     private Money $money;
 
@@ -25,33 +25,24 @@ class SimpleMoneyToArrayTransformerTest extends TestCase
 
     public function testTransformValueToFormData(): void
     {
-        self::assertSame(
-            [
-                'tbbc_amount' => '10.00',
-            ],
-            $this->transformer->transform($this->money)
-        );
+        $this->assertSame([
+            'tbbc_amount' => '10.00',
+        ], $this->transformer->transform($this->money));
     }
 
     public function testTransformNull(): void
     {
-        self::assertNull($this->transformer->transform(null));
+        $this->assertNull($this->transformer->transform(null));
     }
 
     public function testReverse(): void
     {
-        self::assertSame(
-            $this->money->getAmount(),
-            $this->transformer->reverseTransform([
-                'tbbc_amount' => '10.00',
-            ])->getAmount()
-        );
+        $this->assertSame($this->money->getAmount(), $this->transformer->reverseTransform([
+            'tbbc_amount' => '10.00',
+        ])->getAmount());
 
-        self::assertSame(
-            $this->money->getCurrency()->getCode(),
-            $this->transformer->reverseTransform([
-                'tbbc_amount' => '10.00',
-            ])->getCurrency()->getCode()
-        );
+        $this->assertSame($this->money->getCurrency()->getCode(), $this->transformer->reverseTransform([
+            'tbbc_amount' => '10.00',
+        ])->getCurrency()->getCode());
     }
 }

@@ -12,7 +12,7 @@ use Tbbc\MoneyBundle\Command\RatioSaveCommand;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
-class RatioSaveCommandTest extends TestCase
+final class RatioSaveCommandTest extends TestCase
 {
     private MockObject $pairManager;
 
@@ -34,9 +34,9 @@ class RatioSaveCommandTest extends TestCase
             'currencyCode' => 'EUR',
             'ratio' => '1.2563',
         ]);
-        self::assertSame(Command::SUCCESS, $tester->getStatusCode());
+        $this->assertSame(Command::SUCCESS, $tester->getStatusCode());
         $output = $tester->getDisplay();
-        self::assertSame("ratio saved\n", $output);
+        $this->assertSame("ratio saved\n", $output);
     }
 
     public function testWillWriteExceptionMessage(): void
@@ -53,8 +53,8 @@ class RatioSaveCommandTest extends TestCase
             'currencyCode' => 'EUR',
             'ratio' => '1.2563',
         ]);
-        self::assertSame(Command::FAILURE, $tester->getStatusCode());
+        $this->assertSame(Command::FAILURE, $tester->getStatusCode());
         $output = $tester->getDisplay();
-        self::assertSame("ERROR : ratio no saved du to error : test\n", $output);
+        $this->assertSame("ERROR : ratio no saved du to error : test\n", $output);
     }
 }

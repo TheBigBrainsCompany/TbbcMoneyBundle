@@ -12,7 +12,7 @@ use Tbbc\MoneyBundle\Command\RatioFetchCommand;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
-class RatioFetchCommandTest extends KernelTestCase
+final class RatioFetchCommandTest extends KernelTestCase
 {
     private MockObject $pairManager;
 
@@ -37,9 +37,9 @@ class RatioFetchCommandTest extends KernelTestCase
         $command = new RatioFetchCommand($this->pairManager);
         $tester = new CommandTester($command);
         $tester->execute([]);
-        self::assertSame(Command::SUCCESS, $tester->getStatusCode());
+        $this->assertSame(Command::SUCCESS, $tester->getStatusCode());
         $output = $tester->getDisplay();
-        self::assertStringContainsString('[EUR] => 1.1', $output);
+        $this->assertStringContainsString('[EUR] => 1.1', $output);
     }
 
     public function testWillWriteExceptionMessage(): void
@@ -56,8 +56,8 @@ class RatioFetchCommandTest extends KernelTestCase
         $command = new RatioFetchCommand($this->pairManager);
         $tester = new CommandTester($command);
         $tester->execute([]);
-        self::assertSame(Command::FAILURE, $tester->getStatusCode());
+        $this->assertSame(Command::FAILURE, $tester->getStatusCode());
         $output = $tester->getDisplay();
-        self::assertStringContainsString('ERROR during fetch ratio : test', $output);
+        $this->assertStringContainsString('ERROR during fetch ratio : test', $output);
     }
 }

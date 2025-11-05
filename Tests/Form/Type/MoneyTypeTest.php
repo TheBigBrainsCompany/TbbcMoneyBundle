@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 use Tbbc\MoneyBundle\Form\Type\MoneyType;
 
-class MoneyTypeTest extends TypeTestCase
+final class MoneyTypeTest extends TypeTestCase
 {
     protected function getExtensions(): array
     {
@@ -29,13 +29,13 @@ class MoneyTypeTest extends TypeTestCase
         $view = $this->factory->create(MoneyType::class)
             ->createView();
 
-        self::assertSame('tbbc_money', $view->vars['id']);
-        self::assertCount(2, $view->vars['form']->children);
+        $this->assertSame('tbbc_money', $view->vars['id']);
+        $this->assertCount(2, $view->vars['form']->children);
         $child = $view->vars['form']->children['tbbc_currency'];
-        self::assertSame('tbbc_money_tbbc_currency', $child->vars['id']);
+        $this->assertSame('tbbc_money_tbbc_currency', $child->vars['id']);
 
         $child = $view->vars['form']->children['tbbc_amount'];
-        self::assertSame('tbbc_money_tbbc_amount', $child->vars['id']);
+        $this->assertSame('tbbc_money_tbbc_amount', $child->vars['id']);
     }
 
     public function testBindValid(): void
