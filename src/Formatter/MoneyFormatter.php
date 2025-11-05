@@ -14,8 +14,9 @@ use Money\Money;
  */
 class MoneyFormatter
 {
-    public function __construct(protected int $decimals = 2)
-    {
+    public function __construct(
+        protected int $decimals = 2
+    ) {
     }
 
     /**
@@ -28,7 +29,7 @@ class MoneyFormatter
      */
     public function localizedFormatMoney(Money $money, ?string $locale = null, ?\NumberFormatter $numberFormatter = null): string
     {
-        if (!($numberFormatter instanceof \NumberFormatter)) {
+        if (! ($numberFormatter instanceof \NumberFormatter)) {
             $numberFormatter = $this->getDefaultNumberFormatter($money->getCurrency()->getCode(), $locale);
         }
 
@@ -44,7 +45,7 @@ class MoneyFormatter
         $symbol = $this->formatCurrency($money);
         $amount = $this->formatAmount($money, $decPoint, $thousandsSep);
 
-        return $amount.' '.$symbol;
+        return $amount . ' ' . $symbol;
     }
 
     /**

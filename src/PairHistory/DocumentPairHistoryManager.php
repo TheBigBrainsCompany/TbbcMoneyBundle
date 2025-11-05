@@ -16,13 +16,12 @@ use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
  */
 class DocumentPairHistoryManager implements PairHistoryManagerInterface
 {
-    public function __construct(protected DocumentManager $dm, protected string $referenceCurrencyCode)
-    {
+    public function __construct(
+        protected DocumentManager $dm,
+        protected string $referenceCurrencyCode
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRatioAtDate(string $currencyCode, DateTimeInterface $savedAt): ?float
     {
         if ($currencyCode == $this->referenceCurrencyCode) {
@@ -40,7 +39,7 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
         /** @var DocumentRatioHistory $ratioHistory */
         $ratioHistory = $query->getSingleResult();
 
-        if (!($ratioHistory instanceof DocumentRatioHistory)) {
+        if (! ($ratioHistory instanceof DocumentRatioHistory)) {
             return null;
         }
 
@@ -51,9 +50,6 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
         return $ratioHistory->getRatio();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRatioHistory(string $currencyCode, ?DateTimeInterface $startDate = null, ?DateTimeInterface $endDate = null): array
     {
         $qb = $this->dm->createQueryBuilder();

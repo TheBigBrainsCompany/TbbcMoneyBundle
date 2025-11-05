@@ -16,13 +16,12 @@ use Twig\TwigFilter;
  */
 class MoneyExtension extends AbstractExtension
 {
-    public function __construct(protected MoneyFormatter $moneyFormatter, protected PairManagerInterface $pairManager)
-    {
+    public function __construct(
+        protected MoneyFormatter $moneyFormatter,
+        protected PairManagerInterface $pairManager
+    ) {
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getFilters(): array
     {
         return [

@@ -14,18 +14,15 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 /**
- * Class ExchangerAdapterRatioProvider
  * This depends on "florianv/exchanger" package being installed.
  */
 final class ExchangerAdapterRatioProvider implements RatioProviderInterface
 {
-    public function __construct(private ExchangeRateProvider $exchangeRateProvider)
-    {
+    public function __construct(
+        private ExchangeRateProvider $exchangeRateProvider
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float
     {
         $exchangeQueryBuilder = new ExchangeRateQueryBuilder(

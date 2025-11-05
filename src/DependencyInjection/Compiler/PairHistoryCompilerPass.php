@@ -27,7 +27,7 @@ class PairHistoryCompilerPass implements CompilerPassInterface
         }
 
         //Determine if DoctrineBundle or DoctrineMongoDBBundle is defined
-        if (!(isset($bundles['DoctrineBundle']) || isset($bundles['DoctrineMongoDBBundle']))) {
+        if (! (isset($bundles['DoctrineBundle']) || isset($bundles['DoctrineMongoDBBundle']))) {
             throw new \RuntimeException('TbbcMoneyBundle - DoctrineBundle or DoctrineMongoDBBundle is needed to use the pair history function');
         }
 
@@ -47,7 +47,7 @@ class PairHistoryCompilerPass implements CompilerPassInterface
             $container->setDefinition('tbbc_money.pair_history_manager', $pairHistoryDefinition);
 
             //Add doctrine schema mappings
-            $modelDir = (string) realpath(__DIR__.'/../../Resources/config/doctrine/ratios');
+            $modelDir = (string) realpath(__DIR__ . '/../../Resources/config/doctrine/ratios');
             $path = DoctrineOrmMappingsPass::createXmlMappingDriver([
                 $modelDir => 'Tbbc\MoneyBundle\Entity',
             ]);
@@ -70,7 +70,7 @@ class PairHistoryCompilerPass implements CompilerPassInterface
             $container->setDefinition('tbbc_money.pair_history_manager', $pairHistoryDefinition);
 
             //Add document schema mappings
-            $modelDir = (string) realpath(__DIR__.'/../../Resources/config/document/ratios');
+            $modelDir = (string) realpath(__DIR__ . '/../../Resources/config/document/ratios');
             $path = DoctrineMongoDBMappingsPass::createXmlMappingDriver([
                 $modelDir => 'Tbbc\MoneyBundle\Document',
             ], [

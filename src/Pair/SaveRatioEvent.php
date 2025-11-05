@@ -12,8 +12,12 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class SaveRatioEvent extends Event
 {
-    public function __construct(protected string $referenceCurrencyCode, protected string $currencyCode, protected float $ratio, protected DateTimeInterface $savedAt)
-    {
+    public function __construct(
+        protected string $referenceCurrencyCode,
+        protected string $currencyCode,
+        protected float $ratio,
+        protected DateTimeInterface $savedAt
+    ) {
     }
 
     public function getCurrencyCode(): string

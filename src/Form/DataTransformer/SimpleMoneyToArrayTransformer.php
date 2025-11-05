@@ -13,21 +13,20 @@ class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
 {
     protected string $currency = '';
 
-    public function __construct(protected int $decimals)
-    {
+    public function __construct(
+        protected int $decimals
+    ) {
         parent::__construct($decimals);
     }
 
     /**
-     * {@inheritdoc}
-     * 
      * @psalm-param Money|null $value
-     * 
+     *
      * @psalm-return array{tbbc_amount: string}|null
      */
     public function transform(mixed $value): ?array
     {
-        if (!$tab = parent::transform($value)) {
+        if (! $tab = parent::transform($value)) {
             return null;
         }
 
@@ -37,8 +36,6 @@ class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
     }
 
     /**
-     * {@inheritdoc}
-     * 
      * @psalm-param array|null $value
      */
     public function reverseTransform(mixed $value): ?Money

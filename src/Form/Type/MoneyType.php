@@ -15,13 +15,12 @@ use Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer;
  */
 class MoneyType extends AbstractType
 {
-    public function __construct(protected int $decimals)
-    {
+    public function __construct(
+        protected int $decimals
+    ) {
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @psalm-suppress MixedArgument
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -61,9 +60,6 @@ class MoneyType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'tbbc_money';

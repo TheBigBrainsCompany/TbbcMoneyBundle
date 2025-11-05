@@ -6,7 +6,6 @@ namespace Tbbc\MoneyBundle\Tests\Form\DataTransformer;
 
 use Money\Currency;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer;
 
@@ -17,7 +16,9 @@ class CurrencyToArrayTransformerTest extends TestCase
         $value = new Currency('EUR');
         $transformer = new CurrencyToArrayTransformer();
         self::assertSame(
-            ['tbbc_name' => 'EUR'],
+            [
+                'tbbc_name' => 'EUR',
+            ],
             $transformer->transform($value)
         );
     }
@@ -37,7 +38,9 @@ class CurrencyToArrayTransformerTest extends TestCase
 
     public function testReverseValueToCurrency(): void
     {
-        $value = ['tbbc_name' => 'EUR'];
+        $value = [
+            'tbbc_name' => 'EUR',
+        ];
         $expected = new Currency('EUR');
         $transformer = new CurrencyToArrayTransformer();
         self::assertSame(
@@ -55,7 +58,9 @@ class CurrencyToArrayTransformerTest extends TestCase
 
     public function testReverseToNullIfFormElementNotSet(): void
     {
-        $value = ['tbbc_name' => null];
+        $value = [
+            'tbbc_name' => null,
+        ];
         $transformer = new CurrencyToArrayTransformer();
         self::assertNull($transformer->reverseTransform($value));
     }
@@ -71,7 +76,9 @@ class CurrencyToArrayTransformerTest extends TestCase
     public function testReverseThrowExceptionIfCurrencyCodeNotValid(): void
     {
         $this->expectException(UnexpectedTypeException::class);
-        $value = ['tbbc_name' => 123];
+        $value = [
+            'tbbc_name' => 123,
+        ];
         $transformer = new CurrencyToArrayTransformer();
         $transformer->reverseTransform($value);
     }

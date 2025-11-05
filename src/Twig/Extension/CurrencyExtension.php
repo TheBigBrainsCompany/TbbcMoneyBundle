@@ -18,13 +18,11 @@ use Twig\TwigFilter;
  */
 class CurrencyExtension extends AbstractExtension
 {
-    public function __construct(protected MoneyFormatter $moneyFormatter)
-    {
+    public function __construct(
+        protected MoneyFormatter $moneyFormatter
+    ) {
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getFilters(): array
     {
         return [

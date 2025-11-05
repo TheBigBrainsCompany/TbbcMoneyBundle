@@ -16,6 +16,7 @@ class DoctrineStorageTest extends KernelTestCase
     use DatabaseTrait;
 
     private ObjectManager $entityManager;
+
     private DoctrineStorage $doctrineStorage;
 
     public function setUp(): void
@@ -24,7 +25,7 @@ class DoctrineStorageTest extends KernelTestCase
         self::$kernelOptions = [
             'environment' => 'testDoctrine',
             'configs' => [
-                __DIR__.'/../../config/doctrine.yaml'
+                __DIR__ . '/../../config/doctrine.yaml',
             ],
         ];
         self::bootKernel(self::$kernelOptions);

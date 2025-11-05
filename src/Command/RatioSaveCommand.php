@@ -13,8 +13,9 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 class RatioSaveCommand extends Command
 {
-    public function __construct(private readonly PairManagerInterface $pairManager)
-    {
+    public function __construct(
+        private readonly PairManagerInterface $pairManager
+    ) {
         parent::__construct();
     }
 
@@ -47,7 +48,7 @@ class RatioSaveCommand extends Command
 
             return Command::SUCCESS;
         } catch (MoneyException $e) {
-            $output->writeln('ERROR : ratio no saved du to error : '.$e->getMessage());
+            $output->writeln('ERROR : ratio no saved du to error : ' . $e->getMessage());
 
             return Command::FAILURE;
         }
