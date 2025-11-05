@@ -18,7 +18,7 @@ use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 return RectorConfig::configure()
     ->withPaths([
         __DIR__ . '/src',
-        __DIR__ . '/Tests',
+        __DIR__ . '/tests',
     ])
     ->withPhpSets(php81: true)
     ->withImportNames(importShortClasses: false)
