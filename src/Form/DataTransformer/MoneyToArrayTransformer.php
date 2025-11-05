@@ -26,9 +26,7 @@ class MoneyToArrayTransformer implements DataTransformerInterface
     }
 
     /**
-     * @psalm-param Money|null $value
-     *
-     * @psalm-return array{tbbc_amount: string, tbbc_currency: Currency}|array{tbbc_amount: string}|null
+     * @return array{tbbc_amount: string, tbbc_currency?: Currency}|null
      */
     public function transform(mixed $value): ?array
     {
@@ -48,16 +46,12 @@ class MoneyToArrayTransformer implements DataTransformerInterface
         ];
     }
 
-    /**
-     * @psalm-param array|null $value
-     */
     public function reverseTransform(mixed $value): ?Money
     {
         if (null === $value) {
             return null;
         }
 
-        /** @psalm-suppress DocblockTypeContradiction */
         if (!is_array($value)) {
             throw new UnexpectedTypeException($value, 'array');
         }

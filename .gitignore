@@ -1,10 +1,9 @@
-composer.lock
 var
 vendor/*
-Tests/app/cache/*
-Tests/app/logs/*
-Tests/coverage/*
-Tests/app/coverage/*
+tests/app/cache/*
+tests/app/logs/*
+tests/coverage/*
+tests/app/coverage/*
 /*.cache
 
 .idea

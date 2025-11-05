@@ -6,6 +6,8 @@ Versions from 6.0
 **Internal Developer things**
 - Added docker compose with images for all supported PHP versions for easier development
 - Add PHP ECS for style fix/check and Rector for automatic upgrades
+- Replaced Psalm with PHPStan
+- Rector and ECS automatically runs in CI
 
 ### 2024-06-19 : updates for 6.0.0 version
 

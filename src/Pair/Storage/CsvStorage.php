@@ -18,7 +18,7 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
 class CsvStorage implements StorageInterface
 {
     /**
-     * @psalm-var array<string, null|float>
+     * @var array<string, null|float>
      */
     protected array $ratioList = [];
 
@@ -97,7 +97,7 @@ class CsvStorage implements StorageInterface
     /**
      * @throws MoneyException
      *
-     * @psalm-param array<string, null|float> $ratioList
+     * @param array<string, null|float> $ratioList
      */
     public function saveRatioList(array $ratioList): void
     {

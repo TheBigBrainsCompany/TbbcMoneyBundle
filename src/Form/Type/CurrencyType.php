@@ -27,9 +27,6 @@ class CurrencyType extends AbstractType
     ) {
     }
 
-    /**
-     * @psalm-suppress MixedAssignment, MixedArgument, MixedArgumentTypeCoercion, MixedArrayOffset
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $choiceList = [];

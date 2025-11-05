@@ -16,7 +16,7 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
 class DoctrineStorage implements StorageInterface
 {
     /**
-     * @psalm-var array<string, null|float>
+     * @var array<string, null|float>
      */
     protected array $ratioList = [];
 
