@@ -26,7 +26,7 @@ return RectorConfig::configure()
     // https://getrector.com/documentation/set-lists
     ->withPreparedSets(
         deadCode: true,
-        //codeQuality: true,
+        codeQuality: true,
         //codingStyle: true,
         typeDeclarations: true,
         privatization: true,

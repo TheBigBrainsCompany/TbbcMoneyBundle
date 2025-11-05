@@ -22,7 +22,7 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
 
     public function getRatioAtDate(string $currencyCode, DateTimeInterface $savedAt): ?float
     {
-        if ($currencyCode == $this->referenceCurrencyCode) {
+        if ($currencyCode === $this->referenceCurrencyCode) {
             return 1.0;
         }
 

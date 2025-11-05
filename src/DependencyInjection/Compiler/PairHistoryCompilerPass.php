@@ -29,7 +29,7 @@ class PairHistoryCompilerPass implements CompilerPassInterface
         }
 
         //Determine if DoctrineBundle or DoctrineMongoDBBundle is defined
-        if (!(isset($bundles['DoctrineBundle']) || isset($bundles['DoctrineMongoDBBundle']))) {
+        if (!isset($bundles['DoctrineBundle']) && !isset($bundles['DoctrineMongoDBBundle'])) {
             throw new \RuntimeException('TbbcMoneyBundle - DoctrineBundle or DoctrineMongoDBBundle is needed to use the pair history function');
         }
 
