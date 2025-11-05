@@ -17,7 +17,7 @@ use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Twig\TemplateWrapper;
 
-class MoneyExtensionTest extends TestCase
+final class MoneyExtensionTest extends TestCase
 {
     private MoneyExtension $extension;
 
@@ -53,7 +53,7 @@ class MoneyExtensionTest extends TestCase
 
     public function testName(): void
     {
-        self::assertSame('tbbc_money_extension', $this->extension->getName());
+        $this->assertSame('tbbc_money_extension', $this->extension->getName());
     }
 
     #[DataProvider('getMoneyTests')]
@@ -62,18 +62,16 @@ class MoneyExtensionTest extends TestCase
         $this->assertSame($expected, $this->getTemplate($template)->render($this->variables));
     }
 
-    public static function getMoneyTests(): array
+    public static function getMoneyTests(): \Iterator
     {
-        return [
-            ['{{ price|money_localized_format }}', "1\u{202f}234\u{202f}567,89\u{a0}€"],
-            ['{{ price|money_localized_format("en_US") }}', '€1,234,567.89'],
-            ['{{ price|money_format }}', '1 234 567,89 €'],
-            ['{{ price|money_format(".", ",") }}', '1,234,567.89 €'],
-            ['{{ price|money_format_amount }}', '1 234 567,89'],
-            ['{{ price|money_format_amount(".", ",") }}', '1,234,567.89'],
-            ['{{ price|money_format_currency }}', '€'],
-            ['{{ price|money_as_float }}', '1234567.89'],
-        ];
+        yield ['{{ price|money_localized_format }}', "1\u{202f}234\u{202f}567,89\u{a0}€"];
+        yield ['{{ price|money_localized_format("en_US") }}', '€1,234,567.89'];
+        yield ['{{ price|money_format }}', '1 234 567,89 €'];
+        yield ['{{ price|money_format(".", ",") }}', '1,234,567.89 €'];
+        yield ['{{ price|money_format_amount }}', '1 234 567,89'];
+        yield ['{{ price|money_format_amount(".", ",") }}', '1,234,567.89'];
+        yield ['{{ price|money_format_currency }}', '€'];
+        yield ['{{ price|money_as_float }}', '1234567.89'];
     }
 
     protected function getTemplate($template): TemplateWrapper

@@ -13,7 +13,7 @@ use Tbbc\MoneyBundle\Pair\RatioProvider\StaticRatioProvider;
 use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 use Tbbc\MoneyBundle\Tests\MoneyAssert;
 
-class PairManagerTest extends KernelTestCase
+final class PairManagerTest extends KernelTestCase
 {
     use MoneyAssert;
 
@@ -121,14 +121,14 @@ class PairManagerTest extends KernelTestCase
         $this->manager->saveRatioListFromRatioProvider();
 
         //Check saved rates
-        $this->assertSame(1.08, $this->manager->getRelativeRatio('EUR', 'USD'));
-        $this->assertSame(1.54, $this->manager->getRelativeRatio('EUR', 'CAD'));
+        $this->assertEqualsWithDelta(1.08, $this->manager->getRelativeRatio('EUR', 'USD'), PHP_FLOAT_EPSILON);
+        $this->assertEqualsWithDelta(1.54, $this->manager->getRelativeRatio('EUR', 'CAD'), PHP_FLOAT_EPSILON);
 
         //Change provider rates and make sure stored rates are not touched
         $provider->setRatio('EUR', 'USD', 2.2);
         $provider->setRatio('EUR', 'CAD', 1.83);
-        $this->assertSame(1.08, $this->manager->getRelativeRatio('EUR', 'USD'));
-        $this->assertSame(1.54, $this->manager->getRelativeRatio('EUR', 'CAD'));
+        $this->assertEqualsWithDelta(1.08, $this->manager->getRelativeRatio('EUR', 'USD'), PHP_FLOAT_EPSILON);
+        $this->assertEqualsWithDelta(1.54, $this->manager->getRelativeRatio('EUR', 'CAD'), PHP_FLOAT_EPSILON);
     }
 
     public function testNoRatioProvider(): void

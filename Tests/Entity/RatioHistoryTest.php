@@ -8,7 +8,7 @@ use DateTime;
 use PHPUnit\Framework\TestCase;
 use Tbbc\MoneyBundle\Entity\RatioHistory;
 
-class RatioHistoryTest extends TestCase
+final class RatioHistoryTest extends TestCase
 {
     public function testClassExists(): void
     {
@@ -19,30 +19,30 @@ class RatioHistoryTest extends TestCase
     {
         $ratioHistory = new RatioHistory();
 
-        self::assertNull($ratioHistory->getId());
+        $this->assertNull($ratioHistory->getId());
         $ratioHistory->setId(1);
-        self::assertSame(1, $ratioHistory->getId());
+        $this->assertSame(1, $ratioHistory->getId());
 
         $ratioHistory->setCurrencyCode('USD');
-        self::assertSame('USD', $ratioHistory->getCurrencyCode());
+        $this->assertSame('USD', $ratioHistory->getCurrencyCode());
 
         $ratioHistory->setRatio(1.6);
-        self::assertSame(1.6, $ratioHistory->getRatio());
+        $this->assertEqualsWithDelta(1.6, $ratioHistory->getRatio(), PHP_FLOAT_EPSILON);
 
         $ratioHistory->setReferenceCurrencyCode('code');
-        self::assertSame('code', $ratioHistory->getReferenceCurrencyCode());
+        $this->assertSame('code', $ratioHistory->getReferenceCurrencyCode());
 
         $ratioHistory->setSavedAt(new DateTime('2012-01-01'));
-        self::assertSame('2012-01-01', $ratioHistory->getSavedAt()->format('Y-m-d'));
+        $this->assertSame('2012-01-01', $ratioHistory->getSavedAt()->format('Y-m-d'));
 
-        self::assertTrue(method_exists($ratioHistory, 'getId'));
-        self::assertTrue(method_exists($ratioHistory, 'getCurrencyCode'));
-        self::assertTrue(method_exists($ratioHistory, 'setCurrencyCode'));
-        self::assertTrue(method_exists($ratioHistory, 'getRatio'));
-        self::assertTrue(method_exists($ratioHistory, 'setRatio'));
-        self::assertTrue(method_exists($ratioHistory, 'setReferenceCurrencyCode'));
-        self::assertTrue(method_exists($ratioHistory, 'getReferenceCurrencyCode'));
-        self::assertTrue(method_exists($ratioHistory, 'setSavedAt'));
-        self::assertTrue(method_exists($ratioHistory, 'getSavedAt'));
+        $this->assertTrue(method_exists($ratioHistory, 'getId'));
+        $this->assertTrue(method_exists($ratioHistory, 'getCurrencyCode'));
+        $this->assertTrue(method_exists($ratioHistory, 'setCurrencyCode'));
+        $this->assertTrue(method_exists($ratioHistory, 'getRatio'));
+        $this->assertTrue(method_exists($ratioHistory, 'setRatio'));
+        $this->assertTrue(method_exists($ratioHistory, 'setReferenceCurrencyCode'));
+        $this->assertTrue(method_exists($ratioHistory, 'getReferenceCurrencyCode'));
+        $this->assertTrue(method_exists($ratioHistory, 'setSavedAt'));
+        $this->assertTrue(method_exists($ratioHistory, 'getSavedAt'));
     }
 }

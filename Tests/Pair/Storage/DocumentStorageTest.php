@@ -11,7 +11,7 @@ use Tbbc\MoneyBundle\Document\DocumentStorageRatio;
 use Tbbc\MoneyBundle\Pair\Storage\DocumentStorage;
 use Tbbc\MoneyBundle\Tests\DocumentDatabaseTrait;
 
-class DocumentStorageTest extends KernelTestCase
+final class DocumentStorageTest extends KernelTestCase
 {
     use DocumentDatabaseTrait;
 
@@ -57,7 +57,7 @@ class DocumentStorageTest extends KernelTestCase
 
         $this->assertCount(1, $ratioList);
         $this->assertArrayHasKey('USD', $ratioList);
-        $this->assertSame(1.0, $ratioList['USD']);
+        $this->assertEqualsWithDelta(1.0, $ratioList['USD'], PHP_FLOAT_EPSILON);
     }
 
     public function testLoadForceOption(): void
@@ -76,7 +76,7 @@ class DocumentStorageTest extends KernelTestCase
         $this->assertCount(1, $this->documentStorage->loadRatioList());
         $this->assertCount(2, $this->documentStorage->loadRatioList(true));
         $ratioList = $this->documentStorage->loadRatioList();
-        $this->assertSame(1.6, $ratioList['EUR']);
+        $this->assertEqualsWithDelta(1.6, $ratioList['EUR'], PHP_FLOAT_EPSILON);
     }
 
     public function testSave(): void

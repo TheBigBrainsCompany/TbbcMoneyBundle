@@ -10,7 +10,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Tbbc\MoneyBundle\Command\RatioListCommand;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
-class RatioListCommandTest extends KernelTestCase
+final class RatioListCommandTest extends KernelTestCase
 {
     public function testCanWriteRatioList(): void
     {
@@ -26,9 +26,9 @@ class RatioListCommandTest extends KernelTestCase
         $command = new RatioListCommand($pairManager);
         $tester = new CommandTester($command);
         $tester->execute([]);
-        self::assertSame(Command::SUCCESS, $tester->getStatusCode());
+        $this->assertSame(Command::SUCCESS, $tester->getStatusCode());
         $output = $tester->getDisplay();
-        self::assertStringContainsString('USD;1.2', $output);
+        $this->assertStringContainsString('USD;1.2', $output);
     }
 
     public function testGetRatioListAsTable(): void
@@ -48,9 +48,9 @@ class RatioListCommandTest extends KernelTestCase
         $tester->execute([
             '--format' => 'table',
         ]);
-        self::assertSame(Command::SUCCESS, $tester->getStatusCode());
-        self::assertStringContainsString('EUR      | 1.1', $tester->getDisplay());
-        self::assertStringContainsString('USD      | 1.2', $tester->getDisplay());
+        $this->assertSame(Command::SUCCESS, $tester->getStatusCode());
+        $this->assertStringContainsString('EUR      | 1.1', $tester->getDisplay());
+        $this->assertStringContainsString('USD      | 1.2', $tester->getDisplay());
     }
 
     public function testGetRatioListAsJson(): void
@@ -70,9 +70,9 @@ class RatioListCommandTest extends KernelTestCase
         $tester->execute([
             '--format' => 'json',
         ]);
-        self::assertSame(Command::SUCCESS, $tester->getStatusCode());
-        self::assertJson($tester->getDisplay());
+        $this->assertSame(Command::SUCCESS, $tester->getStatusCode());
+        $this->assertJson($tester->getDisplay());
         $output = json_decode($tester->getDisplay(), true);
-        self::assertSame($data, $output);
+        $this->assertSame($data, $output);
     }
 }

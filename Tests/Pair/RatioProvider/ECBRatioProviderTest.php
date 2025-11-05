@@ -10,7 +10,7 @@ use Symfony\Component\HttpClient\Response\MockResponse;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider;
 
-class ECBRatioProviderTest extends TestCase
+final class ECBRatioProviderTest extends TestCase
 {
     private MockHttpClient $client;
 
@@ -30,7 +30,7 @@ class ECBRatioProviderTest extends TestCase
         ]);
 
         $ratio = $this->ratio->fetchRatio('EUR', 'USD');
-        self::assertSame(1.1273, $ratio);
+        $this->assertEqualsWithDelta(1.1273, $ratio, PHP_FLOAT_EPSILON);
     }
 
     public function testGetCachedData(): void
@@ -40,10 +40,10 @@ class ECBRatioProviderTest extends TestCase
         ]);
 
         $ratio = $this->ratio->fetchRatio('EUR', 'USD');
-        self::assertSame(1.1273, $ratio);
+        $this->assertEqualsWithDelta(1.1273, $ratio, PHP_FLOAT_EPSILON);
 
         $ratio = $this->ratio->fetchRatio('EUR', 'USD');
-        self::assertSame(1.1273, $ratio);
+        $this->assertEqualsWithDelta(1.1273, $ratio, PHP_FLOAT_EPSILON);
     }
 
     public function testNotCorrectReferenceCode(): void

@@ -30,7 +30,7 @@ class PairHistoryManager implements PairHistoryManagerInterface
 
         $qb = $this->em->createQueryBuilder();
         $qb->select('rh')
-            ->from(\Tbbc\MoneyBundle\Entity\RatioHistory::class, 'rh')
+            ->from(RatioHistory::class, 'rh')
             ->where('rh.currencyCode = :currencyCode')
             ->orderBy('rh.savedAt', 'DESC')
             ->andWhere('rh.savedAt <= :historyDate')
@@ -57,7 +57,7 @@ class PairHistoryManager implements PairHistoryManagerInterface
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('rh')
-            ->from(\Tbbc\MoneyBundle\Entity\RatioHistory::class, 'rh')
+            ->from(RatioHistory::class, 'rh')
             ->where('rh.currencyCode = :currencyCode')
             ->andWhere('rh.referenceCurrencyCode = :referenceCurrencyCode')
             ->orderBy('rh.savedAt', 'ASC')

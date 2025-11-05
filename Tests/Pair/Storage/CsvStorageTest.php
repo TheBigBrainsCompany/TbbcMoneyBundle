@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 
-class CsvStorageTest extends KernelTestCase
+final class CsvStorageTest extends KernelTestCase
 {
     protected CsvStorage $storage;
 
