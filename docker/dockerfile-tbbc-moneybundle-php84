@@ -1,0 +1,10 @@
+FROM php:8.4
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+RUN apt-get update && apt-get install -y git curl nano zip libicu-dev
+RUN docker-php-ext-install intl bcmath
+RUN pecl install mongodb
+RUN docker-php-ext-enable mongodb
+WORKDIR /docker
+
+CMD ["bash"]

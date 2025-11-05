@@ -1,0 +1,40 @@
+services:
+  tbbc-moneybundle-php81:
+    container_name: tbbc-moneybundle-php81
+    build:
+      context: .
+      dockerfile: ./docker/dockerfile-tbbc-moneybundle-php81
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/docker:rw,delegated
+
+  tbbc-moneybundle-php82:
+    container_name: tbbc-moneybundle-php82
+    build:
+      context: .
+      dockerfile: ./docker/dockerfile-tbbc-moneybundle-php82
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/docker:rw,delegated
+
+  tbbc-moneybundle-php83:
+    container_name: tbbc-moneybundle-php83
+    build:
+      context: .
+      dockerfile: ./docker/dockerfile-tbbc-moneybundle-php83
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/docker:rw,delegated
+
+  tbbc-moneybundle-php84:
+    container_name: tbbc-moneybundle-php84
+    build:
+      context: .
+      dockerfile: ./docker/dockerfile-tbbc-moneybundle-php84
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/docker:rw,delegated
