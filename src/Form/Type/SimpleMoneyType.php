@@ -32,9 +32,6 @@ class SimpleMoneyType extends MoneyType
         $this->decimals = $decimals;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var array<string, mixed> $amountOptions */
@@ -64,9 +61,6 @@ class SimpleMoneyType extends MoneyType
         $resolver->setAllowedTypes('amount_options', 'array');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'tbbc_simple_money';

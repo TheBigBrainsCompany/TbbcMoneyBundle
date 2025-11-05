@@ -26,7 +26,9 @@ class PairManager implements PairManagerInterface, Exchange
 
     public function __construct(
         protected StorageInterface $storage,
-        /** @var string[] */
+        /**
+         * @var string[]
+         */
         protected array $currencyCodeList,
         protected string $referenceCurrencyCode,
         protected EventDispatcherInterface $dispatcher
@@ -34,9 +36,6 @@ class PairManager implements PairManagerInterface, Exchange
         $this->currencies = new ISOCurrencies();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function convert(Money $amount, string $currencyCode): Money
     {
         if ('' === $currencyCode) {
@@ -48,9 +47,6 @@ class PairManager implements PairManagerInterface, Exchange
         return $converter->convert($amount, new Currency($currencyCode));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function quote(Currency $baseCurrency, Currency $counterCurrency): CurrencyPair
     {
         $ratio = $this->getRelativeRatio($baseCurrency->getCode(), $counterCurrency->getCode());
@@ -58,9 +54,6 @@ class PairManager implements PairManagerInterface, Exchange
         return new CurrencyPair($baseCurrency, $counterCurrency, (string) $ratio);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function saveRatio(string $currencyCode, float $ratio): void
     {
         if ('' === $currencyCode) {
@@ -89,9 +82,6 @@ class PairManager implements PairManagerInterface, Exchange
         $this->dispatcher->dispatch($event, TbbcMoneyEvents::AFTER_RATIO_SAVE);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRelativeRatio(string $referenceCurrencyCode, string $currencyCode): float
     {
         if ('' === $referenceCurrencyCode) {
@@ -110,11 +100,11 @@ class PairManager implements PairManagerInterface, Exchange
 
         $ratioList = $this->storage->loadRatioList();
         if (!array_key_exists($currency->getCode(), $ratioList)) {
-            throw new MoneyException('unknown ratio for currency '.$currencyCode);
+            throw new MoneyException('unknown ratio for currency ' . $currencyCode);
         }
 
         if (!array_key_exists($referenceCurrency->getCode(), $ratioList)) {
-            throw new MoneyException('unknown ratio for currency '.$referenceCurrencyCode);
+            throw new MoneyException('unknown ratio for currency ' . $referenceCurrencyCode);
         }
 
         /** @var float $source */
@@ -125,41 +115,26 @@ class PairManager implements PairManagerInterface, Exchange
         return $source / $reference;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrencyCodeList(): array
     {
         return $this->currencyCodeList;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getReferenceCurrencyCode(): string
     {
         return $this->referenceCurrencyCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRatioList(): array
     {
         return $this->storage->loadRatioList();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setRatioProvider(RatioProviderInterface $ratioProvider): void
     {
         $this->ratioProvider = $ratioProvider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function saveRatioListFromRatioProvider(): void
     {
         if (null === $this->ratioProvider) {

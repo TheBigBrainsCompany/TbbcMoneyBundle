@@ -19,10 +19,8 @@ class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
     }
 
     /**
-     * {@inheritdoc}
-     * 
      * @psalm-param Money|null $value
-     * 
+     *
      * @psalm-return array{tbbc_amount: string}|null
      */
     public function transform(mixed $value): ?array
@@ -37,8 +35,6 @@ class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
     }
 
     /**
-     * {@inheritdoc}
-     * 
      * @psalm-param array|null $value
      */
     public function reverseTransform(mixed $value): ?Money

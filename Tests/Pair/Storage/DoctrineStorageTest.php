@@ -24,7 +24,7 @@ class DoctrineStorageTest extends KernelTestCase
         self::$kernelOptions = [
             'environment' => 'testDoctrine',
             'configs' => [
-                __DIR__.'/../../config/doctrine.yaml'
+                __DIR__ . '/../../config/doctrine.yaml',
             ],
         ];
         self::bootKernel(self::$kernelOptions);

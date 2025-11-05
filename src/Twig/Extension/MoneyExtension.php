@@ -20,9 +20,6 @@ class MoneyExtension extends AbstractExtension
     {
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getFilters(): array
     {
         return [
