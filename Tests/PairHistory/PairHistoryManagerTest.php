@@ -135,7 +135,7 @@ class PairHistoryManagerTest extends KernelTestCase
         $this->assertSame(1.25, $ratio);
         try {
             $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
-            $this->fail('should throw an exception du to reference currency code');
+            $this->fail('should throw an exception due to reference currency code');
         } catch (MoneyException) {
             $this->assertTrue(true);
         }
