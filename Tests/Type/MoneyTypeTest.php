@@ -15,6 +15,7 @@ use Tbbc\MoneyBundle\Type\MoneyType;
 class MoneyTypeTest extends TestCase
 {
     private MoneyType $type;
+
     private AbstractPlatform|MockObject $platform;
 
     protected function setUp(): void

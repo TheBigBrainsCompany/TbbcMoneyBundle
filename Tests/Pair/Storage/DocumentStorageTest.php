@@ -16,6 +16,7 @@ class DocumentStorageTest extends KernelTestCase
     use DocumentDatabaseTrait;
 
     private DocumentManager $documentManager;
+
     private DocumentStorage $documentStorage;
 
     public function setUp(): void

@@ -12,6 +12,7 @@ use Tbbc\MoneyBundle\Form\DataTransformer\SimpleMoneyToArrayTransformer;
 class SimpleMoneyToArrayTransformerTest extends TestCase
 {
     private Money $money;
+
     private SimpleMoneyToArrayTransformer $transformer;
 
     protected function setUp(): void

@@ -11,6 +11,7 @@ use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 class CsvStorageTest extends KernelTestCase
 {
     protected CsvStorage $storage;
+
     protected string $fileName;
 
     public function setUp(): void

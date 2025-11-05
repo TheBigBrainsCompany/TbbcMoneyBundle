@@ -11,7 +11,7 @@ class DoctrineStorageRatioTest extends TestCase
 {
     public function testClassExists(): void
     {
-        $this->assertTrue(class_exists(\Tbbc\MoneyBundle\Entity\DoctrineStorageRatio::class));
+        $this->assertTrue(class_exists(DoctrineStorageRatio::class));
     }
 
     public function testConstructor(): void

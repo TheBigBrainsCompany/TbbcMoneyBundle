@@ -17,6 +17,7 @@ use Twig\TemplateWrapper;
 class CurrencyExtensionTest extends TestCase
 {
     private CurrencyExtension $extension;
+
     protected array $variables;
 
     public function setUp(): void

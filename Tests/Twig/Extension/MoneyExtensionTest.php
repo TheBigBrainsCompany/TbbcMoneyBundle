@@ -22,6 +22,7 @@ class MoneyExtensionTest extends TestCase
     private MoneyExtension $extension;
 
     protected array $variables;
+
     private MockObject|PairManager $pairManager;
 
     public function setUp(): void

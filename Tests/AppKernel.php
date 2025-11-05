@@ -16,8 +16,11 @@ class AppKernel extends Kernel
 {
     use MicroKernelTrait;
 
-    public function __construct(string $environment, bool $debug, protected array $configs = [])
-    {
+    public function __construct(
+        string $environment,
+        bool $debug,
+        protected array $configs = []
+    ) {
         parent::__construct($environment, $debug);
     }
 

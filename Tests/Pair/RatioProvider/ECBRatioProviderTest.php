@@ -13,6 +13,7 @@ use Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider;
 class ECBRatioProviderTest extends TestCase
 {
     private MockHttpClient $client;
+
     private ECBRatioProvider $ratio;
 
     protected function setUp(): void

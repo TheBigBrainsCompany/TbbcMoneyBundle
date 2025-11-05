@@ -16,6 +16,7 @@ class DoctrineStorageTest extends KernelTestCase
     use DatabaseTrait;
 
     private ObjectManager $entityManager;
+
     private DoctrineStorage $doctrineStorage;
 
     public function setUp(): void

@@ -11,7 +11,7 @@ class DocumentStorageRatioTest extends TestCase
 {
     public function testClassExists(): void
     {
-        $this->assertTrue(class_exists(\Tbbc\MoneyBundle\Document\DocumentStorageRatio::class));
+        $this->assertTrue(class_exists(DocumentStorageRatio::class));
     }
 
     public function testConstructor(): void

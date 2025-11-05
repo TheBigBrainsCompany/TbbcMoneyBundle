@@ -108,7 +108,7 @@ class MoneyFormatterTest extends TestCase
     public function testGetCurrency(): void
     {
         $value = $this->formatter->getCurrency($this->inputMoney);
-        $this->assertInstanceOf(\Money\Currency::class, $value);
+        $this->assertInstanceOf(Currency::class, $value);
         $currency = new Currency('EUR');
         $this->assertSame($currency->getCode(), $value->getCode());
     }
