@@ -1,7 +1,7 @@
 Versions from 6.0
 -----------------
 
-### TBD
+### 2025-11-05 : updates for 6.1.0 version
 
 **Internal Developer things**
 - Added docker compose with images for all supported PHP versions for easier development
