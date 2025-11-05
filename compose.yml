@@ -38,3 +38,13 @@ services:
     stdin_open: true
     volumes:
       - .:/docker:rw,delegated
+
+  tbbc-moneybundle-php85:
+    container_name: tbbc-moneybundle-php85
+    build:
+      context: .
+      dockerfile: ./docker/dockerfile-tbbc-moneybundle-php85
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/docker:rw,delegated
