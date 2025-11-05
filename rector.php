@@ -49,5 +49,4 @@ return RectorConfig::configure()
         // this is conflicting with our phpstan rules - either they should change or this needs to be skipped
         TernaryToElvisRector::class,
     ])
-    */
 ;
