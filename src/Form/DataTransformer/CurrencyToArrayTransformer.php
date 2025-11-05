@@ -18,14 +18,12 @@ use TypeError;
  */
 class CurrencyToArrayTransformer implements DataTransformerInterface
 {
-    /**
-     * @psalm-param Currency|null $value
-     */
     public function transform(mixed $value): ?array
     {
         if (null === $value) {
             return null;
         }
+
         if (!$value instanceof Currency) {
             throw new UnexpectedTypeException($value, 'Currency');
         }
@@ -35,16 +33,12 @@ class CurrencyToArrayTransformer implements DataTransformerInterface
         ];
     }
 
-    /**
-     * @psalm-param array|null $value
-     */
     public function reverseTransform(mixed $value): ?Currency
     {
         if (null === $value) {
             return null;
         }
 
-        /** @psalm-suppress DocblockTypeContradiction */
         if (!is_array($value)) {
             throw new UnexpectedTypeException($value, 'array');
         }

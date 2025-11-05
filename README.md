@@ -131,7 +131,12 @@ composer cs-fix
 composer rector-check
 composer rector-fix
 composer phpunit
-composer psalm
+composer phpstan
+```
+
+To generate a new baseline for phpstan:
+```bash
+composer phpstan-generate-baseline
 ```
 
 Usage

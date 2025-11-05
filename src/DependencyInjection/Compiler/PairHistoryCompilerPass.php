@@ -10,6 +10,8 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+use Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager;
+use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
 
 /**
  * Class PairHistoryCompilerPass.
@@ -27,13 +29,13 @@ class PairHistoryCompilerPass implements CompilerPassInterface
         }
 
         //Determine if DoctrineBundle or DoctrineMongoDBBundle is defined
-        if (!(isset($bundles['DoctrineBundle']) || isset($bundles['DoctrineMongoDBBundle']))) {
+        if (!isset($bundles['DoctrineBundle']) && !isset($bundles['DoctrineMongoDBBundle'])) {
             throw new \RuntimeException('TbbcMoneyBundle - DoctrineBundle or DoctrineMongoDBBundle is needed to use the pair history function');
         }
 
         //Use DoctrineBundle
         if ('doctrine' === $storage) {
-            $pairHistoryDefinition = new Definition(\Tbbc\MoneyBundle\PairHistory\PairHistoryManager::class, [
+            $pairHistoryDefinition = new Definition(PairHistoryManager::class, [
                 new Reference('doctrine.orm.entity_manager'),
                 $container->getParameter('tbbc_money.reference_currency'),
             ]);
@@ -56,7 +58,7 @@ class PairHistoryCompilerPass implements CompilerPassInterface
 
         //Use DoctrineMongoDBBundle
         if ('document' === $storage) {
-            $pairHistoryDefinition = new Definition(\Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager::class, [
+            $pairHistoryDefinition = new Definition(DocumentPairHistoryManager::class, [
                 new Reference('doctrine_mongodb.odm.document_manager'),
                 $container->getParameter('tbbc_money.reference_currency'),
             ]);

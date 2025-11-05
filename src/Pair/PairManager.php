@@ -22,6 +22,7 @@ use Tbbc\MoneyBundle\TbbcMoneyEvents;
 class PairManager implements PairManagerInterface, Exchange
 {
     protected ?RatioProviderInterface $ratioProvider = null;
+
     protected Currencies $currencies;
 
     public function __construct(

@@ -18,7 +18,7 @@ use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
  */
 final class ExchangerAdapterRatioProvider implements RatioProviderInterface
 {
-    public function __construct(private ExchangeRateProvider $exchangeRateProvider)
+    public function __construct(private readonly ExchangeRateProvider $exchangeRateProvider)
     {
     }
 
@@ -31,8 +31,8 @@ final class ExchangerAdapterRatioProvider implements RatioProviderInterface
 
         try {
             $exchangeRate = $this->exchangeRateProvider->getExchangeRate($exchangeQuery);
-        } catch (Exception $e) {
-            throw new MoneyException($e->getMessage());
+        } catch (Exception $exception) {
+            throw new MoneyException($exception->getMessage());
         }
 
         return $exchangeRate->getValue();

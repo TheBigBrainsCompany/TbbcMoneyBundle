@@ -16,7 +16,7 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
 class DocumentStorage implements StorageInterface
 {
     /**
-     * @psalm-var array<string, null|float>
+     * @var array<string, null|float>
      */
     protected array $ratioList = [];
 
@@ -26,14 +26,14 @@ class DocumentStorage implements StorageInterface
 
     public function loadRatioList(bool $force = false): array
     {
-        if ((false === $force) && (count($this->ratioList) > 0)) {
+        if ((false === $force) && ($this->ratioList !== [])) {
             return $this->ratioList;
         }
 
         $repository = $this->documentManager->getRepository(DocumentStorageRatio::class);
         $documentStorageRatios = $repository->findAll();
 
-        if (0 === count($documentStorageRatios)) {
+        if ([] === $documentStorageRatios) {
             $this->ratioList = [
                 $this->referenceCurrencyCode => 1.0,
             ];

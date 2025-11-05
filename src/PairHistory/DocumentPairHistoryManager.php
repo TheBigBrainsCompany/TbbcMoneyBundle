@@ -22,12 +22,12 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
 
     public function getRatioAtDate(string $currencyCode, DateTimeInterface $savedAt): ?float
     {
-        if ($currencyCode == $this->referenceCurrencyCode) {
+        if ($currencyCode === $this->referenceCurrencyCode) {
             return 1.0;
         }
 
         $qb = $this->dm->createQueryBuilder();
-        $qb->find(\Tbbc\MoneyBundle\Document\DocumentRatioHistory::class)
+        $qb->find(DocumentRatioHistory::class)
             ->field('currencyCode')->equals($currencyCode)
             ->field('savedAt')->lte($savedAt)
             ->sort('savedAt', 'DESC')
@@ -51,7 +51,7 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
     public function getRatioHistory(string $currencyCode, ?DateTimeInterface $startDate = null, ?DateTimeInterface $endDate = null): array
     {
         $qb = $this->dm->createQueryBuilder();
-        $qb->find(\Tbbc\MoneyBundle\Document\DocumentRatioHistory::class)
+        $qb->find(DocumentRatioHistory::class)
             ->field('currencyCode')->equals($currencyCode)
             ->field('referenceCurrencyCode')->equals($this->referenceCurrencyCode)
             ->sort('savedAt', 'ASC')
@@ -59,9 +59,11 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
         if ($startDate instanceof DateTime) {
             $qb->field('savedAt')->gte($startDate);
         }
+
         if ($endDate instanceof DateTime) {
             $qb->field('savedAt')->lte($endDate);
         }
+
         $query = $qb->getQuery();
         /** @var DocumentRatioHistory[] $resultList */
         $resultList = $query->execute();
@@ -84,6 +86,7 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
         $ratioHistory->setCurrencyCode($event->getCurrencyCode());
         $ratioHistory->setRatio($event->getRatio());
         $ratioHistory->setSavedAt($event->getSavedAt());
+
         $this->dm->persist($ratioHistory);
         $this->dm->flush();
     }

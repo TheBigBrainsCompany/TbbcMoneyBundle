@@ -19,9 +19,6 @@ class MoneyType extends AbstractType
     {
     }
 
-    /**
-     * @psalm-suppress MixedArgument
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

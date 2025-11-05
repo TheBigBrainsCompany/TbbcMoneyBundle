@@ -24,13 +24,13 @@ class PairHistoryManager implements PairHistoryManagerInterface
 
     public function getRatioAtDate(string $currencyCode, DateTimeInterface $savedAt): ?float
     {
-        if ($currencyCode == $this->referenceCurrencyCode) {
+        if ($currencyCode === $this->referenceCurrencyCode) {
             return 1.0;
         }
 
         $qb = $this->em->createQueryBuilder();
         $qb->select('rh')
-            ->from(\Tbbc\MoneyBundle\Entity\RatioHistory::class, 'rh')
+            ->from(RatioHistory::class, 'rh')
             ->where('rh.currencyCode = :currencyCode')
             ->orderBy('rh.savedAt', 'DESC')
             ->andWhere('rh.savedAt <= :historyDate')
@@ -57,7 +57,7 @@ class PairHistoryManager implements PairHistoryManagerInterface
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('rh')
-            ->from(\Tbbc\MoneyBundle\Entity\RatioHistory::class, 'rh')
+            ->from(RatioHistory::class, 'rh')
             ->where('rh.currencyCode = :currencyCode')
             ->andWhere('rh.referenceCurrencyCode = :referenceCurrencyCode')
             ->orderBy('rh.savedAt', 'ASC')
@@ -68,10 +68,12 @@ class PairHistoryManager implements PairHistoryManagerInterface
             $qb->andWhere('rh.savedAt >= :startDate')
                 ->setParameter('startDate', $startDate, Types::DATETIME_MUTABLE);
         }
+
         if ($endDate instanceof DateTime) {
             $qb->andWhere('rh.savedAt <= :endDate')
                 ->setParameter('endDate', $endDate, Types::DATETIME_MUTABLE);
         }
+
         $query = $qb->getQuery();
         /** @var RatioHistory[] $resultList */
         $resultList = $query->getResult();
@@ -94,6 +96,7 @@ class PairHistoryManager implements PairHistoryManagerInterface
         $ratioHistory->setCurrencyCode($event->getCurrencyCode());
         $ratioHistory->setRatio($event->getRatio());
         $ratioHistory->setSavedAt($event->getSavedAt());
+
         $this->em->persist($ratioHistory);
         $this->em->flush();
     }

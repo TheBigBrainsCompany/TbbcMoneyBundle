@@ -18,11 +18,10 @@ use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 return RectorConfig::configure()
     ->withPaths([
         __DIR__ . '/src',
-        __DIR__ . '/Tests',
+        __DIR__ . '/tests',
     ])
     ->withPhpSets(php81: true)
     ->withImportNames(importShortClasses: false)
-    /* FIXME! One by one
     ->withAttributesSets()
     // https://getrector.com/documentation/set-lists
     ->withPreparedSets(
@@ -32,9 +31,11 @@ return RectorConfig::configure()
         typeDeclarations: true,
         privatization: true,
         instanceOf: true,
-        strictBooleans: true,
         rectorPreset: true,
         phpunitCodeQuality: true,
+        doctrineCodeQuality: true,
+        symfonyCodeQuality: true,
+        symfonyConfigs: true,
     )
     ->withComposerBased(
         phpunit: true,
@@ -46,6 +47,4 @@ return RectorConfig::configure()
         FlipTypeControlToUseExclusiveTypeRector::class,
         // this is conflicting with our phpstan rules - either they should change or this needs to be skipped
         TernaryToElvisRector::class,
-    ])
-    */
-;
+    ]);

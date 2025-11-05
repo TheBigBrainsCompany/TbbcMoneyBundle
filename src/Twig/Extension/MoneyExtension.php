@@ -23,13 +23,13 @@ class MoneyExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('money_localized_format', [$this->moneyFormatter, 'localizedFormatMoney']),
-            new TwigFilter('money_format', [$this->moneyFormatter, 'formatMoney']),
-            new TwigFilter('money_format_amount', [$this->moneyFormatter, 'formatAmount']),
-            new TwigFilter('money_format_currency', [$this->moneyFormatter, 'formatCurrency']),
-            new TwigFilter('money_as_float', [$this->moneyFormatter, 'asFloat']),
-            new TwigFilter('money_get_currency', [$this->moneyFormatter, 'getCurrency']),
-            new TwigFilter('money_convert', [$this, 'convert']),
+            new TwigFilter('money_localized_format', $this->moneyFormatter->localizedFormatMoney(...)),
+            new TwigFilter('money_format', $this->moneyFormatter->formatMoney(...)),
+            new TwigFilter('money_format_amount', $this->moneyFormatter->formatAmount(...)),
+            new TwigFilter('money_format_currency', $this->moneyFormatter->formatCurrency(...)),
+            new TwigFilter('money_as_float', $this->moneyFormatter->asFloat(...)),
+            new TwigFilter('money_get_currency', $this->moneyFormatter->getCurrency(...)),
+            new TwigFilter('money_convert', $this->convert(...)),
         ];
     }
 

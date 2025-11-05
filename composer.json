@@ -47,22 +47,26 @@
         "florianv/exchanger": "^2.8.1",
         "php-http/message": "^1.0",
         "php-http/guzzle7-adapter": "^1.0",
-        "vimeo/psalm": "^5.20|^6.0",
         "symfony/phpunit-bridge": "^7.0",
         "phpunit/phpunit": "^10.5.46|^11.5.21|^12.1.6",
         "symfony/yaml": "^5.4|^6.0|^7.0",
-        "http-interop/http-factory-guzzle": "^1.2"
+        "http-interop/http-factory-guzzle": "^1.2",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "spaze/phpstan-disallowed-calls": "^4.0"
     },
     "autoload-dev": {
         "psr-4": {
-            "Tbbc\\MoneyBundle\\Tests\\": "Tests"
+            "Tbbc\\MoneyBundle\\Tests\\": "tests"
         }
     },
     "scripts": {
         "cs-check": "vendor/bin/ecs check --ansi",
         "cs-fix": "vendor/bin/ecs check --fix --ansi",
+        "phpstan": "vendor/bin/phpstan analyse --memory-limit=-1",
+        "phpstan-generate-baseline": "vendor/bin/phpstan analyse --memory-limit=-1 --generate-baseline",
         "phpunit": "vendor/bin/phpunit --coverage-text --coverage-html=.build",
-        "psalm": "vendor/bin/psalm",
         "rector-check": "vendor/bin/rector --dry-run",
         "rector-fix": "vendor/bin/rector"
     },
