@@ -25,7 +25,7 @@ final class MoneyExtensionTest extends TestCase
 
     private MockObject $pairManager;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         Locale::setDefault('fr_FR');
         $this->pairManager = $this->createMock(PairManager::class);

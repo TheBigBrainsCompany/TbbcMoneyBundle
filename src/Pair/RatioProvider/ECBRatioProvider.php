@@ -22,6 +22,7 @@ class ECBRatioProvider implements RatioProviderInterface
      * Fetch cache time in seconds (10 minutes).
      */
     public const FETCH_CACHE_TIME = 600;
+
     private const URL = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
 
     /**
@@ -108,11 +109,9 @@ class ECBRatioProvider implements RatioProviderInterface
         $pairs = [];
 
         foreach ($xmlObject->Cube->Cube->children() as $rateObject) {
-            // @codeCoverageIgnoreStart
             if (null === $rateObject) {
                 continue;
             }
-            // @codeCoverageIgnoreEnd
 
             $attributes = (array) $rateObject->attributes();
             $pairs[$attributes['@attributes']['currency']] = $attributes['@attributes']['rate'];

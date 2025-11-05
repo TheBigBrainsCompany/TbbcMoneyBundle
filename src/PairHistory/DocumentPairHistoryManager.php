@@ -59,9 +59,11 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
         if ($startDate instanceof DateTime) {
             $qb->field('savedAt')->gte($startDate);
         }
+
         if ($endDate instanceof DateTime) {
             $qb->field('savedAt')->lte($endDate);
         }
+
         $query = $qb->getQuery();
         /** @var DocumentRatioHistory[] $resultList */
         $resultList = $query->execute();
@@ -84,6 +86,7 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
         $ratioHistory->setCurrencyCode($event->getCurrencyCode());
         $ratioHistory->setRatio($event->getRatio());
         $ratioHistory->setSavedAt($event->getSavedAt());
+
         $this->dm->persist($ratioHistory);
         $this->dm->flush();
     }

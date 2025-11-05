@@ -68,6 +68,7 @@ final class SimpleMoneyTypeTest extends TypeTestCase
         Locale::setDefault('fr_FR');
         $form = $this->factory->create($this->simpleMoneyTypeClass, null, []);
         $form->setData(Money::EUR(120));
+
         $formView = $form->createView();
 
         $this->assertSame('1,20', $formView->children['tbbc_amount']->vars['value']);
@@ -82,6 +83,7 @@ final class SimpleMoneyTypeTest extends TypeTestCase
             ],
         ]);
         $form->setData(Money::EUR(120));
+
         $formView = $form->createView();
 
         $this->assertSame('1,20', $formView->children['tbbc_amount']->vars['value']);

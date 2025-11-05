@@ -28,6 +28,7 @@ trait DocumentDatabaseTrait
     {
         $kernel = static::createKernel(self::$kernelOptions);
         $kernel->boot();
+
         $application = new Application($kernel);
         $application->setAutoExit(false);
 
@@ -42,6 +43,7 @@ trait DocumentDatabaseTrait
     {
         $kernel = static::createKernel(self::$kernelOptions);
         $kernel->boot();
+
         $application = new Application($kernel);
         $application->setAutoExit(false);
 

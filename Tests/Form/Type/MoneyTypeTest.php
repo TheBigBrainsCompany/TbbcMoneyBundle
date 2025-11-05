@@ -95,6 +95,7 @@ final class MoneyTypeTest extends TypeTestCase
             'currency_type' => CurrencyType::class,
         ]);
         $form->setData(Money::EUR(120));
+
         $formView = $form->createView();
 
         $this->assertSame('1,20', $formView->children['tbbc_amount']->vars['value']);
@@ -113,6 +114,7 @@ final class MoneyTypeTest extends TypeTestCase
             ],
         ]);
         $form->setData(Money::EUR(120));
+
         $formView = $form->createView();
 
         $this->assertSame('1,20', $formView->children['tbbc_amount']->vars['value']);

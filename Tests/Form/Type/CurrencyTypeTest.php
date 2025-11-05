@@ -59,6 +59,7 @@ final class CurrencyTypeTest extends TypeTestCase
         ]);
 
         $form->setData(new Currency('USD'));
+
         $formView = $form->createView();
 
         $this->assertSame('USD', $formView->children['tbbc_name']->vars['value']);

@@ -11,7 +11,7 @@ final class MoneyManagerTest extends TestCase
 {
     private MoneyManager $manager;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->manager = new MoneyManager('EUR', 2);
     }

@@ -28,7 +28,7 @@ class CsvStorage implements StorageInterface
 
     public function loadRatioList(bool $force = false): array
     {
-        if ((false === $force) && (count($this->ratioList) > 0)) {
+        if ((false === $force) && ($this->ratioList !== [])) {
             return $this->ratioList;
         }
 
@@ -41,12 +41,12 @@ class CsvStorage implements StorageInterface
 
             return $this->ratioList;
         }
+
         // read ratio file
         if (($handle = fopen($this->ratioFileName, 'r')) === false) {
-            // @codeCoverageIgnoreStart
             throw new MoneyException('ratioFileName ' . $this->ratioFileName . ' is not initialized');
-            // @codeCoverageIgnoreEnd
         }
+
         $row = 1;
         $this->ratioList = [];
 
@@ -55,26 +55,27 @@ class CsvStorage implements StorageInterface
             if (2 !== count($data)) {
                 throw new MoneyException('error in ratioFileName ' . $this->ratioFileName . ' on line ' . $row . ', invalid argument count');
             }
+
             [$currencyCode, $ratio] = $data;
 
             // validate that currency exist in currency code list
             if (null === $currencyCode || '' === $currencyCode) {
                 throw new MoneyException('error in ratioFileName ' . $this->ratioFileName . ' on line ' . $row . ', currency is an empty string or is null');
             }
-            // @codeCoverageIgnoreStart
+
             try {
                 // hack to throw an exception if currency doesn't exist
                 new Currency($currencyCode);
             } catch (UnknownCurrencyException|InvalidArgumentException) {
                 throw new MoneyException('error in ratioFileName ' . $this->ratioFileName . ' on line ' . $row . ', unknown currency ' . $currencyCode);
             }
-            // @codeCoverageIgnoreEnd
 
             // validate value
             $ratio = floatval($ratio);
             if ($ratio === 0.0) {
                 throw new MoneyException('error in ratioFileName ' . $this->ratioFileName . ' on line ' . $row . ', ratio is not a float or is null');
             }
+
             if ($ratio <= 0) {
                 throw new MoneyException('error in ratioFileName ' . $this->ratioFileName . ' on line ' . $row . ', ratio has to be positive');
             }
@@ -87,6 +88,7 @@ class CsvStorage implements StorageInterface
             $this->ratioList[$currencyCode] = $ratio;
             ++$row;
         }
+
         fclose($handle);
 
         return $this->ratioList;
@@ -100,20 +102,18 @@ class CsvStorage implements StorageInterface
     public function saveRatioList(array $ratioList): void
     {
         $dirName = dirname($this->ratioFileName);
-        // @codeCoverageIgnoreStart
         if (!is_dir($dirName)) {
             mkdir($dirName, 0777, true);
         }
-        // @codeCoverageIgnoreEnd
 
         if (($handle = fopen($this->ratioFileName, 'w')) === false) {
-            // @codeCoverageIgnoreStart
-            throw new MoneyException('can\'t open ' . $this->ratioFileName . ' for writing');
-            // @codeCoverageIgnoreEnd
+            throw new MoneyException("can't open " . $this->ratioFileName . ' for writing');
         }
+
         foreach ($ratioList as $currencyCode => $ratio) {
             fputcsv($handle, [$currencyCode, $ratio], ';');
         }
+
         fclose($handle);
         $this->ratioList = $ratioList;
     }

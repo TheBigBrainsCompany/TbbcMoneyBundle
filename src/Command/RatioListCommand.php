@@ -42,7 +42,7 @@ class RatioListCommand extends Command
         $io->writeln('Ratio list');
 
         foreach ($ratioList as $currencyCode => $ratio) {
-            $io->writeln($currencyCode . ';' . $ratio);
+            $io->writeln($currencyCode . ';' . (string) $ratio);
         }
 
         return Command::SUCCESS;

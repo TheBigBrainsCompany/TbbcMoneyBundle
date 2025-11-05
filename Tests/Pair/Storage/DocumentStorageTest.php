@@ -19,7 +19,7 @@ final class DocumentStorageTest extends KernelTestCase
 
     private DocumentStorage $documentStorage;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         self::$kernelOptions = [
@@ -70,6 +70,7 @@ final class DocumentStorageTest extends KernelTestCase
         $storageRatio = new DocumentStorageRatio('USD', 1);
         $storageRatio->setCurrencyCode('EUR');
         $storageRatio->setRatio(1.6);
+
         $this->documentManager->persist(new DocumentStorageRatio('EUR', 1.6));
         $this->documentManager->flush();
 

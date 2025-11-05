@@ -20,7 +20,7 @@ final class CurrencyExtensionTest extends TestCase
 
     private array $variables;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         Locale::setDefault('fr_FR');
         $this->extension = new CurrencyExtension(new MoneyFormatter(2));

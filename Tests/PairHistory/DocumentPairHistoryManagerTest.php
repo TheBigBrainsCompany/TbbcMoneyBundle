@@ -24,7 +24,7 @@ final class DocumentPairHistoryManagerTest extends KernelTestCase
 
     private ?DocumentManager $dm;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         self::$kernelOptions = [
@@ -139,6 +139,7 @@ final class DocumentPairHistoryManagerTest extends KernelTestCase
         } catch (MoneyException) {
             $this->assertTrue(true);
         }
+
         $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-10 12:30:00'));
         $this->assertEqualsWithDelta(1.75, $ratio, PHP_FLOAT_EPSILON);
         $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2011-07-10 12:30:00'));

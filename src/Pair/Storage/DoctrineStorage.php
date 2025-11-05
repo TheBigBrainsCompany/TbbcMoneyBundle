@@ -26,14 +26,14 @@ class DoctrineStorage implements StorageInterface
 
     public function loadRatioList(bool $force = false): array
     {
-        if ((false === $force) && (count($this->ratioList) > 0)) {
+        if ((false === $force) && ($this->ratioList !== [])) {
             return $this->ratioList;
         }
 
         $repository = $this->entityManager->getRepository(DoctrineStorageRatio::class);
         $doctrineStorageRatios = $repository->findAll();
 
-        if (0 === count($doctrineStorageRatios)) {
+        if ([] === $doctrineStorageRatios) {
             $this->ratioList = [
                 $this->referenceCurrencyCode => 1.0,
             ];
