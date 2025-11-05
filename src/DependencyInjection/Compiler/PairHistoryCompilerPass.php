@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\DependencyInjection\Compiler;
 
-use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
-use Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+use Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager;
+use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
 
 /**
  * Class PairHistoryCompilerPass.
