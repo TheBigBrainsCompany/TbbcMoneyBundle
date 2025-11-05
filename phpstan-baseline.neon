@@ -1,0 +1,1903 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\AppKernel::__construct() has parameter $configs with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/AppKernel.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Command/RatioFetchCommandTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertStringContainsString().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Command/RatioFetchCommandTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::never().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Command/RatioFetchCommandTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::once().'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: Tests/Command/RatioFetchCommandTest.php
+
+		-
+			rawMessage: 'Parameter #1 $pairManager of class Tbbc\MoneyBundle\Command\RatioFetchCommand constructor expects Tbbc\MoneyBundle\Pair\PairManagerInterface, PHPUnit\Framework\MockObject\MockObject given.'
+			identifier: argument.type
+			count: 2
+			path: Tests/Command/RatioFetchCommandTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertJson().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Command/RatioListCommandTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 4
+			path: Tests/Command/RatioListCommandTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertStringContainsString().'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: Tests/Command/RatioListCommandTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::once().'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: Tests/Command/RatioListCommandTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 4
+			path: Tests/Command/RatioSaveCommandTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::once().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Command/RatioSaveCommandTest.php
+
+		-
+			rawMessage: 'Parameter #1 $pairManager of class Tbbc\MoneyBundle\Command\RatioSaveCommand constructor expects Tbbc\MoneyBundle\Pair\PairManagerInterface, PHPUnit\Framework\MockObject\MockObject given.'
+			identifier: argument.type
+			count: 2
+			path: Tests/Command/RatioSaveCommandTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentRatioHistory and ''getCurrencyCode'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentRatioHistory and ''getId'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentRatioHistory and ''getRatio'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentRatioHistory and ''getReferenceCurrenc…'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentRatioHistory and ''getSavedAt'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentRatioHistory and ''setCurrencyCode'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentRatioHistory and ''setRatio'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentRatioHistory and ''setReferenceCurrenc…'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentRatioHistory and ''setSavedAt'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 4
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
+			identifier: staticMethod.dynamicCall
+			count: 10
+			path: Tests/Document/DocumentRatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentStorageRatio and ''getCurrencyCode'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentStorageRatioTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentStorageRatio and ''getId'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentStorageRatioTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentStorageRatio and ''getRatio'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentStorageRatioTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentStorageRatio and ''setCurrencyCode'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentStorageRatioTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentStorageRatio and ''setRatio'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Document/DocumentStorageRatioTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Document/DocumentStorageRatioTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Document/DocumentStorageRatioTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Document/DocumentStorageRatioTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
+			identifier: staticMethod.dynamicCall
+			count: 6
+			path: Tests/Document/DocumentStorageRatioTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\DoctrineStorageRatio and ''getCurrencyCode'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/DoctrineStorageRatioTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\DoctrineStorageRatio and ''getId'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/DoctrineStorageRatioTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\DoctrineStorageRatio and ''getRatio'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/DoctrineStorageRatioTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\DoctrineStorageRatio and ''setCurrencyCode'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/DoctrineStorageRatioTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\DoctrineStorageRatio and ''setRatio'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/DoctrineStorageRatioTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Entity/DoctrineStorageRatioTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Entity/DoctrineStorageRatioTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Entity/DoctrineStorageRatioTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
+			identifier: staticMethod.dynamicCall
+			count: 6
+			path: Tests/Entity/DoctrineStorageRatioTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\RatioHistory and ''getCurrencyCode'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\RatioHistory and ''getId'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\RatioHistory and ''getRatio'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\RatioHistory and ''getReferenceCurrenc…'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\RatioHistory and ''getSavedAt'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\RatioHistory and ''setCurrencyCode'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\RatioHistory and ''setRatio'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\RatioHistory and ''setReferenceCurrenc…'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\RatioHistory and ''setSavedAt'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 4
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
+			identifier: staticMethod.dynamicCall
+			count: 10
+			path: Tests/Entity/RatioHistoryTest.php
+
+		-
+			rawMessage: 'Cannot call method getCode() on Money\Currency|null.'
+			identifier: method.nonObject
+			count: 1
+			path: Tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNotInstanceOf().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Parameter #1 $value of method Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer::reverseTransform() expects array|null, string given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Parameter #1 $value of method Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer::transform() expects Money\Currency|null, string given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertInstanceOf().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Form/DataTransformer/MoneyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNotInstanceOf().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Form/DataTransformer/MoneyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Form/DataTransformer/MoneyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: Tests/Form/DataTransformer/MoneyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Parameter #1 $value of method Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer::reverseTransform() expects array|null, string given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Form/DataTransformer/MoneyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Parameter #1 $value of method Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer::transform() expects Money\Money|null, string given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Form/DataTransformer/MoneyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Cannot call method getAmount() on Money\Money|null.'
+			identifier: method.nonObject
+			count: 1
+			path: Tests/Form/DataTransformer/SimpleMoneyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Cannot call method getCurrency() on Money\Money|null.'
+			identifier: method.nonObject
+			count: 1
+			path: Tests/Form/DataTransformer/SimpleMoneyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Form/DataTransformer/SimpleMoneyToArrayTransformerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: Tests/Form/DataTransformer/SimpleMoneyToArrayTransformerTest.php
+
+		-
+			rawMessage: Cannot access offset 'choices' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: Cannot access offset 'form' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: Cannot access offset 'id' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: Cannot access offset 'tbbc_name' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: Cannot access offset 'value' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: Cannot access property $children on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: Cannot access property $vars on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: 'Cannot call method getCode() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 4
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Form\Type\CurrencyTypeTest::getExtensions() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: 'Parameter #2 $haystack of method PHPUnit\Framework\Assert::assertCount() expects Countable|iterable, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: Property Tbbc\MoneyBundle\Tests\Form\Type\CurrencyTypeTest::$currencies type has no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Form/Type/CurrencyTypeTest.php
+
+		-
+			rawMessage: Cannot access offset 'form' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: Cannot access offset 'id' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: Cannot access offset 'tbbc_amount' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: Cannot access offset 'tbbc_currency' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: Cannot access offset 'value' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: Cannot access property $children on mixed.
+			identifier: property.nonObject
+			count: 3
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: Cannot access property $vars on mixed.
+			identifier: property.nonObject
+			count: 2
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Cannot call method getAmount() on mixed.'
+			identifier: method.nonObject
+			count: 3
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Cannot call method getCode() on mixed.'
+			identifier: method.nonObject
+			count: 3
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Cannot call method getCurrency() on mixed.'
+			identifier: method.nonObject
+			count: 3
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 11
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Form\Type\MoneyTypeTest::getExtensions() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Parameter #2 $haystack of method PHPUnit\Framework\Assert::assertCount() expects Countable|iterable, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Form/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with $this(Tbbc\MoneyBundle\Tests\Form\Type\SimpleMoneyTypeTest) and ''getName'' will always evaluate to false.'
+			identifier: function.impossibleType
+			count: 1
+			path: Tests/Form/Type/SimpleMoneyTypeTest.php
+
+		-
+			rawMessage: 'Call to function method_exists() with $this(Tbbc\MoneyBundle\Tests\Form\Type\SimpleMoneyTypeTest) and ''name'' will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: Tests/Form/Type/SimpleMoneyTypeTest.php
+
+		-
+			rawMessage: 'Call to internal method PHPUnit\Framework\TestCase::name() from outside its root namespace PHPUnit.'
+			identifier: method.internal
+			count: 1
+			path: Tests/Form/Type/SimpleMoneyTypeTest.php
+
+		-
+			rawMessage: Cannot access offset 'value' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: Tests/Form/Type/SimpleMoneyTypeTest.php
+
+		-
+			rawMessage: 'Cannot call method getAmount() on mixed.'
+			identifier: method.nonObject
+			count: 5
+			path: Tests/Form/Type/SimpleMoneyTypeTest.php
+
+		-
+			rawMessage: 'Cannot call method getCode() on mixed.'
+			identifier: method.nonObject
+			count: 5
+			path: Tests/Form/Type/SimpleMoneyTypeTest.php
+
+		-
+			rawMessage: 'Cannot call method getCurrency() on mixed.'
+			identifier: method.nonObject
+			count: 5
+			path: Tests/Form/Type/SimpleMoneyTypeTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 12
+			path: Tests/Form/Type/SimpleMoneyTypeTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Form\Type\SimpleMoneyTypeTest::getExtensions() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Form/Type/SimpleMoneyTypeTest.php
+
+		-
+			rawMessage: 'Call to method PHPUnit\Framework\Assert::assertInstanceOf() with ''Money\\Currency'' and Money\Currency will always evaluate to true.'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: Tests/Formatter/MoneyFormatterTest.php
+
+		-
+			rawMessage: 'Call to method PHPUnit\Framework\Assert::assertIsFloat() with float will always evaluate to true.'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: Tests/Formatter/MoneyFormatterTest.php
+
+		-
+			rawMessage: 'Call to method setAttribute() of internal class Symfony\Polyfill\Intl\Icu\NumberFormatter from outside its root namespace Symfony.'
+			identifier: method.internalClass
+			count: 1
+			path: Tests/Formatter/MoneyFormatterTest.php
+
+		-
+			rawMessage: 'Call to method setTextAttribute() of internal class Symfony\Polyfill\Intl\Icu\NumberFormatter from outside its root namespace Symfony.'
+			identifier: method.internalClass
+			count: 1
+			path: Tests/Formatter/MoneyFormatterTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertInstanceOf().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Formatter/MoneyFormatterTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertIsFloat().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Formatter/MoneyFormatterTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 16
+			path: Tests/Formatter/MoneyFormatterTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 6
+			path: Tests/Money/MoneyManagerTest.php
+
+		-
+			rawMessage: Binary operation "." between array|bool|float|int|string|UnitEnum|null and '/pair.csv' results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: Tests/Pair/PairManagerTest.php
+
+		-
+			rawMessage: 'Call to method PHPUnit\Framework\Assert::assertTrue() with true will always evaluate to true.'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: Tests/Pair/PairManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
+			identifier: staticMethod.dynamicCall
+			count: 4
+			path: Tests/Pair/PairManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 4
+			path: Tests/Pair/PairManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Pair/PairManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::fail().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Pair/PairManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method Tbbc\MoneyBundle\Tests\Pair\PairManagerTest::assertMoneySame().'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: Tests/Pair/PairManagerTest.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\Pair\PairManagerTest::$fileName (string) does not accept mixed.'
+			identifier: assign.propertyType
+			count: 1
+			path: Tests/Pair/PairManagerTest.php
+
+		-
+			rawMessage: 'Call to method PHPUnit\Framework\Assert::assertIsFloat() with float and ''The fetched ratio…'' will always evaluate to true.'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: Cannot access offset 'currency' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: Cannot access offset 'ratio_max' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: Cannot access offset 'ratio_min' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: Cannot access offset 'reference' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertGreaterThan().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertIsFloat().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertLessThan().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Pair\RatioProvider\AbstractRatioProvider::getRatiosToTest() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: 'Parameter #1 $referenceCurrencyCode of method Tbbc\MoneyBundle\Pair\RatioProviderInterface::fetchRatio() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: 'Parameter #2 $currencyCode of method Tbbc\MoneyBundle\Pair\RatioProviderInterface::fetchRatio() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Pair/RatioProvider/AbstractRatioProvider.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: Tests/Pair/RatioProvider/ECBRatioProviderTest.php
+
+		-
+			rawMessage: 'Parameter #1 $body of class Symfony\Component\HttpClient\Response\MockResponse constructor expects iterable<string|Throwable>|string, string|false given.'
+			identifier: argument.type
+			count: 4
+			path: Tests/Pair/RatioProvider/ECBRatioProviderTest.php
+
+		-
+			rawMessage: Binary operation "." between mixed and '/' results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: Tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
+
+		-
+			rawMessage: Binary operation "." between non-falsy-string and mixed results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: Tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
+
+		-
+			rawMessage: Cannot access offset 'currency' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
+
+		-
+			rawMessage: Cannot access offset 'ratio_max' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
+
+		-
+			rawMessage: Cannot access offset 'ratio_min' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
+
+		-
+			rawMessage: Cannot access offset 'reference' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
+
+		-
+			rawMessage: Implicit array creation is not allowed - variable $ratiosSetup does not exist.
+			identifier: variable.implicitArray
+			count: 1
+			path: Tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
+
+		-
+			rawMessage: 'Parameter #1 $latestRates of class Exchanger\Service\PhpArray constructor expects array<Exchanger\ExchangeRate|string>, array<string, float> given.'
+			identifier: argument.type
+			count: 2
+			path: Tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
+
+		-
+			rawMessage: 'Parameter #1 $ratioMin of method Tbbc\MoneyBundle\Tests\Pair\RatioProvider\AbstractRatioProvider::randomRatio() expects float, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
+
+		-
+			rawMessage: 'Parameter #2 $ratioMax of method Tbbc\MoneyBundle\Tests\Pair\RatioProvider\AbstractRatioProvider::randomRatio() expects float, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
+
+		-
+			rawMessage: Cannot access offset 'currency' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/StaticRatioProviderTest.php
+
+		-
+			rawMessage: Cannot access offset 'ratio_max' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/StaticRatioProviderTest.php
+
+		-
+			rawMessage: Cannot access offset 'ratio_min' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/StaticRatioProviderTest.php
+
+		-
+			rawMessage: Cannot access offset 'reference' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: Tests/Pair/RatioProvider/StaticRatioProviderTest.php
+
+		-
+			rawMessage: 'Parameter #1 $ratioMin of method Tbbc\MoneyBundle\Tests\Pair\RatioProvider\AbstractRatioProvider::randomRatio() expects float, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Pair/RatioProvider/StaticRatioProviderTest.php
+
+		-
+			rawMessage: 'Parameter #1 $referenceCurrencyCode of method Tbbc\MoneyBundle\Pair\RatioProvider\StaticRatioProvider::setRatio() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Pair/RatioProvider/StaticRatioProviderTest.php
+
+		-
+			rawMessage: 'Parameter #2 $currencyCode of method Tbbc\MoneyBundle\Pair\RatioProvider\StaticRatioProvider::setRatio() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Pair/RatioProvider/StaticRatioProviderTest.php
+
+		-
+			rawMessage: 'Parameter #2 $ratioMax of method Tbbc\MoneyBundle\Tests\Pair\RatioProvider\AbstractRatioProvider::randomRatio() expects float, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Pair/RatioProvider/StaticRatioProviderTest.php
+
+		-
+			rawMessage: Binary operation "." between array|bool|float|int|string|UnitEnum|null and '/pair.csv' results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: Tests/Pair/Storage/CsvStorageTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 5
+			path: Tests/Pair/Storage/CsvStorageTest.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\Pair\Storage\CsvStorageTest::$fileName (string) does not accept mixed.'
+			identifier: assign.propertyType
+			count: 1
+			path: Tests/Pair/Storage/CsvStorageTest.php
+
+		-
+			rawMessage: 'Call to an undefined method object::getManager().'
+			identifier: method.notFound
+			count: 1
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertArrayHasKey().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
+			identifier: staticMethod.dynamicCall
+			count: 9
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Pair\Storage\DoctrineStorageTest::createKernel() has parameter $options with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Pair\Storage\DoctrineStorageTest::createKernel() should return Symfony\Component\HttpKernel\KernelInterface but returns object.'
+			identifier: return.type
+			count: 1
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: 'Parameter #1 $entityManager of class Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage constructor expects Doctrine\ORM\EntityManagerInterface, Doctrine\Persistence\ObjectManager given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\Pair\Storage\DoctrineStorageTest::$entityManager (Doctrine\Persistence\ObjectManager) does not accept mixed.'
+			identifier: assign.propertyType
+			count: 1
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: Property Tbbc\MoneyBundle\Tests\Pair\Storage\DoctrineStorageTest::$kernelOptions type has no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
+			identifier: disallowed.variable
+			count: 2
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
+			identifier: disallowed.variable
+			count: 2
+			path: Tests/Pair/Storage/DoctrineStorageTest.php
+
+		-
+			rawMessage: 'Call to an undefined method object::getManager().'
+			identifier: method.notFound
+			count: 1
+			path: Tests/Pair/Storage/DocumentStorageTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertArrayHasKey().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Pair/Storage/DocumentStorageTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
+			identifier: staticMethod.dynamicCall
+			count: 9
+			path: Tests/Pair/Storage/DocumentStorageTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Pair/Storage/DocumentStorageTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Pair\Storage\DocumentStorageTest::createKernel() has parameter $options with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Pair/Storage/DocumentStorageTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Pair\Storage\DocumentStorageTest::createKernel() should return Symfony\Component\HttpKernel\KernelInterface but returns object.'
+			identifier: return.type
+			count: 1
+			path: Tests/Pair/Storage/DocumentStorageTest.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\Pair\Storage\DocumentStorageTest::$documentManager (Doctrine\ODM\MongoDB\DocumentManager) does not accept mixed.'
+			identifier: assign.propertyType
+			count: 1
+			path: Tests/Pair/Storage/DocumentStorageTest.php
+
+		-
+			rawMessage: Property Tbbc\MoneyBundle\Tests\Pair\Storage\DocumentStorageTest::$kernelOptions type has no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Pair/Storage/DocumentStorageTest.php
+
+		-
+			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
+			identifier: disallowed.variable
+			count: 2
+			path: Tests/Pair/Storage/DocumentStorageTest.php
+
+		-
+			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
+			identifier: disallowed.variable
+			count: 2
+			path: Tests/Pair/Storage/DocumentStorageTest.php
+
+		-
+			rawMessage: 'Call to an undefined method object::getManager().'
+			identifier: method.notFound
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Call to method PHPUnit\Framework\Assert::assertTrue() with true will always evaluate to true.'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: Cannot access offset 'ratio' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: Cannot access offset 'savedAt' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Cannot call method close() on Doctrine\ODM\MongoDB\DocumentManager|null.'
+			identifier: method.nonObject
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Cannot call method format() on mixed.'
+			identifier: method.nonObject
+			count: 3
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Cannot call method getRepository() on Doctrine\ODM\MongoDB\DocumentManager|null.'
+			identifier: method.nonObject
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
+			identifier: staticMethod.dynamicCall
+			count: 5
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
+			identifier: staticMethod.dynamicCall
+			count: 9
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertIsFloat().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::fail().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::createDatabase().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::createKernel() has parameter $options with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::createKernel() should return Symfony\Component\HttpKernel\KernelInterface but returns object.'
+			identifier: return.type
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Parameter #1 $dm of class Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager constructor expects Doctrine\ODM\MongoDB\DocumentManager, Doctrine\ODM\MongoDB\DocumentManager|null given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::$dm (Doctrine\ODM\MongoDB\DocumentManager|null) does not accept mixed.'
+			identifier: assign.propertyType
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::$documentRatioHistoryRepo (Doctrine\ODM\MongoDB\Repository\DocumentRepository) does not accept Doctrine\ODM\MongoDB\Repository\DocumentRepository<Tbbc\MoneyBundle\Document\DocumentRatioHistory>|Doctrine\ODM\MongoDB\Repository\GridFSRepository<Tbbc\MoneyBundle\Document\DocumentRatioHistory>|Doctrine\ODM\MongoDB\Repository\ViewRepository<Tbbc\MoneyBundle\Document\DocumentRatioHistory>.'
+			identifier: assign.propertyType
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::$documentRatioHistoryRepo with generic class Doctrine\ODM\MongoDB\Repository\DocumentRepository does not specify its types: T'
+			identifier: missingType.generics
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: Property Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::$kernelOptions type has no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
+			identifier: disallowed.variable
+			count: 2
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
+			identifier: disallowed.variable
+			count: 2
+			path: Tests/PairHistory/DocumentPairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Call to an undefined method object::getManager().'
+			identifier: method.notFound
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Call to method PHPUnit\Framework\Assert::assertTrue() with true will always evaluate to true.'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: Cannot access offset 'ratio' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: Cannot access offset 'savedAt' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Cannot call method close() on Doctrine\Persistence\ObjectManager|null.'
+			identifier: method.nonObject
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Cannot call method format() on mixed.'
+			identifier: method.nonObject
+			count: 3
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Cannot call method getRepository() on Doctrine\Persistence\ObjectManager|null.'
+			identifier: method.nonObject
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
+			identifier: staticMethod.dynamicCall
+			count: 5
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
+			identifier: staticMethod.dynamicCall
+			count: 9
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertIsFloat().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::fail().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\PairHistory\PairHistoryManagerTest::createKernel() has parameter $options with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Tests\PairHistory\PairHistoryManagerTest::createKernel() should return Symfony\Component\HttpKernel\KernelInterface but returns object.'
+			identifier: return.type
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Parameter #1 $em of class Tbbc\MoneyBundle\PairHistory\PairHistoryManager constructor expects Doctrine\ORM\EntityManagerInterface, Doctrine\Persistence\ObjectManager|null given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\PairHistory\PairHistoryManagerTest::$em (Doctrine\Persistence\ObjectManager|null) does not accept mixed.'
+			identifier: assign.propertyType
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: Property Tbbc\MoneyBundle\Tests\PairHistory\PairHistoryManagerTest::$kernelOptions type has no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\PairHistory\PairHistoryManagerTest::$ratioHistoryRepo with generic interface Doctrine\Persistence\ObjectRepository does not specify its types: T'
+			identifier: missingType.generics
+			count: 1
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
+			identifier: disallowed.variable
+			count: 2
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
+			identifier: disallowed.variable
+			count: 2
+			path: Tests/PairHistory/PairHistoryManagerTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::exactly().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/TbbcMoneyBundleTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 2
+			path: Tests/Twig/Extension/CurrencyExtensionTest.php
+
+		-
+			rawMessage: Property Tbbc\MoneyBundle\Tests\Twig\Extension\CurrencyExtensionTest::$variables type has no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Twig/Extension/CurrencyExtensionTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 3
+			path: Tests/Twig/Extension/MoneyExtensionTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::once().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Twig/Extension/MoneyExtensionTest.php
+
+		-
+			rawMessage: Property Tbbc\MoneyBundle\Tests\Twig\Extension\MoneyExtensionTest::$variables type has no value type specified in iterable type array.
+			identifier: missingType.iterableValue
+			count: 1
+			path: Tests/Twig/Extension/MoneyExtensionTest.php
+
+		-
+			rawMessage: 'Cannot call method getAmount() on Money\Money|null.'
+			identifier: method.nonObject
+			count: 1
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Cannot call method getCurrency() on Money\Money|null.'
+			identifier: method.nonObject
+			count: 1
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNotInstanceOf().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
+			identifier: staticMethod.dynamicCall
+			count: 5
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::once().'
+			identifier: staticMethod.dynamicCall
+			count: 1
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Parameter #1 $platform of method Tbbc\MoneyBundle\Type\MoneyType::requiresSQLCommentHint() expects Doctrine\DBAL\Platforms\AbstractPlatform, PHPUnit\Framework\MockObject\MockObject given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Parameter #2 $platform of method Tbbc\MoneyBundle\Type\MoneyType::convertToDatabaseValue() expects Doctrine\DBAL\Platforms\AbstractPlatform, PHPUnit\Framework\MockObject\MockObject given.'
+			identifier: argument.type
+			count: 3
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Parameter #2 $platform of method Tbbc\MoneyBundle\Type\MoneyType::convertToPHPValue() expects Doctrine\DBAL\Platforms\AbstractPlatform, PHPUnit\Framework\MockObject\MockObject given.'
+			identifier: argument.type
+			count: 3
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: 'Parameter #2 $platform of method Tbbc\MoneyBundle\Type\MoneyType::getSqlDeclaration() expects Doctrine\DBAL\Platforms\AbstractPlatform, PHPUnit\Framework\MockObject\MockObject given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Type/MoneyTypeTest.php
+
+		-
+			rawMessage: Cannot cast mixed to float.
+			identifier: cast.double
+			count: 1
+			path: src/Command/RatioSaveCommand.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: src/Command/RatioSaveCommand.php
+
+		-
+			rawMessage: 'Call to static method createXmlMappingDriver() of internal class Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass from outside its root namespace Doctrine.'
+			identifier: staticMethod.internalClass
+			count: 1
+			path: src/DependencyInjection/Compiler/PairHistoryCompilerPass.php
+
+		-
+			rawMessage: Cannot access offset 'DoctrineBundle' on array|bool|float|int|string|UnitEnum.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/Compiler/PairHistoryCompilerPass.php
+
+		-
+			rawMessage: Cannot access offset 'DoctrineMongoDBBundle' on array|bool|float|int|string|UnitEnum.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/Compiler/PairHistoryCompilerPass.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 1
+			path: src/DependencyInjection/Compiler/RatioProviderCompilerPass.php
+
+		-
+			rawMessage: 'Parameter #1 $id of class Symfony\Component\DependencyInjection\Reference constructor expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: src/DependencyInjection/Compiler/RatioProviderCompilerPass.php
+
+		-
+			rawMessage: 'Call to static method createXmlMappingDriver() of internal class Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass from outside its root namespace Doctrine.'
+			identifier: staticMethod.internalClass
+			count: 1
+			path: src/DependencyInjection/Compiler/StorageCompilerPass.php
+
+		-
+			rawMessage: Cannot access offset 'DoctrineBundle' on array|bool|float|int|string|UnitEnum.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/Compiler/StorageCompilerPass.php
+
+		-
+			rawMessage: Cannot access offset 'DoctrineMongoDBBundle' on array|bool|float|int|string|UnitEnum.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/Compiler/StorageCompilerPass.php
+
+		-
+			rawMessage: 'Cannot call method booleanNode() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method cannotBeEmpty() on mixed.'
+			identifier: method.nonObject
+			count: 3
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method defaultValue() on Symfony\Component\Config\Definition\Builder\NodeParentInterface|null.'
+			identifier: method.nonObject
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method defaultValue() on mixed.'
+			identifier: method.nonObject
+			count: 5
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method end() on mixed.'
+			identifier: method.nonObject
+			count: 8
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method ifNotInArray() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method integerNode() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method min() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method requiresAtLeastOneElement() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method scalarNode() on mixed.'
+			identifier: method.nonObject
+			count: 3
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method thenInvalid() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Cannot call method validate() on mixed.'
+			identifier: method.nonObject
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Parameter #1 $node of method Tbbc\MoneyBundle\DependencyInjection\Configuration::addCurrencySection() expects Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition, Symfony\Component\Config\Definition\Builder\NodeDefinition given.'
+			identifier: argument.type
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\DependencyInjection\TbbcMoneyExtension::remapParameters() has parameter $config with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/DependencyInjection/TbbcMoneyExtension.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\DependencyInjection\TbbcMoneyExtension::remapParameters() has parameter $map with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/DependencyInjection/TbbcMoneyExtension.php
+
+		-
+			rawMessage: 'Parameter #1 $name of method Symfony\Component\DependencyInjection\Container::setParameter() expects string, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: src/DependencyInjection/TbbcMoneyExtension.php
+
+		-
+			rawMessage: 'Parameter #2 $value of method Symfony\Component\DependencyInjection\Container::setParameter() expects array|bool|float|int|string|UnitEnum|null, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: src/DependencyInjection/TbbcMoneyExtension.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Document\DocumentStorageRatio::$id (string|null) is never assigned string so it can be removed from the property type.'
+			identifier: property.unusedType
+			count: 1
+			path: src/Document/DocumentStorageRatio.php
+
+		-
+			rawMessage: 'Property Tbbc\MoneyBundle\Entity\DoctrineStorageRatio::$id (int|null) is never assigned int so it can be removed from the property type.'
+			identifier: property.unusedType
+			count: 1
+			path: src/Entity/DoctrineStorageRatio.php
+
+		-
+			rawMessage: 'Call to function is_array() with array will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Form/DataTransformer/CurrencyToArrayTransformer.php
+
+		-
+			rawMessage: Instanceof between Money\Currency and Money\Currency will always evaluate to true.
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Form/DataTransformer/CurrencyToArrayTransformer.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer::reverseTransform() has parameter $value with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Form/DataTransformer/CurrencyToArrayTransformer.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer::transform() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Form/DataTransformer/CurrencyToArrayTransformer.php
+
+		-
+			rawMessage: 'Call to function is_array() with array will always evaluate to true.'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Form/DataTransformer/MoneyToArrayTransformer.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: src/Form/DataTransformer/MoneyToArrayTransformer.php
+
+		-
+			rawMessage: Instanceof between Money\Money and Money\Money will always evaluate to true.
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Form/DataTransformer/MoneyToArrayTransformer.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer::reverseTransform() has parameter $value with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Form/DataTransformer/MoneyToArrayTransformer.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Form\DataTransformer\SimpleMoneyToArrayTransformer::reverseTransform() has parameter $value with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Form/DataTransformer/SimpleMoneyToArrayTransformer.php
+
+		-
+			rawMessage: 'Only booleans are allowed in a negated boolean, array<string, Money\Currency|string>|null given.'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Form/DataTransformer/SimpleMoneyToArrayTransformer.php
+
+		-
+			rawMessage: 'Argument of an invalid type mixed supplied for foreach, only iterables are supported.'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/Form/Type/CurrencyType.php
+
+		-
+			rawMessage: 'Parameter #2 ...$arrays of function array_merge expects array, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: src/Form/Type/CurrencyType.php
+
+		-
+			rawMessage: 'Parameter #3 $options of method Symfony\Component\Form\FormBuilderInterface::add() expects array<string, mixed>, array<mixed, mixed> given.'
+			identifier: argument.type
+			count: 1
+			path: src/Form/Type/CurrencyType.php
+
+		-
+			rawMessage: Possibly invalid array key type mixed.
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: src/Form/Type/CurrencyType.php
+
+		-
+			rawMessage: 'Parameter #2 $type of method Symfony\Component\Form\FormBuilderInterface::add() expects string|null, mixed given.'
+			identifier: argument.type
+			count: 1
+			path: src/Form/Type/MoneyType.php
+
+		-
+			rawMessage: 'Parameter #3 $options of method Symfony\Component\Form\FormBuilderInterface::add() expects array<string, mixed>, mixed given.'
+			identifier: argument.type
+			count: 2
+			path: src/Form/Type/MoneyType.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Form\Type\SimpleMoneyType::__construct() has parameter $currencyCodeList with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Form/Type/SimpleMoneyType.php
+
+		-
+			rawMessage: 'Call to method formatCurrency() of internal class Symfony\Polyfill\Intl\Icu\NumberFormatter from outside its root namespace Symfony.'
+			identifier: method.internalClass
+			count: 1
+			path: src/Formatter/MoneyFormatter.php
+
+		-
+			rawMessage: 'Call to method getSymbol() of internal class Symfony\Polyfill\Intl\Icu\NumberFormatter from outside its root namespace Symfony.'
+			identifier: method.internalClass
+			count: 1
+			path: src/Formatter/MoneyFormatter.php
+
+		-
+			rawMessage: 'Call to method setAttribute() of internal class Symfony\Polyfill\Intl\Icu\NumberFormatter from outside its root namespace Symfony.'
+			identifier: method.internalClass
+			count: 1
+			path: src/Formatter/MoneyFormatter.php
+
+		-
+			rawMessage: 'Call to method setTextAttribute() of internal class Symfony\Polyfill\Intl\Icu\NumberFormatter from outside its root namespace Symfony.'
+			identifier: method.internalClass
+			count: 1
+			path: src/Formatter/MoneyFormatter.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Formatter\MoneyFormatter::formatCurrencyAsSymbol() should return string but returns string|false.'
+			identifier: return.type
+			count: 1
+			path: src/Formatter/MoneyFormatter.php
+
+		-
+			rawMessage: 'Cannot call method fetchRatio() on Tbbc\MoneyBundle\Pair\RatioProviderInterface|null.'
+			identifier: method.nonObject
+			count: 1
+			path: src/Pair/PairManager.php
+
+		-
+			rawMessage: 'Loose comparison via "!=" is not allowed.'
+			identifier: notEqual.notAllowed
+			count: 1
+			path: src/Pair/PairManager.php
+
+		-
+			rawMessage: Cannot access offset 'currency' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Pair/RatioProvider/ECBRatioProvider.php
+
+		-
+			rawMessage: Cannot access offset 'rate' on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Pair/RatioProvider/ECBRatioProvider.php
+
+		-
+			rawMessage: Cannot cast mixed to float.
+			identifier: cast.double
+			count: 1
+			path: src/Pair/RatioProvider/ECBRatioProvider.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider::parseXML() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Pair/RatioProvider/ECBRatioProvider.php
+
+		-
+			rawMessage: 'Only booleans are allowed in a negated boolean, SimpleXMLElement|false given.'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Pair/RatioProvider/ECBRatioProvider.php
+
+		-
+			rawMessage: Possibly invalid array key type mixed.
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: src/Pair/RatioProvider/ECBRatioProvider.php
+
+		-
+			rawMessage: 'Strict comparison using === between null and SimpleXMLElement will always evaluate to false.'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Pair/RatioProvider/ECBRatioProvider.php
+
+		-
+			rawMessage: 'Call to Money\Currency::__construct() on a separate line has no effect.'
+			identifier: new.resultUnused
+			count: 1
+			path: src/Pair/RatioProvider/ExchangerAdapterRatioProvider.php
+
+		-
+			rawMessage: 'Call to Money\Currency::__construct() on a separate line has no effect.'
+			identifier: new.resultUnused
+			count: 1
+			path: src/Pair/Storage/CsvStorage.php
+
+		-
+			rawMessage: Instanceof between Tbbc\MoneyBundle\Document\DocumentRatioHistory and Tbbc\MoneyBundle\Document\DocumentRatioHistory will always evaluate to true.
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PairHistory/DocumentPairHistoryManager.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager::getRatioHistory() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/PairHistory/DocumentPairHistoryManager.php
+
+		-
+			rawMessage: 'PHPDoc tag @var with type array<Tbbc\MoneyBundle\Document\DocumentRatioHistory> is not subtype of type array<string, mixed>|int|object|null.'
+			identifier: varTag.type
+			count: 1
+			path: src/PairHistory/DocumentPairHistoryManager.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\PairHistory\PairHistoryManager::getRatioHistory() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/PairHistory/PairHistoryManager.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\PairHistory\PairHistoryManagerInterface::getRatioHistory() return type has no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/PairHistory/PairHistoryManagerInterface.php
+
+		-
+			rawMessage: 'Call to an undefined static method Doctrine\DBAL\Types\ConversionException::conversionFailed().'
+			identifier: staticMethod.notFound
+			count: 1
+			path: src/Type/MoneyType.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: src/Type/MoneyType.php
+
+		-
+			rawMessage: 'Construct empty() is not allowed. Use more strict comparison.'
+			identifier: empty.notAllowed
+			count: 1
+			path: src/Type/MoneyType.php
+
+		-
+			rawMessage: Invalid type mixed to throw.
+			identifier: throw.notThrowable
+			count: 1
+			path: src/Type/MoneyType.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Type\MoneyType::getSqlDeclaration() does not match parent method name: Doctrine\DBAL\Types\Type::getSQLDeclaration().'
+			identifier: method.nameCase
+			count: 1
+			path: src/Type/MoneyType.php
+
+		-
+			rawMessage: 'Method Tbbc\MoneyBundle\Type\MoneyType::getSqlDeclaration() has parameter $column with no value type specified in iterable type array.'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Type/MoneyType.php
+
+		-
+			rawMessage: 'Parameter #1 $column of method Doctrine\DBAL\Platforms\AbstractPlatform::getStringTypeDeclarationSQL() expects array<string, mixed>, array given.'
+			identifier: argument.type
+			count: 1
+			path: src/Type/MoneyType.php

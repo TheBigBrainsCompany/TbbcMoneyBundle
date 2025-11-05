@@ -36,6 +36,8 @@ parameters:
             message: 'Use date object methods instead'
 
 includes:
+        #ignore our baseline (generate a new with --generate-baseline)
+        - phpstan-baseline.neon
         # https://github.com/phpstan/phpstan-strict-rules
         - vendor/phpstan/phpstan-strict-rules/rules.neon
         - vendor/phpstan/phpstan/conf/bleedingEdge.neon
