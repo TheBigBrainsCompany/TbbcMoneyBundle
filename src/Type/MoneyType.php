@@ -57,7 +57,7 @@ class MoneyType extends Type
         }
 
         if ($value instanceof Money) {
-            return $value->getCurrency().' '.$value->getAmount();
+            return $value->getCurrency() . ' ' . $value->getAmount();
         }
 
         # BC Layer Doctrine dbal 3/4

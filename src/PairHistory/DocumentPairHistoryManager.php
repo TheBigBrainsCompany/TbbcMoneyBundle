@@ -20,9 +20,6 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRatioAtDate(string $currencyCode, DateTimeInterface $savedAt): ?float
     {
         if ($currencyCode == $this->referenceCurrencyCode) {
@@ -51,9 +48,6 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
         return $ratioHistory->getRatio();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRatioHistory(string $currencyCode, ?DateTimeInterface $startDate = null, ?DateTimeInterface $endDate = null): array
     {
         $qb = $this->dm->createQueryBuilder();

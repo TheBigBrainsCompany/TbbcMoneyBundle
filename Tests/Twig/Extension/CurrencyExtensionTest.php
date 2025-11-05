@@ -23,7 +23,9 @@ class CurrencyExtensionTest extends TestCase
     {
         Locale::setDefault('fr_FR');
         $this->extension = new CurrencyExtension(new MoneyFormatter(2));
-        $this->variables = ['currency' => new Currency('EUR')];
+        $this->variables = [
+            'currency' => new Currency('EUR'),
+        ];
     }
 
     public function testName(): void
@@ -47,8 +49,13 @@ class CurrencyExtensionTest extends TestCase
 
     protected function getTemplate($template): TemplateWrapper
     {
-        $loader = new ArrayLoader(['index' => $template]);
-        $twig = new Environment($loader, ['debug' => true, 'cache' => false]);
+        $loader = new ArrayLoader([
+            'index' => $template,
+        ]);
+        $twig = new Environment($loader, [
+            'debug' => true,
+            'cache' => false,
+        ]);
         $twig->addExtension($this->extension);
 
         /* @noinspection PhpTemplateMissingInspection */

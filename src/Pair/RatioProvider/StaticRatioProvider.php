@@ -25,15 +25,12 @@ class StaticRatioProvider implements RatioProviderInterface
         $this->ratios[$pair] = $ratio;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float
     {
         $pair = $this->getPairCode($referenceCurrencyCode, $currencyCode);
 
         if (!isset($this->ratios[$pair])) {
-            throw new MoneyException('StaticRatioProvider does not have an exchange rate for '.$pair);
+            throw new MoneyException('StaticRatioProvider does not have an exchange rate for ' . $pair);
         }
 
         return $this->ratios[$pair];
@@ -41,6 +38,6 @@ class StaticRatioProvider implements RatioProviderInterface
 
     private function getPairCode(string $referenceCurrencyCode, string $currencyCode): string
     {
-        return $referenceCurrencyCode.'-'.$currencyCode;
+        return $referenceCurrencyCode . '-' . $currencyCode;
     }
 }

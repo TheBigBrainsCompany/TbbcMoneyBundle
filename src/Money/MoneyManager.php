@@ -20,9 +20,6 @@ class MoneyManager implements MoneyManagerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createMoneyFromFloat(float $floatAmount, ?string $currencyCode = null): Money
     {
         if (null === $currencyCode) {
