@@ -89,26 +89,53 @@ jobs:
         run: vendor/bin/phpunit --coverage-text
 
 
-  cs:
+  cs-and-rector:
     runs-on: ubuntu-latest
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: shivammathur/setup-php@v2
         with:
           php-version: 8.3
           coverage: none
+
+      - name: Cache dependencies
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: dependencies-php-8.3-composer-${{ hashFiles('composer.json') }}
+
       - run: |
-          composer install --no-progress
-          composer require friendsofphp/php-cs-fixer "^3.48"
-          vendor/bin/php-cs-fixer
+          composer install --prefer-dist --no-progress
+          composer cs-fix
+          composer rector-fix
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Apply CS/Rector changes
 
   phpstan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: shivammathur/setup-php@v2
         with:
           php-version: 8.3
           coverage: none
-      - run: composer install --no-progress
-      - run: vendor/bin/phpstan analyse --memory-limit=-1
+
+      - name: Cache dependencies
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: dependencies-php-8.3-composer-${{ hashFiles('composer.json') }}
+
+      - run: composer install --prefer-dist --no-progress
+      - run: composer phpstan
