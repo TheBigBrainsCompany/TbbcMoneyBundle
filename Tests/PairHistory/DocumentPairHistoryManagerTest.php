@@ -134,7 +134,7 @@ class DocumentPairHistoryManagerTest extends KernelTestCase
         try {
             $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
             $this->fail('should throw an exception du to reference currency code');
-        } catch (MoneyException $e) {
+        } catch (MoneyException) {
             $this->assertTrue(true);
         }
         $ratio = $this->documentPairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-10 12:30:00'));

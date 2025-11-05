@@ -53,7 +53,7 @@ class PairManagerTest extends KernelTestCase
         try {
             $this->manager->convert($eur, 'USD');
             $this->fail();
-        } catch (MoneyException $e) {
+        } catch (MoneyException) {
             $this->assertTrue(true);
         }
         $this->manager->saveRatio('USD', 1.25);

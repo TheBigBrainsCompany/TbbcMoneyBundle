@@ -12,7 +12,7 @@ class DocumentRatioHistoryTest extends TestCase
 {
     public function testClassExists(): void
     {
-        $this->assertTrue(class_exists(\Tbbc\MoneyBundle\Document\DocumentRatioHistory::class));
+        $this->assertTrue(class_exists(DocumentRatioHistory::class));
     }
 
     public function testProperties(): void

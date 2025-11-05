@@ -30,7 +30,7 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
         }
 
         $qb = $this->dm->createQueryBuilder();
-        $qb->find(\Tbbc\MoneyBundle\Document\DocumentRatioHistory::class)
+        $qb->find(DocumentRatioHistory::class)
             ->field('currencyCode')->equals($currencyCode)
             ->field('savedAt')->lte($savedAt)
             ->sort('savedAt', 'DESC')
@@ -57,7 +57,7 @@ class DocumentPairHistoryManager implements PairHistoryManagerInterface
     public function getRatioHistory(string $currencyCode, ?DateTimeInterface $startDate = null, ?DateTimeInterface $endDate = null): array
     {
         $qb = $this->dm->createQueryBuilder();
-        $qb->find(\Tbbc\MoneyBundle\Document\DocumentRatioHistory::class)
+        $qb->find(DocumentRatioHistory::class)
             ->field('currencyCode')->equals($currencyCode)
             ->field('referenceCurrencyCode')->equals($this->referenceCurrencyCode)
             ->sort('savedAt', 'ASC')
