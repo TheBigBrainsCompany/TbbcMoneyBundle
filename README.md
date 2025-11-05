@@ -104,6 +104,26 @@ doctrine:
             money: Tbbc\MoneyBundle\Type\MoneyType
 ```
 
+## Development
+
+TbbcMoneybundle comes with docker compose to ease development, to build dev docker containers, run:
+```bash
+docker compose up --build -d
+```
+
+And once it is built, enter the php 8.1, 8.2, 8.3 or 8.4 container:
+```bash
+docker exec -it tbbc-moneybundle-php81 bash
+docker exec -it tbbc-moneybundle-php82 bash
+docker exec -it tbbc-moneybundle-php83 bash
+docker exec -it tbbc-moneybundle-php84 bash
+```
+
+All the tooling is added as composer scripts, start by installing deps:
+```bash
+composer install
+```
+
 
 Usage
 -----
