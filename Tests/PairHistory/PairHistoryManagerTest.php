@@ -8,11 +8,11 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Tbbc\MoneyBundle\Entity\RatioHistory;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
 use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
 use Tbbc\MoneyBundle\Tests\DatabaseTrait;
-use Tbbc\MoneyBundle\Entity\RatioHistory;
 
 class PairHistoryManagerTest extends KernelTestCase
 {
@@ -28,7 +28,7 @@ class PairHistoryManagerTest extends KernelTestCase
         self::$kernelOptions = [
             'environment' => 'testDoctrine',
             'configs' => [
-                __DIR__.'/../config/doctrine.yaml'
+                __DIR__ . '/../config/doctrine.yaml',
             ],
         ];
         self::bootKernel(self::$kernelOptions);

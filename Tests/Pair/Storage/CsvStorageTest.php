@@ -16,7 +16,7 @@ class CsvStorageTest extends KernelTestCase
     public function setUp(): void
     {
         self::bootKernel();
-        $this->fileName = self::getContainer()->getParameter('kernel.cache_dir').'/pair.csv';
+        $this->fileName = self::getContainer()->getParameter('kernel.cache_dir') . '/pair.csv';
         if (file_exists($this->fileName)) {
             unlink($this->fileName);
         }
@@ -46,7 +46,10 @@ class CsvStorageTest extends KernelTestCase
         );
 
         $ratioList = $this->storage->loadRatioList();
-        $this->assertSame(['EUR' => 1.0, 'USD' => 1.25], $ratioList);
+        $this->assertSame([
+            'EUR' => 1.0,
+            'USD' => 1.25,
+        ], $ratioList);
 
         $this->storage->saveRatioList($ratioList);
         $this->assertSame(
@@ -59,13 +62,16 @@ class CsvStorageTest extends KernelTestCase
     {
         file_put_contents($this->fileName, "EUR;1\nUSD;1.25\n");
         $ratioList = $this->storage->loadRatioList();
-        $this->assertSame(['EUR' => 1.0, 'USD' => 1.25], $ratioList);
+        $this->assertSame([
+            'EUR' => 1.0,
+            'USD' => 1.25,
+        ], $ratioList);
     }
 
     public function testCsvFileFailure(): void
     {
         $this->expectException(MoneyException::class);
-        $this->expectExceptionMessage('error in ratioFileName '.$this->fileName.' on line 1, invalid argument count');
+        $this->expectExceptionMessage('error in ratioFileName ' . $this->fileName . ' on line 1, invalid argument count');
         file_put_contents($this->fileName, "1\nUSD;1.25\n");
         $this->storage->loadRatioList();
     }
@@ -73,7 +79,7 @@ class CsvStorageTest extends KernelTestCase
     public function testUnknownValue(): void
     {
         $this->expectException(MoneyException::class);
-        $this->expectExceptionMessage('error in ratioFileName '.$this->fileName.' on line 1, ratio is not a float or is null');
+        $this->expectExceptionMessage('error in ratioFileName ' . $this->fileName . ' on line 1, ratio is not a float or is null');
         file_put_contents($this->fileName, "EUR;abc\nUSD;1.25\n");
         $this->storage->loadRatioList();
     }
@@ -81,7 +87,7 @@ class CsvStorageTest extends KernelTestCase
     public function testNegativeNumber(): void
     {
         $this->expectException(MoneyException::class);
-        $this->expectExceptionMessage('error in ratioFileName '.$this->fileName.' on line 1, ratio has to be positive');
+        $this->expectExceptionMessage('error in ratioFileName ' . $this->fileName . ' on line 1, ratio has to be positive');
         file_put_contents($this->fileName, "EUR;-10\nUSD;1.25\n");
         $this->storage->loadRatioList();
     }
@@ -89,7 +95,7 @@ class CsvStorageTest extends KernelTestCase
     public function testDoubleCurrency(): void
     {
         $this->expectException(MoneyException::class);
-        $this->expectExceptionMessage('error in ratioFileName '.$this->fileName.' on line 2, ratio already exists for currency EUR');
+        $this->expectExceptionMessage('error in ratioFileName ' . $this->fileName . ' on line 2, ratio already exists for currency EUR');
         file_put_contents($this->fileName, "EUR;1\nEUR;1.25\n");
         $this->storage->loadRatioList();
     }

@@ -22,9 +22,6 @@ class CurrencyExtension extends AbstractExtension
     {
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getFilters(): array
     {
         return [

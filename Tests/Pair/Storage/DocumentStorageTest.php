@@ -24,7 +24,7 @@ class DocumentStorageTest extends KernelTestCase
         self::$kernelOptions = [
             'environment' => 'testDocument',
             'configs' => [
-                __DIR__.'/../../config/document.yaml'
+                __DIR__ . '/../../config/document.yaml',
             ],
         ];
         self::bootKernel(self::$kernelOptions);

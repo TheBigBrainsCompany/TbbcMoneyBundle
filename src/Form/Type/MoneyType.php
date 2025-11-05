@@ -20,8 +20,6 @@ class MoneyType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @psalm-suppress MixedArgument
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -61,9 +59,6 @@ class MoneyType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix(): string
     {
         return 'tbbc_money';

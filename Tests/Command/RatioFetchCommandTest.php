@@ -29,7 +29,10 @@ class RatioFetchCommandTest extends KernelTestCase
         $this->pairManager
             ->expects($this->once())
             ->method('getRatioList')
-            ->willReturn(['EUR' => 1.1, 'USD' => 1.2]);
+            ->willReturn([
+                'EUR' => 1.1,
+                'USD' => 1.2,
+            ]);
 
         $command = new RatioFetchCommand($this->pairManager);
         $tester = new CommandTester($command);

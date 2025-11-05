@@ -126,7 +126,8 @@ class SimpleMoneyTypeTest extends TypeTestCase
 
         return [
             new PreloadedExtension(
-                [new SimpleMoneyType($decimals, $currencies, $referenceCurrency)], []
+                [new SimpleMoneyType($decimals, $currencies, $referenceCurrency)],
+                []
             ),
         ];
     }
@@ -134,7 +135,9 @@ class SimpleMoneyTypeTest extends TypeTestCase
     public function testOverrideCurrency(): void
     {
         Locale::setDefault('fr_FR');
-        $form = $this->factory->create($this->simpleMoneyTypeClass, null, ['currency' => 'USD']);
+        $form = $this->factory->create($this->simpleMoneyTypeClass, null, [
+            'currency' => 'USD',
+        ]);
         $form->submit([
             'tbbc_amount' => '1 252,5',
         ]);
