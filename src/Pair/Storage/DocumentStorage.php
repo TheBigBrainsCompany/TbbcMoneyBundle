@@ -15,16 +15,15 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
  */
 class DocumentStorage implements StorageInterface
 {
-    /** @psalm-var array<string, null|float> */
+    /**
+     * @psalm-var array<string, null|float>
+     */
     protected array $ratioList = [];
 
     public function __construct(protected DocumentManager $documentManager, protected string $referenceCurrencyCode)
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadRatioList(bool $force = false): array
     {
         if ((false === $force) && (count($this->ratioList) > 0)) {
@@ -35,7 +34,9 @@ class DocumentStorage implements StorageInterface
         $documentStorageRatios = $repository->findAll();
 
         if (0 === count($documentStorageRatios)) {
-            $this->ratioList = [$this->referenceCurrencyCode => 1.0];
+            $this->ratioList = [
+                $this->referenceCurrencyCode => 1.0,
+            ];
             $this->saveRatioList($this->ratioList);
 
             return $this->ratioList;
@@ -55,9 +56,6 @@ class DocumentStorage implements StorageInterface
         return $this->ratioList;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function saveRatioList(array $ratioList): void
     {
         $documentStorageRatios = $this->documentManager->getRepository(DocumentStorageRatio::class)->findAll();

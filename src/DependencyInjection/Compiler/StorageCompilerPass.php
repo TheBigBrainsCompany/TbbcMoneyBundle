@@ -28,7 +28,7 @@ class StorageCompilerPass implements CompilerPassInterface
             }
 
             //Add doctrine schema mappings
-            $modelDir = (string) realpath(__DIR__.'/../../Resources/config/doctrine/ratios');
+            $modelDir = (string) realpath(__DIR__ . '/../../Resources/config/doctrine/ratios');
             $path = DoctrineOrmMappingsPass::createXmlMappingDriver([
                 $modelDir => 'Tbbc\MoneyBundle\Entity',
             ]);
@@ -50,7 +50,7 @@ class StorageCompilerPass implements CompilerPassInterface
             }
 
             //Add document schema mappings
-            $modelDir = (string) realpath(__DIR__.'/../../Resources/config/document/ratios');
+            $modelDir = (string) realpath(__DIR__ . '/../../Resources/config/document/ratios');
             $path = DoctrineMongoDBMappingsPass::createXmlMappingDriver([
                 $modelDir => 'Tbbc\MoneyBundle\Document',
             ], [

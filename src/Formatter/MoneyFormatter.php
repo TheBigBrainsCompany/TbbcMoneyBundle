@@ -44,7 +44,7 @@ class MoneyFormatter
         $symbol = $this->formatCurrency($money);
         $amount = $this->formatAmount($money, $decPoint, $thousandsSep);
 
-        return $amount.' '.$symbol;
+        return $amount . ' ' . $symbol;
     }
 
     /**

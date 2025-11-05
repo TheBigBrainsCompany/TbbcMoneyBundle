@@ -12,7 +12,6 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 /**
- * ECBRatioProvider
  * Fetches currencies ratios from ECB.
  *
  * @author Johan Wilfer <johan@jttech.se>
@@ -39,9 +38,6 @@ class ECBRatioProvider implements RatioProviderInterface
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float
     {
         // we could possibly take the feed and convert twice, to allow the other currencies as base currencies, but for now only allow EUR

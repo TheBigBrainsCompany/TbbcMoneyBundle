@@ -29,11 +29,11 @@ class RatioFetchCommand extends Command
     {
         try {
             $this->pairManager->saveRatioListFromRatioProvider();
-            $output->writeln('ratio fetched from provider'.PHP_EOL.print_r($this->pairManager->getRatioList(), true));
+            $output->writeln('ratio fetched from provider' . PHP_EOL . print_r($this->pairManager->getRatioList(), true));
 
             return Command::SUCCESS;
         } catch (MoneyException $e) {
-            $output->writeln('ERROR during fetch ratio : '.$e->getMessage());
+            $output->writeln('ERROR during fetch ratio : ' . $e->getMessage());
 
             return Command::FAILURE;
         }

@@ -47,7 +47,7 @@ class RatioSaveCommand extends Command
 
             return Command::SUCCESS;
         } catch (MoneyException $e) {
-            $output->writeln('ERROR : ratio no saved du to error : '.$e->getMessage());
+            $output->writeln('ERROR : ratio no saved du to error : ' . $e->getMessage());
 
             return Command::FAILURE;
         }
