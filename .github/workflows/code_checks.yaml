@@ -99,8 +99,8 @@ jobs:
           coverage: none
       - run: |
           composer install --no-progress
-          composer require friendsofphp/php-cs-fixer "^3.48"
-          vendor/bin/php-cs-fixer
+          composer rector-check
+          composer cs-check
 
   phpstan:
     runs-on: ubuntu-latest
