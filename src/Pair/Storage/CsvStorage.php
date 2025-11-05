@@ -73,7 +73,7 @@ class CsvStorage implements StorageInterface
             // validate value
             $ratio = floatval($ratio);
             if ($ratio === 0.0) {
-                throw new MoneyException('error in ratioFileName ' . $this->ratioFileName . ' on line ' . $row . ', ratio is zero');
+                throw new MoneyException('error in ratioFileName ' . $this->ratioFileName . ' on line ' . $row . ', ratio is not a float or is null');
             }
             if ($ratio <= 0) {
                 throw new MoneyException('error in ratioFileName ' . $this->ratioFileName . ' on line ' . $row . ', ratio has to be positive');
