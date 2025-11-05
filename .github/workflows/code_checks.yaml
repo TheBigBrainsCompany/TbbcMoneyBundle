@@ -53,7 +53,8 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: pcov, curl
+          # we need an older mongodb for symfony 5.4 and php 8.1 tests
+          extensions: pcov, curl, mongodb-${{ matrix.symfony-version == '5.4.*' && '1.19.4' || 'stable' }}
           coverage: pcov
 
       - name: Start MongoDB
