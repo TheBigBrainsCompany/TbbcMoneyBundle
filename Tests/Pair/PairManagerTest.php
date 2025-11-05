@@ -18,12 +18,13 @@ class PairManagerTest extends KernelTestCase
     use MoneyAssert;
 
     protected PairManager $manager;
+
     protected string $fileName;
 
     public function setUp(): void
     {
         self::bootKernel();
-        $this->fileName = self::getContainer()->getParameter('kernel.cache_dir').'/pair.csv';
+        $this->fileName = self::getContainer()->getParameter('kernel.cache_dir') . '/pair.csv';
         if (file_exists($this->fileName)) {
             unlink($this->fileName);
         }

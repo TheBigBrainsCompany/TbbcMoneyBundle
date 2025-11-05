@@ -28,8 +28,8 @@ class CurrencyExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('currency_name', $this->moneyFormatter->formatCurrencyAsName(...)),
-            new TwigFilter('currency_symbol', $this->moneyFormatter->formatCurrencyAsSymbol(...)),
+            new TwigFilter('currency_name', [$this->moneyFormatter, 'formatCurrencyAsName']),
+            new TwigFilter('currency_symbol', [$this->moneyFormatter, 'formatCurrencyAsSymbol']),
         ];
     }
 
