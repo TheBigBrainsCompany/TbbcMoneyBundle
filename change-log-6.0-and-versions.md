@@ -8,6 +8,7 @@ Versions from 6.0
 - Add PHP ECS for style fix/check and Rector for automatic upgrades
 - Replaced Psalm with PHPStan
 - Rector and ECS automatically runs in CI
+- Add support for PHP 8.5 in CI and docker
 
 ### 2024-06-19 : updates for 6.0.0 version
 

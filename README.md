@@ -117,6 +117,7 @@ docker exec -it tbbc-moneybundle-php81 bash
 docker exec -it tbbc-moneybundle-php82 bash
 docker exec -it tbbc-moneybundle-php83 bash
 docker exec -it tbbc-moneybundle-php84 bash
+docker exec -it tbbc-moneybundle-php85 bash
 ```
 
 All the tooling is added as composer scripts, start by installing deps:
