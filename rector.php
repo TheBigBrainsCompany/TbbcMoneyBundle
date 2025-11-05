@@ -17,11 +17,12 @@ use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 //
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__ . '/examples',
         __DIR__ . '/src',
+        __DIR__ . '/Tests',
     ])
     ->withPhpSets(php81: true)
     ->withImportNames(importShortClasses: false)
+    /* FIXME! One by one
     ->withAttributesSets()
     // https://getrector.com/documentation/set-lists
     ->withPreparedSets(
@@ -46,4 +47,5 @@ return RectorConfig::configure()
         // this is conflicting with our phpstan rules - either they should change or this needs to be skipped
         TernaryToElvisRector::class,
     ])
+    */
 ;
