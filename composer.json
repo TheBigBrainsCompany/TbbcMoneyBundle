@@ -59,15 +59,12 @@
         }
     },
     "scripts": {
-        "fix": [
-            "vendor/bin/psalm",
-            "vendor/bin/phpunit --coverage-text --coverage-html=.build"
-        ],
         "cs-check": "vendor/bin/ecs check --ansi",
         "cs-fix": "vendor/bin/ecs check --fix --ansi",
+        "phpunit": "vendor/bin/phpunit --coverage-text --coverage-html=.build",
+        "psalm": "vendor/bin/psalm",
         "rector-check": "vendor/bin/rector --dry-run",
-        "rector-fix": "vendor/bin/rector",
-        "phpunit": "vendor/bin/phpunit --coverage-text --coverage-html=.build"
+        "rector-fix": "vendor/bin/rector"
     },
     "suggest": {
         "doctrine/doctrine-bundle": "~2.12",

@@ -124,6 +124,15 @@ All the tooling is added as composer scripts, start by installing deps:
 composer install
 ```
 
+The you can use the code style (cs) commands to check/fix issues, rector to run the automatic refactors, or phpunit.
+```bash
+composer cs-check
+composer cs-fix
+composer rector-check
+composer rector-fix
+composer phpunit
+composer psalm
+```
 
 Usage
 -----
