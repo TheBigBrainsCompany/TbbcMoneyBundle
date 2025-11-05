@@ -48,5 +48,4 @@ return RectorConfig::configure()
         FlipTypeControlToUseExclusiveTypeRector::class,
         // this is conflicting with our phpstan rules - either they should change or this needs to be skipped
         TernaryToElvisRector::class,
-    ])
-;
+    ]);
