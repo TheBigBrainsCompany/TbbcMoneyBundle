@@ -26,6 +26,7 @@ class CurrencyToArrayTransformer implements DataTransformerInterface
         if (null === $value) {
             return null;
         }
+
         if (!$value instanceof Currency) {
             throw new UnexpectedTypeException($value, 'Currency');
         }

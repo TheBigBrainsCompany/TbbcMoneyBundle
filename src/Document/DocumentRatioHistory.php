@@ -10,9 +10,13 @@ use DateTimeInterface;
 class DocumentRatioHistory
 {
     protected ?string $id = null;
+
     protected string $referenceCurrencyCode = '';
+
     protected string $currencyCode = '';
+
     protected float $ratio = 0;
+
     protected DateTimeInterface $savedAt;
 
     public function __construct()

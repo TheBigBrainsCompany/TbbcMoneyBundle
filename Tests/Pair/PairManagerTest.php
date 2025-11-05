@@ -17,11 +17,11 @@ final class PairManagerTest extends KernelTestCase
 {
     use MoneyAssert;
 
-    protected PairManager $manager;
+    private PairManager $manager;
 
-    protected string $fileName;
+    private string $fileName;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         self::bootKernel();
         $this->fileName = self::getContainer()->getParameter('kernel.cache_dir') . '/pair.csv';
@@ -39,7 +39,7 @@ final class PairManagerTest extends KernelTestCase
         );
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         if (file_exists($this->fileName)) {
             unlink($this->fileName);
@@ -57,6 +57,7 @@ final class PairManagerTest extends KernelTestCase
         } catch (MoneyException) {
             $this->assertTrue(true);
         }
+
         $this->manager->saveRatio('USD', 1.25);
         $usd = $this->manager->convert($eur, 'USD');
         $this->assertMoneySame(Money::USD(125), $usd);

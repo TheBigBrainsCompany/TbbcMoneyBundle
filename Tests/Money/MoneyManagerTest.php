@@ -9,9 +9,9 @@ use Tbbc\MoneyBundle\Money\MoneyManager;
 
 final class MoneyManagerTest extends TestCase
 {
-    protected MoneyManager $manager;
+    private MoneyManager $manager;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->manager = new MoneyManager('EUR', 2);
     }

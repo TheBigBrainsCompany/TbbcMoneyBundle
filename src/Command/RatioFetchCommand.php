@@ -32,8 +32,8 @@ class RatioFetchCommand extends Command
             $output->writeln('ratio fetched from provider' . PHP_EOL . print_r($this->pairManager->getRatioList(), true));
 
             return Command::SUCCESS;
-        } catch (MoneyException $e) {
-            $output->writeln('ERROR during fetch ratio : ' . $e->getMessage());
+        } catch (MoneyException $moneyException) {
+            $output->writeln('ERROR during fetch ratio : ' . $moneyException->getMessage());
 
             return Command::FAILURE;
         }

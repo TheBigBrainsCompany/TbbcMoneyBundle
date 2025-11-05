@@ -10,11 +10,11 @@ use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 
 final class CsvStorageTest extends KernelTestCase
 {
-    protected CsvStorage $storage;
+    private CsvStorage $storage;
 
-    protected string $fileName;
+    private string $fileName;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         self::bootKernel();
         $this->fileName = self::getContainer()->getParameter('kernel.cache_dir') . '/pair.csv';
@@ -25,7 +25,7 @@ final class CsvStorageTest extends KernelTestCase
         $this->storage = new CsvStorage($this->fileName, 'EUR');
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         if (file_exists($this->fileName)) {
             unlink($this->fileName);

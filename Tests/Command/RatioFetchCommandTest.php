@@ -14,7 +14,7 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 final class RatioFetchCommandTest extends KernelTestCase
 {
-    private MockObject|PairManagerInterface $pairManager;
+    private MockObject $pairManager;
 
     protected function setUp(): void
     {

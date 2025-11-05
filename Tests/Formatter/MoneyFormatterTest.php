@@ -13,11 +13,11 @@ use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 
 final class MoneyFormatterTest extends TestCase
 {
-    protected MoneyFormatter $formatter;
+    private MoneyFormatter $formatter;
 
-    protected Money $inputMoney;
+    private Money $inputMoney;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         Locale::setDefault('fr_FR');
         $this->formatter = new MoneyFormatter(2);

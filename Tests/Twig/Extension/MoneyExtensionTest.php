@@ -21,11 +21,11 @@ final class MoneyExtensionTest extends TestCase
 {
     private MoneyExtension $extension;
 
-    protected array $variables;
+    private array $variables;
 
-    private MockObject|PairManager $pairManager;
+    private MockObject $pairManager;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         Locale::setDefault('fr_FR');
         $this->pairManager = $this->createMock(PairManager::class);
@@ -57,7 +57,7 @@ final class MoneyExtensionTest extends TestCase
     }
 
     #[DataProvider('getMoneyTests')]
-    public function testMoney($template, $expected): void
+    public function testMoney(string $template, string $expected): void
     {
         $this->assertSame($expected, $this->getTemplate($template)->render($this->variables));
     }
@@ -74,7 +74,7 @@ final class MoneyExtensionTest extends TestCase
         yield ['{{ price|money_as_float }}', '1234567.89'];
     }
 
-    protected function getTemplate($template): TemplateWrapper
+    private function getTemplate(string $template): TemplateWrapper
     {
         $loader = new ArrayLoader([
             'index' => $template,

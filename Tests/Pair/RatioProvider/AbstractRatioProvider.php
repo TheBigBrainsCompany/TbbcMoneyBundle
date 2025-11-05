@@ -21,7 +21,7 @@ abstract class AbstractRatioProvider extends TestCase
      */
     protected RatioProviderInterface $ratioProvider;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->ratioProvider = $this->getRatioProvider();
     }

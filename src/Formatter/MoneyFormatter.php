@@ -112,6 +112,7 @@ class MoneyFormatter
         if (is_null($locale)) {
             $locale = \Locale::getDefault();
         }
+
         $numberFormatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
         $numberFormatter->setTextAttribute(\NumberFormatter::CURRENCY_CODE, $currencyCode);
         $numberFormatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, $this->decimals);

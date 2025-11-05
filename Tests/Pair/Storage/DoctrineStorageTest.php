@@ -19,7 +19,7 @@ final class DoctrineStorageTest extends KernelTestCase
 
     private DoctrineStorage $doctrineStorage;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         self::$kernelOptions = [
@@ -42,13 +42,13 @@ final class DoctrineStorageTest extends KernelTestCase
 
     protected static function createKernel(array $options = []): KernelInterface
     {
-        static::$class ??= static::getKernelClass();
+        self::$class ??= self::getKernelClass();
 
         $env = $options['environment'] ?? $_ENV['APP_ENV'] ?? $_SERVER['APP_ENV'] ?? 'test';
         $debug = $options['debug'] ?? $_ENV['APP_DEBUG'] ?? $_SERVER['APP_DEBUG'] ?? true;
         $configs = $options['configs'] ?? [];
 
-        return new static::$class($env, $debug, $configs);
+        return new self::$class($env, $debug, $configs);
     }
 
     public function testLoadDefaultCurrency(): void
@@ -70,6 +70,7 @@ final class DoctrineStorageTest extends KernelTestCase
         $storageRatio = new DoctrineStorageRatio('USD', 1);
         $storageRatio->setCurrencyCode('EUR');
         $storageRatio->setRatio(1.6);
+
         $this->entityManager->persist(new DoctrineStorageRatio('EUR', 1.6));
         $this->entityManager->flush();
 

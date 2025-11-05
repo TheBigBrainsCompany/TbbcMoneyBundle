@@ -18,9 +18,9 @@ final class CurrencyExtensionTest extends TestCase
 {
     private CurrencyExtension $extension;
 
-    protected array $variables;
+    private array $variables;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         Locale::setDefault('fr_FR');
         $this->extension = new CurrencyExtension(new MoneyFormatter(2));
@@ -35,7 +35,7 @@ final class CurrencyExtensionTest extends TestCase
     }
 
     #[DataProvider('getCurrencyTests')]
-    public function testCurrency($template, $expected): void
+    public function testCurrency(string $template, string $expected): void
     {
         $this->assertSame($expected, $this->getTemplate($template)->render($this->variables));
     }
@@ -46,7 +46,7 @@ final class CurrencyExtensionTest extends TestCase
         yield ['{{ currency|currency_symbol(".", ",") }}', '€'];
     }
 
-    protected function getTemplate($template): TemplateWrapper
+    private function getTemplate(string $template): TemplateWrapper
     {
         $loader = new ArrayLoader([
             'index' => $template,

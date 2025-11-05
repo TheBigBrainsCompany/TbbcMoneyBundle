@@ -18,13 +18,13 @@ final class PairHistoryManagerTest extends KernelTestCase
 {
     use DatabaseTrait;
 
-    protected PairHistoryManager $pairHistoryManager;
+    private PairHistoryManager $pairHistoryManager;
 
-    protected ObjectRepository $ratioHistoryRepo;
+    private ObjectRepository $ratioHistoryRepo;
 
     private ?ObjectManager $em;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         self::$kernelOptions = [
@@ -53,13 +53,13 @@ final class PairHistoryManagerTest extends KernelTestCase
 
     protected static function createKernel(array $options = []): KernelInterface
     {
-        static::$class ??= static::getKernelClass();
+        self::$class ??= self::getKernelClass();
 
         $env = $options['environment'] ?? $_ENV['APP_ENV'] ?? $_SERVER['APP_ENV'] ?? 'test';
         $debug = $options['debug'] ?? $_ENV['APP_DEBUG'] ?? $_SERVER['APP_DEBUG'] ?? true;
         $configs = $options['configs'] ?? [];
 
-        return new static::$class($env, $debug, $configs);
+        return new self::$class($env, $debug, $configs);
     }
 
     public function testSaveRatioHistory(): void
@@ -84,7 +84,7 @@ final class PairHistoryManagerTest extends KernelTestCase
         $event = new SaveRatioEvent('EUR', 'USD', 1.75, new \DateTime('2012-07-08 14:00:00'));
         $this->pairHistoryManager->listenSaveRatioEvent($event);
 
-        $ratioList = $this->pairHistoryManager->getRatioHistory('USD', null, null);
+        $ratioList = $this->pairHistoryManager->getRatioHistory('USD');
         $this->assertCount(3, $ratioList);
         $this->assertEqualsWithDelta(1.25, $ratioList[0]['ratio'], PHP_FLOAT_EPSILON);
         $this->assertEqualsWithDelta(1.50, $ratioList[1]['ratio'], PHP_FLOAT_EPSILON);
@@ -93,7 +93,7 @@ final class PairHistoryManagerTest extends KernelTestCase
         $this->assertSame('2012-07-08 13:00:00', $ratioList[1]['savedAt']->format('Y-m-d H:i:s'));
         $this->assertSame('2012-07-08 14:00:00', $ratioList[2]['savedAt']->format('Y-m-d H:i:s'));
 
-        $ratioList = $this->pairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'), null);
+        $ratioList = $this->pairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'));
         $this->assertCount(2, $ratioList);
         $ratioList = $this->pairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'), new \DateTime('2012-07-08 13:30:00'));
         $this->assertCount(1, $ratioList);
@@ -139,6 +139,7 @@ final class PairHistoryManagerTest extends KernelTestCase
         } catch (MoneyException) {
             $this->assertTrue(true);
         }
+
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-10 12:30:00'));
         $this->assertEqualsWithDelta(1.75, $ratio, PHP_FLOAT_EPSILON);
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2011-07-10 12:30:00'));
