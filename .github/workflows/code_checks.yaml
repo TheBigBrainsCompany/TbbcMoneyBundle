@@ -90,7 +90,7 @@ jobs:
           composer require friendsofphp/php-cs-fixer "^3.48"
           vendor/bin/php-cs-fixer
 
-  psalm:
+  phpstan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -99,4 +99,4 @@ jobs:
           php-version: 8.2
           coverage: none
       - run: composer install --no-progress
-      - run: vendor/bin/psalm
+      - run: vendor/bin/phpstan analyse --memory-limit=-1
