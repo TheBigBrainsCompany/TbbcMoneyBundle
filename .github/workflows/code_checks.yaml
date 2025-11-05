@@ -104,13 +104,6 @@ jobs:
           php-version: 8.3
           coverage: none
 
-      - name: Cache dependencies
-        id: composer-cache
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: dependencies-php-8.3-composer-${{ hashFiles('composer.json') }}
-
       - run: |
           composer install --prefer-dist --no-progress
           composer cs-fix
@@ -129,13 +122,6 @@ jobs:
         with:
           php-version: 8.3
           coverage: none
-
-      - name: Cache dependencies
-        id: composer-cache
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: dependencies-php-8.3-composer-${{ hashFiles('composer.json') }}
 
       - run: composer install --prefer-dist --no-progress
       - run: composer phpstan
