@@ -5,7 +5,7 @@ parameters:
         - tests/bootstrap.php
     paths:
         - src
-        - Tests
+        - tests
 
     disallowedSuperglobals:
         -

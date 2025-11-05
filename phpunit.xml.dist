@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         bootstrap="Tests/bootstrap.php"
+         bootstrap="tests/bootstrap.php"
          colors="true"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
 >
@@ -12,7 +12,7 @@
 
   <testsuites>
     <testsuite name="TbbcMoneyBundle test suite">
-      <directory>Tests</directory>
+      <directory>tests</directory>
     </testsuite>
   </testsuites>
 
