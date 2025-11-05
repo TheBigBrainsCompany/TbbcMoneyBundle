@@ -22,10 +22,9 @@ return RectorConfig::configure()
     ])
     ->withPhpSets(php81: true)
     ->withImportNames(importShortClasses: false)
-    /* FIXME! One by one
     ->withAttributesSets()
     // https://getrector.com/documentation/set-lists
-    ->withPreparedSets(
+    /* ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
         codingStyle: true,
@@ -35,7 +34,7 @@ return RectorConfig::configure()
         strictBooleans: true,
         rectorPreset: true,
         phpunitCodeQuality: true,
-    )
+    ) */
     ->withComposerBased(
         phpunit: true,
     )
@@ -46,6 +45,4 @@ return RectorConfig::configure()
         FlipTypeControlToUseExclusiveTypeRector::class,
         // this is conflicting with our phpstan rules - either they should change or this needs to be skipped
         TernaryToElvisRector::class,
-    ])
-    */
-;
+    ]);
