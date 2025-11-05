@@ -9,7 +9,7 @@ use Tbbc\MoneyBundle\Money\MoneyManager;
 
 class MoneyManagerTest extends TestCase
 {
-    protected MoneyManager $manager;
+    private MoneyManager $manager;
 
     public function setUp(): void
     {

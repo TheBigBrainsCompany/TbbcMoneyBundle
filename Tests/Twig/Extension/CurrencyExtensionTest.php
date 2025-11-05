@@ -18,7 +18,7 @@ class CurrencyExtensionTest extends TestCase
 {
     private CurrencyExtension $extension;
 
-    protected array $variables;
+    private array $variables;
 
     public function setUp(): void
     {
@@ -35,7 +35,7 @@ class CurrencyExtensionTest extends TestCase
     }
 
     #[DataProvider('getCurrencyTests')]
-    public function testCurrency($template, $expected): void
+    public function testCurrency(string $template, string $expected): void
     {
         $this->assertSame($expected, $this->getTemplate($template)->render($this->variables));
     }
@@ -48,7 +48,7 @@ class CurrencyExtensionTest extends TestCase
         ];
     }
 
-    protected function getTemplate($template): TemplateWrapper
+    private function getTemplate(string $template): TemplateWrapper
     {
         $loader = new ArrayLoader([
             'index' => $template,

@@ -10,9 +10,9 @@ use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 
 class CsvStorageTest extends KernelTestCase
 {
-    protected CsvStorage $storage;
+    private CsvStorage $storage;
 
-    protected string $fileName;
+    private string $fileName;
 
     public function setUp(): void
     {

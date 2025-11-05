@@ -21,9 +21,9 @@ class MoneyExtensionTest extends TestCase
 {
     private MoneyExtension $extension;
 
-    protected array $variables;
+    private array $variables;
 
-    private MockObject|PairManager $pairManager;
+    private MockObject $pairManager;
 
     public function setUp(): void
     {
@@ -57,7 +57,7 @@ class MoneyExtensionTest extends TestCase
     }
 
     #[DataProvider('getMoneyTests')]
-    public function testMoney($template, $expected): void
+    public function testMoney(string $template, string $expected): void
     {
         $this->assertSame($expected, $this->getTemplate($template)->render($this->variables));
     }
@@ -76,7 +76,7 @@ class MoneyExtensionTest extends TestCase
         ];
     }
 
-    protected function getTemplate($template): TemplateWrapper
+    private function getTemplate(string $template): TemplateWrapper
     {
         $loader = new ArrayLoader([
             'index' => $template,

@@ -18,9 +18,9 @@ class PairHistoryManagerTest extends KernelTestCase
 {
     use DatabaseTrait;
 
-    protected PairHistoryManager $pairHistoryManager;
+    private PairHistoryManager $pairHistoryManager;
 
-    protected ObjectRepository $ratioHistoryRepo;
+    private ObjectRepository $ratioHistoryRepo;
 
     private ?ObjectManager $em;
 
@@ -84,7 +84,7 @@ class PairHistoryManagerTest extends KernelTestCase
         $event = new SaveRatioEvent('EUR', 'USD', 1.75, new \DateTime('2012-07-08 14:00:00'));
         $this->pairHistoryManager->listenSaveRatioEvent($event);
 
-        $ratioList = $this->pairHistoryManager->getRatioHistory('USD', null, null);
+        $ratioList = $this->pairHistoryManager->getRatioHistory('USD');
         $this->assertCount(3, $ratioList);
         $this->assertSame(1.25, $ratioList[0]['ratio']);
         $this->assertSame(1.50, $ratioList[1]['ratio']);
@@ -93,7 +93,7 @@ class PairHistoryManagerTest extends KernelTestCase
         $this->assertSame('2012-07-08 13:00:00', $ratioList[1]['savedAt']->format('Y-m-d H:i:s'));
         $this->assertSame('2012-07-08 14:00:00', $ratioList[2]['savedAt']->format('Y-m-d H:i:s'));
 
-        $ratioList = $this->pairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'), null);
+        $ratioList = $this->pairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'));
         $this->assertCount(2, $ratioList);
         $ratioList = $this->pairHistoryManager->getRatioHistory('USD', new \DateTime('2012-07-08 12:30:00'), new \DateTime('2012-07-08 13:30:00'));
         $this->assertCount(1, $ratioList);

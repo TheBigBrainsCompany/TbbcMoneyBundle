@@ -13,9 +13,9 @@ use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 
 class MoneyFormatterTest extends TestCase
 {
-    protected MoneyFormatter $formatter;
+    private MoneyFormatter $formatter;
 
-    protected Money $inputMoney;
+    private Money $inputMoney;
 
     public function setUp(): void
     {

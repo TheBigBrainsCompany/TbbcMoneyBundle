@@ -17,9 +17,9 @@ class PairManagerTest extends KernelTestCase
 {
     use MoneyAssert;
 
-    protected PairManager $manager;
+    private PairManager $manager;
 
-    protected string $fileName;
+    private string $fileName;
 
     public function setUp(): void
     {

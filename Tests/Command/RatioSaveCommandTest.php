@@ -14,7 +14,7 @@ use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
 class RatioSaveCommandTest extends TestCase
 {
-    private MockObject|PairManagerInterface $pairManager;
+    private MockObject $pairManager;
 
     protected function setUp(): void
     {

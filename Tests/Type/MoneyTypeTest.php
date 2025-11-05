@@ -16,7 +16,7 @@ class MoneyTypeTest extends TestCase
 {
     private MoneyType $type;
 
-    private AbstractPlatform|MockObject $platform;
+    private MockObject $platform;
 
     protected function setUp(): void
     {
