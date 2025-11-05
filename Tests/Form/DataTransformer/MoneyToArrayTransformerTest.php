@@ -41,10 +41,7 @@ class MoneyToArrayTransformerTest extends TestCase
 
     public function testReverseValueToCurrency(): void
     {
-        $value = [
-            'tbbc_amount' => '1.00',
-            'tbbc_currency' => 'EUR',
-        ];
+        $value = ['tbbc_amount' => '1.00', 'tbbc_currency' => 'EUR'];
         $expected = new Money('100', new Currency('EUR'));
         $transformer = new MoneyToArrayTransformer();
         $transformed = $transformer->reverseTransform($value);
@@ -67,9 +64,7 @@ class MoneyToArrayTransformerTest extends TestCase
 
     public function testReverseToNullIfFormElementNotSet(): void
     {
-        $value = [
-            'tbbc_name' => null,
-        ];
+        $value = ['tbbc_name' => null];
         $transformer = new MoneyToArrayTransformer();
         self::assertNull($transformer->reverseTransform($value));
     }

@@ -20,9 +20,8 @@ class RatioListCommand extends Command
 {
     private string $format = 'txt';
 
-    public function __construct(
-        private readonly PairManagerInterface $pairManager
-    ) {
+    public function __construct(private readonly PairManagerInterface $pairManager)
+    {
         parent::__construct();
     }
 
@@ -43,7 +42,7 @@ class RatioListCommand extends Command
         $io->writeln('Ratio list');
 
         foreach ($ratioList as $currencyCode => $ratio) {
-            $io->writeln($currencyCode . ';' . (string) $ratio);
+            $io->writeln($currencyCode.';'.(string) $ratio);
         }
 
         return Command::SUCCESS;
@@ -83,8 +82,8 @@ class RatioListCommand extends Command
         $ratioList = $this->pairManager->getRatioList();
 
         return match ($this->format) {
-            'txt' => $this->displayTxt($ratioList, $output, $io),
-            'json' => $this->displayJson($ratioList, $output),
+            'txt'   => $this->displayTxt($ratioList, $output, $io),
+            'json'  => $this->displayJson($ratioList, $output),
             'table' => $this->displayTable($ratioList, $output, $io),
             default => throw new InvalidArgumentException(sprintf('Supported formats are "%s".', implode('", "', $this->getAvailableFormatOptions()))),
         };
@@ -108,9 +107,7 @@ class RatioListCommand extends Command
         }
     }
 
-    /**
-     * @return list<string|Suggestion> $values
-     */
+    /** @return list<string|Suggestion> $values */
     private function getAvailableFormatOptions(): array
     {
         return ['txt', 'json', 'table'];

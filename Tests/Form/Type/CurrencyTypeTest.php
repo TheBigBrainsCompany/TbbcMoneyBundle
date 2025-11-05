@@ -44,9 +44,7 @@ class CurrencyTypeTest extends TypeTestCase
     public function testSubmittedData(): void
     {
         $form = $this->factory->create(CurrencyType::class);
-        $form->submit([
-            'tbbc_name' => 'USD',
-        ]);
+        $form->submit(['tbbc_name' => 'USD']);
         self::assertSame(
             (new Currency('USD'))->getCode(),
             $form->getData()->getCode()

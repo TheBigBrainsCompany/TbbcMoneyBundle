@@ -15,17 +15,16 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
  */
 class DoctrineStorage implements StorageInterface
 {
-    /**
-     * @psalm-var array<string, null|float>
-     */
+    /** @psalm-var array<string, null|float> */
     protected array $ratioList = [];
 
-    public function __construct(
-        protected EntityManagerInterface $entityManager,
-        protected string $referenceCurrencyCode
-    ) {
+    public function __construct(protected EntityManagerInterface $entityManager, protected string $referenceCurrencyCode)
+    {
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function loadRatioList(bool $force = false): array
     {
         if ((false === $force) && (count($this->ratioList) > 0)) {
@@ -36,9 +35,7 @@ class DoctrineStorage implements StorageInterface
         $doctrineStorageRatios = $repository->findAll();
 
         if (0 === count($doctrineStorageRatios)) {
-            $this->ratioList = [
-                $this->referenceCurrencyCode => 1.0,
-            ];
+            $this->ratioList = [$this->referenceCurrencyCode => 1.0];
             $this->saveRatioList($this->ratioList);
 
             return $this->ratioList;
@@ -58,6 +55,9 @@ class DoctrineStorage implements StorageInterface
         return $this->ratioList;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function saveRatioList(array $ratioList): void
     {
         /** @var DoctrineStorageRatio[] $doctrineStorageRatios */

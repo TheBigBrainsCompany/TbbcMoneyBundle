@@ -13,22 +13,23 @@ use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedString
 
 /**
  * Transforms between a Money and an array.
- *
+ * 
  * @implements DataTransformerInterface<Money, array>
  */
 class MoneyToArrayTransformer implements DataTransformerInterface
 {
     protected MoneyToLocalizedStringTransformer $sfTransformer;
 
-    public function __construct(
-        protected int $decimals = 2
-    ) {
+    public function __construct(protected int $decimals = 2)
+    {
         $this->sfTransformer = new MoneyToLocalizedStringTransformer($decimals, null, null, 10 ** $this->decimals);
     }
 
     /**
+     * {@inheritdoc}
+     * 
      * @psalm-param Money|null $value
-     *
+     * 
      * @psalm-return array{tbbc_amount: string, tbbc_currency: Currency}|array{tbbc_amount: string}|null
      */
     public function transform(mixed $value): ?array
@@ -37,7 +38,7 @@ class MoneyToArrayTransformer implements DataTransformerInterface
             return null;
         }
 
-        if (! $value instanceof Money) {
+        if (!$value instanceof Money) {
             throw new UnexpectedTypeException($value, 'Money');
         }
 
@@ -50,6 +51,8 @@ class MoneyToArrayTransformer implements DataTransformerInterface
     }
 
     /**
+     * {@inheritdoc}
+     * 
      * @psalm-param array|null $value
      */
     public function reverseTransform(mixed $value): ?Money
@@ -59,11 +62,11 @@ class MoneyToArrayTransformer implements DataTransformerInterface
         }
 
         /** @psalm-suppress DocblockTypeContradiction */
-        if (! is_array($value)) {
+        if (!is_array($value)) {
             throw new UnexpectedTypeException($value, 'array');
         }
 
-        if (! isset($value['tbbc_amount']) || ! isset($value['tbbc_currency'])) {
+        if (!isset($value['tbbc_amount']) || !isset($value['tbbc_currency'])) {
             return null;
         }
 
@@ -80,7 +83,7 @@ class MoneyToArrayTransformer implements DataTransformerInterface
             throw new TransformationFailedException('currency can not be an empty string');
         }
 
-        if (! $currency instanceof Currency) {
+        if (!$currency instanceof Currency) {
             $currency = new Currency($currency);
         }
 

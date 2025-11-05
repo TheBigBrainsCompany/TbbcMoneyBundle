@@ -22,7 +22,6 @@ class MoneyExtensionTest extends TestCase
     private MoneyExtension $extension;
 
     protected array $variables;
-
     private MockObject|PairManager $pairManager;
 
     public function setUp(): void
@@ -30,9 +29,7 @@ class MoneyExtensionTest extends TestCase
         Locale::setDefault('fr_FR');
         $this->pairManager = $this->createMock(PairManager::class);
         $this->extension = new MoneyExtension(new MoneyFormatter(2), $this->pairManager);
-        $this->variables = [
-            'price' => new Money(123456789, new Currency('EUR')),
-        ];
+        $this->variables = ['price' => new Money(123456789, new Currency('EUR'))];
     }
 
     public function testConvert(): void
@@ -78,13 +75,8 @@ class MoneyExtensionTest extends TestCase
 
     protected function getTemplate($template): TemplateWrapper
     {
-        $loader = new ArrayLoader([
-            'index' => $template,
-        ]);
-        $twig = new Environment($loader, [
-            'debug' => true,
-            'cache' => false,
-        ]);
+        $loader = new ArrayLoader(['index' => $template]);
+        $twig = new Environment($loader, ['debug' => true, 'cache' => false]);
         $twig->addExtension($this->extension);
 
         /* @noinspection PhpTemplateMissingInspection */

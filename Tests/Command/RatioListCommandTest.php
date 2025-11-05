@@ -18,10 +18,7 @@ class RatioListCommandTest extends KernelTestCase
         $pairManager
             ->expects($this->once())
             ->method('getRatioList')
-            ->willReturn([
-                'EUR' => 1.1,
-                'USD' => 1.2,
-            ]);
+            ->willReturn(['EUR' => 1.1, 'USD' => 1.2]);
 
         $command = new RatioListCommand($pairManager);
         $tester = new CommandTester($command);
@@ -33,10 +30,7 @@ class RatioListCommandTest extends KernelTestCase
 
     public function testGetRatioListAsTable(): void
     {
-        $data = [
-            'EUR' => 1.1,
-            'USD' => 1.2,
-        ];
+        $data = ['EUR' => 1.1, 'USD' => 1.2];
         $pairManager = $this->createMock(PairManagerInterface::class);
         $pairManager
             ->expects($this->once())
@@ -45,9 +39,7 @@ class RatioListCommandTest extends KernelTestCase
 
         $command = new RatioListCommand($pairManager);
         $tester = new CommandTester($command);
-        $tester->execute([
-            '--format' => 'table',
-        ]);
+        $tester->execute(['--format' => 'table']);
         self::assertSame(Command::SUCCESS, $tester->getStatusCode());
         self::assertStringContainsString('EUR      | 1.1', $tester->getDisplay());
         self::assertStringContainsString('USD      | 1.2', $tester->getDisplay());
@@ -55,10 +47,7 @@ class RatioListCommandTest extends KernelTestCase
 
     public function testGetRatioListAsJson(): void
     {
-        $data = [
-            'EUR' => 1.1,
-            'USD' => 1.2,
-        ];
+        $data = ['EUR' => 1.1, 'USD' => 1.2];
         $pairManager = $this->createMock(PairManagerInterface::class);
         $pairManager
             ->expects($this->once())
@@ -67,9 +56,7 @@ class RatioListCommandTest extends KernelTestCase
 
         $command = new RatioListCommand($pairManager);
         $tester = new CommandTester($command);
-        $tester->execute([
-            '--format' => 'json',
-        ]);
+        $tester->execute(['--format' => 'json']);
         self::assertSame(Command::SUCCESS, $tester->getStatusCode());
         self::assertJson($tester->getDisplay());
         $output = json_decode($tester->getDisplay(), true);

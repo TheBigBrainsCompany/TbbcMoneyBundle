@@ -6,8 +6,8 @@ namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
 
 use Money\Currency;
 use PHPUnit\Framework\TestCase;
-use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
+use Tbbc\MoneyBundle\MoneyException;
 
 /**
  * This class can be used to easily test your custom ratio providers.
@@ -86,9 +86,9 @@ abstract class AbstractRatioProvider extends TestCase
         mt_srand($seed);
 
         $float = random_int(
-            ((int) $ratioMin * $precision),
-            ((int) $ratioMax * $precision)
-        ) / $precision;
+                ((int) $ratioMin * $precision),
+                ((int) $ratioMax * $precision)
+            ) / $precision;
 
         if ($float <= 0.3) {
             $float = 0.31;

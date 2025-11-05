@@ -13,15 +13,16 @@ use Tbbc\MoneyBundle\MoneyException;
  */
 class MoneyManager implements MoneyManagerInterface
 {
-    public function __construct(
-        protected string $referenceCurrencyCode,
-        protected int $decimals = 2
-    ) {
+    public function __construct(protected string $referenceCurrencyCode, protected int $decimals = 2)
+    {
         if ('' === $referenceCurrencyCode) {
             throw new MoneyException('reference currency can not be an empty string');
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function createMoneyFromFloat(float $floatAmount, ?string $currencyCode = null): Money
     {
         if (null === $currencyCode) {
@@ -35,7 +36,7 @@ class MoneyManager implements MoneyManagerInterface
         $currency = new Currency($currencyCode);
         $amountAsInt = $floatAmount * 10 ** $this->decimals;
         $amountAsInt = round($amountAsInt);
-        $amountAsInt = (int) $amountAsInt;
+        $amountAsInt = (int)$amountAsInt;
 
         return new Money($amountAsInt, $currency);
     }

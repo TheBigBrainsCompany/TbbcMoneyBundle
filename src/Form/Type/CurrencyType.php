@@ -28,6 +28,8 @@ class CurrencyType extends AbstractType
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @psalm-suppress MixedAssignment, MixedArgument, MixedArgumentTypeCoercion, MixedArrayOffset
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -45,6 +47,9 @@ class CurrencyType extends AbstractType
         $builder->addModelTransformer(new CurrencyToArrayTransformer());
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(['reference_currency', 'currency_choices']);
@@ -59,6 +64,9 @@ class CurrencyType extends AbstractType
         $resolver->setAllowedTypes('currency_options', 'array');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix(): string
     {
         return 'tbbc_currency';

@@ -6,6 +6,7 @@ namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
 
 use Exchanger\Exchanger;
 use Exchanger\Service\PhpArray;
+use InvalidArgumentException;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProvider\ExchangerAdapterRatioProvider;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
@@ -18,7 +19,7 @@ class ExchangerAdapterRatioProviderTest extends AbstractRatioProvider
 
         $ratiosSetup = [];
         foreach ($ratios as $idx => $ratio) {
-            $key = $ratio['reference'] . '/' . $ratio['currency'];
+            $key = $ratio['reference'].'/'.$ratio['currency'];
             $ratiosSetup[$key] = $this->randomRatio($ratio['ratio_min'], $ratio['ratio_max'], $idx);
         }
 

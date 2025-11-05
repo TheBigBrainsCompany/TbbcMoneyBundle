@@ -15,7 +15,6 @@ use Tbbc\MoneyBundle\Type\MoneyType;
 class MoneyTypeTest extends TestCase
 {
     private MoneyType $type;
-
     private AbstractPlatform|MockObject $platform;
 
     protected function setUp(): void
@@ -47,7 +46,7 @@ class MoneyTypeTest extends TestCase
     public function testConvertToPHPValueValue(): void
     {
         $money = new Money(100, new Currency('EUR'));
-        $value = $money->getCurrency()->getCode() . ' ' . $money->getAmount();
+        $value = $money->getCurrency()->getCode().' '.$money->getAmount();
         self::assertSame(
             $money->getAmount(),
             $this->type->convertToPHPValue($value, $this->platform)->getAmount()
@@ -67,7 +66,7 @@ class MoneyTypeTest extends TestCase
     public function testConvertToDatabaseValueMoney(): void
     {
         $money = new Money(100, new Currency('EUR'));
-        $value = $money->getCurrency()->getCode() . ' ' . $money->getAmount();
+        $value = $money->getCurrency()->getCode().' '.$money->getAmount();
         self::assertSame($value, $this->type->convertToDatabaseValue($money, $this->platform));
     }
 

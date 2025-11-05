@@ -44,9 +44,7 @@ class MoneyTypeTest extends TypeTestCase
             'currency_type' => CurrencyType::class,
         ]);
         $form->submit([
-            'tbbc_currency' => [
-                'tbbc_name' => 'EUR',
-            ],
+            'tbbc_currency' => ['tbbc_name' => 'EUR'],
             'tbbc_amount' => '12',
         ]);
         $money = Money::EUR(1200);
@@ -61,9 +59,7 @@ class MoneyTypeTest extends TypeTestCase
             'currency_type' => CurrencyType::class,
         ]);
         $form->submit([
-            'tbbc_currency' => [
-                'tbbc_name' => 'EUR',
-            ],
+            'tbbc_currency' => ['tbbc_name' => 'EUR'],
             'tbbc_amount' => '12,5',
         ]);
         $money = Money::EUR(1250);
@@ -78,9 +74,7 @@ class MoneyTypeTest extends TypeTestCase
             'currency_type' => CurrencyType::class,
         ]);
         $form->submit([
-            'tbbc_currency' => [
-                'tbbc_name' => 'EUR',
-            ],
+            'tbbc_currency' => ['tbbc_name' => 'EUR'],
             'tbbc_amount' => '1 252,5',
         ]);
         $money = Money::EUR(125250);

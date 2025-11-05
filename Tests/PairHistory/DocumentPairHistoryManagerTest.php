@@ -8,20 +8,18 @@ use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Repository\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Tbbc\MoneyBundle\Document\DocumentRatioHistory;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
 use Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager;
 use Tbbc\MoneyBundle\Tests\DocumentDatabaseTrait;
+use Tbbc\MoneyBundle\Document\DocumentRatioHistory;
 
 class DocumentPairHistoryManagerTest extends KernelTestCase
 {
     use DocumentDatabaseTrait;
 
     protected DocumentPairHistoryManager $documentPairHistoryManager;
-
     protected DocumentRepository $documentRatioHistoryRepo;
-
     private ?DocumentManager $dm;
 
     public function setUp(): void
@@ -30,7 +28,7 @@ class DocumentPairHistoryManagerTest extends KernelTestCase
         self::$kernelOptions = [
             'environment' => 'testDocument',
             'configs' => [
-                __DIR__ . '/../config/document.yaml',
+                __DIR__.'/../config/document.yaml'
             ],
         ];
         self::bootKernel(self::$kernelOptions);

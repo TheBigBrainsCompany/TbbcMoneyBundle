@@ -13,12 +13,14 @@ use TypeError;
 
 /**
  * Transforms between a Currency and an array.
- *
+ * 
  * @implements DataTransformerInterface<Currency, array>
  */
 class CurrencyToArrayTransformer implements DataTransformerInterface
 {
     /**
+     * {@inheritdoc}
+     * 
      * @psalm-param Currency|null $value
      */
     public function transform(mixed $value): ?array
@@ -26,16 +28,16 @@ class CurrencyToArrayTransformer implements DataTransformerInterface
         if (null === $value) {
             return null;
         }
-        if (! $value instanceof Currency) {
+        if (!$value instanceof Currency) {
             throw new UnexpectedTypeException($value, 'Currency');
         }
 
-        return [
-            'tbbc_name' => $value->getCode(),
-        ];
+        return ['tbbc_name' => $value->getCode()];
     }
 
     /**
+     * {@inheritdoc}
+     * 
      * @psalm-param array|null $value
      */
     public function reverseTransform(mixed $value): ?Currency
@@ -45,15 +47,15 @@ class CurrencyToArrayTransformer implements DataTransformerInterface
         }
 
         /** @psalm-suppress DocblockTypeContradiction */
-        if (! is_array($value)) {
+        if (!is_array($value)) {
             throw new UnexpectedTypeException($value, 'array');
         }
 
-        if (! isset($value['tbbc_name'])) {
+        if (!isset($value['tbbc_name'])) {
             return null;
         }
 
-        if (! is_string($value['tbbc_name'])) {
+        if (!is_string($value['tbbc_name'])) {
             throw new UnexpectedTypeException($value, 'string');
         }
 

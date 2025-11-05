@@ -12,6 +12,7 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 /**
+ * ECBRatioProvider
  * Fetches currencies ratios from ECB.
  *
  * @author Johan Wilfer <johan@jttech.se>
@@ -22,7 +23,6 @@ class ECBRatioProvider implements RatioProviderInterface
      * Fetch cache time in seconds (10 minutes).
      */
     public const FETCH_CACHE_TIME = 600;
-
     private const URL = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
 
     /**
@@ -35,11 +35,13 @@ class ECBRatioProvider implements RatioProviderInterface
      */
     protected ?int $fetchedTimestamp = null;
 
-    public function __construct(
-        private HttpClientInterface $client
-    ) {
+    public function __construct(private HttpClientInterface $client)
+    {
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function fetchRatio(string $referenceCurrencyCode, string $currencyCode): float
     {
         // we could possibly take the feed and convert twice, to allow the other currencies as base currencies, but for now only allow EUR
@@ -65,7 +67,7 @@ class ECBRatioProvider implements RatioProviderInterface
 
         $rates = $this->parseXML($xml);
 
-        if (! isset($rates[$currency->getCode()])) {
+        if (!isset($rates[$currency->getCode()])) {
             throw new MoneyException(sprintf('The currency code %s does not exist in the ECB feed', $currencyCode));
         }
 
@@ -100,7 +102,7 @@ class ECBRatioProvider implements RatioProviderInterface
      */
     protected function parseXML(string $xml): array
     {
-        if (! $xmlObject = @simplexml_load_string($xml)) {
+        if (!$xmlObject = @simplexml_load_string($xml)) {
             throw new MoneyException('Failed to parse XML from ECB');
         }
 
