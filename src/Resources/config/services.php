@@ -1,20 +1,20 @@
 <?php
 
-use Tbbc\MoneyBundle\Pair\PairManager;
-use Tbbc\MoneyBundle\Pair\PairManagerInterface;
-use Tbbc\MoneyBundle\Money\MoneyManager;
-use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
-use Tbbc\MoneyBundle\PairHistory\PairHistoryManagerInterface;
-use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
-use Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider;
-use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
-use Tbbc\MoneyBundle\Command\RatioFetchCommand;
-use Tbbc\MoneyBundle\Command\RatioListCommand;
-use Tbbc\MoneyBundle\Command\RatioSaveCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Tbbc\MoneyBundle\Command\RatioFetchCommand;
+use Tbbc\MoneyBundle\Command\RatioListCommand;
+use Tbbc\MoneyBundle\Command\RatioSaveCommand;
+use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
+use Tbbc\MoneyBundle\Money\MoneyManager;
+use Tbbc\MoneyBundle\Pair\PairManager;
+use Tbbc\MoneyBundle\Pair\PairManagerInterface;
+use Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider;
+use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
+use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
+use Tbbc\MoneyBundle\PairHistory\PairHistoryManagerInterface;
 
 return static function (ContainerConfigurator $configurator): void {
     $parameters = $configurator->parameters();

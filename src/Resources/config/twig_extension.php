@@ -1,9 +1,9 @@
 <?php
 
-use Tbbc\MoneyBundle\Twig\Extension\MoneyExtension;
-use Tbbc\MoneyBundle\Twig\Extension\CurrencyExtension;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Reference;
+use Tbbc\MoneyBundle\Twig\Extension\CurrencyExtension;
+use Tbbc\MoneyBundle\Twig\Extension\MoneyExtension;
 
 return static function (ContainerConfigurator $configurator): void {
     $parameters = $configurator->parameters();
