@@ -12,7 +12,7 @@ updates:
     schedule:
       interval: 'monthly'
     groups:
-      # group all updates that are minor or path versions
+      # group all updates that are minor or patch versions
       upgrade-batch:
         applies-to: version-updates
         update-types:
