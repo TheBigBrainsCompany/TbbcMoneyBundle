@@ -61,6 +61,12 @@ parameters:
 			path: src/DependencyInjection/Compiler/StorageCompilerPass.php
 
 		-
+			rawMessage: 'Call to an undefined method Symfony\Component\Config\Definition\Builder\NodeParentInterface::defaultValue().'
+			identifier: method.notFound
+			count: 1
+			path: src/DependencyInjection/Configuration.php
+
+		-
 			rawMessage: 'Cannot call method booleanNode() on mixed.'
 			identifier: method.nonObject
 			count: 1
@@ -70,12 +76,6 @@ parameters:
 			rawMessage: 'Cannot call method cannotBeEmpty() on mixed.'
 			identifier: method.nonObject
 			count: 3
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method defaultValue() on Symfony\Component\Config\Definition\Builder\NodeParentInterface|null.'
-			identifier: method.nonObject
-			count: 1
 			path: src/DependencyInjection/Configuration.php
 
 		-
@@ -463,18 +463,6 @@ parameters:
 			path: tests/Command/RatioFetchCommandTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::never().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Command/RatioFetchCommandTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::once().'
-			identifier: staticMethod.dynamicCall
-			count: 3
-			path: tests/Command/RatioFetchCommandTest.php
-
-		-
 			rawMessage: 'Parameter #1 $pairManager of class Tbbc\MoneyBundle\Command\RatioFetchCommand constructor expects Tbbc\MoneyBundle\Pair\PairManagerInterface, PHPUnit\Framework\MockObject\MockObject given.'
 			identifier: argument.type
 			count: 2
@@ -499,21 +487,9 @@ parameters:
 			path: tests/Command/RatioListCommandTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::once().'
-			identifier: staticMethod.dynamicCall
-			count: 3
-			path: tests/Command/RatioListCommandTest.php
-
-		-
 			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
 			identifier: staticMethod.dynamicCall
 			count: 4
-			path: tests/Command/RatioSaveCommandTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::once().'
-			identifier: staticMethod.dynamicCall
-			count: 2
 			path: tests/Command/RatioSaveCommandTest.php
 
 		-
@@ -889,25 +865,13 @@ parameters:
 			path: tests/Form/Type/CurrencyTypeTest.php
 
 		-
-			rawMessage: Cannot access offset 'form' on mixed.
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: tests/Form/Type/CurrencyTypeTest.php
-
-		-
 			rawMessage: Cannot access offset 'id' on mixed.
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: tests/Form/Type/CurrencyTypeTest.php
-
-		-
-			rawMessage: Cannot access offset 'tbbc_name' on mixed.
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: tests/Form/Type/CurrencyTypeTest.php
 
 		-
-			rawMessage: Cannot access offset 'value' on mixed.
+			rawMessage: Cannot access offset 'tbbc_name' on mixed.
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: tests/Form/Type/CurrencyTypeTest.php
@@ -943,12 +907,6 @@ parameters:
 			path: tests/Form/Type/CurrencyTypeTest.php
 
 		-
-			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Form\Type\CurrencyTypeTest::getExtensions() return type has no value type specified in iterable type array.'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/Form/Type/CurrencyTypeTest.php
-
-		-
 			rawMessage: 'Parameter #2 $haystack of method PHPUnit\Framework\Assert::assertCount() expects Countable|iterable, mixed given.'
 			identifier: argument.type
 			count: 2
@@ -961,15 +919,9 @@ parameters:
 			path: tests/Form/Type/CurrencyTypeTest.php
 
 		-
-			rawMessage: Cannot access offset 'form' on mixed.
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 3
-			path: tests/Form/Type/MoneyTypeTest.php
-
-		-
 			rawMessage: Cannot access offset 'id' on mixed.
 			identifier: offsetAccess.nonOffsetAccessible
-			count: 3
+			count: 2
 			path: tests/Form/Type/MoneyTypeTest.php
 
 		-
@@ -982,12 +934,6 @@ parameters:
 			rawMessage: Cannot access offset 'tbbc_currency' on mixed.
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
-			path: tests/Form/Type/MoneyTypeTest.php
-
-		-
-			rawMessage: Cannot access offset 'value' on mixed.
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
 			path: tests/Form/Type/MoneyTypeTest.php
 
 		-
@@ -1033,12 +979,6 @@ parameters:
 			path: tests/Form/Type/MoneyTypeTest.php
 
 		-
-			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Form\Type\MoneyTypeTest::getExtensions() return type has no value type specified in iterable type array.'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/Form/Type/MoneyTypeTest.php
-
-		-
 			rawMessage: 'Parameter #2 $haystack of method PHPUnit\Framework\Assert::assertCount() expects Countable|iterable, mixed given.'
 			identifier: argument.type
 			count: 1
@@ -1063,12 +1003,6 @@ parameters:
 			path: tests/Form/Type/SimpleMoneyTypeTest.php
 
 		-
-			rawMessage: Cannot access offset 'value' on mixed.
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: tests/Form/Type/SimpleMoneyTypeTest.php
-
-		-
 			rawMessage: 'Cannot call method getAmount() on mixed.'
 			identifier: method.nonObject
 			count: 5
@@ -1090,12 +1024,6 @@ parameters:
 			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
 			identifier: staticMethod.dynamicCall
 			count: 12
-			path: tests/Form/Type/SimpleMoneyTypeTest.php
-
-		-
-			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Form\Type\SimpleMoneyTypeTest::getExtensions() return type has no value type specified in iterable type array.'
-			identifier: missingType.iterableValue
-			count: 1
 			path: tests/Form/Type/SimpleMoneyTypeTest.php
 
 		-
@@ -1801,12 +1729,6 @@ parameters:
 			path: tests/PairHistory/PairHistoryManagerTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::exactly().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/TbbcMoneyBundleTest.php
-
-		-
 			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
 			identifier: staticMethod.dynamicCall
 			count: 2
@@ -1822,12 +1744,6 @@ parameters:
 			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
 			identifier: staticMethod.dynamicCall
 			count: 3
-			path: tests/Twig/Extension/MoneyExtensionTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::once().'
-			identifier: staticMethod.dynamicCall
-			count: 1
 			path: tests/Twig/Extension/MoneyExtensionTest.php
 
 		-
@@ -1868,12 +1784,6 @@ parameters:
 
 		-
 			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Type/MoneyTypeTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::once().'
 			identifier: staticMethod.dynamicCall
 			count: 1
 			path: tests/Type/MoneyTypeTest.php
