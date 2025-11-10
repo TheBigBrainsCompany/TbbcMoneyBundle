@@ -1,6 +1,12 @@
 Versions from 6.0
 -----------------
 
+### 2025-11-10 : updates for 6.1.1 version
+
+**New features**
+- Allow doctrine/doctrine-bundle ^2|^3
+- Migrate config from xml to php (prepare for Symfony 8)
+
 ### 2025-11-05 : updates for 6.1.0 version
 
 **Internal Developer things**
