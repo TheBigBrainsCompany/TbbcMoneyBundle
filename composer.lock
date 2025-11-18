@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82d3a4c8c65a7d4a3e0c93c1abc6b5d8",
+    "content-hash": "a31538155b953d7320fab19d9034595b",
     "packages": [
         {
             "name": "masterminds/html5",
@@ -3922,16 +3922,16 @@
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
-            "version": "5.4.3",
+            "version": "5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMongoDBBundle.git",
-                "reference": "2d040dd7abafd70c8b7932a0c7b107dc4ff552f2"
+                "reference": "da3bfe0aa2ce995569baf8e3affbf76a5bf01a00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/2d040dd7abafd70c8b7932a0c7b107dc4ff552f2",
-                "reference": "2d040dd7abafd70c8b7932a0c7b107dc4ff552f2",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/da3bfe0aa2ce995569baf8e3affbf76a5bf01a00",
+                "reference": "da3bfe0aa2ce995569baf8e3affbf76a5bf01a00",
                 "shasum": ""
             },
             "require": {
@@ -3941,30 +3941,32 @@
                 "ext-mongodb": "^1.21 || ^2",
                 "php": "^8.1",
                 "psr/log": "^1.0 || ^2.0 || ^3.0",
-                "symfony/config": "^6.4 || ^7.0",
-                "symfony/console": "^6.4 || ^7.0",
-                "symfony/dependency-injection": "^6.4 || ^7.0",
-                "symfony/doctrine-bridge": "^6.4 || ^7.0",
-                "symfony/framework-bundle": "^6.4 || ^7.0",
-                "symfony/http-kernel": "^6.4 || ^7.0",
-                "symfony/options-resolver": "^6.4 || ^7.0"
+                "symfony/config": "^6.4 || ^7.0 || ^8.0",
+                "symfony/console": "^6.4 || ^7.0 || ^8.0",
+                "symfony/dependency-injection": "^6.4 || ^7.0 || ^8.0",
+                "symfony/doctrine-bridge": "^6.4 || ^7.0 || ^8.0",
+                "symfony/framework-bundle": "^6.4 || ^7.0 || ^8.0",
+                "symfony/http-kernel": "^6.4 || ^7.0 || ^8.0",
+                "symfony/options-resolver": "^6.4 || ^7.0 || ^8.0"
             },
             "conflict": {
                 "doctrine/data-fixtures": "<1.8 || >=3"
             },
             "require-dev": {
                 "composer/semver": "^3.4",
-                "doctrine/coding-standard": "^11.0",
+                "doctrine/coding-standard": "^14.0",
                 "doctrine/data-fixtures": "^1.8 || ^2.0",
                 "phpstan/phpstan": "^2.1",
                 "phpunit/phpunit": "^10.5",
-                "symfony/browser-kit": "^6.4 || ^7.0",
-                "symfony/form": "^6.4 || ^7.0",
+                "squizlabs/php_codesniffer": "^4",
+                "symfony/browser-kit": "^6.4 || ^7.0 || ^8.0",
+                "symfony/form": "^6.4 || ^7.0 || ^8.0",
+                "symfony/messenger": "^6.4 || ^7.0 || ^8.0",
                 "symfony/phpunit-bridge": "^6.4.1 || ^7.0.1",
-                "symfony/security-bundle": "^6.4 || ^7.0",
-                "symfony/stopwatch": "^6.4 || ^7.0",
-                "symfony/validator": "^6.4 || ^7.0",
-                "symfony/yaml": "^6.4 || ^7.0"
+                "symfony/security-bundle": "^6.4 || ^7.0 || ^8.0",
+                "symfony/stopwatch": "^6.4 || ^7.0 || ^8.0",
+                "symfony/validator": "^6.4 || ^7.0 || ^8.0",
+                "symfony/yaml": "^6.4 || ^7.0 || ^8.0"
             },
             "suggest": {
                 "doctrine/data-fixtures": "Load data fixtures"
@@ -4002,9 +4004,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineMongoDBBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineMongoDBBundle/tree/5.4.3"
+                "source": "https://github.com/doctrine/DoctrineMongoDBBundle/tree/5.5.0"
             },
-            "time": "2025-11-05T15:09:42+00:00"
+            "time": "2025-11-14T17:10:15+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -8556,16 +8558,16 @@
         },
         {
             "name": "theseer/tokenizer",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/tokenizer.git",
-                "reference": "d74205c497bfbca49f34d4bc4c19c17e22db4ebb"
+                "reference": "b7489ce515e168639d17feec34b8847c326b0b3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/tokenizer/zipball/d74205c497bfbca49f34d4bc4c19c17e22db4ebb",
-                "reference": "d74205c497bfbca49f34d4bc4c19c17e22db4ebb",
+                "url": "https://api.github.com/repos/theseer/tokenizer/zipball/b7489ce515e168639d17feec34b8847c326b0b3c",
+                "reference": "b7489ce515e168639d17feec34b8847c326b0b3c",
                 "shasum": ""
             },
             "require": {
@@ -8594,7 +8596,7 @@
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
             "support": {
                 "issues": "https://github.com/theseer/tokenizer/issues",
-                "source": "https://github.com/theseer/tokenizer/tree/1.3.0"
+                "source": "https://github.com/theseer/tokenizer/tree/1.3.1"
             },
             "funding": [
                 {
@@ -8602,7 +8604,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-13T13:44:09+00:00"
+            "time": "2025-11-17T20:03:58+00:00"
         }
     ],
     "aliases": [],
