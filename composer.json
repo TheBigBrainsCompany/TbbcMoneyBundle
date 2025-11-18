@@ -28,7 +28,8 @@
         "symfony/console": "^5.4|^6.0|^7.0",
         "symfony/dom-crawler": "^5.4|^6.0|^7.0",
         "symfony/event-dispatcher": "^5.4|^6.0|^7.0",
-        "symfony/http-client": "^v5.4.49|^v6.4.28|^v7.3.6"
+        "symfony/http-client": "^5.4|^6.0|^7.0",
+        "symfony/http-foundation": "^5.4.50|^6.4.29|^7.3.7"
     },
     "autoload": {
         "psr-4": {
