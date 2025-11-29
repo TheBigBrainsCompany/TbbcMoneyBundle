@@ -70,7 +70,7 @@
         "rector-check": "vendor/bin/rector --dry-run",
         "rector-fix": "vendor/bin/rector"
     },
-    "suggest": {:
+    "suggest": {
         "doctrine/doctrine-bundle": "~2.12",
         "doctrine/mongodb-odm-bundle": "For usage with MongoDB",
         "doctrine/orm": "~2.19",
