@@ -23,12 +23,12 @@
         "ext-intl": "*",
         "ext-simplexml": "*",
         "moneyphp/money": "^4.5",
-        "symfony/form": "^5.4|^6.0|^7.0",
-        "symfony/twig-bundle": "^5.4|^6.0|^7.0",
-        "symfony/console": "^5.4|^6.0|^7.0",
-        "symfony/dom-crawler": "^5.4|^6.0|^7.0",
-        "symfony/event-dispatcher": "^5.4|^6.0|^7.0",
-        "symfony/http-client": "^5.4|^6.0|^7.0"
+        "symfony/form": "^5.4|^6.0|^7.0|^8.0",
+        "symfony/twig-bundle": "^5.4|^6.0|^7.0|^8.0",
+        "symfony/console": "^5.4|^6.0|^7.0|^8.0",
+        "symfony/dom-crawler": "^5.4|^6.0|^7.0|^8.0",
+        "symfony/event-dispatcher": "^5.4|^6.0|^7.0|^8.0",
+        "symfony/http-client": "^5.4|^6.0|^7.0|^8.0"
     },
     "autoload": {
         "psr-4": {
@@ -49,7 +49,7 @@
         "php-http/guzzle7-adapter": "^1.0",
         "symfony/phpunit-bridge": "^7.0",
         "phpunit/phpunit": "^10.5.46|^11.5.21|^12.1.6",
-        "symfony/yaml": "^5.4|^6.0|^7.0",
+        "symfony/yaml": "^5.4|^6.0|^7.0|^8.0",
         "http-interop/http-factory-guzzle": "^1.2",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-phpunit": "^2.0",
@@ -70,7 +70,7 @@
         "rector-check": "vendor/bin/rector --dry-run",
         "rector-fix": "vendor/bin/rector"
     },
-    "suggest": {
+    "suggest": {:
         "doctrine/doctrine-bundle": "~2.12",
         "doctrine/mongodb-odm-bundle": "For usage with MongoDB",
         "doctrine/orm": "~2.19",
