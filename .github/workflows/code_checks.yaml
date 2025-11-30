@@ -28,35 +28,35 @@ jobs:
         php: ['8.4']
         stability: [ prefer-stable ]
         mongodb-version: ['7.0']
-        symfony-version: ['7.0.*']
+        symfony-version: ['7.4.*']
         include:
-          - php: '8.1'
+          - php: '8.2'
             mongodb-version: '7.0'
             symfony-version: 5.4.*
             stability: prefer-lowest
-          - php: '8.1'
+          - php: '8.2'
             mongodb-version: '7.0'
             symfony-version: 5.4.*
             stability: prefer-stable
-          - php: '8.1'
+          - php: '8.2'
             mongodb-version: '7.0'
             symfony-version: 6.4.*
             stability: prefer-stable
           - php: '8.2'
             mongodb-version: '7.0'
-            symfony-version: 7.0.*
+            symfony-version: 7.4.*
             stability: prefer-stable
           - php: '8.3'
             mongodb-version: '7.0'
-            symfony-version: 7.0.*
+            symfony-version: 7.4.*
             stability: prefer-stable
           - php: '8.4'
             mongodb-version: '7.0'
-            symfony-version: 7.0.*
+            symfony-version: 7.4.*
             stability: prefer-stable
           - php: '8.5'
             mongodb-version: '7.0'
-            symfony-version: 7.3.*
+            symfony-version: 7.4.*
             stability: prefer-stable
           - php: '8.5'
             mongodb-version: '7.0'
@@ -126,8 +126,8 @@ jobs:
 
       - run: |
           composer install --prefer-dist --no-progress
-          composer cs-fix
           composer rector-fix
+          composer cs-fix
 
       - uses: stefanzweifel/git-auto-commit-action@28e16e81777b558cc906c8750092100bbb34c5e3 #v7
         with:
