@@ -111,9 +111,8 @@ TbbcMoneybundle comes with docker compose to ease development, to build dev dock
 docker compose up --build -d
 ```
 
-And once it is built, enter the php 8.1, 8.2, 8.3 or 8.4 container:
+And once it is built, enter the php 8.2, 8.3, 8.4 or 8.5 container:
 ```bash
-docker exec -it tbbc-moneybundle-php81 bash
 docker exec -it tbbc-moneybundle-php82 bash
 docker exec -it tbbc-moneybundle-php83 bash
 docker exec -it tbbc-moneybundle-php84 bash
