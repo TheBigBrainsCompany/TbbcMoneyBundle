@@ -61,80 +61,14 @@ parameters:
 			path: src/DependencyInjection/Compiler/StorageCompilerPass.php
 
 		-
-			rawMessage: 'Call to an undefined method Symfony\Component\Config\Definition\Builder\NodeParentInterface::defaultValue().'
-			identifier: method.notFound
+			rawMessage: 'Method Tbbc\MoneyBundle\DependencyInjection\Configuration::addCurrencySection() has parameter $node with generic class Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition but does not specify its types: TParent'
+			identifier: missingType.generics
 			count: 1
 			path: src/DependencyInjection/Configuration.php
 
 		-
-			rawMessage: 'Cannot call method booleanNode() on mixed.'
-			identifier: method.nonObject
-			count: 1
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method cannotBeEmpty() on mixed.'
-			identifier: method.nonObject
-			count: 3
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method defaultValue() on mixed.'
-			identifier: method.nonObject
-			count: 5
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method end() on mixed.'
-			identifier: method.nonObject
-			count: 8
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method ifNotInArray() on mixed.'
-			identifier: method.nonObject
-			count: 1
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method integerNode() on mixed.'
-			identifier: method.nonObject
-			count: 1
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method min() on mixed.'
-			identifier: method.nonObject
-			count: 1
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method requiresAtLeastOneElement() on mixed.'
-			identifier: method.nonObject
-			count: 1
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method scalarNode() on mixed.'
-			identifier: method.nonObject
-			count: 3
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method thenInvalid() on mixed.'
-			identifier: method.nonObject
-			count: 1
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Cannot call method validate() on mixed.'
-			identifier: method.nonObject
-			count: 1
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Parameter #1 $node of method Tbbc\MoneyBundle\DependencyInjection\Configuration::addCurrencySection() expects Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition, Symfony\Component\Config\Definition\Builder\NodeDefinition given.'
-			identifier: argument.type
+			rawMessage: 'Method Tbbc\MoneyBundle\DependencyInjection\Configuration::getConfigTreeBuilder() return type with generic class Symfony\Component\Config\Definition\Builder\TreeBuilder does not specify its types: T'
+			identifier: missingType.generics
 			count: 1
 			path: src/DependencyInjection/Configuration.php
 
