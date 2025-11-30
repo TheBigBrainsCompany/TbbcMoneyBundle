@@ -2,8 +2,8 @@ TbbcMoneyBundle
 ===============
 
 [![Build Status](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/actions/workflows/code_checks.yaml/badge.svg)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/actions/workflows/code_checks.yaml)
-[![PHP](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg?style=flat-square)](https://php.net)
-[![Symfony](https://img.shields.io/badge/symfony-%5E5|%5E6|%5E7-green.svg?style=flat-square)](https://symfony.com)
+[![PHP](https://img.shields.io/badge/php-%3E%3D%208.2-8892BF.svg?style=flat-square)](https://php.net)
+[![Symfony](https://img.shields.io/badge/symfony-%5E6|%5E7|%5E8-green.svg?style=flat-square)](https://symfony.com)
 [![Downloads](https://img.shields.io/packagist/dt/tbbc/money-bundle.svg?style=flat-square)](https://packagist.org/packages/tbbc/money-bundle/stats)
 [![Latest Stable Version](https://img.shields.io/packagist/v/tbbc/money-bundle.svg)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/releases/latest)
 [![license](https://img.shields.io/github/license/TheBigBrainsCompany/TbbcMoneyBundle.svg?style=flat-square)](https://github.com/TheBigBrainsCompany/TbbcMoneyBundle/blob/master/LICENSE)
@@ -15,7 +15,7 @@ a Symfony project.
 
 This library is based on Fowler's [Money pattern](https://verraes.net/2011/04/fowler-money-pattern-in-php/)
 
-* This bundle is tested and is stable with Symfony 5.4, 6.4, 7.0
+* This bundle is tested and is stable with Symfony 6.4, 7.4 and 8.0
 
 Quick Start
 -----------
