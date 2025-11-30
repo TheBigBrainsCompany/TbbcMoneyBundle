@@ -5,7 +5,7 @@ Versions from 6.0
 
 **New features**
 - Allow doctrine/doctrine-bundle ^2|^3
-- Migrate config from xml to php (prepare for Symfony 8)
+- Migrate config from xml to php, support Symfony 8
 
 ### 2025-11-05 : updates for 6.1.0 version
 
