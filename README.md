@@ -675,3 +675,4 @@ what is functional:
 * commands for ratio creation and ratio display
 * automatic ratio fetch (with 2 ratio providers)
 * history of currency ratio
+
