@@ -1,14 +1,4 @@
 services:
-  tbbc-moneybundle-php81:
-    container_name: tbbc-moneybundle-php81
-    build:
-      context: .
-      dockerfile: ./docker/dockerfile-tbbc-moneybundle-php81
-    tty: true
-    stdin_open: true
-    volumes:
-      - .:/docker:rw,delegated
-
   tbbc-moneybundle-php82:
     container_name: tbbc-moneybundle-php82
     build:
