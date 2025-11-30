@@ -8,7 +8,6 @@ use Exchanger\Exchanger;
 use Exchanger\Service\PhpArray;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProvider\ExchangerAdapterRatioProvider;
-use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 final class ExchangerAdapterRatioProviderTest extends AbstractRatioProvider
 {

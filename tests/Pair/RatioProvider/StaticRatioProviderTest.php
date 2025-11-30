@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
 
 use Tbbc\MoneyBundle\Pair\RatioProvider\StaticRatioProvider;
-use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 final class StaticRatioProviderTest extends AbstractRatioProvider
 {
