@@ -12,7 +12,7 @@ use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 final class ExchangerAdapterRatioProviderTest extends AbstractRatioProvider
 {
-    protected function getRatioProvider(): RatioProviderInterface
+    protected function getRatioProvider(): ExchangerAdapterRatioProvider
     {
         $ratios = $this->getRatiosToTest();
 

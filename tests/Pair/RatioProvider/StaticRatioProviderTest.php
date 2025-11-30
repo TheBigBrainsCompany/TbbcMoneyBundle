@@ -9,7 +9,7 @@ use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 final class StaticRatioProviderTest extends AbstractRatioProvider
 {
-    protected function getRatioProvider(): RatioProviderInterface
+    protected function getRatioProvider(): StaticRatioProvider
     {
         $provider = new StaticRatioProvider();
         $ratios = $this->getRatiosToTest();
