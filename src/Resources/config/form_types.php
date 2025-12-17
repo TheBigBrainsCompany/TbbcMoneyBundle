@@ -6,6 +6,10 @@ use Tbbc\MoneyBundle\Form\Type\{CurrencyType, MoneyType, SimpleMoneyType};
 return static function (ContainerConfigurator $configurator): void {
     $services = $configurator->services();
 
+    $services->defaults()
+        ->private()
+        ->autoconfigure();
+
     $services
         ->set(CurrencyType::class)
         ->arg('$currencyCodeList', '%tbbc_money.currencies%')
