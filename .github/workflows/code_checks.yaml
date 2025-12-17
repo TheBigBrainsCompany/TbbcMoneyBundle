@@ -28,16 +28,12 @@ jobs:
         php: ['8.4']
         stability: [ prefer-stable ]
         mongodb-version: ['7.0']
-        symfony-version: ['7.4.*']
+        symfony-version: ['8.0.*']
         include:
           - php: '8.2'
             mongodb-version: '7.0'
-            symfony-version: 5.4.*
+            symfony-version: 6.4.*
             stability: prefer-lowest
-          - php: '8.2'
-            mongodb-version: '7.0'
-            symfony-version: 5.4.*
-            stability: prefer-stable
           - php: '8.2'
             mongodb-version: '7.0'
             symfony-version: 6.4.*
@@ -54,9 +50,17 @@ jobs:
             mongodb-version: '7.0'
             symfony-version: 7.4.*
             stability: prefer-stable
+          - php: '8.4'
+            mongodb-version: '7.0'
+            symfony-version: 8.0.*
+            stability: prefer-stable
           - php: '8.5'
             mongodb-version: '7.0'
             symfony-version: 7.4.*
+            stability: prefer-stable
+          - php: '8.5'
+            mongodb-version: '7.0'
+            symfony-version: 8.0.*
             stability: prefer-stable
 
     name: PHP ${{ matrix.php }} - ${{ matrix.symfony-version }} - ${{ matrix.stability }}
@@ -74,8 +78,7 @@ jobs:
       - uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f #v2
         with:
           php-version: ${{ matrix.php }}
-          # we need an older mongodb for symfony 5.4 and php 8.1 tests
-          extensions: pcov, curl, mongodb-${{ matrix.symfony-version == '5.4.*' && '1.19.4' || 'stable' }}
+          extensions: pcov, curl, mongodb-stable
           coverage: pcov
 
       - name: Start MongoDB
