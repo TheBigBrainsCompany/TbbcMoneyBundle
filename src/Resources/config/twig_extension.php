@@ -13,7 +13,6 @@ return static function (ContainerConfigurator $configurator): void {
         ->private()
         ->autoconfigure();
 
-    // === Services ===
     $services->set(MoneyExtension::class)
         ->arg('$moneyFormatter', service(MoneyFormatter::class))
         ->arg('$pairManager', service(PairManagerInterface::class));

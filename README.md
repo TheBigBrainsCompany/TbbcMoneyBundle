@@ -33,7 +33,7 @@ assert($part2->equals(Money::EUR(333)));
 assert($part3->equals(Money::EUR(333)));
 
 // a service that stores conversion ratios
-$pairManager = $this->get('tbbc_money.pair_manager');
+// inject $pairManager Tbbc\MoneyBundle\Pair\PairManagerInterface with DI
 $usd = $pairManager->convert($tenEur, 'USD');
 
 // a form integration
@@ -322,7 +322,7 @@ class TestMoney
 Convert an amount into another currency
 
 ```php
-$pairManager = $this->get("tbbc_money.pair_manager");
+// inject $pairManager Tbbc\MoneyBundle\Pair\PairManagerInterface with DI
 $usd = $pairManager->convert($amount, 'USD');
 ```
 
@@ -331,7 +331,7 @@ Save a conversion value in a DB
 ```php
 use Money\Money;
 
-$pairManager = $this->get("tbbc_money.pair_manager");
+// inject $pairManager Tbbc\MoneyBundle\Pair\PairManagerInterface with DI
 $pairManager->saveRatio('USD', 1.25); // save in ratio file in CSV
 $eur = Money::EUR(100);
 $usd = $pairManager->convert($amount, 'USD');
