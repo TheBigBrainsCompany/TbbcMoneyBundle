@@ -7,6 +7,7 @@ namespace Tbbc\MoneyBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider;
 
 class Configuration implements ConfigurationInterface
 {
@@ -56,7 +57,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('ratio_provider')
                     ->cannotBeEmpty()
-                    ->defaultValue('tbbc_money.ratio_provider.ecb')
+                    ->defaultValue(ECBRatioProvider::class)
                 ->end()
             ->end()
         ;
