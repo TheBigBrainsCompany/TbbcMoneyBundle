@@ -23,21 +23,24 @@ Quick Start
 ```php
 use Money\Money;
 use Tbbc\MoneyBundle\Form\Type\MoneyType;
+use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
-// the money library
-$fiveEur = Money::EUR(500);
-$tenEur = $fiveEur->add($fiveEur);
-[$part1, $part2, $part3] = $tenEur->allocate([1, 1, 1]);
-assert($part1->equals(Money::EUR(334)));
-assert($part2->equals(Money::EUR(333)));
-assert($part3->equals(Money::EUR(333)));
+public function convertAction(PairManagerInterface $pairManager): Response
+{
+    // the money library
+    $fiveEur = Money::EUR(500);
+    $tenEur = $fiveEur->add($fiveEur);
+    [$part1, $part2, $part3] = $tenEur->allocate([1, 1, 1]);
+    assert($part1->equals(Money::EUR(334)));
+    assert($part2->equals(Money::EUR(333)));
+    assert($part3->equals(Money::EUR(333)));
 
-// a service that stores conversion ratios
-// inject $pairManager Tbbc\MoneyBundle\Pair\PairManagerInterface with DI
-$usd = $pairManager->convert($tenEur, 'USD');
+    // a service that stores conversion ratios
+    $usd = $pairManager->convert($tenEur, 'USD');
 
-// a form integration
-$formBuilder->add('price', MoneyType::class);
+    // a form integration
+    $formBuilder->add('price', MoneyType::class);
+}
 ```
 
 Features
@@ -322,20 +325,29 @@ class TestMoney
 Convert an amount into another currency
 
 ```php
-// inject $pairManager Tbbc\MoneyBundle\Pair\PairManagerInterface with DI
-$usd = $pairManager->convert($amount, 'USD');
+use Tbbc\MoneyBundle\Pair\PairManagerInterface;
+
+public function convertAction(PairManagerInterface $pairManager): Response
+{
+    $usd = $pairManager->convert($amount, 'USD');
+    // ...
+}
 ```
 
 Save a conversion value in a DB
 
 ```php
 use Money\Money;
+use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
-// inject $pairManager Tbbc\MoneyBundle\Pair\PairManagerInterface with DI
-$pairManager->saveRatio('USD', 1.25); // save in ratio file in CSV
-$eur = Money::EUR(100);
-$usd = $pairManager->convert($amount, 'USD');
-$this->assertEquals(Money::USD(125), $usd);
+public function saveRatioAction(PairManagerInterface $pairManager): Response
+{
+    // save in ratio file in CSV
+    $pairManager->saveRatio('USD', 1.25);
+    $eur = Money::EUR(100);
+    $usd = $pairManager->convert($eur, 'USD');
+    $this->assertEquals(Money::USD(125), $usd);
+}
 ```
 
 ### Money formatter
@@ -347,12 +359,13 @@ namespace My\Controller\IndexController;
 
 use Money\Money;
 use Money\Currency;
+use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
+use Symfony\Component\HttpFoundation\Response;
 
-class IndexController extends Controller
+class IndexController
 {
-    public function myAction()
+    public function myAction(MoneyFormatter $moneyFormatter): Response
     {
-        $moneyFormatter = $this->get('tbbc_money.formatter.money_formatter');
         $price = new Money(123456789, new Currency('EUR'));
 
         // best method (added in 2.2+ version)
@@ -403,9 +416,8 @@ class IndexController extends Controller
 
 ### Change the ratio provider
 
-The ratio provider by default is base on the service `tbbc_money.ratio_provider.ecb`.
-
-* `tbbc_money.ratio_provider.ecb` ratio provider is based on the data provided here https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
+The ratio provider by default is base on the service `Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider`.
+* The ECBRatioProvider ratio provider is based on the data provided here https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
 
 You can write your own ratio provider by creating and custom class that implements the `RatioProviderInterface` interface.
 
@@ -442,82 +454,10 @@ composer require "florianv/exchanger" "php-http/message" "php-http/guzzle7-adapt
 
 Configuration:
 
-First, you need to add services you would like to use into your services.yml file, e.g:
-    
-```yaml
-ratio_provider.service.ecb:
-  class: Exchanger\Service\EuropeanCentralBank
-```
-
-Second, you need to update ratio provider used by MoneyBundle on your config.yml file:
-
 ```yaml
 tbbc_money:
-    ratio_provider: ratio_provider.service.ecb
+    ratio_provider: Tbbc\MoneyBundle\Pair\RatioProvider\ExchangerAdapterRatioProvider
 ```
-
-Recommended:
-
-Some providers focus on a limited set of currencies, but give better data. 
-You can use several rate providers seamlessly on your project by bundling them into the chain.
-If some provider does not support certain currency, next provider in the chain would be attempted.
-
-Example of chained providers:
-
-```yaml
-ratio_provider.service.ecb:
-  class: Exchanger\Service\EuropeanCentralBank
-
-ratio_provider.service.rcb:
-  class: Exchanger\Service\RussianCentralBank
-
-ratio_provider.service.cryptonator:
-  class: Exchanger\Service\Cryptonator
-
-ratio_provider.service.array:
-  class: Exchanger\Service\PhpArray
-  arguments:
-    -
-      'EUR/USD': 1.157
-      'EUR/AUD': 1.628
-
-ratio_provider.service.default:
-  class: Exchanger\Service\Chain
-  arguments:
-    -
-      - "@ratio_provider.service.ecb"
-      - "@ratio_provider.service.rcb"
-      - "@ratio_provider.service.cryptonator"
-      - "@ratio_provider.service.array"
-```
-
-As you can see here 4 providers would be attempted one after another until conversion rate is found.
-Check this page for a fill list of supported services and their configurations: https://github.com/florianv/exchanger/blob/master/doc/readme.md#supported-services
-
-And then you need to assign rate provider on your config.yml file:
-
-```
-tbbc_money:
-    [...]
-    ratio_provider: ratio_provider.service.default
-```
-
-### Create your own ratio provider
-
-A ratio provider is a service that implements the `Tbbc\MoneyBundle\Pair\RatioProviderInterface`.
-I recommend that you read the PHP doc of the interface to understand how to implement a new ratio provider.
-
-The new ratio provider has to be registered as a service.
-
-To use the new ratio provider, you should set the service to use in the config.yml by giving the
-service name.
-
-```
-tbbc_money:
-    [...]
-    ratio_provider: tbbc_money.ratio_provider.google
-```
-
 
 
 ### automatic currency ratio fetch
@@ -533,11 +473,13 @@ Add to your crontab :
 Create a money object from a float can be a bit tricky because of rounding issues.
 
 ```php
-<?php
-$moneyManager = $this->get("tbbc_money.money_manager");
-$money = $moneyManager->createMoneyFromFloat('2.5', 'USD');
-$this->assertEquals("USD", $money->getCurrency()->getCode());
-$this->assertEquals(250, $money->getAmount());
+use Tbbc\MoneyBundle\Money\MoneyManagerInterface;
+
+public function createMoneyAction(MoneyManagerInterface $moneyManager): Response
+{
+    $money = $moneyManager->createMoneyFromFloat('2.5', 'USD');
+    $this->assertEquals("USD", $money->getCurrency()->getCode());
+    $this->assertEquals(250, $money->getAmount());
 ```
 
 ### history of currency ratio with the pairHistoryManager
@@ -556,14 +498,18 @@ tbbc_money:
 Then you can use the service :
 
 ```php
-$pairHistoryManager = $this->get("tbbc_money.pair_history_manager");
-$dt = new \DateTime("2023-07-08 11:14:15.638276");
+use Tbbc\MoneyBundle\PairHistory\PairHistoryManagerInterface;
 
-// returns ratio for at a given date
-$ratio = $pairHistoryManager->getRatioAtDate('USD', $dt);
+public function historyAction(PairHistoryManagerInterface $pairHistoryManager): Response
+{
+    $dt = new \DateTime("2023-07-08 11:14:15.638276");
 
-// returns the list of USD ratio (relative to the reference value)
-$ratioList = $pairHistoryManager->getRatioHistory('USD', $startDate, $endDate);
+    // returns ratio for at a given date
+    $ratio = $pairHistoryManager->getRatioAtDate('USD', $dt);
+
+    // returns the list of USD ratio (relative to the reference value)
+    $ratioList = $pairHistoryManager->getRatioHistory('USD', $startDate, $endDate);
+}
 ```
 
 RatioStorage
@@ -655,22 +601,3 @@ Authors
 
 Philippe Le Van - [kitpages.fr](http://www.kitpages.fr) - twitter : @plv  
 Thomas Tourlourat - [Wozbe](http://wozbe.com) - twitter: @armetiz  
-
-
-Status
-------
-
-Stable
-
-what is functional:
-
-* integration of the money library
-* configuration parser
-* pairManager
-* Travis CI integration
-* form integration
-* Twig presentation for forms
-* Twig filters
-* commands for ratio creation and ratio display
-* automatic ratio fetch (with 2 ratio providers)
-* history of currency ratio
