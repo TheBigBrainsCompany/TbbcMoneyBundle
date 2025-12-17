@@ -43,7 +43,7 @@ class StorageCompilerPass implements CompilerPassInterface
             ]);
 
             $container->setDefinition('tbbc_money.pair.doctrine_storage', $storageDoctrineDefinition);
-            $container->getDefinition(PairManagerInterface::class)->replaceArgument(0, new Reference('tbbc_money.pair.doctrine_storage'));
+            $container->getDefinition(PairManagerInterface::class)->setArgument('$storage', new Reference('tbbc_money.pair.doctrine_storage'));
         }
 
         //Determine if DoctrineMongoDBBundle is defined
@@ -66,7 +66,7 @@ class StorageCompilerPass implements CompilerPassInterface
             ]);
 
             $container->setDefinition('tbbc_money.pair.document_storage', $storageDocumentDefinition);
-            $container->getDefinition(PairManagerInterface::class)->replaceArgument(0, new Reference('tbbc_money.pair.document_storage'));
+            $container->getDefinition(PairManagerInterface::class)->setArgument('$storage', new Reference('tbbc_money.pair.document_storage'));
         }
     }
 }

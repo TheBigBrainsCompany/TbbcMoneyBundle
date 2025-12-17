@@ -15,9 +15,9 @@ return static function (ContainerConfigurator $configurator): void {
 
     // === Services ===
     $services->set(MoneyExtension::class)
-        ->arg('$formatter', service(MoneyFormatter::class))
+        ->arg('$moneyFormatter', service(MoneyFormatter::class))
         ->arg('$pairManager', service(PairManagerInterface::class));
 
     $services->set(CurrencyExtension::class)
-        ->arg('$formatter', service(MoneyFormatter::class));
+        ->arg('$moneyFormatter', service(MoneyFormatter::class));
 };

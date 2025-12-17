@@ -39,7 +39,7 @@ return static function (ContainerConfigurator $configurator): void {
 
     $services->set(PairHistoryManagerInterface::class, PairHistoryManager::class)
         ->public()
-        ->arg('$entityManager', service(EntityManagerInterface::class))
+        ->arg('$em', service(EntityManagerInterface::class))
         ->arg('$referenceCurrencyCode', '%tbbc_money.reference_currency%');
 
     $services->alias(PairHistoryManager::class, PairHistoryManagerInterface::class)->public();
@@ -54,14 +54,14 @@ return static function (ContainerConfigurator $configurator): void {
 
     // Storage
     $services->set(CsvStorage::class)
-        ->arg('$fileName', '%tbbc_money.pair_manager.ratio_file_name%')
+        ->arg('$ratioFileName', '%tbbc_money.pair_manager.ratio_file_name%')
         ->arg('$referenceCurrencyCode', '%tbbc_money.reference_currency%');
 
     $services->alias('tbbc_money.pair.csv_storage', CsvStorage::class);
 
     // Ratio providers
     $services->set(ECBRatioProvider::class)
-        ->arg('$httpClient', service(HttpClientInterface::class));
+        ->arg('$client', service(HttpClientInterface::class));
 
     $services->alias('tbbc_money.ratio_provider.ecb', ECBRatioProvider::class);
 
