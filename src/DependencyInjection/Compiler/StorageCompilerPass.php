@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 use Tbbc\MoneyBundle\Pair\Storage\DoctrineStorage;
 use Tbbc\MoneyBundle\Pair\Storage\DocumentStorage;
 
@@ -42,7 +43,7 @@ class StorageCompilerPass implements CompilerPassInterface
             ]);
 
             $container->setDefinition('tbbc_money.pair.doctrine_storage', $storageDoctrineDefinition);
-            $container->getDefinition('tbbc_money.pair_manager')->replaceArgument(0, new Reference('tbbc_money.pair.doctrine_storage'));
+            $container->getDefinition(PairManagerInterface::class)->replaceArgument(0, new Reference('tbbc_money.pair.doctrine_storage'));
         }
 
         //Determine if DoctrineMongoDBBundle is defined
@@ -65,7 +66,7 @@ class StorageCompilerPass implements CompilerPassInterface
             ]);
 
             $container->setDefinition('tbbc_money.pair.document_storage', $storageDocumentDefinition);
-            $container->getDefinition('tbbc_money.pair_manager')->replaceArgument(0, new Reference('tbbc_money.pair.document_storage'));
+            $container->getDefinition(PairManagerInterface::class)->replaceArgument(0, new Reference('tbbc_money.pair.document_storage'));
         }
     }
 }

@@ -19,7 +19,6 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $configurator): void {
     $parameters = $configurator->parameters();
     $services = $configurator->services();
-    $services->defaults()->public();
     $services->defaults()
         ->private()
         ->autoconfigure();
@@ -28,27 +27,30 @@ return static function (ContainerConfigurator $configurator): void {
     $parameters->set('tbbc_money.pair_manager.ratio_file_name', '%kernel.project_dir%/../data/tbbc_money/ratio_file_name.csv');
 
     // === Services ===
-    $services->set(PairManager::class)
-        ->arg('$storage', service('tbbc_money.pair.csv_storage'))
+    $services->set(PairManagerInterface::class, PairManager::class)
+        ->public()
+        ->arg('$storage', service(CsvStorage::class))
         ->arg('$currencyCodeList', '%tbbc_money.currencies%')
         ->arg('$referenceCurrencyCode', '%tbbc_money.reference_currency%')
         ->arg('$dispatcher', service('event_dispatcher'));
 
-    $services->alias(PairManagerInterface::class, PairManager::class);
-    $services->alias('tbbc_money.pair_manager', PairManager::class);
+    $services->alias(PairManager::class, PairManagerInterface::class)->public();
+    $services->alias('tbbc_money.pair_manager', PairManagerInterface::class)->public();
 
-    $services->set(PairHistoryManager::class)
+    $services->set(PairHistoryManagerInterface::class, PairHistoryManager::class)
+        ->public()
         ->arg('$entityManager', service(EntityManagerInterface::class))
         ->arg('$referenceCurrencyCode', '%tbbc_money.reference_currency%');
 
-    $services->alias(PairHistoryManagerInterface::class, PairHistoryManager::class);
-    $services->alias('tbbc_money.pair_history_manager', PairHistoryManager::class);
+    $services->alias(PairHistoryManager::class, PairHistoryManagerInterface::class)->public();
+    $services->alias('tbbc_money.pair_history_manager', PairHistoryManagerInterface::class)->public();
 
     $services->set(MoneyManager::class)
+        ->public()
         ->arg('$referenceCurrencyCode', '%tbbc_money.reference_currency%')
         ->arg('$decimals', '%tbbc_money.decimals%');
 
-    $services->alias('tbbc_money.money_manager', MoneyManager::class);
+    $services->alias('tbbc_money.money_manager', MoneyManager::class)->public();
 
     // Storage
     $services->set(CsvStorage::class)
@@ -65,17 +67,18 @@ return static function (ContainerConfigurator $configurator): void {
 
     // Formatter
     $services->set(MoneyFormatter::class)
+        ->public()
         ->arg('$decimals', '%tbbc_money.decimals%');
 
-    $services->alias('tbbc_money.formatter.money_formatter', MoneyFormatter::class);
+    $services->alias('tbbc_money.formatter.money_formatter', MoneyFormatter::class)->public();
 
     // Commands
     $services->set(RatioFetchCommand::class)
-        ->arg('$pairManager', service(PairManager::class));
+        ->arg('$pairManager', service(PairManagerInterface::class));
 
     $services->set(RatioListCommand::class)
-        ->arg('$pairManager', service(PairManager::class));
+        ->arg('$pairManager', service(PairManagerInterface::class));
 
     $services->set(RatioSaveCommand::class)
-        ->arg('$pairManager', service(PairManager::class));
+        ->arg('$pairManager', service(PairManagerInterface::class));
 };
