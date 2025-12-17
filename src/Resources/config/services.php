@@ -22,21 +22,10 @@ return static function (ContainerConfigurator $configurator): void {
     $services->defaults()->public();
 
     // === Parameters ===
-    $parameters->set('tbbc_money.pair_manager.class', PairManager::class);
-    $parameters->set('tbbc_money.pair_manager_interface.class', PairManagerInterface::class);
-    $parameters->set('tbbc_money.money_manager.class', MoneyManager::class);
-    $parameters->set('tbbc_money.pair_history_manager.class', PairHistoryManager::class);
-    $parameters->set('tbbc_money.pair_history_manager_interface.class', PairHistoryManagerInterface::class);
-    $parameters->set('tbbc_money.pair.csv_storage.class', CsvStorage::class);
     $parameters->set('tbbc_money.pair_manager.ratio_file_name', '%kernel.project_dir%/../data/tbbc_money/ratio_file_name.csv');
-    $parameters->set('tbbc_money.ratio_provider.ecb.class', ECBRatioProvider::class);
-    $parameters->set('tbbc_money.formatter.money_formatter.class', MoneyFormatter::class);
-    $parameters->set('tbbc_money.command.ratio_fetch.class', RatioFetchCommand::class);
-    $parameters->set('tbbc_money.command.ratio_list.class', RatioListCommand::class);
-    $parameters->set('tbbc_money.command.ratio_save.class', RatioSaveCommand::class);
 
     // === Services ===
-    $services->set('tbbc_money.pair_manager', '%tbbc_money.pair_manager.class%')
+    $services->set('tbbc_money.pair_manager', PairManager::class)
         ->args([
             new Reference('tbbc_money.pair.csv_storage'),
             '%tbbc_money.currencies%',
@@ -44,59 +33,59 @@ return static function (ContainerConfigurator $configurator): void {
             new Reference('event_dispatcher'),
         ]);
 
-    $services->alias('%tbbc_money.pair_manager_interface.class%', 'tbbc_money.pair_manager')->private();
+    $services->alias(PairManagerInterface::class, 'tbbc_money.pair_manager')->private();
 
-    $services->set('tbbc_money.pair_history_manager', '%tbbc_money.pair_history_manager.class%')
+    $services->set('tbbc_money.pair_history_manager', PairHistoryManager::class)
         ->args([
             new Reference(EntityManagerInterface::class),
             '%tbbc_money.reference_currency%',
         ]);
 
-    $services->alias('%tbbc_money.pair_history_manager_interface.class%', 'tbbc_money.pair_history_manager')->private();
+    $services->alias(PairHistoryManagerInterface::class, 'tbbc_money.pair_history_manager')->private();
 
-    $services->set('tbbc_money.money_manager', '%tbbc_money.money_manager.class%')
+    $services->set('tbbc_money.money_manager', MoneyManager::class)
         ->args([
             '%tbbc_money.reference_currency%',
             '%tbbc_money.decimals%',
         ]);
 
-    $services->alias('%tbbc_money.money_manager.class%', 'tbbc_money.money_manager')->private();
+    $services->alias(MoneyManager::class, 'tbbc_money.money_manager')->private();
 
     // Storage
-    $services->set('tbbc_money.pair.csv_storage', '%tbbc_money.pair.csv_storage.class%')
+    $services->set('tbbc_money.pair.csv_storage', CsvStorage::class)
         ->args([
             '%tbbc_money.pair_manager.ratio_file_name%',
             '%tbbc_money.reference_currency%',
         ]);
 
     // Ratio providers
-    $services->set('tbbc_money.ratio_provider.ecb', '%tbbc_money.ratio_provider.ecb.class%')
+    $services->set('tbbc_money.ratio_provider.ecb', ECBRatioProvider::class)
         ->args([
             new Reference(HttpClientInterface::class),
         ]);
 
     // Formatter
-    $services->set('tbbc_money.formatter.money_formatter', '%tbbc_money.formatter.money_formatter.class%')
+    $services->set('tbbc_money.formatter.money_formatter', MoneyFormatter::class)
         ->args([
             '%tbbc_money.decimals%',
         ]);
 
-    $services->alias('%tbbc_money.formatter.money_formatter.class%', 'tbbc_money.formatter.money_formatter')->private();
+    $services->alias(MoneyFormatter::class, 'tbbc_money.formatter.money_formatter')->private();
 
     // Commands
-    $services->set('tbbc_money.command.ratio_fetch', '%tbbc_money.command.ratio_fetch.class%')
+    $services->set('tbbc_money.command.ratio_fetch', RatioFetchCommand::class)
         ->args([new Reference('tbbc_money.pair_manager')])
         ->tag('console.command', [
             'command' => 'tbbc:money:ratio-fetch',
         ]);
 
-    $services->set('tbbc_money.command.ratio_list', '%tbbc_money.command.ratio_list.class%')
+    $services->set('tbbc_money.command.ratio_list', RatioListCommand::class)
         ->args([new Reference('tbbc_money.pair_manager')])
         ->tag('console.command', [
             'command' => 'tbbc:money:ratio-list',
         ]);
 
-    $services->set('tbbc_money.command.ratio_save', '%tbbc_money.command.ratio_save.class%')
+    $services->set('tbbc_money.command.ratio_save', RatioSaveCommand::class)
         ->args([new Reference('tbbc_money.pair_manager')])
         ->tag('console.command', [
             'command' => 'tbbc:money:ratio-save',
