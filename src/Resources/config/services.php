@@ -8,6 +8,7 @@ use Tbbc\MoneyBundle\Command\RatioListCommand;
 use Tbbc\MoneyBundle\Command\RatioSaveCommand;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Money\MoneyManager;
+use Tbbc\MoneyBundle\Money\MoneyManagerInterface;
 use Tbbc\MoneyBundle\Pair\PairManager;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 use Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider;
@@ -19,9 +20,8 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $configurator): void {
     $parameters = $configurator->parameters();
     $services = $configurator->services();
-    $services->defaults()->public();
     $services->defaults()
-        ->private()
+        ->public()
         ->autoconfigure();
 
     $parameters->set('tbbc_money.pair_manager.ratio_file_name', '%kernel.project_dir%/../data/tbbc_money/ratio_file_name.csv');
@@ -38,9 +38,10 @@ return static function (ContainerConfigurator $configurator): void {
         ->arg('$referenceCurrencyCode', '%tbbc_money.reference_currency%');
     $services->alias(PairHistoryManager::class, PairHistoryManagerInterface::class);
 
-    $services->set(MoneyManager::class)
+    $services->set(MoneyManagerInterface::class, MoneyManager::class)
         ->arg('$referenceCurrencyCode', '%tbbc_money.reference_currency%')
         ->arg('$decimals', '%tbbc_money.decimals%');
+    $services->alias(MoneyManager::class, MoneyManagerInterface::class);
 
     $services->set(CsvStorage::class)
         ->arg('$ratioFileName', '%tbbc_money.pair_manager.ratio_file_name%')
