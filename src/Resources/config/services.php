@@ -2,6 +2,7 @@
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Tbbc\MoneyBundle\Command\RatioFetchCommand;
 use Tbbc\MoneyBundle\Command\RatioListCommand;
@@ -30,17 +31,20 @@ return static function (ContainerConfigurator $configurator): void {
         ->arg('$storage', service(CsvStorage::class))
         ->arg('$currencyCodeList', '%tbbc_money.currencies%')
         ->arg('$referenceCurrencyCode', '%tbbc_money.reference_currency%')
-        ->arg('$dispatcher', service('event_dispatcher'));
+        ->arg('$dispatcher', service(EventDispatcherInterface::class));
+
     $services->alias(PairManager::class, PairManagerInterface::class);
 
     $services->set(PairHistoryManagerInterface::class, PairHistoryManager::class)
         ->arg('$em', service(EntityManagerInterface::class))
         ->arg('$referenceCurrencyCode', '%tbbc_money.reference_currency%');
+
     $services->alias(PairHistoryManager::class, PairHistoryManagerInterface::class);
 
     $services->set(MoneyManagerInterface::class, MoneyManager::class)
         ->arg('$referenceCurrencyCode', '%tbbc_money.reference_currency%')
         ->arg('$decimals', '%tbbc_money.decimals%');
+
     $services->alias(MoneyManager::class, MoneyManagerInterface::class);
 
     $services->set(CsvStorage::class)
