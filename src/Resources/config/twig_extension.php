@@ -1,23 +1,23 @@
 <?php
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Reference;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
+use Tbbc\MoneyBundle\Pair\PairManager;
 use Tbbc\MoneyBundle\Twig\Extension\CurrencyExtension;
 use Tbbc\MoneyBundle\Twig\Extension\MoneyExtension;
 
 return static function (ContainerConfigurator $configurator): void {
     $services = $configurator->services();
-    $services->defaults()->public();
-    $services->defaults()->autoconfigure();
+    $services->defaults()
+        ->private()
+        ->autoconfigure();
 
-    $services->set('tbbc_money.twig.money', MoneyExtension::class)
-        ->args([
-            new Reference('tbbc_money.formatter.money_formatter'),
-            new Reference('tbbc_money.pair_manager'),
-        ]);
+    // === Services ===
+    $services->set(MoneyExtension::class)
+        ->arg('$formatter', service(MoneyFormatter::class))
+        ->arg('$pairManager', service(PairManager::class));
 
-    $services->set('tbbc_money.twig.currency', CurrencyExtension::class)
-        ->args([
-            new Reference('tbbc_money.formatter.money_formatter'),
-        ]);
+    $services->set(CurrencyExtension::class)
+        ->arg('$formatter', service(MoneyFormatter::class));
 };
