@@ -2,6 +2,7 @@
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Tbbc\MoneyBundle\Command\RatioFetchCommand;
@@ -16,7 +17,6 @@ use Tbbc\MoneyBundle\Pair\RatioProvider\ECBRatioProvider;
 use Tbbc\MoneyBundle\Pair\Storage\CsvStorage;
 use Tbbc\MoneyBundle\PairHistory\PairHistoryManager;
 use Tbbc\MoneyBundle\PairHistory\PairHistoryManagerInterface;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $configurator): void {
     $parameters = $configurator->parameters();

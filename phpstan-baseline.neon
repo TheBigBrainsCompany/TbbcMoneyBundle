@@ -13,12 +13,6 @@ parameters:
 			path: src/Command/RatioSaveCommand.php
 
 		-
-			rawMessage: 'Call to static method createXmlMappingDriver() of internal class Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass from outside its root namespace Doctrine.'
-			identifier: staticMethod.internalClass
-			count: 1
-			path: src/DependencyInjection/Compiler/PairHistoryCompilerPass.php
-
-		-
 			rawMessage: Cannot access offset 'DoctrineBundle' on array|bool|float|int|string|UnitEnum.
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
@@ -43,12 +37,6 @@ parameters:
 			path: src/DependencyInjection/Compiler/RatioProviderCompilerPass.php
 
 		-
-			rawMessage: 'Call to static method createXmlMappingDriver() of internal class Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass from outside its root namespace Doctrine.'
-			identifier: staticMethod.internalClass
-			count: 1
-			path: src/DependencyInjection/Compiler/StorageCompilerPass.php
-
-		-
 			rawMessage: Cannot access offset 'DoctrineBundle' on array|bool|float|int|string|UnitEnum.
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
@@ -59,18 +47,6 @@ parameters:
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: src/DependencyInjection/Compiler/StorageCompilerPass.php
-
-		-
-			rawMessage: 'Method Tbbc\MoneyBundle\DependencyInjection\Configuration::addCurrencySection() has parameter $node with generic class Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition but does not specify its types: TParent'
-			identifier: missingType.generics
-			count: 1
-			path: src/DependencyInjection/Configuration.php
-
-		-
-			rawMessage: 'Method Tbbc\MoneyBundle\DependencyInjection\Configuration::getConfigTreeBuilder() return type with generic class Symfony\Component\Config\Definition\Builder\TreeBuilder does not specify its types: T'
-			identifier: missingType.generics
-			count: 1
-			path: src/DependencyInjection/Configuration.php
 
 		-
 			rawMessage: 'Method Tbbc\MoneyBundle\DependencyInjection\TbbcMoneyExtension::remapParameters() has parameter $config with no value type specified in iterable type array.'
@@ -193,7 +169,7 @@ parameters:
 			path: src/Form/Type/CurrencyType.php
 
 		-
-			rawMessage: 'Parameter #2 $type of method Symfony\Component\Form\FormBuilderInterface::add() expects string|null, mixed given.'
+			rawMessage: 'Parameter #2 $type of method Symfony\Component\Form\FormBuilderInterface::add() expects class-string<Symfony\Component\Form\FormTypeInterface>|null, mixed given.'
 			identifier: argument.type
 			count: 1
 			path: src/Form/Type/MoneyType.php

@@ -1,11 +1,11 @@
 <?php
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 use Tbbc\MoneyBundle\Formatter\MoneyFormatter;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 use Tbbc\MoneyBundle\Twig\Extension\CurrencyExtension;
 use Tbbc\MoneyBundle\Twig\Extension\MoneyExtension;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $configurator): void {
     $services = $configurator->services();
