@@ -33,7 +33,7 @@ doctrine:
 doctrine_mongodb:
   connections:
     default:
-      server: 'mongodb://127.0.0.1:27017'
+      server: '%env(MONGODB_SERVER)%'
 
   document_managers:
     default:

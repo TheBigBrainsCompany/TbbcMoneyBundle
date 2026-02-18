@@ -82,7 +82,7 @@ jobs:
           coverage: pcov
 
       - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@315db7fe45ac2880b7758f1933e6e5d59afd5e94 #1.12.1
+        uses: supercharge/mongodb-github-action@9306129218d23ef2e0a9e11bd708950d886bb855 #v1
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
 
