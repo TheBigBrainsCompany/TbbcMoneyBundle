@@ -30,12 +30,11 @@ final class PairManagerTest extends KernelTestCase
         }
 
         $storage = new CsvStorage($this->fileName, 'EUR');
-        $dispatcher = $this->createMock(EventDispatcher::class);
         $this->manager = new PairManager(
             $storage,
             ['EUR', 'USD', 'CAD'],
             'EUR',
-            $dispatcher
+            $this->createStub(EventDispatcher::class)
         );
     }
 
