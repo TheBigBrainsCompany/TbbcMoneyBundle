@@ -22,6 +22,7 @@ final class DocumentStorageTest extends KernelTestCase
     protected function setUp(): void
     {
         parent::setUp();
+        self::requireMongoDb();
         self::$kernelOptions = [
             'environment' => 'testDocument',
             'configs' => [
