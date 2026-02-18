@@ -973,18 +973,6 @@ parameters:
 			path: tests/Pair/Storage/DoctrineStorageTest.php
 
 		-
-			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/Pair/Storage/DoctrineStorageTest.php
-
-		-
-			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/Pair/Storage/DoctrineStorageTest.php
-
-		-
 			rawMessage: 'Call to an undefined method object::getManager().'
 			identifier: method.notFound
 			count: 1
@@ -1012,18 +1000,6 @@ parameters:
 			rawMessage: Property Tbbc\MoneyBundle\Tests\Pair\Storage\DocumentStorageTest::$kernelOptions type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
-			path: tests/Pair/Storage/DocumentStorageTest.php
-
-		-
-			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 3
-			path: tests/Pair/Storage/DocumentStorageTest.php
-
-		-
-			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
 			path: tests/Pair/Storage/DocumentStorageTest.php
 
 		-
@@ -1102,18 +1078,6 @@ parameters:
 			rawMessage: Property Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::$kernelOptions type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 3
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
 
 		-
@@ -1200,17 +1164,6 @@ parameters:
 			count: 1
 			path: tests/PairHistory/PairHistoryManagerTest.php
 
-		-
-			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/PairHistory/PairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/PairHistory/PairHistoryManagerTest.php
 
 		-
 			rawMessage: Property Tbbc\MoneyBundle\Tests\Twig\Extension\CurrencyExtensionTest::$variables type has no value type specified in iterable type array.
