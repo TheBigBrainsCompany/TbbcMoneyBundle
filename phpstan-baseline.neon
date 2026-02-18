@@ -223,7 +223,7 @@ parameters:
 			path: src/Pair/PairManager.php
 
 		-
-			rawMessage: 'Loose comparison via "!=" is not allowed.'
+			rawMessage: 'Loose comparison via "!=" between string and string is not allowed.'
 			identifier: notEqual.notAllowed
 			count: 1
 			path: src/Pair/PairManager.php
@@ -343,64 +343,16 @@ parameters:
 			path: src/Type/MoneyType.php
 
 		-
-			rawMessage: 'Method Tbbc\MoneyBundle\Type\MoneyType::getSqlDeclaration() has parameter $column with no value type specified in iterable type array.'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Type/MoneyType.php
-
-		-
-			rawMessage: 'Parameter #1 $column of method Doctrine\DBAL\Platforms\AbstractPlatform::getStringTypeDeclarationSQL() expects array<string, mixed>, array given.'
-			identifier: argument.type
-			count: 1
-			path: src/Type/MoneyType.php
-
-		-
 			rawMessage: 'Method Tbbc\MoneyBundle\Tests\AppKernel::__construct() has parameter $configs with no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/AppKernel.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/Command/RatioFetchCommandTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertStringContainsString().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/Command/RatioFetchCommandTest.php
-
-		-
 			rawMessage: 'Parameter #1 $pairManager of class Tbbc\MoneyBundle\Command\RatioFetchCommand constructor expects Tbbc\MoneyBundle\Pair\PairManagerInterface, PHPUnit\Framework\MockObject\MockObject given.'
 			identifier: argument.type
 			count: 2
 			path: tests/Command/RatioFetchCommandTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertJson().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Command/RatioListCommandTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 4
-			path: tests/Command/RatioListCommandTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertStringContainsString().'
-			identifier: staticMethod.dynamicCall
-			count: 3
-			path: tests/Command/RatioListCommandTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 4
-			path: tests/Command/RatioSaveCommandTest.php
 
 		-
 			rawMessage: 'Parameter #1 $pairManager of class Tbbc\MoneyBundle\Command\RatioSaveCommand constructor expects Tbbc\MoneyBundle\Pair\PairManagerInterface, PHPUnit\Framework\MockObject\MockObject given.'
@@ -463,30 +415,6 @@ parameters:
 			path: tests/Document/DocumentRatioHistoryTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Document/DocumentRatioHistoryTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Document/DocumentRatioHistoryTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 4
-			path: tests/Document/DocumentRatioHistoryTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
-			identifier: staticMethod.dynamicCall
-			count: 10
-			path: tests/Document/DocumentRatioHistoryTest.php
-
-		-
 			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Document\DocumentStorageRatio and ''getCurrencyCode'' will always evaluate to true.'
 			identifier: function.alreadyNarrowedType
 			count: 1
@@ -517,30 +445,6 @@ parameters:
 			path: tests/Document/DocumentStorageRatioTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/Document/DocumentStorageRatioTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Document/DocumentStorageRatioTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/Document/DocumentStorageRatioTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
-			identifier: staticMethod.dynamicCall
-			count: 6
-			path: tests/Document/DocumentStorageRatioTest.php
-
-		-
 			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\DoctrineStorageRatio and ''getCurrencyCode'' will always evaluate to true.'
 			identifier: function.alreadyNarrowedType
 			count: 1
@@ -568,30 +472,6 @@ parameters:
 			rawMessage: 'Call to function method_exists() with Tbbc\MoneyBundle\Entity\DoctrineStorageRatio and ''setRatio'' will always evaluate to true.'
 			identifier: function.alreadyNarrowedType
 			count: 1
-			path: tests/Entity/DoctrineStorageRatioTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/Entity/DoctrineStorageRatioTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Entity/DoctrineStorageRatioTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/Entity/DoctrineStorageRatioTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
-			identifier: staticMethod.dynamicCall
-			count: 6
 			path: tests/Entity/DoctrineStorageRatioTest.php
 
 		-
@@ -649,51 +529,9 @@ parameters:
 			path: tests/Entity/RatioHistoryTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Entity/RatioHistoryTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Entity/RatioHistoryTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 4
-			path: tests/Entity/RatioHistoryTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
-			identifier: staticMethod.dynamicCall
-			count: 10
-			path: tests/Entity/RatioHistoryTest.php
-
-		-
 			rawMessage: 'Cannot call method getCode() on Money\Currency|null.'
 			identifier: method.nonObject
 			count: 1
-			path: tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNotInstanceOf().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 2
 			path: tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
 
 		-
@@ -707,30 +545,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: tests/Form/DataTransformer/CurrencyToArrayTransformerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertInstanceOf().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Form/DataTransformer/MoneyToArrayTransformerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNotInstanceOf().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/Form/DataTransformer/MoneyToArrayTransformerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Form/DataTransformer/MoneyToArrayTransformerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 3
-			path: tests/Form/DataTransformer/MoneyToArrayTransformerTest.php
 
 		-
 			rawMessage: 'Parameter #1 $value of method Tbbc\MoneyBundle\Form\DataTransformer\MoneyToArrayTransformer::reverseTransform() expects array|null, string given.'
@@ -754,18 +568,6 @@ parameters:
 			rawMessage: 'Cannot call method getCurrency() on Money\Money|null.'
 			identifier: method.nonObject
 			count: 1
-			path: tests/Form/DataTransformer/SimpleMoneyToArrayTransformerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Form/DataTransformer/SimpleMoneyToArrayTransformerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 3
 			path: tests/Form/DataTransformer/SimpleMoneyToArrayTransformerTest.php
 
 		-
@@ -802,18 +604,6 @@ parameters:
 			rawMessage: 'Cannot call method getCode() on mixed.'
 			identifier: method.nonObject
 			count: 1
-			path: tests/Form/Type/CurrencyTypeTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/Form/Type/CurrencyTypeTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 4
 			path: tests/Form/Type/CurrencyTypeTest.php
 
 		-
@@ -877,18 +667,6 @@ parameters:
 			path: tests/Form/Type/MoneyTypeTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Form/Type/MoneyTypeTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 11
-			path: tests/Form/Type/MoneyTypeTest.php
-
-		-
 			rawMessage: 'Parameter #2 $haystack of method PHPUnit\Framework\Assert::assertCount() expects Countable|iterable, mixed given.'
 			identifier: argument.type
 			count: 1
@@ -931,12 +709,6 @@ parameters:
 			path: tests/Form/Type/SimpleMoneyTypeTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 12
-			path: tests/Form/Type/SimpleMoneyTypeTest.php
-
-		-
 			rawMessage: 'Call to method PHPUnit\Framework\Assert::assertInstanceOf() with ''Money\\Currency'' and Money\Currency will always evaluate to true.'
 			identifier: method.alreadyNarrowedType
 			count: 1
@@ -961,30 +733,6 @@ parameters:
 			path: tests/Formatter/MoneyFormatterTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertInstanceOf().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Formatter/MoneyFormatterTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertIsFloat().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Formatter/MoneyFormatterTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 16
-			path: tests/Formatter/MoneyFormatterTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 6
-			path: tests/Money/MoneyManagerTest.php
-
-		-
 			rawMessage: Binary operation "." between array|bool|float|int|string|UnitEnum|null and '/pair.csv' results in an error.
 			identifier: binaryOp.invalid
 			count: 1
@@ -997,33 +745,15 @@ parameters:
 			path: tests/Pair/PairManagerTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
-			identifier: staticMethod.dynamicCall
-			count: 4
-			path: tests/Pair/PairManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 4
-			path: tests/Pair/PairManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Pair/PairManagerTest.php
-
-		-
 			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::fail().'
 			identifier: staticMethod.dynamicCall
 			count: 1
 			path: tests/Pair/PairManagerTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method Tbbc\MoneyBundle\Tests\Pair\PairManagerTest::assertMoneySame().'
+			rawMessage: 'Dynamic call to static method PHPUnit\Framework\TestCase::createStub().'
 			identifier: staticMethod.dynamicCall
-			count: 3
+			count: 1
 			path: tests/Pair/PairManagerTest.php
 
 		-
@@ -1063,24 +793,6 @@ parameters:
 			path: tests/Pair/RatioProvider/AbstractRatioProvider.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertGreaterThan().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Pair/RatioProvider/AbstractRatioProvider.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertIsFloat().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Pair/RatioProvider/AbstractRatioProvider.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertLessThan().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Pair/RatioProvider/AbstractRatioProvider.php
-
-		-
 			rawMessage: 'Method Tbbc\MoneyBundle\Tests\Pair\RatioProvider\AbstractRatioProvider::getRatiosToTest() return type has no value type specified in iterable type array.'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1097,12 +809,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: tests/Pair/RatioProvider/AbstractRatioProvider.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
-			identifier: staticMethod.dynamicCall
-			count: 3
-			path: tests/Pair/RatioProvider/ECBRatioProviderTest.php
 
 		-
 			rawMessage: 'Parameter #1 $body of class Symfony\Component\HttpClient\Response\MockResponse constructor expects iterable<string|Throwable>|string, string|false given.'
@@ -1225,12 +931,6 @@ parameters:
 			path: tests/Pair/Storage/CsvStorageTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 5
-			path: tests/Pair/Storage/CsvStorageTest.php
-
-		-
 			rawMessage: 'Property Tbbc\MoneyBundle\Tests\Pair\Storage\CsvStorageTest::$fileName (string) does not accept mixed.'
 			identifier: assign.propertyType
 			count: 1
@@ -1240,24 +940,6 @@ parameters:
 			rawMessage: 'Call to an undefined method object::getManager().'
 			identifier: method.notFound
 			count: 1
-			path: tests/Pair/Storage/DoctrineStorageTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertArrayHasKey().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Pair/Storage/DoctrineStorageTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
-			identifier: staticMethod.dynamicCall
-			count: 9
-			path: tests/Pair/Storage/DoctrineStorageTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
-			identifier: staticMethod.dynamicCall
-			count: 2
 			path: tests/Pair/Storage/DoctrineStorageTest.php
 
 		-
@@ -1291,39 +973,9 @@ parameters:
 			path: tests/Pair/Storage/DoctrineStorageTest.php
 
 		-
-			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/Pair/Storage/DoctrineStorageTest.php
-
-		-
-			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/Pair/Storage/DoctrineStorageTest.php
-
-		-
 			rawMessage: 'Call to an undefined method object::getManager().'
 			identifier: method.notFound
 			count: 1
-			path: tests/Pair/Storage/DocumentStorageTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertArrayHasKey().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Pair/Storage/DocumentStorageTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
-			identifier: staticMethod.dynamicCall
-			count: 9
-			path: tests/Pair/Storage/DocumentStorageTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
-			identifier: staticMethod.dynamicCall
-			count: 2
 			path: tests/Pair/Storage/DocumentStorageTest.php
 
 		-
@@ -1351,18 +1003,6 @@ parameters:
 			path: tests/Pair/Storage/DocumentStorageTest.php
 
 		-
-			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/Pair/Storage/DocumentStorageTest.php
-
-		-
-			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/Pair/Storage/DocumentStorageTest.php
-
-		-
 			rawMessage: 'Call to an undefined method object::getManager().'
 			identifier: method.notFound
 			count: 1
@@ -1387,57 +1027,9 @@ parameters:
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
 
 		-
-			rawMessage: 'Cannot call method close() on Doctrine\ODM\MongoDB\DocumentManager|null.'
-			identifier: method.nonObject
-			count: 1
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
 			rawMessage: 'Cannot call method format() on mixed.'
 			identifier: method.nonObject
 			count: 3
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Cannot call method getRepository() on Doctrine\ODM\MongoDB\DocumentManager|null.'
-			identifier: method.nonObject
-			count: 1
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
-			identifier: staticMethod.dynamicCall
-			count: 5
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
-			identifier: staticMethod.dynamicCall
-			count: 9
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertIsFloat().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 3
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
-			identifier: staticMethod.dynamicCall
-			count: 1
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
 
 		-
@@ -1465,13 +1057,7 @@ parameters:
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
 
 		-
-			rawMessage: 'Parameter #1 $dm of class Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager constructor expects Doctrine\ODM\MongoDB\DocumentManager, Doctrine\ODM\MongoDB\DocumentManager|null given.'
-			identifier: argument.type
-			count: 1
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Property Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::$dm (Doctrine\ODM\MongoDB\DocumentManager|null) does not accept mixed.'
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::$dm (Doctrine\ODM\MongoDB\DocumentManager) does not accept mixed.'
 			identifier: assign.propertyType
 			count: 1
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
@@ -1492,18 +1078,6 @@ parameters:
 			rawMessage: Property Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::$kernelOptions type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
 
 		-
@@ -1549,42 +1123,6 @@ parameters:
 			path: tests/PairHistory/PairHistoryManagerTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertCount().'
-			identifier: staticMethod.dynamicCall
-			count: 5
-			path: tests/PairHistory/PairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertEqualsWithDelta().'
-			identifier: staticMethod.dynamicCall
-			count: 9
-			path: tests/PairHistory/PairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertIsFloat().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/PairHistory/PairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/PairHistory/PairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 3
-			path: tests/PairHistory/PairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/PairHistory/PairHistoryManagerTest.php
-
-		-
 			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::fail().'
 			identifier: staticMethod.dynamicCall
 			count: 1
@@ -1626,35 +1164,12 @@ parameters:
 			count: 1
 			path: tests/PairHistory/PairHistoryManagerTest.php
 
-		-
-			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/PairHistory/PairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Using $_SERVER is forbidden, use the Request methods instead.'
-			identifier: disallowed.variable
-			count: 2
-			path: tests/PairHistory/PairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 2
-			path: tests/Twig/Extension/CurrencyExtensionTest.php
 
 		-
 			rawMessage: Property Tbbc\MoneyBundle\Tests\Twig\Extension\CurrencyExtensionTest::$variables type has no value type specified in iterable type array.
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/Twig/Extension/CurrencyExtensionTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 3
-			path: tests/Twig/Extension/MoneyExtensionTest.php
 
 		-
 			rawMessage: Property Tbbc\MoneyBundle\Tests\Twig\Extension\MoneyExtensionTest::$variables type has no value type specified in iterable type array.
@@ -1675,26 +1190,8 @@ parameters:
 			path: tests/Type/MoneyTypeTest.php
 
 		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNotInstanceOf().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Type/MoneyTypeTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertNull().'
-			identifier: staticMethod.dynamicCall
-			count: 1
-			path: tests/Type/MoneyTypeTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertSame().'
-			identifier: staticMethod.dynamicCall
-			count: 5
-			path: tests/Type/MoneyTypeTest.php
-
-		-
-			rawMessage: 'Dynamic call to static method PHPUnit\Framework\Assert::assertTrue().'
-			identifier: staticMethod.dynamicCall
+			rawMessage: 'Parameter #1 $column of method Tbbc\MoneyBundle\Type\MoneyType::getSqlDeclaration() expects array<string, mixed>, array<int, string> given.'
+			identifier: argument.type
 			count: 1
 			path: tests/Type/MoneyTypeTest.php
 

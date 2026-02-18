@@ -22,7 +22,7 @@ final class DocumentPairHistoryManagerTest extends KernelTestCase
 
     private DocumentRepository $documentRatioHistoryRepo;
 
-    private ?DocumentManager $dm;
+    private DocumentManager $dm;
 
     protected function setUp(): void
     {
@@ -48,7 +48,6 @@ final class DocumentPairHistoryManagerTest extends KernelTestCase
         parent::tearDown();
         $this->dropDatabase();
         $this->dm->close();
-        $this->dm = null;
     }
 
     protected static function createKernel(array $options = []): KernelInterface

@@ -9,8 +9,13 @@ parameters:
 
     disallowedSuperglobals:
         -
-            superglobal: [ '$GLOBALS', '$_SERVER', '$_GET', '$_POST', '$_FILES', '$_COOKIE', '$_SESSION', '$_REQUEST', '$_ENV' ]
+            superglobal: [ '$GLOBALS', '$_GET', '$_POST', '$_FILES', '$_COOKIE', '$_SESSION', '$_REQUEST' ]
             message: 'use the Request methods instead'
+        -
+            superglobal: [ '$_SERVER', '$_ENV' ]
+            message: 'use the Request methods instead'
+            allowIn:
+                - tests/*
 
     disallowedFunctionCalls:
         -

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Tests;
 
+use MongoDB\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -36,21 +37,15 @@ trait DocumentDatabaseTrait
             'command' => 'doctrine:mongodb:schema:create',
             '--quiet' => true,
         ]), new NullOutput());
+
         self::assertSame(Command::SUCCESS, $code);
     }
 
     private static function doDropDatabase(): void
     {
-        $kernel = static::createKernel(self::$kernelOptions);
-        $kernel->boot();
-
-        $application = new Application($kernel);
-        $application->setAutoExit(false);
-
-        $code = $application->run(new ArrayInput([
-            'command' => 'doctrine:mongodb:schema:drop',
-            '--quiet' => true,
-        ]), new NullOutput());
-        self::assertSame(Command::SUCCESS, $code);
+        /** @var string $server */
+        $server = $_ENV['MONGODB_SERVER'] ?? 'mongodb://127.0.0.1:27017';
+        $client = new Client($server);
+        $client->dropDatabase('default');
     }
 }

@@ -1,4 +1,10 @@
 services:
+  mongodb:
+    image: mongo:7.0
+    container_name: tbbc-moneybundle-mongodb
+    ports:
+      - '27017:27017'
+
   tbbc-moneybundle-php82:
     container_name: tbbc-moneybundle-php82
     build:
@@ -8,6 +14,10 @@ services:
     stdin_open: true
     volumes:
       - .:/docker:rw,delegated
+    environment:
+      MONGODB_SERVER: 'mongodb://mongodb:27017'
+    depends_on:
+      - mongodb
 
   tbbc-moneybundle-php83:
     container_name: tbbc-moneybundle-php83
@@ -18,6 +28,10 @@ services:
     stdin_open: true
     volumes:
       - .:/docker:rw,delegated
+    environment:
+      MONGODB_SERVER: 'mongodb://mongodb:27017'
+    depends_on:
+      - mongodb
 
   tbbc-moneybundle-php84:
     container_name: tbbc-moneybundle-php84
@@ -28,6 +42,10 @@ services:
     stdin_open: true
     volumes:
       - .:/docker:rw,delegated
+    environment:
+      MONGODB_SERVER: 'mongodb://mongodb:27017'
+    depends_on:
+      - mongodb
 
   tbbc-moneybundle-php85:
     container_name: tbbc-moneybundle-php85
@@ -38,3 +56,7 @@ services:
     stdin_open: true
     volumes:
       - .:/docker:rw,delegated
+    environment:
+      MONGODB_SERVER: 'mongodb://mongodb:27017'
+    depends_on:
+      - mongodb
