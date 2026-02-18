@@ -6,6 +6,7 @@ namespace Tbbc\MoneyBundle\Tests;
 
 use MongoDB\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 
@@ -32,10 +33,12 @@ trait DocumentDatabaseTrait
         $application = new Application($kernel);
         $application->setAutoExit(false);
 
-        $application->run(new ArrayInput([
+        $code = $application->run(new ArrayInput([
             'command' => 'doctrine:mongodb:schema:create',
             '--quiet' => true,
         ]), new NullOutput());
+
+        self::assertSame(Command::SUCCESS, $code);
     }
 
     private static function doDropDatabase(): void
