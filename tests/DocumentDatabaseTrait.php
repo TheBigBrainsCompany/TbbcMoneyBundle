@@ -40,6 +40,7 @@ trait DocumentDatabaseTrait
 
     private static function doDropDatabase(): void
     {
+        /** @var string $server */
         $server = $_ENV['MONGODB_SERVER'] ?? 'mongodb://127.0.0.1:27017';
         $client = new Client($server);
         $client->dropDatabase('default');

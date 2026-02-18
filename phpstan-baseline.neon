@@ -1017,7 +1017,7 @@ parameters:
 		-
 			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
 			identifier: disallowed.variable
-			count: 2
+			count: 3
 			path: tests/Pair/Storage/DocumentStorageTest.php
 
 		-
@@ -1051,21 +1051,9 @@ parameters:
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
 
 		-
-			rawMessage: 'Cannot call method close() on Doctrine\ODM\MongoDB\DocumentManager|null.'
-			identifier: method.nonObject
-			count: 1
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
 			rawMessage: 'Cannot call method format() on mixed.'
 			identifier: method.nonObject
 			count: 3
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Cannot call method getRepository() on Doctrine\ODM\MongoDB\DocumentManager|null.'
-			identifier: method.nonObject
-			count: 1
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
 
 		-
@@ -1093,13 +1081,7 @@ parameters:
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
 
 		-
-			rawMessage: 'Parameter #1 $dm of class Tbbc\MoneyBundle\PairHistory\DocumentPairHistoryManager constructor expects Doctrine\ODM\MongoDB\DocumentManager, Doctrine\ODM\MongoDB\DocumentManager|null given.'
-			identifier: argument.type
-			count: 1
-			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
-
-		-
-			rawMessage: 'Property Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::$dm (Doctrine\ODM\MongoDB\DocumentManager|null) does not accept mixed.'
+			rawMessage: 'Property Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest::$dm (Doctrine\ODM\MongoDB\DocumentManager) does not accept mixed.'
 			identifier: assign.propertyType
 			count: 1
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
@@ -1125,7 +1107,7 @@ parameters:
 		-
 			rawMessage: 'Using $_ENV is forbidden, use the Request methods instead.'
 			identifier: disallowed.variable
-			count: 2
+			count: 3
 			path: tests/PairHistory/DocumentPairHistoryManagerTest.php
 
 		-
