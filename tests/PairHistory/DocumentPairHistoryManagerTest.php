@@ -22,12 +22,11 @@ final class DocumentPairHistoryManagerTest extends KernelTestCase
 
     private DocumentRepository $documentRatioHistoryRepo;
 
-    private ?DocumentManager $dm;
+    private DocumentManager $dm;
 
     protected function setUp(): void
     {
         parent::setUp();
-        self::requireMongoDb();
         self::$kernelOptions = [
             'environment' => 'testDocument',
             'configs' => [
@@ -47,11 +46,8 @@ final class DocumentPairHistoryManagerTest extends KernelTestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        if (isset($this->dm)) {
-            $this->dropDatabase();
-            $this->dm->close();
-            $this->dm = null;
-        }
+        $this->dropDatabase();
+        $this->dm->close();
     }
 
     protected static function createKernel(array $options = []): KernelInterface
