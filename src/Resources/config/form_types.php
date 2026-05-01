@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Tbbc\MoneyBundle\Form\Type\{CurrencyType, MoneyType, SimpleMoneyType};
 
