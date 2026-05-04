@@ -7,6 +7,7 @@ namespace Tbbc\MoneyBundle\Tests\Twig\Extension;
 use Locale;
 use Money\Currency;
 use Money\Money;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -17,6 +18,7 @@ use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Twig\TemplateWrapper;
 
+#[AllowMockObjectsWithoutExpectations]
 final class MoneyExtensionTest extends TestCase
 {
     private MoneyExtension $extension;

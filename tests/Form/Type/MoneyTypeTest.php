@@ -6,12 +6,14 @@ namespace Tbbc\MoneyBundle\Tests\Form\Type;
 
 use Locale;
 use Money\Money;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 use Tbbc\MoneyBundle\Form\Type\MoneyType;
 
+#[AllowMockObjectsWithoutExpectations]
 final class MoneyTypeTest extends TypeTestCase
 {
     protected function getExtensions(): array

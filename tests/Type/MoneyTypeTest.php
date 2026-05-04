@@ -8,10 +8,12 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Money\Currency;
 use Money\Money;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Tbbc\MoneyBundle\Type\MoneyType;
 
+#[AllowMockObjectsWithoutExpectations]
 final class MoneyTypeTest extends TestCase
 {
     private MoneyType $type;

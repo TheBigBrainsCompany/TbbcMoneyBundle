@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Tbbc\MoneyBundle\Tests\Form\Type;
 
 use Money\Currency;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Tbbc\MoneyBundle\Form\Type\CurrencyType;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CurrencyTypeTest extends TypeTestCase
 {
     private array $currencies;
