@@ -11,7 +11,7 @@ return static function (ContainerConfigurator $configurator): void {
     $services->defaults()
         ->private()
         ->autoconfigure();
- 
+
     $services
         ->set(CurrencyType::class)
         ->arg('$currencyCodeList', '%tbbc_money.currencies%')
