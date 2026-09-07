@@ -60,11 +60,20 @@ return static function (ContainerConfigurator $configurator): void {
         ->arg('$decimals', '%tbbc_money.decimals%');
 
     $services->set(RatioFetchCommand::class)
-        ->arg('$pairManager', service(PairManagerInterface::class));
+        ->arg('$pairManager', service(PairManagerInterface::class))
+        ->tag('console.command', [
+            'command' => 'tbbc:money:ratio-fetch',
+        ]);
 
     $services->set(RatioListCommand::class)
-        ->arg('$pairManager', service(PairManagerInterface::class));
+        ->arg('$pairManager', service(PairManagerInterface::class))
+        ->tag('console.command', [
+            'command' => 'tbbc:money:ratio-list',
+        ]);
 
     $services->set(RatioSaveCommand::class)
-        ->arg('$pairManager', service(PairManagerInterface::class));
+        ->arg('$pairManager', service(PairManagerInterface::class))
+        ->tag('console.command', [
+            'command' => 'tbbc:money:ratio-save',
+        ])
 };
