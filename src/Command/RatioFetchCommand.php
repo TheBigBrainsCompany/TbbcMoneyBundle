@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
+#[AsCommand(name: 'tbbc:money:ratio-fetch', description: 'fetch all needed ratio from a external ratio provider')]
 class RatioFetchCommand extends Command
 {
     public function __construct(private readonly PairManagerInterface $pairManager)
