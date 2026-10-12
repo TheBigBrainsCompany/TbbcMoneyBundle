@@ -111,20 +111,20 @@ final class PairManagerTest extends KernelTestCase
 
     public function testRatioProvider(): void
     {
-        //Provider
+        // Provider
         $provider = new StaticRatioProvider();
         $provider->setRatio('EUR', 'USD', 1.08);
         $provider->setRatio('EUR', 'CAD', 1.54);
 
-        //Store rates in manager
+        // Store rates in manager
         $this->manager->setRatioProvider($provider);
         $this->manager->saveRatioListFromRatioProvider();
 
-        //Check saved rates
+        // Check saved rates
         $this->assertEqualsWithDelta(1.08, $this->manager->getRelativeRatio('EUR', 'USD'), PHP_FLOAT_EPSILON);
         $this->assertEqualsWithDelta(1.54, $this->manager->getRelativeRatio('EUR', 'CAD'), PHP_FLOAT_EPSILON);
 
-        //Change provider rates and make sure stored rates are not touched
+        // Change provider rates and make sure stored rates are not touched
         $provider->setRatio('EUR', 'USD', 2.2);
         $provider->setRatio('EUR', 'CAD', 1.83);
         $this->assertEqualsWithDelta(1.08, $this->manager->getRelativeRatio('EUR', 'USD'), PHP_FLOAT_EPSILON);

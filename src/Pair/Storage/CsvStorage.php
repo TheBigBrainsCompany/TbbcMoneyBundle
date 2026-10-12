@@ -13,7 +13,7 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
 /**
  * Class CsvStorage.
  *
- * @author Philippe Le Van.
+ * @see \Tbbc\MoneyBundle\Tests\Pair\Storage\CsvStorageTest
  */
 class CsvStorage implements StorageInterface
 {

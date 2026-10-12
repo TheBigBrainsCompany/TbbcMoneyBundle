@@ -11,7 +11,7 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
 /**
  * Class DocumentStorage.
  *
- * @author Philippe Le Van.
+ * @see \Tbbc\MoneyBundle\Tests\Pair\Storage\DocumentStorageTest
  */
 class DocumentStorage implements StorageInterface
 {

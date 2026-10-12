@@ -11,6 +11,7 @@ use Tbbc\MoneyBundle\Form\DataTransformer\SimpleMoneyToArrayTransformer;
 
 /**
  * Formtype for the Money object.
+ * @see \Tbbc\MoneyBundle\Tests\Form\Type\SimpleMoneyTypeTest
  */
 class SimpleMoneyType extends MoneyType
 {

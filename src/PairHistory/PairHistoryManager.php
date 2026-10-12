@@ -15,6 +15,7 @@ use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
 
 /**
  * Class PairHistoryManager.
+ * @see \Tbbc\MoneyBundle\Tests\PairHistory\PairHistoryManagerTest
  */
 class PairHistoryManager implements PairHistoryManagerInterface
 {

@@ -12,6 +12,7 @@ use Tbbc\MoneyBundle\Form\DataTransformer\CurrencyToArrayTransformer;
 
 /**
  * Formtype for the Currency object.
+ * @see \Tbbc\MoneyBundle\Tests\Form\Type\CurrencyTypeTest
  */
 class CurrencyType extends AbstractType
 {

@@ -7,6 +7,9 @@ namespace Tbbc\MoneyBundle\Document;
 use DateTime;
 use DateTimeInterface;
 
+/**
+ * @see \Tbbc\MoneyBundle\Tests\Document\DocumentRatioHistoryTest
+ */
 class DocumentRatioHistory
 {
     protected ?string $id = null;

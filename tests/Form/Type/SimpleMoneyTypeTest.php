@@ -105,7 +105,7 @@ final class SimpleMoneyTypeTest extends TypeTestCase
 
     protected function getExtensions(): array
     {
-        //This is probably not ideal, but I'm not sure how to set up the pair manager
+        // This is probably not ideal, but I'm not sure how to set up the pair manager
         // with different decimals for different tests in Symfony 3.0
         $decimals = 2;
         $currencies = ['EUR', 'USD'];

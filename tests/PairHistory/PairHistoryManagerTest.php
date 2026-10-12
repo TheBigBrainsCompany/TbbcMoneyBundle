@@ -134,7 +134,7 @@ final class PairHistoryManagerTest extends KernelTestCase
         $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 12:30:00'));
         $this->assertEqualsWithDelta(1.25, $ratio, PHP_FLOAT_EPSILON);
         try {
-            $ratio = $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
+            $this->pairHistoryManager->getRatioAtDate('USD', new \DateTime('2012-07-08 13:30:00'));
             $this->fail('should throw an exception due to reference currency code');
         } catch (MoneyException) {
             $this->assertTrue(true);

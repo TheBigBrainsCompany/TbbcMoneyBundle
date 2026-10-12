@@ -11,8 +11,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 /**
- * @author Philippe Le Van <philippe.levan@kitpages.fr>
- * @author Benjamin Dulau <benjamin.dulau@gmail.com>
+ * @see \Tbbc\MoneyBundle\Tests\Twig\Extension\MoneyExtensionTest
  */
 class MoneyExtension extends AbstractExtension
 {

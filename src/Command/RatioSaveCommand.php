@@ -12,6 +12,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
+/**
+ * @see \Tbbc\MoneyBundle\Tests\Command\RatioSaveCommandTest
+ */
 #[AsCommand(name: 'tbbc:money:ratio-save', description: 'save a currency ratio')]
 class RatioSaveCommand extends Command
 {

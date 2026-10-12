@@ -15,6 +15,7 @@ use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 /**
  * This depends on "florianv/exchanger" package being installed.
+ * @see \Tbbc\MoneyBundle\Tests\Pair\RatioProvider\ExchangerAdapterRatioProviderTest
  */
 final class ExchangerAdapterRatioProvider implements RatioProviderInterface
 {

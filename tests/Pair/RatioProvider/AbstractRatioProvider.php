@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Tests\Pair\RatioProvider;
 
-use Money\Currency;
 use PHPUnit\Framework\TestCase;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 
 /**
  * This class can be used to easily test your custom ratio providers.
- *
- * @author Hugues Maignol <hugues.maignol@kitpages.fr>
  */
 abstract class AbstractRatioProvider extends TestCase
 {
@@ -95,7 +92,7 @@ abstract class AbstractRatioProvider extends TestCase
         }
 
         if ($float >= 3) {
-            $float = 2.99;
+            return 2.99;
         }
 
         return $float;

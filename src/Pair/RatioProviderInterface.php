@@ -11,8 +11,6 @@ use Tbbc\MoneyBundle\MoneyException;
  *
  * After creating a new ratio provider, you have to register it as a service
  * and you can use it by setting the tbbc_money.ratio_provider field in the config.yml file
- *
- * @author Philippe Le Van.
  */
 interface RatioProviderInterface
 {

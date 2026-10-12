@@ -7,6 +7,9 @@ namespace Tbbc\MoneyBundle\Entity;
 use DateTime;
 use DateTimeInterface;
 
+/**
+ * @see \Tbbc\MoneyBundle\Tests\Entity\RatioHistoryTest
+ */
 class RatioHistory
 {
     protected ?int $id = null;

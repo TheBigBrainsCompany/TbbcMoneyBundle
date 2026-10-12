@@ -28,12 +28,12 @@ class PairHistoryCompilerPass implements CompilerPassInterface
             return;
         }
 
-        //Determine if DoctrineBundle or DoctrineMongoDBBundle is defined
+        // Determine if DoctrineBundle or DoctrineMongoDBBundle is defined
         if (!isset($bundles['DoctrineBundle']) && !isset($bundles['DoctrineMongoDBBundle'])) {
             throw new \RuntimeException('TbbcMoneyBundle - DoctrineBundle or DoctrineMongoDBBundle is needed to use the pair history function');
         }
 
-        //Use DoctrineBundle
+        // Use DoctrineBundle
         if ('doctrine' === $storage) {
             $pairHistoryDefinition = new Definition(PairHistoryManager::class, [
                 new Reference('doctrine.orm.entity_manager'),
@@ -48,7 +48,7 @@ class PairHistoryCompilerPass implements CompilerPassInterface
 
             $container->setDefinition('tbbc_money.pair_history_manager', $pairHistoryDefinition);
 
-            //Add doctrine schema mappings
+            // Add doctrine schema mappings
             $modelDir = (string) realpath(__DIR__ . '/../../Resources/config/doctrine/ratios');
             $path = DoctrineOrmMappingsPass::createXmlMappingDriver([
                 $modelDir => 'Tbbc\MoneyBundle\Entity',
@@ -56,7 +56,7 @@ class PairHistoryCompilerPass implements CompilerPassInterface
             $path->process($container);
         }
 
-        //Use DoctrineMongoDBBundle
+        // Use DoctrineMongoDBBundle
         if ('document' === $storage) {
             $pairHistoryDefinition = new Definition(DocumentPairHistoryManager::class, [
                 new Reference('doctrine_mongodb.odm.document_manager'),
@@ -71,12 +71,11 @@ class PairHistoryCompilerPass implements CompilerPassInterface
 
             $container->setDefinition('tbbc_money.pair_history_manager', $pairHistoryDefinition);
 
-            //Add document schema mappings
+            // Add document schema mappings
             $modelDir = (string) realpath(__DIR__ . '/../../Resources/config/document/ratios');
             $path = DoctrineMongoDBMappingsPass::createXmlMappingDriver([
                 $modelDir => 'Tbbc\MoneyBundle\Document',
-            ], [
-            ]);
+            ], []);
             $path->process($container);
         }
     }

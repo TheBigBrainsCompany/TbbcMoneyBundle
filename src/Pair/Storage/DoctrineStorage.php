@@ -11,7 +11,7 @@ use Tbbc\MoneyBundle\Pair\StorageInterface;
 /**
  * Class DoctrineStorage.
  *
- * @author Philippe Le Van.
+ * @see \Tbbc\MoneyBundle\Tests\Pair\Storage\DoctrineStorageTest
  */
 class DoctrineStorage implements StorageInterface
 {

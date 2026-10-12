@@ -8,6 +8,7 @@ use Money\Money;
 
 /**
  * Transforms between a Money and an array.
+ * @see \Tbbc\MoneyBundle\Tests\Form\DataTransformer\SimpleMoneyToArrayTransformerTest
  */
 class SimpleMoneyToArrayTransformer extends MoneyToArrayTransformer
 {

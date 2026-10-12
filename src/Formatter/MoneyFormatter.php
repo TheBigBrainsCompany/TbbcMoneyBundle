@@ -10,7 +10,7 @@ use Money\Money;
 /**
  * Money formatter.
  *
- * @author Benjamin Dulau <benjamin@thebigbrainscompany.com>
+ * @see \Tbbc\MoneyBundle\Tests\Formatter\MoneyFormatterTest
  */
 class MoneyFormatter
 {
@@ -109,9 +109,7 @@ class MoneyFormatter
 
     protected function getDefaultNumberFormatter(string $currencyCode, ?string $locale = null): \NumberFormatter
     {
-        if (is_null($locale)) {
-            $locale = \Locale::getDefault();
-        }
+        $locale ??= \Locale::getDefault();
 
         $numberFormatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
         $numberFormatter->setTextAttribute(\NumberFormatter::CURRENCY_CODE, $currencyCode);

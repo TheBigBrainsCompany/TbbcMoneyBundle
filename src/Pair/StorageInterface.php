@@ -6,8 +6,6 @@ namespace Tbbc\MoneyBundle\Pair;
 
 /**
  * Interface StorageInterface.
- *
- * @author Philippe Le Van.
  */
 interface StorageInterface
 {

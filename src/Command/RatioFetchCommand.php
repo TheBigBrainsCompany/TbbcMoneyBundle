@@ -11,6 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
+/**
+ * @see \Tbbc\MoneyBundle\Tests\Command\RatioFetchCommandTest
+ */
 #[AsCommand(name: 'tbbc:money:ratio-fetch', description: 'fetch all needed ratio from a external ratio provider')]
 class RatioFetchCommand extends Command
 {

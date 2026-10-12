@@ -17,6 +17,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Tbbc\MoneyBundle\Pair\PairManagerInterface;
 
+/**
+ * @see \Tbbc\MoneyBundle\Tests\Command\RatioListCommandTest
+ */
 #[AsCommand(name: 'tbbc:money:ratio-list', description: 'display list of registered ratio')]
 class RatioListCommand extends Command
 {
