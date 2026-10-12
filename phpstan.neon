@@ -1,6 +1,10 @@
 parameters:
     # https://phpstan.org/config-reference
     level: max
+    # analyse for every supported PHP version, not just composer.json's config.platform.php pin
+    phpVersion:
+        min: 80200
+        max: 80599
     bootstrapFiles:
         - tests/bootstrap.php
     paths:
