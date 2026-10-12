@@ -157,12 +157,6 @@ parameters:
 			path: src/Form/Type/CurrencyType.php
 
 		-
-			rawMessage: 'Parameter #3 $options of method Symfony\Component\Form\FormBuilderInterface::add() expects array<string, mixed>, array<mixed, mixed> given.'
-			identifier: argument.type
-			count: 1
-			path: src/Form/Type/CurrencyType.php
-
-		-
 			rawMessage: Possibly invalid array key type mixed.
 			identifier: offsetAccess.invalidOffset
 			count: 1
