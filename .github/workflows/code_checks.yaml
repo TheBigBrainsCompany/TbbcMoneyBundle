@@ -90,6 +90,8 @@ jobs:
         env:
           SYMFONY_REQUIRE: ${{ matrix.symfony-version }}
         run: |
+          # composer.json pins platform.php to the lockfile's PHP; resolve for this matrix PHP instead
+          composer config --unset platform.php
           composer global config --no-plugins allow-plugins.symfony/flex true
           composer global require --no-progress --no-scripts --no-plugins symfony/flex
           composer update --no-interaction --prefer-dist
@@ -142,3 +144,15 @@ jobs:
           coverage: none
       - run: composer install --no-progress
       - run: vendor/bin/phpstan analyse --memory-limit=-1
+
+  # Fails on any advisory against composer.lock, so the nightly run turns red
+  # when Dependabot cannot ship a security fix on its own.
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6
+      - uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 #v2
+        with:
+          php-version: 8.4
+          coverage: none
+      - run: composer audit --locked

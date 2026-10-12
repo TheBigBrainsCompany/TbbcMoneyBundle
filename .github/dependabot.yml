@@ -7,10 +7,41 @@
 
 version: 2
 updates:
+  # GitHub Actions used in .github/workflows/ — keeps SHA pins fresh.
+  # note: directory: '/' is correct for github-actions even though the workflow
+  # files live in .github/workflows/.
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    # Ignore releases younger than 7 days so a freshly published,
+    # potentially compromised version is given time to be flagged and yanked before we bump.
+    cooldown:
+      default-days: 7
+    groups:
+      actions-batch:
+        applies-to: version-updates
+        update-types:
+          - 'minor'
+          - 'patch'
+          - 'major'
+      # every security fix in one PR per run, instead of one PR per advisory
+      actions-security:
+        applies-to: security-updates
+        patterns:
+          - '*'
+
+  # composer — Dependabot resolves at config.platform.php from composer.json, so
+  # composer.lock must stay installable on that PHP version, or every update
+  # (security fixes included) fails silently as "update not possible".
   - package-ecosystem: 'composer'
     directory: '/'
     schedule:
       interval: 'monthly'
+    # Ignore releases younger than 7 days so a freshly published,
+    # potentially compromised version is given time to be flagged and yanked before we bump.
+    cooldown:
+      default-days: 7
     groups:
       # group all updates that are minor or patch versions
       upgrade-batch:
@@ -18,3 +49,8 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
+      # every security fix in one PR per run, instead of one PR per advisory
+      security:
+        applies-to: security-updates
+        patterns:
+          - '*'
