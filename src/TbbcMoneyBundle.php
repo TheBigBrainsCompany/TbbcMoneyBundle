@@ -10,6 +10,9 @@ use Tbbc\MoneyBundle\DependencyInjection\Compiler\PairHistoryCompilerPass;
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\RatioProviderCompilerPass;
 use Tbbc\MoneyBundle\DependencyInjection\Compiler\StorageCompilerPass;
 
+/**
+ * @see \Tbbc\MoneyBundle\Tests\TbbcMoneyBundleTest
+ */
 class TbbcMoneyBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void

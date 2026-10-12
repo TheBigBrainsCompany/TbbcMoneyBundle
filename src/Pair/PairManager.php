@@ -17,7 +17,7 @@ use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\TbbcMoneyEvents;
 
 /**
- * @author Philippe Le Van.
+ * @see \Tbbc\MoneyBundle\Tests\Pair\PairManagerTest
  */
 class PairManager implements PairManagerInterface, Exchange
 {

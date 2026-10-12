@@ -17,7 +17,7 @@ use Money\Money;
  *
  * @example
  *
- * @author Philippe Le Van.
+ * @see \Tbbc\MoneyBundle\Tests\Type\MoneyTypeTest
  */
 class MoneyType extends Type
 {

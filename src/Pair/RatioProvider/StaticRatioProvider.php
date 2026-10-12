@@ -10,7 +10,7 @@ use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 /**
  * Static ratio provider.
  *
- * @author Pavel Dubinin <geekdevs@gmail.com>
+ * @see \Tbbc\MoneyBundle\Tests\Pair\RatioProvider\StaticRatioProviderTest
  */
 class StaticRatioProvider implements RatioProviderInterface
 {

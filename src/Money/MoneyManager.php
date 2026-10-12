@@ -9,7 +9,7 @@ use Money\Money;
 use Tbbc\MoneyBundle\MoneyException;
 
 /**
- * @author levan
+ * @see \Tbbc\MoneyBundle\Tests\Money\MoneyManagerTest
  */
 class MoneyManager implements MoneyManagerInterface
 {
@@ -22,9 +22,7 @@ class MoneyManager implements MoneyManagerInterface
 
     public function createMoneyFromFloat(float $floatAmount, ?string $currencyCode = null): Money
     {
-        if (null === $currencyCode) {
-            $currencyCode = $this->referenceCurrencyCode;
-        }
+        $currencyCode ??= $this->referenceCurrencyCode;
 
         if ('' === $currencyCode) {
             throw new MoneyException('currency can not be an empty string');

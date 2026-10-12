@@ -15,6 +15,7 @@ use TypeError;
  * Transforms between a Currency and an array.
  *
  * @implements DataTransformerInterface<Currency, array>
+ * @see \Tbbc\MoneyBundle\Tests\Form\DataTransformer\CurrencyToArrayTransformerTest
  */
 class CurrencyToArrayTransformer implements DataTransformerInterface
 {

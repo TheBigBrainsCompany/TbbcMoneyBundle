@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedString
  * Transforms between a Money and an array.
  *
  * @implements DataTransformerInterface<Money, array>
+ * @see \Tbbc\MoneyBundle\Tests\Form\DataTransformer\MoneyToArrayTransformerTest
  */
 class MoneyToArrayTransformer implements DataTransformerInterface
 {

@@ -13,6 +13,7 @@ use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
 
 /**
  * Class DocumentPairHistoryManager.
+ * @see \Tbbc\MoneyBundle\Tests\PairHistory\DocumentPairHistoryManagerTest
  */
 class DocumentPairHistoryManager implements PairHistoryManagerInterface
 {

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Entity;
 
+/**
+ * @see \Tbbc\MoneyBundle\Tests\Entity\DoctrineStorageRatioTest
+ */
 class DoctrineStorageRatio
 {
     private ?int $id = null;

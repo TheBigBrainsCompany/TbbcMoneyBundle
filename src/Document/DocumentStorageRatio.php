@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Document;
 
+/**
+ * @see \Tbbc\MoneyBundle\Tests\Document\DocumentStorageRatioTest
+ */
 class DocumentStorageRatio
 {
     private ?string $id = null;

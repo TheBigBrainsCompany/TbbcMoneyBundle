@@ -14,7 +14,7 @@ use Tbbc\MoneyBundle\Pair\RatioProviderInterface;
 /**
  * Fetches currencies ratios from ECB.
  *
- * @author Johan Wilfer <johan@jttech.se>
+ * @see \Tbbc\MoneyBundle\Tests\Pair\RatioProvider\ECBRatioProviderTest
  */
 class ECBRatioProvider implements RatioProviderInterface
 {
