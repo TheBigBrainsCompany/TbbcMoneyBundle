@@ -28,7 +28,7 @@ jobs:
         php: ['8.4']
         stability: [ prefer-stable ]
         mongodb-version: ['7.0']
-        symfony-version: ['8.0.*']
+        symfony-version: ['8.1.*']
         include:
           - php: '8.2'
             mongodb-version: '7.0'
@@ -52,7 +52,7 @@ jobs:
             stability: prefer-stable
           - php: '8.4'
             mongodb-version: '7.0'
-            symfony-version: 8.0.*
+            symfony-version: 8.1.*
             stability: prefer-stable
           - php: '8.5'
             mongodb-version: '7.0'
@@ -60,7 +60,7 @@ jobs:
             stability: prefer-stable
           - php: '8.5'
             mongodb-version: '7.0'
-            symfony-version: 8.0.*
+            symfony-version: 8.1.*
             stability: prefer-stable
 
     name: PHP ${{ matrix.php }} - ${{ matrix.symfony-version }} - ${{ matrix.stability }}
