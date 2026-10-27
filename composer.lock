@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b0ff571cc83d1557cfe4d2257ce17e1",
+    "content-hash": "360ad613b434c989d29e7b263eada6f2",
     "packages": [
         {
             "name": "moneyphp/money",
@@ -1230,20 +1230,21 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v8.0.15",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "a608e3fa15c5b9f4f53fde9ebf5e1f0edae8c93d"
+                "reference": "7850897fb8659f98491b03be79ac48600bdaf9ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/a608e3fa15c5b9f4f53fde9ebf5e1f0edae8c93d",
-                "reference": "a608e3fa15c5b9f4f53fde9ebf5e1f0edae8c93d",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/7850897fb8659f98491b03be79ac48600bdaf9ab",
+                "reference": "7850897fb8659f98491b03be79ac48600bdaf9ab",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.4",
+                "php": ">=8.4.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/polyfill-mbstring": "^1.1"
             },
             "conflict": {
@@ -1286,7 +1287,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v8.0.15"
+                "source": "https://github.com/symfony/http-foundation/tree/v8.1.9"
             },
             "funding": [
                 {
@@ -1306,7 +1307,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-29T07:16:23+00:00"
+            "time": "2026-10-08T16:57:43+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -8384,27 +8385,28 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v8.0.15",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "38e4b36d74a20dd9124a5b34c3e83e270b9649b8"
+                "reference": "6107ee26a25215c3df3af0a3315e56bb4fd0b7db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/38e4b36d74a20dd9124a5b34c3e83e270b9649b8",
-                "reference": "38e4b36d74a20dd9124a5b34c3e83e270b9649b8",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/6107ee26a25215c3df3af0a3315e56bb4fd0b7db",
+                "reference": "6107ee26a25215c3df3af0a3315e56bb4fd0b7db",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.4",
+                "php": ">=8.4.1",
                 "symfony/polyfill-ctype": "^1.8"
             },
             "conflict": {
                 "symfony/console": "<7.4"
             },
             "require-dev": {
-                "symfony/console": "^7.4|^8.0"
+                "symfony/console": "^7.4|^8.0",
+                "yaml/yaml-test-suite": "*"
             },
             "bin": [
                 "Resources/bin/yaml-lint"
@@ -8435,7 +8437,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v8.0.15"
+                "source": "https://github.com/symfony/yaml/tree/v8.1.9"
             },
             "funding": [
                 {
@@ -8455,7 +8457,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-22T15:20:43+00:00"
+            "time": "2026-10-12T12:37:13+00:00"
         },
         {
             "name": "symplify/easy-coding-standard",
@@ -8570,7 +8572,7 @@
         "ext-sqlite3": "*"
     },
     "platform-overrides": {
-        "php": "8.4.0"
+        "php": "8.4.1"
     },
     "plugin-api-version": "2.9.0"
 }
