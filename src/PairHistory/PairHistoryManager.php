@@ -9,6 +9,7 @@ use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
+use SortDirection;
 use Tbbc\MoneyBundle\Entity\RatioHistory;
 use Tbbc\MoneyBundle\MoneyException;
 use Tbbc\MoneyBundle\Pair\SaveRatioEvent;
@@ -33,7 +34,7 @@ class PairHistoryManager implements PairHistoryManagerInterface
         $qb->select('rh')
             ->from(RatioHistory::class, 'rh')
             ->where('rh.currencyCode = :currencyCode')
-            ->orderBy('rh.savedAt', 'DESC')
+            ->orderBy('rh.savedAt', SortDirection::Descending)
             ->andWhere('rh.savedAt <= :historyDate')
             ->setParameter('historyDate', $savedAt, Types::DATETIME_MUTABLE)
             ->setParameter('currencyCode', $currencyCode)
@@ -61,7 +62,7 @@ class PairHistoryManager implements PairHistoryManagerInterface
             ->from(RatioHistory::class, 'rh')
             ->where('rh.currencyCode = :currencyCode')
             ->andWhere('rh.referenceCurrencyCode = :referenceCurrencyCode')
-            ->orderBy('rh.savedAt', 'ASC')
+            ->orderBy('rh.savedAt', SortDirection::Ascending)
             ->setParameter('currencyCode', $currencyCode)
             ->setParameter('referenceCurrencyCode', $this->referenceCurrencyCode)
         ;

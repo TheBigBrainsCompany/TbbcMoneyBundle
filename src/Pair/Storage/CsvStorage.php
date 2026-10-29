@@ -111,7 +111,7 @@ class CsvStorage implements StorageInterface
         }
 
         foreach ($ratioList as $currencyCode => $ratio) {
-            fputcsv($handle, [$currencyCode, $ratio], ';');
+            fputcsv($handle, [$currencyCode, $ratio], ';', '"', '\\');
         }
 
         fclose($handle);
