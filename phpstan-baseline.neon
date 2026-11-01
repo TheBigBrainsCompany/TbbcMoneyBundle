@@ -853,12 +853,6 @@ parameters:
 			path: tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
 
 		-
-			rawMessage: 'Parameter #1 $latestRates of class Exchanger\Service\PhpArray constructor expects array<Exchanger\ExchangeRate|string>, array<string, float> given.'
-			identifier: argument.type
-			count: 2
-			path: tests/Pair/RatioProvider/ExchangerAdapterRatioProviderTest.php
-
-		-
 			rawMessage: 'Parameter #1 $ratioMin of method Tbbc\MoneyBundle\Tests\Pair\RatioProvider\AbstractRatioProvider::randomRatio() expects float, mixed given.'
 			identifier: argument.type
 			count: 1

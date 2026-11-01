@@ -138,7 +138,7 @@ class PairManager implements PairManagerInterface, Exchange
 
     public function saveRatioListFromRatioProvider(): void
     {
-        if (null === $this->ratioProvider) {
+        if (!$this->ratioProvider instanceof RatioProviderInterface) {
             throw new MoneyException('no ratio provider defined');
         }
 
