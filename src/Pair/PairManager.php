@@ -50,9 +50,14 @@ class PairManager implements PairManagerInterface, Exchange
 
     public function quote(Currency $baseCurrency, Currency $counterCurrency): CurrencyPair
     {
-        $ratio = $this->getRelativeRatio($baseCurrency->getCode(), $counterCurrency->getCode());
+        $ratio = (string) $this->getRelativeRatio($baseCurrency->getCode(), $counterCurrency->getCode());
 
-        return new CurrencyPair($baseCurrency, $counterCurrency, (string) $ratio);
+        // a float cast to string can be "INF", "-INF" or "NAN", which CurrencyPair does not accept
+        if (!is_numeric($ratio)) {
+            throw new MoneyException('invalid ratio ' . $ratio . ' for currency pair ' . $baseCurrency->getCode() . '/' . $counterCurrency->getCode());
+        }
+
+        return new CurrencyPair($baseCurrency, $counterCurrency, $ratio);
     }
 
     public function saveRatio(string $currencyCode, float $ratio): void

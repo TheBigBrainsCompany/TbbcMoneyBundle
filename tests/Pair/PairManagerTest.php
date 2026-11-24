@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tbbc\MoneyBundle\Tests\Pair;
 
+use Money\Currency;
 use Money\Money;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -107,6 +108,16 @@ final class PairManagerTest extends KernelTestCase
         $this->expectException(MoneyException::class);
         $eur = Money::BSD(100);
         $this->manager->convert($eur, 'EUR');
+    }
+
+    public function testQuoteWithNonFiniteRatio(): void
+    {
+        $this->manager->saveRatio('USD', 1e200);
+        $this->manager->saveRatio('CAD', 1e-200);
+
+        $this->expectException(MoneyException::class);
+        $this->expectExceptionMessage('invalid ratio INF for currency pair CAD/USD');
+        $this->manager->quote(new Currency('CAD'), new Currency('USD'));
     }
 
     public function testRatioProvider(): void
