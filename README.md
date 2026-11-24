@@ -109,17 +109,18 @@ doctrine:
 
 ## Development
 
-TbbcMoneybundle comes with docker compose to ease development, to build dev docker containers, run:
+TbbcMoneyBundle comes with docker compose to ease development, to build dev docker containers, run:
 ```bash
 docker compose up --build -d
 ```
 
-And once it is built, enter the php 8.2, 8.3, 8.4 or 8.5 container:
+And once it is built, enter the php 8.2, 8.3, 8.4, 8.5 or 8.6 container:
 ```bash
 docker exec -it tbbc-moneybundle-php82 bash
 docker exec -it tbbc-moneybundle-php83 bash
 docker exec -it tbbc-moneybundle-php84 bash
 docker exec -it tbbc-moneybundle-php85 bash
+docker exec -it tbbc-moneybundle-php86 bash
 ```
 
 All the tooling is added as composer scripts, start by installing deps:
