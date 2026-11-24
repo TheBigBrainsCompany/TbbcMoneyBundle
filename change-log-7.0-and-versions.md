@@ -1,6 +1,10 @@
 Versions from 7.0
 -----------------
 
+### 2026-11-24 : updates for 7.6.1 version
+
+- add tests for PHP 8.6
+
 ### 2026-09-10 : updates for 7.2.1 version
 
 - register commands with PHP 8 Symfony Attributes, to make them broader available
